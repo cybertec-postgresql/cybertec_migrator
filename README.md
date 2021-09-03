@@ -12,6 +12,9 @@
   <a href="#contact">Contact</a>
 </p>
 
+[_CYBERTEC Migrator_](https://www.cybertec-postgresql.com/en/products/cybertec-migrator/) is an streamlined and user-friendly tool that helps you to organize and efficiently migrate multiple Oracle databases to PostgreSQL.  
+In addition to migrating your data professionally and securely with minimum effort, _CYBERTEC Migrator_ allows you to visually monitor and track the whole process at any time.
+
 ## Getting Started
 
 ### Requirements
@@ -56,12 +59,16 @@ An offline installation package is also avaliable for environments in which netw
 
 - Offline installation
 
-  1. Generate default configuration
-  2. Import images (assumes that images are located in `./images`)
+  1. Extract the provided archive file
+  2. Change directory to the directory created in the previous step
+  3. Generate default configuration
+  4. Import images (assumes that images are located in `./images`)
 
   <br/>
 
   ```sh
+  tar xf cybertec_migrator-v3.0.0-beta.tar.gz
+  cd cybertec_migrator
   ./migrator setup
   ./migrator import
   ```
