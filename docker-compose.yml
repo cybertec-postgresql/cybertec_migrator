@@ -1,0 +1,62 @@
+version: "3"
+
+services:
+  # Single page application served via nginx web server
+  web_gui:
+    image: docker.io/cybertecpostgresql/cybertec_migrator-web_gui:${VERSION}
+    depends_on:
+      core:
+        condition: service_started
+    links:
+      - core
+    volumes:
+      - ./docker/templates:/etc/nginx/templates
+    ports:
+      - ${EXTERNAL_HTTP_PORT}:80
+
+  # Migrator core exposed as REST service API
+  core:
+    image: docker.io/cybertecpostgresql/cybertec_migrator-core:${VERSION}
+    environment:
+      # —— Internal database ——
+      - CORE_DB_HOST=core_db
+      - CORE_DB_PASSWORD=${CORE_DB_PASSWORD}
+      - CORE_DB_DATABASE=migrator
+      # —— Job queue ——
+      - CORE_QUEUE_HOST=core_queue
+    depends_on:
+      core_db:
+        condition: service_healthy
+      core_queue:
+        condition: service_started
+    links:
+      - core_db
+      - core_queue
+
+  # Internal Migrator database
+  core_db:
+    image: docker.io/postgres:13-alpine
+    environment:
+      # —— Postgres settings ——
+      - POSTGRES_PASSWORD=${CORE_DB_PASSWORD}
+    volumes:
+      - core_db-data:/var/lib/postgresql/data
+      - ./docker/initdb.sh:/docker-entrypoint-initdb.d/init-user-db.sh:Z
+    healthcheck:
+      # Ensures that the database is ready *and* the password is in sync
+      test:
+        [
+          "CMD-SHELL",
+          'psql --username=postgres --dbname=migrator --command="ALTER USER postgres WITH PASSWORD ''${CORE_DB_PASSWORD}''"',
+        ]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  # Internal Migrator job queue
+  core_queue:
+    image: docker.io/redis:alpine
+    command: ["redis-server", "--appendonly", "yes"]
+
+volumes:
+  core_db-data:
