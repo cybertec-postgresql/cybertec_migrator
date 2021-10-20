@@ -35,24 +35,31 @@ For detailed information see the list of [supported migration features for Oracl
 
 ## What's New
 
-- `v3.1.0-rc.1`
+- `v3.1.0`
 
   **Features**
 
   - Search and Replace  
     Perform bulk changes on column data types / default values, functions, views, and triggers (with support for even more object properties coming soon)
+
   - Significant Speed Improvements  
     **Feel** the difference
+
   - Resume Failed Stages  
     Spend less time fixing those last few migration errors
+
   - Realtime Syntax Checking  
     Get immediate feedback about the syntactical correctness of code
+
   - Partition Renaming  
     Rename partitions as part of a migration instead of altering the source database
+
   - Code Export  
     Export code of function / views / triggers (with code import coming soon)
+
   - Migration Deletion  
     Delete of completed migrations
+    
   - Migration Cloning  
     Prepare migrations against your staging environment and then execute them against production
 
