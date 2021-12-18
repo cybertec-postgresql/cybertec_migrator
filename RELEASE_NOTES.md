@@ -2,6 +2,37 @@
 
 The release notes of the last release may be found on [README.md](README.md#whats-new).
 
+- `v3.2.0`
+
+  **Features**
+
+  - Enhanced migration configuration:
+    - Index Renaming  
+      Rename indices in case there are naming collisions with other database objects
+
+    - Primary/Unique Key Modification  
+      Add, remove and change the order of table columns in a primary/unique key
+
+  - Browser Tab Syncing  
+    Work on the same migration in multiple browser tabs, with them being synced in real-time
+
+  - *Search and Replace* on check constraints and expression indexes
+
+  - Usability Improvements
+    - Improved sidebar functionalities:
+        - Object Type filter: add options for indices, triggers, and sequences
+        - Bulk exclude of schemata and tables
+    - The different tabs in the table editor (Columns, Constraints, etc.) display the identifiers used in the target database
+    - Provide examples for source and target connection strings when creating new migrations
+    - Performance improvements when running migration jobs
+    - Provide more concise error details when writing database objects to the target database (e.g. miss-matching foreign key data-types)
+
+  **Resolved Bugs**
+
+  - Creating a migration of a database with a view with numerous columns causes a failure during meta-data import (`ORA-40478: output value too large (maximum: 4000)`)
+  - Creating a migration with an unreachable host shows a non-descriptive error
+  - *Replace All* on different database object types sometimes doesn't replace all search results
+
 - `v3.1.0`
 
   **Features**

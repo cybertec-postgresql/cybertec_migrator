@@ -2,20 +2,23 @@
 
 ## Database Object Types
 
-| CREATE            |    | Comment                                                 |
-|-------------------|----|---------------------------------------------------------|
-| FUNCTION          | ✅ | function created, code needs to be translated manually  |
-| INDEX             | ✅ |                                                         |
-| MATERIALIZED VIEW | ✅ |                                                         |
-| PACKAGE           | ❌ |                                                         |
-| PROCEDURE         | ✅ | procedure created, code needs to be translated manually |
-| SCHEMA            | ✅ |                                                         |
-| SEQUENCE          | ✅ |                                                         |
-| TABLE             | ✅ | partitions (hash, list, range) supported                |
-| TRIGGER           | ✅ |                                                         |
-| TYPE              | ✅ |                                                         |
-| USER              | ❌ |                                                         |
-| VIEW              | ✅ |                                                         |
+| CREATE            |    | Comment                                                    |
+|-------------------|----|------------------------------------------------------------|
+| DATABASE LINK     | ✅ |                                                            |
+| DIRECTORY         | ❌ |                                                            |
+| FUNCTION          | ✅ | code needs to be translated manually                       |
+| INDEX             | ✅ |                                                            |
+| MATERIALIZED VIEW | ✅ |                                                            |
+| PACKAGE           | ✅ | package code visible, code needs to be translated manually |
+| PROCEDURE         | ✅ | code needs to be translated manually                       |
+| SCHEMA            | ✅ |                                                            |
+| SEQUENCE          | ✅ |                                                            |
+| SYNONYMS          | ✅ | visible, have to be migrated manually                      |
+| TABLE             | ✅ | partitions (hash, list, range) supported                   |
+| TRIGGER           | ✅ |                                                            |
+| TYPE              | ✅ |                                                            |
+| USER              | ❌ |                                                            |
+| VIEW              | ✅ |                                                            |
 
 ## Built-In Data Types
 
