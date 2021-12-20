@@ -2,24 +2,27 @@
 
 ## Database Object Types
 
-| CREATE            |    | Comment                                                 |
-|-------------------|----|---------------------------------------------------------|
-| FUNCTION          | ✅ | function created, code needs to be translated manually  |
-| INDEX             | ✅ |                                                         |
-| MATERIALIZED VIEW | ✅ |                                                         |
-| PACKAGE           | ❌ |                                                         |
-| PROCEDURE         | ✅ | procedure created, code needs to be translated manually |
-| SCHEMA            | ✅ |                                                         |
-| SEQUENCE          | ✅ |                                                         |
-| TABLE             | ✅ | partitions (hash, list, range) supported                |
-| TRIGGER           | ✅ |                                                         |
-| TYPE              | ✅ |                                                         |
-| USER              | ❌ |                                                         |
-| VIEW              | ✅ |                                                         |
+| CREATE            |    | Comment                                                    |
+|-------------------|----|------------------------------------------------------------|
+| DATABASE LINK     | ✅ |                                                            |
+| DIRECTORY         | ❌ |                                                            |
+| FUNCTION          | ✅ | code needs to be translated manually                       |
+| INDEX             | ✅ |                                                            |
+| MATERIALIZED VIEW | ✅ |                                                            |
+| PACKAGE           | ✅ | package code visible, code needs to be translated manually |
+| PROCEDURE         | ✅ | code needs to be translated manually                       |
+| SCHEMA            | ✅ |                                                            |
+| SEQUENCE          | ✅ |                                                            |
+| SYNONYMS          | ✅ | visible, have to be migrated manually                      |
+| TABLE             | ✅ | partitions (hash, list, range) supported                   |
+| TRIGGER           | ✅ |                                                            |
+| TYPE              | ✅ |                                                            |
+| USER              | ❌ |                                                            |
+| VIEW              | ✅ |                                                            |
 
 ## Built-In Data Types
 
-Detailed information about the Oracle built-in data types may in the [Oracle SQL Language Reference](https://docs.oracle.com/en/database/oracle/oracle-database/19/sqlrf/Data-Types.html#GUID-7B72E154-677A-4342-A1EA-C74C1EA928E6).
+Detailed information about Oracle built-in data types may be found in the [Oracle SQL Language Reference](https://docs.oracle.com/en/database/oracle/oracle-database/19/sqlrf/Data-Types.html#GUID-7B72E154-677A-4342-A1EA-C74C1EA928E6).
 
 <table class="inline">
     <tr>
