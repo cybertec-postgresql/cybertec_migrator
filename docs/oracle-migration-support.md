@@ -22,7 +22,7 @@
 
 ## Built-In Data Types
 
-Detailed information about the Oracle built-in data types may in the [Oracle SQL Language Reference](https://docs.oracle.com/en/database/oracle/oracle-database/19/sqlrf/Data-Types.html#GUID-7B72E154-677A-4342-A1EA-C74C1EA928E6).
+Detailed information about Oracle built-in data types may be found in the [Oracle SQL Language Reference](https://docs.oracle.com/en/database/oracle/oracle-database/19/sqlrf/Data-Types.html#GUID-7B72E154-677A-4342-A1EA-C74C1EA928E6).
 
 <table class="inline">
     <tr>

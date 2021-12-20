@@ -22,14 +22,14 @@ The release notes of the last release may be found on [README.md](README.md#what
     - Improved sidebar functionalities:
         - Object Type filter: add options for indices, triggers, and sequences
         - Bulk exclude of schemata and tables
-    - The different tabs in the table editor (Columns, Constraints, etc.) display the identifiers used in the target database
+    - The tabs in the table editor (Columns, Constraints, etc.) display the identifiers used in the target database
     - Provide examples for source and target connection strings when creating new migrations
     - Performance improvements when running migration jobs
     - Provide more concise error details when writing database objects to the target database (e.g. miss-matching foreign key data-types)
 
   **Resolved Bugs**
 
-  - Creating a migration of a database with a view with numerous columns causes a failure during meta-data import (`ORA-40478: output value too large (maximum: 4000)`)
+  - Creating a migration of a database with a view containing numerous columns causes a failure during meta-data import (`ORA-40478: output value too large (maximum: 4000)`)
   - Creating a migration with an unreachable host shows a non-descriptive error
   - *Replace All* on different database object types sometimes doesn't replace all search results
 
@@ -79,12 +79,12 @@ The release notes of the last release may be found on [README.md](README.md#what
         - **Data** stage: migrate table data in parallel
         - **Logic** stage: create functions, triggers, views
         - **Integrity** stage: parallel creation of primary keys, indices, foreign keys, and constraint checks
-    - Enjoy quick round trips and gain confidence in the correctness of your migration thanks to the reworked _Migration Controls_
+    - Enjoy quick round trips and gain confidence in the correctness of your migration thanks to the reworked _Migration_Controls_
         - **Start** migration from the beginning
         - **Rerun stage** in case of an error
         - **Continue** to next stage
         - **Abort** migration and restart at any time
-    - Explore the inner workings of your migration with the new, and easily accessible _Log View_
+    - Explore the inner workings of your migration with the new, and easily accessible _Log_View_
         - Log entries are inter-linked to the database objects configuration
         - Filter on log level (`ERROR`, `WARNING`, `INFO`, `VERBOSE`)
     - Extensive configuration
