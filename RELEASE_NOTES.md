@@ -79,12 +79,12 @@ The release notes of the last release may be found on [README.md](README.md#what
         - **Data** stage: migrate table data in parallel
         - **Logic** stage: create functions, triggers, views
         - **Integrity** stage: parallel creation of primary keys, indices, foreign keys, and constraint checks
-    - Enjoy quick round trips and gain confidence in the correctness of your migration thanks to the reworked _Migration_Controls_
+    - Enjoy quick round trips and gain confidence in the correctness of your migration thanks to the reworked _Migration Controls_
         - **Start** migration from the beginning
         - **Rerun stage** in case of an error
         - **Continue** to next stage
         - **Abort** migration and restart at any time
-    - Explore the inner workings of your migration with the new, and easily accessible _Log_View_
+    - Explore the inner workings of your migration with the new, and easily accessible _Log View_
         - Log entries are inter-linked to the database objects configuration
         - Filter on log level (`ERROR`, `WARNING`, `INFO`, `VERBOSE`)
     - Extensive configuration
