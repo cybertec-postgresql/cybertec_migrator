@@ -8,6 +8,8 @@ server {
 	root /usr/share/nginx/html/;
 	index index.html;
 
+	client_max_body_size 50m;
+
 	location / {
 		try_files $uri /index.html;
 		add_header Cache-Control no-store always;

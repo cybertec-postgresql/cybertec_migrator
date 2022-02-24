@@ -37,24 +37,39 @@ For detailed information see the list of [supported migration features for Oracl
 
 For older releases see [Release Notes](RELEASE_NOTES.md).
 
-- `v3.3.0`
+### v3.4.0
 
-  **Features**
+The main focus of this release was improving the performance on reading the source database meta-data
+(one of our customers has a data warehouse with more than 350.000 partitions and sub-partitions!).
+This implied to improve the GUI to be responsive with a large number of database objects.
 
-  - Show information of additional Oracle database object types
-    - Database links
-    - Packages (specification and body)
-    - Synonyms
-  - Show procedures and functions as separate types (until now both types were shown under `Functions`)
-  - Improve data transfer for Oracle `BLOB, CLOB, NCLOB` and `BFILE` columns for rows with big LOBs.
-    This may fix out-of-memory errors on the Oracle side, namely `MSG: ORA-01062: unable to allocate memory for define buffer`.
-    It also _significantly_ reduces the Migrator memory footprint.
-  - The transfer of a row containing a LOB bigger than 500MB will abort with an informative error message.
+> **NOTE**  
+> After starting the migrator the dashboard may show an error until the Migrator converted existing migrations in its internal database.
+> Depending on the number and size of existing migrations this may take some time.
 
-  **Resolved Bugs**
+#### Features
 
-  - Creating a migration of a database with invisible columns causes a failure during meta-data import
-    (`null value in column "position" of relation "table_column" violates not-null constraint`)
+- Reading and analyzing the source database meta-data is now faster
+- *Overview page*: drill down to show specific data types
+- Improve *Sidebar*:
+    - Show number of database objects
+    - Add new `Constraints` Object Type filter (`Check`, `Foreign Keys`, and `Unique/Primary Keys`)
+    - Add `Disable Partitioning` for multiple tables
+- Improve *Search and Replace*
+    - Include index names
+    - Scope search with sidebar filter
+- Highlight element in the table editor when selected in the sidebar or when navigated from the log view
+- *Log View*:
+    - Scope log entries based on job execution: `ALL`, `CURRENT MIGRATION`, and `LAST EXECUTED JOB`
+    - Download content of log view
+
+#### Resolved Bugs
+
+- Creating a migration with a database with large number of DBOs fails
+- Unable to save large configuration changes
+- `Partitions` tab not responsive for a table with large number of partitions (>500)
+- Resuming data stage results in migrating the data from a different SCN
+
 
 ## Getting Started
 
