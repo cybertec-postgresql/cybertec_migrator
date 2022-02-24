@@ -4,11 +4,11 @@ The release notes of the last release may be found on [README.md](README.md#what
 
 ### v3.4.0
 
-The main focus of this release was improving the performance reading the source database meta-data
-(one of our customers has a data warehouse with more than 350.000 partitions and sub-partitions!).
-This implied to improve the GUI to be responsive with a large number of database objects.
+The main focus of this release is improving the performance for reading the source database meta-data (we tested databases with approximately 400.000 database objects).
+This includes improvements to the GUI to be responsive with a large number of database objects.
 
-> **NOTE** after starting the migrator the dashboard may show an error until the Migrator converted existing migrations in its internal database.
+> **NOTE**  
+> After starting the migrator the dashboard may show an error until the Migrator converted existing migrations in its internal database.
 > Depending on the number and size of existing migrations this may take some time.
 
 #### Features
@@ -29,10 +29,11 @@ This implied to improve the GUI to be responsive with a large number of database
 
 #### Resolved Bugs
 
-- Creating a migration with a database with large number of DBOs fails
+- Creating a migration of a database with a large number of DBOs fails
 - Unable to save large configuration changes
 - `Partitions` tab not responsive for a table with large number of partitions (>500)
 - Resuming data stage results in migrating the data from a different SCN
+- Data stage was not aborted properly by user request
 
 
 ### v3.3.0
