@@ -37,39 +37,15 @@ For detailed information see the list of [supported migration features for Oracl
 
 For older releases see [Release Notes](RELEASE_NOTES.md).
 
-### v3.4.0
+### v3.4.3
 
-The main focus of this release is improving the performance for reading the source database meta-data (we tested databases with approximately 400.000 database objects).
-This includes improvements to the GUI to be responsive with a large number of database objects.
-
-> **NOTE**  
-> After starting the migrator the dashboard may show an error until the Migrator converted existing migrations in its internal database.
-> Depending on the number and size of existing migrations this may take some time.
-
-#### Features
-
-- Reading and analyzing the source database meta-data is now faster
-- *Overview page*: drill down to show specific data types
-- Improve *Sidebar*:
-    - Show number of database objects
-    - Add new `Constraints` Object Type filter (`Check`, `Foreign Keys`, and `Unique/Primary Keys`)
-    - Add `Disable Partitioning` for multiple tables
-- Improve *Search and Replace*
-    - Include index names
-    - Scope search with sidebar filter
-- Highlight element in the table editor when selected in the sidebar or when navigated from the log view
-- *Log View*:
-    - Scope log entries based on job execution: `ALL`, `CURRENT MIGRATION`, and `LAST EXECUTED JOB`
-    - Download content of log view
+This is a bugfix release for [v3.4.0](RELEASE_NOTES.md).
 
 #### Resolved Bugs
 
-- Creating a migration of a database with a large number of DBOs fails
-- Unable to save large configuration changes
-- `Partitions` tab not responsive for a table with large number of partitions (>500)
-- Resuming data stage results in migrating the data from a different SCN
-- Data stage was not aborted properly by user request
-
+- Foreign keys are not created in parallel
+- Import fails for databases with a view on a view
+- Import fails for databases with a partition of a non-imported table (i.e. temporary, secondary, nested, or dropped table)
 
 ## Getting Started
 
