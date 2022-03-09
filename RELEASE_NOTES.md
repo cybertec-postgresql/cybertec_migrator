@@ -2,6 +2,26 @@
 
 The release notes of the last release may be found on [README.md](README.md#whats-new).
 
+### v3.4.3
+
+This is a bugfix release for [v3.4.0](RELEASE_NOTES.md).
+
+> **Note**: v3.4.1 and v3.4.2 were not released.
+
+#### Resolved Bugs
+
+- Foreign keys are not created in parallel
+- Import fails for databases with a view on a view
+- Import fails for databases with a partition of a non-imported table (i.e. temporary, secondary, nested, or dropped table)
+
+### v3.4.2
+
+Not released.
+
+### v3.4.1
+
+Not released.
+
 ### v3.4.0
 
 The main focus of this release is improving the performance for reading the source database meta-data (we tested databases with approximately 400.000 database objects).
