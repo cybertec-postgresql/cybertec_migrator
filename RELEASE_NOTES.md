@@ -2,6 +2,59 @@
 
 The release notes of the last release may be found on [README.md](README.md#whats-new).
 
+### v3.5.0-rc.2
+
+#### Features
+
+- Several improvements in the execution of a migration:
+    - Swap **execution order of *Integrity* and *Logic* stage**.
+      Having indices in the Logic stage makes it easier to test performance of views, stored procedures and triggers.
+      <p align="center">
+          <img src="./docs/pictures/release-notes/v3.5.0/change-stage-execution-order.png"></img>
+      </p>
+    - Move **creation of [check constraints](https://www.postgresql.org/docs/current/ddl-constraints.html#DDL-CONSTRAINTS-CHECK-CONSTRAINTS) from Logic into Structure stage**.
+      Checking the data during the data bulk load is negligible compared to the time needed to re-read the table from disk in the Logic stage.
+    - As a consequence, **functions are created in the Structure stage** prior to tables, since they may be used by check constraints.
+      The Logic stage re-creates the functions once again still providing the means for fast change-test round-trips.
+- The _Migration Overview_ was updated to reflect the changes in the migration execution:
+    - It is visible in which order the database objects are created: first schemas, then user defined types, followed by sequences, etc.
+      <p align="center">
+          <img src="./docs/pictures/release-notes/v3.5.0/overview-shows-stage-execution.png"></img>
+      </p>
+    - Provide drill down on _Indices_ entry to show the number of unique indices. We will enrich the _Migration Overview_ with additional information in future releases.
+      <p align="center">
+          <img src="./docs/pictures/release-notes/v3.5.0/overview-show-unique-indices.png"></img>
+      </p>
+- Enhance migration configuration:
+    - Constraint Renaming  
+      Rename constraints in case there are naming collisions with other database objects.
+      <p align="center">
+          <img src="./docs/pictures/release-notes/v3.5.0/constraints-rename.png"></img>
+      </p>
+- Improve handling of implicitly created indices via [Unique Constraints](https://www.postgresql.org/docs/current/ddl-constraints.html#DDL-CONSTRAINTS-UNIQUE-CONSTRAINTS) or [Primary Keys](https://www.postgresql.org/docs/current/ddl-constraints.html#DDL-CONSTRAINTS-PRIMARY-KEYS):
+    - Show implicitly created indices in the sidebar and the _Indices_ view. In our example, `dept_id_pk` is shown in the _Constraints_ as well as the _Indices_ section.
+    - A hyperlink in the _Indices_ view facilitates navigation to the constraint.
+      <p align="center">
+          <img src="./docs/pictures/release-notes/v3.5.0/indices-show-unique-indices.png"></img>
+      </p>
+    - Rename implicitly created indices by renaming its constraint.
+- *Log view* shows detailed information about the started migration job:
+  <p align="center">
+      <img src="./docs/pictures/release-notes/v3.5.0/log.provide-job-information.png"></img>
+  </p>
+- Improve *Sidebar*:
+    - Object Type Filter: add option for User Defined Types (UDT).
+
+#### Resolved Bugs
+
+- Cloning a migration fails due to missing database object in the source database (dropped or renamed table, dropped column, etc.)
+- Integrity stage `ERROR: timeout exceeded when trying to connect`
+- Integrity stage keeps processing workers after an error even with enabled "Abort stage on first error"
+- Resume of an aborted job fails when the Migrator core was forcefully shut down
+- Core dump due to repeated, large error message (`warn: Unable to process subpartition ... table not found`)
+- Functional index with an expression containing a number was not migrated
+- Overview page does now show 0 database links, synonyms, packages
+
 ### v3.4.3
 
 This is a bugfix release for [v3.4.0](RELEASE_NOTES.md).
