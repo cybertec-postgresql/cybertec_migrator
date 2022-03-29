@@ -2,7 +2,7 @@
 
 The release notes of the last release may be found on [README.md](README.md#whats-new).
 
-### v3.5.0-rc.2
+### v3.5.0 - 2022-03-29
 
 #### Features
 
@@ -55,7 +55,7 @@ The release notes of the last release may be found on [README.md](README.md#what
 - Functional index with an expression containing a number was not migrated
 - Overview page does now show 0 database links, synonyms, packages
 
-### v3.4.3
+### v3.4.3 - 2022-03-04
 
 This is a bugfix release for [v3.4.0](RELEASE_NOTES.md).
 
@@ -75,7 +75,7 @@ Not released.
 
 Not released.
 
-### v3.4.0
+### v3.4.0 - 2022-02-24
 
 The main focus of this release is improving the performance for reading the source database meta-data (we tested databases with approximately 400.000 database objects).
 This includes improvements to the GUI to be responsive with a large number of database objects.
@@ -109,7 +109,7 @@ This includes improvements to the GUI to be responsive with a large number of da
 - Data stage was not aborted properly by user request
 
 
-### v3.3.0
+### v3.3.0 - 2021-12-21
 
 #### Features
 
@@ -129,7 +129,7 @@ This includes improvements to the GUI to be responsive with a large number of da
     (`null value in column "position" of relation "table_column" violates not-null constraint`)
 
 
-### v3.2.0
+### v3.2.0 - 2021-11-26
 
 #### Features
 
@@ -157,7 +157,7 @@ This includes improvements to the GUI to be responsive with a large number of da
   - *Replace All* on different database object types sometimes doesn't replace all search results
 
 
-### v3.1.0
+### v3.1.0 - 2021-10-20
 
 #### Features
 
@@ -193,7 +193,7 @@ This includes improvements to the GUI to be responsive with a large number of da
 - Excluding partition columns via the sidebar prevents the Structure stage from succeeding
 
 
-### v3.0.0
+### v3.0.0 - 2022-09-16
 
 With _CYBERTEC Migrator_ v3 we've rebuilt the GUI from the ground up to simplify database migrations even further
 
