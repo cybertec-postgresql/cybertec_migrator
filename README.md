@@ -37,7 +37,7 @@ For detailed information see the list of [supported migration features for Oracl
 
 For older releases see [Release Notes](RELEASE_NOTES.md).
 
-### v3.5.0-rc.2
+### v3.5.0 - 2022-03-29
 
 #### Features
 
