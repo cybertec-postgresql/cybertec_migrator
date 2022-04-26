@@ -21,14 +21,13 @@ The release notes of the last release may be found on [README.md](README.md#what
       <p align="left">
           <img src="./docs/pictures/release-notes/v3.6.0/stage-post-hook-script-logging.png"></img>
       </p>
-- Improve _Data stage_: __partitions and sub-partitions__ of partitioned tables are __migrated in parallel__.
+- Improve _Data stage_: list and range __partitions and sub-partitions__ of partitioned tables are __migrated in parallel__.
 - Support migration of `GENERATED AS IDENTITY` constraint.
 - Improve user experience:
     - Code editors verify DDL code to provide fast error feedback.
       <p align="left">
           <img src="./docs/pictures/release-notes/v3.6.0/editor-code-verification.png"></img>
       </p>
-    - Receive browser tab notification when a migration job finished.
     - Add keyboard hotkey `Ctrl`-`Enter` to start migration job execution.
 
 #### Resolved Bugs
