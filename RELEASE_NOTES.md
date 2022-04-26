@@ -8,7 +8,7 @@ The release notes of the last release may be found on [README.md](README.md#what
 
 - Add support for __stage post-hook SQL scripts__ to adapt the migration with functionalities not provided by the Migrator.
   The scripts are executed at the end of a stage.
-  Typical use cases for such scripts are to create database objects which are not present in the source database, or to define ownership and access permissions.  
+  Typical use cases for such scripts are to create database objects which are not present in the source database, or to define ownership and access permissions.
     - Add a stage post-hook script in the _Stages Tab_.
       <p align="left">
           <img src="./docs/pictures/release-notes/v3.6.0/stage-post-hook-scripts.png"></img>
@@ -17,14 +17,14 @@ The release notes of the last release may be found on [README.md](README.md#what
       <p align="left">
           <img src="./docs/pictures/release-notes/v3.6.0/stage-post-hook-script-editor.png"></img>
       </p>
-    - The execution of the stage post-hook scripts are __logged for audit purposes__
+    - The execution of the stage post-hook scripts are __logged for audit purposes__.
       <p align="left">
           <img src="./docs/pictures/release-notes/v3.6.0/stage-post-hook-script-logging.png"></img>
       </p>
 - Improve _Data stage_: __partitions and sub-partitions__ of partitioned tables are __migrated in parallel__.
 - Support migration of `GENERATED AS IDENTITY` constraint.
 - Improve user experience:
-    - Code editors verify DDL code to provide fast error feedback
+    - Code editors verify DDL code to provide fast error feedback.
       <p align="left">
           <img src="./docs/pictures/release-notes/v3.6.0/editor-code-verification.png"></img>
       </p>
@@ -33,10 +33,10 @@ The release notes of the last release may be found on [README.md](README.md#what
 
 #### Resolved Bugs
 
-- Import fails on column that uses a data-type from the `SYS` schema
-- Starting a job with more than one stage and incorrect target connection bricks the migration
-- Sidebar filter shows empty schemas (i.e. with no filtered objects)
-- Misleading log entries `No metadata found. There is more than once class-validator version installed probably ...`
+- Failed to created migration of an Oracle database containing a column that uses a data-type from the `SYS` schema
+- Starting a migration job with more than one stage and incorrect target connection bricks the migration
+- Sidebar filter showing schemas that contain none of the filter results
+- Misleading console log entries `No metadata found. There is more than once class-validator version installed probably ...`
 
 ### v3.5.0 - 2022-03-29
 
