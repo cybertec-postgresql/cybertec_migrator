@@ -1,0 +1,82 @@
+name: "🐞 Bug Report"
+description: "Something isn't working as expected"
+title: "[BUG]: <title>"
+labels: ["bug"]
+body:
+  - type: textarea
+    validations:
+      required: true
+    attributes:
+      label: "📝 Description"
+      description: "Short but concise description of the bug"
+
+  - type: textarea
+    validations:
+      required: true
+    attributes:
+      label: "📜 Steps to reproduce"
+      description: |
+        How does the bug manifest itself?
+      placeholder: |
+        1. First step
+        2. Second step
+        3. And so on...
+
+  - type: textarea
+    validations:
+      required: true
+    attributes:
+      label: "🙁 Actual behavior"
+      description: "What happened, and why it was wrong"
+
+  - type: textarea
+    validations:
+      required: true
+    attributes:
+      label: "🙂 Expected behavior"
+      description: "What you expected to happen instead, and why"
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+
+  - type: input
+    validations:
+      required: true
+    attributes:
+      label: "Migrator version"
+      description: |
+        Which version of the CYBERTEC Migrator are you using?
+      placeholder: "3.7.0"
+
+  - type: checkboxes
+    validations:
+      required: true
+    attributes:
+      label: "In which environment are you operating?"
+      options:
+        - label: Linux
+        - label: macOS
+        - label: Windows
+        - label: Other
+
+  - type: input
+    validations:
+      required: true
+    attributes:
+      label: "What browser are you using"
+      placeholder: "Firefox, Chrome, Safari, etc..."
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+
+  - type: textarea
+    id: other_description
+    attributes:
+      label: "Other"
+      description: |
+        Anything else that could be relevant? e.g.: Logs, OS version, Browser version, etc...
+        **Tip:** You can attach images, recordings or log files by clicking this area to highlight it and then dragging files in it
