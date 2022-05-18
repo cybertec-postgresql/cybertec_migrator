@@ -7,12 +7,12 @@ services:
     depends_on:
       core:
         condition: service_started
-    links:
-      - core
     volumes:
       - ./docker/templates:/etc/nginx/templates
     ports:
       - ${EXTERNAL_HTTP_PORT}:80
+    networks:
+      - common
 
   # Migrator core exposed as REST service API
   core:
@@ -22,16 +22,11 @@ services:
       - CORE_DB_HOST=core_db
       - CORE_DB_PASSWORD=${CORE_DB_PASSWORD}
       - CORE_DB_DATABASE=migrator
-      # —— Job queue ——
-      - CORE_QUEUE_HOST=core_queue
     depends_on:
       core_db:
         condition: service_healthy
-      core_queue:
-        condition: service_started
-    links:
-      - core_db
-      - core_queue
+    networks:
+      - common
 
   # Internal Migrator database
   core_db:
@@ -52,11 +47,11 @@ services:
       interval: 5s
       timeout: 5s
       retries: 10
-
-  # Internal Migrator job queue
-  core_queue:
-    image: docker.io/redis:alpine
-    command: ["redis-server", "--appendonly", "yes"]
+    networks:
+      - common
 
 volumes:
   core_db-data:
+
+networks:
+  common:
