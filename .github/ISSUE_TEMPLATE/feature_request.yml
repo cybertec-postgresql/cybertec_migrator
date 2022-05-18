@@ -1,0 +1,26 @@
+name: "🌟 Feature Request"
+description: "I have a suggestion!"
+labels: ["feature-request"]
+body:
+  - type: textarea
+    validations:
+      required: true
+    attributes:
+      label: "Is your feature request related to a problem? Please describe it"
+      description: "A clear and concise description of what the problem is"
+      placeholder: |
+        I have an issue when ...
+
+  - type: textarea
+    validations:
+      required: true
+    attributes:
+      label: "Describe the solution you would like"
+      description: "A clear and concise description of what you want to happen. Add any considered drawbacks"
+
+  - type: textarea
+    validations:
+      required: true
+    attributes:
+      label: "What is the motivation / use case for changing the behavior?"
+      description: "Describe the motivation or the concrete use case"
