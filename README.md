@@ -18,7 +18,7 @@ In addition to migrating your data professionally and securely with minimum effo
 <br/>
 
 <p align="center">
-  <a href="http://www.youtube.com/watch?v=8hSrFVOw3Rc"><img alt="CYBERTEC Migrator v3 Demonstration" width="384px" src="http://img.youtube.com/vi/8hSrFVOw3Rc/0.jpg"/></a><br/>
+  <a href="https://www.youtube.com/watch?v=z79_lZHmDG4&t=0s"><img alt="CYBERTEC Migrator v3 Demonstration" width="384px" src="http://img.youtube.com/vi/8hSrFVOw3Rc/0.jpg"/></a><br/>
   <b>Product Demo</b>
 </p>
 
@@ -29,125 +29,142 @@ For detailed information see the list of [supported migration features for Oracl
 ## Table of Contents
 
 1. [What's New](#whats-new)
-2. [Getting Started](#getting-started)
-3. [Running the Migrator](#running-the-migrator)
-4. [Contact](#contact)
+1. [Getting Started](#getting-started)
+1. [Running the Migrator](#running-the-migrator)
+1. [Contact](#contact)
+1. [License](#license)
 
 ## What's New
 
 For older releases see [Release Notes](RELEASE_NOTES.md).
 
-### v3.6.0 - 2022-04-26
+### v3.7.0 - 2022-05-18
+
+Do you want to know if the Migrator can migrate your Oracle database to PostgreSQL?
+
+Then [get the Migrator Standard Edition](https://www.cybertec-postgresql.com/en/products/cybertec-migrator#form),  a __free version__ (as in beer) of the CYBERTEC Migrator, follow the offline instructions provided in [Getting Started](#offline-installation) section, and try it out.
 
 #### Features
 
-- Add support for __stage post-hook SQL scripts__ to adapt the migration with functionalities not provided by the Migrator.
-  The scripts are executed at the end of a stage.
-  Typical use cases for such scripts are to create database objects which are not present in the source database, or to define ownership and access permissions.
-    - Add a stage post-hook script in the _Stages Tab_.
-      <p align="left">
-          <img src="./docs/pictures/release-notes/v3.6.0/stage-post-hook-scripts.png"></img>
-      </p>
-    - Editor for stage hook scripts. It is possible to temporary disable a hook script.
-      <p align="left">
-          <img src="./docs/pictures/release-notes/v3.6.0/stage-post-hook-script-editor.png"></img>
-      </p>
-    - The execution of the stage post-hook scripts are __logged for audit purposes__.
-      <p align="left">
-          <img src="./docs/pictures/release-notes/v3.6.0/stage-post-hook-script-logging.png"></img>
-      </p>
-- Improve _Data stage_: list and range __partitions and sub-partitions__ of partitioned tables are __migrated in parallel__.
-- Support migration of `GENERATED AS IDENTITY` constraint.
-- Improve user experience:
-    - Code editors verify DDL code to provide fast error feedback.
-      <p align="left">
-          <img src="./docs/pictures/release-notes/v3.6.0/editor-code-verification.png"></img>
-      </p>
-    - Add keyboard hotkey `Ctrl`-`Enter` to start migration job execution.
+- Improve migration job execution (which removed the Redis job queue as a dependency)
+- Provide help menu to reach out to CYBERTEC
+- Provide a [Migrator demo database environment](https://github.com/cybertec-postgresql/cybertec_migrator_demo) to facilitate a test-run of the Migrator Standard Edition
+- Added [License](#license) information
 
 #### Resolved Bugs
 
-- Failed to created migration of an Oracle database containing a column that uses a data-type from the `SYS` schema
-- Starting a migration job with more than one stage and incorrect target connection bricks the migration
-- Sidebar filter showing schemas that contain none of the filter results
-- Misleading console log entries `No metadata found. There is more than once class-validator version installed probably ...`
+- Error when attempting to edit a function, procedure, trigger or view containing a `#` in its name
+- Trigger Type and Level can be changed even if the trigger is excluded
+- Column data-types qualified with `SYS` are not translated properly
+
 
 ## Getting Started
 
 ### Requirements
 
-_CYBERTEC Migrator_ is distributed as a set of [Docker](https://www.docker.com/) images that are brought up by [Docker Compose](https://docs.docker.com/compose/).
+_CYBERTEC Migrator_ is distributed as a set of [container images](https://github.com/opencontainers/image-spec/blob/main/spec.md) that are managed with the help of [Docker Compose](https://docs.docker.com/compose/).
 
 - [`docker`](https://docs.docker.com/get-docker/)
 - [`docker-compose`](https://docs.docker.com/compose/install/) (`>= 1.27.0`)
 - `git` (`>= 2.20.1`)
 - `bash` (`>= 4.0`)
 
-### Obtaining Images
 
-_CYBERTEC Migrator_ images can be obtained through Docker Hub.  
-An offline installation package is also available for environments in which networking restrictions are imposed.
+### Migrator Installation
 
-- Docker Hub  
+The _CYBERTEC Migrator_ images can be obtained via two channels
+- [Online installation via container registry](#online-installation)
+- From an [offline installation](#offline-installation) package for environments in which networking restrictions are imposed
+
+| 💡  | The Migrator Standard Edition is only available as [offline installation package](https://www.cybertec-postgresql.com/en/products/cybertec-migrator#form) |
+| --- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+
+#### Online installation
+
+  You need an account on the [Docker Hub](https://hub.docker.com/) container image registry.
+
   Please [get in touch with us](#contact) if your account has not been granted access to the respective images.
+  Make sure you are logged in the Docker Hub registry with the correct user.
 
   ```sh
   cat ~/password.txt | docker login --username <username> --password-stdin
   ```
 
-- Offline installation package  
-  Please [get in touch with us](#contact) to request download credentials.
-
-### Setup
-
-- Online installation
-
-  1. Clone the repository
-  2. Change directory into cloned repository
+  1. Clone this git repository
+  2. Change working directory to the previously cloned repository
   3. Generate default configuration
-  4. Download images
-
-  <br/>
+  4. Download and load container images
+  5. Start the Migrator
 
   ```sh
-  git clone https://github.com/cybertec-postgresql/cybertec_migrator
-  cd cybertec_migrator
-  ./migrator configure
-  ./migrator install
+  ➜ git clone https://github.com/cybertec-postgresql/cybertec_migrator
+  ➜ cd cybertec_migrator
+  ➜ ./migrator configure
+  [OK] Generated environment file
+  [INFO] Run './migrator install' to complete setup
+  ➜ ./migrator install
+  [INFO] Pulling v3.7.0
+  Pulling core_db ... done
+  Pulling core    ... done
+  Pulling web_gui ... done
+  [OK] Pulled v3.7.0
+  [INFO] Upgraded to v3.7.0
+  [INFO] Run './migrator up' to switch to new version
+  [WARN] Switching will abort running migrations
+  ➜ ./migrator up
+  Creating network "cybertec_migrator-network" with the default driver
+  Creating cybertec_migrator_core_db_1 ... done
+  Creating cybertec_migrator_core_1    ... done
+  Creating cybertec_migrator_web_gui_1 ... done
+  [OK] Started on 'http://localhost'
   ```
 
-- Offline installation
+#### Offline installation
 
-  | 💡  | Installation archives also serve as upgrade archives |
-    | --- | ---------------------------------------------------- |
+  Get your Migrator installation package. You can get the Migrator Standard Edition [here](https://www.cybertec-postgresql.com/en/products/cybertec-migrator#form) for free.  
+  For the Professional or Enterprise Edition [get in touch with us](#contact) to request download credentials.
 
   1. Extract the provided archive file
-  2. Change directory to the directory created in the previous step
+  2. Change working directory to newly created directory
   3. Generate default configuration
-  4. Import images from archive
-
-  <br/>
+  4. Import container images from archive
+  5. Start the Migrator
 
   ```sh
-  tar xf cybertec_migrator-vX.Y.Z.tar.gz
-  cd cybertec_migrator
-  ./migrator configure
-  ./migrator install --archive ../cybertec_migrator-vX.Y.Z.tar.gz
+  ➜ tar xf cybertec_migrator-v3.7.0-standard.tar.gz
+  ➜ cd cybertec_migrator
+  ➜ ./migrator configure
+  [OK] Generated environment file
+  [INFO] Run './migrator install' to complete setup
+  ➜ ./migrator install --archive ../cybertec_migrator-v3.7.0-standard.tar.gz
+  [INFO] Extracting upgrade information
+  Loaded image: cybertecpostgresql/cybertec_migrator-core:v3.7.0-standard
+  Loaded image: cybertecpostgresql/cybertec_migrator-web_gui:v3.7.0-standard
+  Loaded image: postgres:13-alpine
+  [INFO] Extracted upgrade information
+  [INFO] Upgraded to v3.7.0-standard
+  [INFO] Run './migrator up' to switch to new version
+  [WARN] Switching will abort running migrations
+  ➜ ./migrator up
+  Creating network "cybertec_migrator-network" with the default driver
+  Creating cybertec_migrator_core_db_1 ... done
+  Creating cybertec_migrator_core_1    ... done
+  Creating cybertec_migrator_web_gui_1 ... done
+  [OK] Started on 'http://localhost'
   ```
 
 ## Running the Migrator
 
-```sh
-./migrator up
-```
+The configuration provided with this repository starts the CYBERTEC Migrator via HTTP. The `EXTERNAL_HTTP_PORT` variable in the `.env` file (generated by `./migrator configure`) controls the choice of port on which the Migrator is served.
 
-CYBERTEC Migrator only supports connections via HTTP.
+The configuration is __not meant to be used in production environment__.
+Adapt the NGINX configuration in `docker/templates/default.conf.template` to your needs to run the service on HTTPS with proper credentials.
 
-The `EXTERNAL_HTTP_PORT` variable in the `.env` file (generated by `./migrator configure`) controls the choice of port on which the Migrator is served.
+If you don't have access to an Oracle or PostgreSQL database to test the Migrator, use our [Migrator demo database environment](https://github.com/cybertec-postgresql/cybertec_migrator_demo).
 
 ### Upgrades
 
-| ⚠️  | Running migrations _will_ be interrupted by applying upgrades |
+| ⚠️   | Running migrations _will_ be interrupted by applying upgrades |
 | --- | ------------------------------------------------------------- |
 
 - Online upgrade
@@ -166,6 +183,9 @@ The `EXTERNAL_HTTP_PORT` variable in the `.env` file (generated by `./migrator c
 
 - Offline upgrade
 
+  | 💡  | Installation archives also serve for upgrading the Migrator |
+  | --- | ----------------------------------------------------------- |
+
   1. Update release information
   2. Upgrade to version bundled in archive
   3. Apply upgrade
@@ -181,4 +201,8 @@ The `EXTERNAL_HTTP_PORT` variable in the `.env` file (generated by `./migrator c
 ## Contact
 
 - [Sales](https://www.cybertec-postgresql.com/en/contact/)
-- [Report Bug](https://cybertec.atlassian.net/servicedesk/customer/portal/3/group/4/create/23)
+
+## License
+
+The content of this repository is under the [MIT License](LICENSE) in case you have to adapt the deployment to your needs.
+The CYBERTEC Migrator delivered in the container images uses a proprietary license with an [EULA](EULA.md).
