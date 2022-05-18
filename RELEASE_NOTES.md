@@ -2,6 +2,25 @@
 
 The release notes of the last release may be found on [README.md](README.md#whats-new).
 
+### v3.7.0 - 2022-05-18
+
+Do you want to know if the Migrator can migrate your Oracle database to PostgreSQL?
+
+Then [get the Migrator Standard Edition](https://www.cybertec-postgresql.com/en/products/cybertec-migrator#form),  a __free version__ (as in beer) of the CYBERTEC Migrator, follow the offline instructions provided in [Getting Started](#offline-installation) section, and try it out.
+
+#### Features
+
+- Improve migration job execution (which removed the Redis job queue as a dependency)
+- Provide help menu to reach out to CYBERTEC
+- Provide a [Migrator demo database environment](https://github.com/cybertec-postgresql/cybertec_migrator_demo) to facilitate a test-run of the Migrator Standard Edition
+- Added [License](#license) information
+
+#### Resolved Bugs
+
+- Error when attempting to edit a function, procedure, trigger or view containing a `#` in its name
+- Trigger Type and Level can be changed even if the trigger is excluded
+- Column data-types qualified with `SYS` are not translated properly
+
 ### v3.6.0 - 2022-04-26
 
 #### Features

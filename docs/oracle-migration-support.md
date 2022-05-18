@@ -1,10 +1,12 @@
 # Supported features for migration from Oracle
 
+Supported features of the [CYBERTEC Migrator](../README.md).
+
 ## Database Object Types
 
 | CREATE            |    | Comment                                                    |
 |-------------------|----|------------------------------------------------------------|
-| DATABASE LINK     | ✅ |                                                            |
+| DATABASE LINK     | ✅ | visible, use PostgreSQL [Foreign Data Wrapper]             |
 | DIRECTORY         | ❌ |                                                            |
 | FUNCTION          | ✅ | code needs to be translated manually                       |
 | INDEX             | ✅ |                                                            |
