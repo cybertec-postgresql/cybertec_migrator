@@ -1,0 +1,24 @@
+name: "❔ Question"
+description: "Ask us anything related to the CYBERTEC Migrator!"
+labels: ["question"]
+body:
+  - type: textarea
+    validations:
+      required: true
+    attributes:
+      label: "📝 Description"
+      description: "Short but concise"
+
+  - type: input
+    attributes:
+      label: "Migrator version"
+      description: |
+        Which version of the CYBERTEC Migrator are you using?
+      placeholder: "3.7.0"
+
+  - type: textarea
+    attributes:
+      label: "Other"
+      description: |
+        Anything else that could be relevant? e.g.: Logs, OS version, Browser version, etc...
+        **Tip:** You can attach images, recordings or log files by clicking this area to highlight it and then dragging files in it

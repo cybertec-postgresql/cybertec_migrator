@@ -1,6 +1,5 @@
 name: "🐞 Bug Report"
 description: "Something isn't working as expected"
-title: "[BUG]: <title>"
 labels: ["bug"]
 body:
   - type: textarea

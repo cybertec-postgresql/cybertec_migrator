@@ -1,6 +1,6 @@
 name: "🌟 Feature Request"
 description: "I have a suggestion!"
-labels: ["feature-request"]
+labels: ["feature request"]
 body:
   - type: textarea
     validations:
