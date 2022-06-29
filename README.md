@@ -15,6 +15,9 @@
 [_CYBERTEC Migrator_](https://www.cybertec-postgresql.com/en/products/cybertec-migrator/) is a streamlined and user-friendly tool that helps you to organize and efficiently migrate multiple Oracle databases to PostgreSQL.
 In addition to migrating your data professionally and securely with minimum effort, _CYBERTEC Migrator_ allows you to visually monitor and track the whole process at any time.
 
+Do you want to know if the Migrator can migrate your Oracle database to PostgreSQL?
+Then [get the Migrator Standard Edition](https://www.cybertec-postgresql.com/en/products/cybertec-migrator#form),  a __free version__ of the CYBERTEC Migrator, follow the offline instructions provided in [Getting Started](#offline-installation) section, and try it out.
+
 <br/>
 
 <p align="center">
@@ -31,6 +34,7 @@ For detailed information see the list of [supported migration features for Oracl
 1. [What's New](#whats-new)
 1. [Getting Started](#getting-started)
 1. [Running the Migrator](#running-the-migrator)
+1. [Getting Help](#getting-help)
 1. [Contact](#contact)
 1. [License](#license)
 
@@ -38,25 +42,38 @@ For detailed information see the list of [supported migration features for Oracl
 
 For older releases see [Release Notes](RELEASE_NOTES.md).
 
-### v3.7.0 - 2022-05-18
-
-Do you want to know if the Migrator can migrate your Oracle database to PostgreSQL?
-
-Then [get the Migrator Standard Edition](https://www.cybertec-postgresql.com/en/products/cybertec-migrator#form),  a __free version__ (as in beer) of the CYBERTEC Migrator, follow the offline instructions provided in [Getting Started](#offline-installation) section, and try it out.
+### v3.8.0 - 2022-06-29
 
 #### Features
 
-- Improve migration job execution (which removed the Redis job queue as a dependency)
-- Provide help menu to reach out to CYBERTEC
-- Provide a [Migrator demo database environment](https://github.com/cybertec-postgresql/cybertec_migrator_demo) to facilitate a test-run of the Migrator Standard Edition
-- Added [License](#license) information
+- Configure the maximal number of parallel data transfers and index creation workers for each migration.  
+  The Migrator picks reasonable default values when a new migration is created:
+  - `Data Tranfers`: number of CPUs where the Migrator is hosted
+  - `Database Workers`: number of CPUs of the target database. Make sure to tune this parameter with the PostgreSQL configuration of [max_worker_processes, max_parallel_workers, max_parallel_maintenance_workers](https://www.postgresql.org/docs/current/runtime-config-resource.html)
+  <p align="left">
+      <img src="./docs/pictures/release-notes/v3.8.0/settings-parallel-workers.png"></img>
+  </p>
+- Enhance sidebar: show synonym meta-data as pop-up
+  <p align="left">
+      <img src="./docs/pictures/release-notes/v3.8.0/sidebar-shows-synonym-meta-data.png"></img>
+  </p>
+- Set/clear object type filter by selecting an `Object Type` in the overview tab. Use the `CTRL` key to filter for more than one database object type.
+  <p align="left">
+      <img src="./docs/pictures/release-notes/v3.8.0/set-object-type-filter-from-overview-tab.png"></img>
+  </p>
+- Add [issue templates](https://github.com/cybertec-postgresql/cybertec_migrator/issues/new/choose) for asking questions.
 
 #### Resolved Bugs
 
-- Error when attempting to edit a function, procedure, trigger or view containing a `#` in its name
-- Trigger Type and Level can be changed even if the trigger is excluded
-- Column data-types qualified with `SYS` are not translated properly
-
+* Empty connection check error message on `504 Gateway Time-Out`
+* Broken GUI workflow in the Analyze step on `504 Gateway Time-Out`
+* Error on migrating `REVERSE` indexes: PostgreSQL does not have/need an equivalent feature
+* Opening a non-existent migration endlessly shows the loading animation
+* Error on migrating sequences with negative `INCREMENT` - `START value cannot be greater than MAXVALUE`
+* Migration controls (resume, continue, etc.) occasionally do not behave as expected
+* Views depending on other views are not created in the correct order
+* Spacing between the migration log time and level is jumping
+* Incorrect name conflict detection for tables and triggers with the same identifier
 
 ## Getting Started
 
@@ -103,12 +120,12 @@ The _CYBERTEC Migrator_ images can be obtained via two channels
   [OK] Generated environment file
   [INFO] Run './migrator install' to complete setup
   ➜ ./migrator install
-  [INFO] Pulling v3.7.0
+  [INFO] Pulling v3.8.0
   Pulling core_db ... done
   Pulling core    ... done
   Pulling web_gui ... done
-  [OK] Pulled v3.7.0
-  [INFO] Upgraded to v3.7.0
+  [OK] Pulled v3.8.0
+  [INFO] Upgraded to v3.8.0
   [INFO] Run './migrator up' to switch to new version
   [WARN] Switching will abort running migrations
   ➜ ./migrator up
@@ -121,7 +138,8 @@ The _CYBERTEC Migrator_ images can be obtained via two channels
 
 #### Offline installation
 
-  Get your Migrator installation package. You can get the Migrator Standard Edition [here](https://www.cybertec-postgresql.com/en/products/cybertec-migrator#form) for free.  
+  Get your Migrator offline installation package.
+  You can get the Migrator Standard Edition [here](https://www.cybertec-postgresql.com/en/products/cybertec-migrator#form) for free.  
   For the Professional or Enterprise Edition [get in touch with us](#contact) to request download credentials.
 
   1. Extract the provided archive file
@@ -131,18 +149,18 @@ The _CYBERTEC Migrator_ images can be obtained via two channels
   5. Start the Migrator
 
   ```sh
-  ➜ tar xf cybertec_migrator-v3.7.0-standard.tar.gz
+  ➜ tar xf cybertec_migrator-v3.8.0-standard.tar.gz
   ➜ cd cybertec_migrator
   ➜ ./migrator configure
   [OK] Generated environment file
   [INFO] Run './migrator install' to complete setup
-  ➜ ./migrator install --archive ../cybertec_migrator-v3.7.0-standard.tar.gz
+  ➜ ./migrator install --archive ../cybertec_migrator-v3.8.0-standard.tar.gz
   [INFO] Extracting upgrade information
-  Loaded image: cybertecpostgresql/cybertec_migrator-core:v3.7.0-standard
-  Loaded image: cybertecpostgresql/cybertec_migrator-web_gui:v3.7.0-standard
+  Loaded image: cybertecpostgresql/cybertec_migrator-core:v3.8.0-standard
+  Loaded image: cybertecpostgresql/cybertec_migrator-web_gui:v3.8.0-standard
   Loaded image: postgres:13-alpine
   [INFO] Extracted upgrade information
-  [INFO] Upgraded to v3.7.0-standard
+  [INFO] Upgraded to v3.8.0-standard
   [INFO] Run './migrator up' to switch to new version
   [WARN] Switching will abort running migrations
   ➜ ./migrator up
@@ -155,7 +173,9 @@ The _CYBERTEC Migrator_ images can be obtained via two channels
 
 ## Running the Migrator
 
-The configuration provided with this repository starts the CYBERTEC Migrator via HTTP. The `EXTERNAL_HTTP_PORT` variable in the `.env` file (generated by `./migrator configure`) controls the choice of port on which the Migrator is served.
+Use your web browser to access the Migrator on the URL shown in the terminal with `migrator up`. In our example it would be `http://localhost`.
+
+The configuration provided with this repository starts the CYBERTEC Migrator over HTTP. The `EXTERNAL_HTTP_PORT` variable in the `.env` file (generated by `./migrator configure`) controls the choice of port on which the Migrator is served.
 
 The configuration is __not meant to be used in production environment__.
 Adapt the NGINX configuration in `docker/templates/default.conf.template` to your needs to run the service on HTTPS with proper credentials.
@@ -197,6 +217,11 @@ If you don't have access to an Oracle or PostgreSQL database to test the Migrato
   ./migrator upgrade --archive cybertec_migrator-vX.Y.Z.tar.gz
   ./migrator up
   ```
+
+## Getting Help
+
+Raising an [issue](https://github.com/cybertec-postgresql/cybertec_migrator/issues/new/choose) is encouraged.
+We have templates to report bugs, requesting a new feature or for general questions.
 
 ## Contact
 

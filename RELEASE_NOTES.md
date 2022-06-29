@@ -2,6 +2,39 @@
 
 The release notes of the last release may be found on [README.md](README.md#whats-new).
 
+### v3.8.0 - 2022-06-29
+
+#### Features
+
+- Configure the maximal number of parallel data transfers and index creation workers for each migration.  
+  The Migrator picks reasonable default values when a new migration is created:
+  - `Data Tranfers`: number of CPUs where the Migrator is hosted
+  - `Database Workers`: number of CPUs of the target database. Make sure to tune this parameter with the PostgreSQL configuration of [max_worker_processes, max_parallel_workers, max_parallel_maintenance_workers](https://www.postgresql.org/docs/current/runtime-config-resource.html)
+  <p align="left">
+      <img src="./docs/pictures/release-notes/v3.8.0/settings-parallel-workers.png"></img>
+  </p>
+- Enhance sidebar: show synonym meta-data as pop-up
+  <p align="left">
+      <img src="./docs/pictures/release-notes/v3.8.0/sidebar-shows-synonym-meta-data.png"></img>
+  </p>
+- Set/clear object type filter by selecting an `Object Type` in the overview tab. Use the `CTRL` key to filter for more than one database object type.
+  <p align="left">
+      <img src="./docs/pictures/release-notes/v3.8.0/set-object-type-filter-from-overview-tab.png"></img>
+  </p>
+- Add [issue templates](https://github.com/cybertec-postgresql/cybertec_migrator/issues/new/choose) for asking questions.
+
+#### Resolved Bugs
+
+* Empty connection check error message on `504 Gateway Time-Out`
+* Broken GUI workflow in the Analyze step on `504 Gateway Time-Out`
+* Error on migrating `REVERSE` indexes: PostgreSQL does not have/need an equivalent feature
+* Opening a non-existent migration endlessly shows the loading animation
+* Error on migrating sequences with negative `INCREMENT` - `START value cannot be greater than MAXVALUE`
+* Migration controls (resume, continue, etc.) occasionally do not behave as expected
+* Views depending on other views are not created in the correct order
+* Spacing between the migration log time and level is jumping
+* Incorrect name conflict detection for tables and triggers with the same identifier
+
 ### v3.7.0 - 2022-05-18
 
 Do you want to know if the Migrator can migrate your Oracle database to PostgreSQL?
