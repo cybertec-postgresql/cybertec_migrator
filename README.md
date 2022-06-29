@@ -32,11 +32,11 @@ For detailed information see the list of [supported migration features for Oracl
 ## Table of Contents
 
 1. [What's New](#whats-new)
-2. [Getting Started](#getting-started)
-3. [Running the Migrator](#running-the-migrator)
-4. [Getting Help](#getting-help)
-5. [Contact](#contact)
-6. [License](#license)
+1. [Getting Started](#getting-started)
+1. [Running the Migrator](#running-the-migrator)
+1. [Getting Help](#getting-help)
+1. [Contact](#contact)
+1. [License](#license)
 
 ## What's New
 
@@ -120,12 +120,12 @@ The _CYBERTEC Migrator_ images can be obtained via two channels
   [OK] Generated environment file
   [INFO] Run './migrator install' to complete setup
   ➜ ./migrator install
-  [INFO] Pulling v3.7.0
+  [INFO] Pulling v3.8.0
   Pulling core_db ... done
   Pulling core    ... done
   Pulling web_gui ... done
-  [OK] Pulled v3.7.0
-  [INFO] Upgraded to v3.7.0
+  [OK] Pulled v3.8.0
+  [INFO] Upgraded to v3.8.0
   [INFO] Run './migrator up' to switch to new version
   [WARN] Switching will abort running migrations
   ➜ ./migrator up
@@ -149,18 +149,18 @@ The _CYBERTEC Migrator_ images can be obtained via two channels
   5. Start the Migrator
 
   ```sh
-  ➜ tar xf cybertec_migrator-v3.7.0-standard.tar.gz
+  ➜ tar xf cybertec_migrator-v3.8.0-standard.tar.gz
   ➜ cd cybertec_migrator
   ➜ ./migrator configure
   [OK] Generated environment file
   [INFO] Run './migrator install' to complete setup
-  ➜ ./migrator install --archive ../cybertec_migrator-v3.7.0-standard.tar.gz
+  ➜ ./migrator install --archive ../cybertec_migrator-v3.8.0-standard.tar.gz
   [INFO] Extracting upgrade information
-  Loaded image: cybertecpostgresql/cybertec_migrator-core:v3.7.0-standard
-  Loaded image: cybertecpostgresql/cybertec_migrator-web_gui:v3.7.0-standard
+  Loaded image: cybertecpostgresql/cybertec_migrator-core:v3.8.0-standard
+  Loaded image: cybertecpostgresql/cybertec_migrator-web_gui:v3.8.0-standard
   Loaded image: postgres:13-alpine
   [INFO] Extracted upgrade information
-  [INFO] Upgraded to v3.7.0-standard
+  [INFO] Upgraded to v3.8.0-standard
   [INFO] Run './migrator up' to switch to new version
   [WARN] Switching will abort running migrations
   ➜ ./migrator up
