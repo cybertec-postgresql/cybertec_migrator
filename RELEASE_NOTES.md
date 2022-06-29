@@ -21,18 +21,19 @@ The release notes of the last release may be found on [README.md](README.md#what
   <p align="left">
       <img src="./docs/pictures/release-notes/v3.8.0/set-object-type-filter-from-overview-tab.png"></img>
   </p>
-- Add [issue templates](https://github.com/cybertec-postgresql/cybertec_migrator/issues/new/choose) to report bugs, request features or for asking questions.
+- Add [issue templates](https://github.com/cybertec-postgresql/cybertec_migrator/issues/new/choose) for asking questions.
 
 #### Resolved Bugs
 
-* Empty connection error message on `504 Gateway Time-Out`
-* Timeout (504) errors on creating/cloning a migration leads to a broken GUI workflow
-* Error on migrating `REVERSE` indexes: PostgreSQL does not has/need an equivalent feature
-* Show 404 page on non-existent migration
+* Empty connection check error message on `504 Gateway Time-Out`
+* Broken GUI workflow in the Analyze step on `504 Gateway Time-Out`
+* Error on migrating `REVERSE` indexes: PostgreSQL does not have/need an equivalent feature
+* Opening a non-existent migration endlessly shows the loading animation
 * Error on migrating sequences with negative `INCREMENT` - `START value cannot be greater than MAXVALUE`
-* Migration controls do not behave as expected
-* Migration of views depending on other views may fail due to missing dependency information
-* Spacing between log time and log level is jumping
+* Migration controls (resume, continue, etc.) occasionally do not behave as expected
+* Views depending on other views are not created in the correct order
+* Spacing between the migration log time and level is jumping
+* Incorrect name conflict detection for tables and triggers with the same identifier
 
 ### v3.7.0 - 2022-05-18
 
