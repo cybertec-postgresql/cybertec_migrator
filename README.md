@@ -18,6 +18,9 @@ In addition to migrating your data professionally and securely with minimum effo
 Do you want to know if the Migrator can migrate your Oracle database to PostgreSQL?
 Then [get the Migrator Standard Edition](https://www.cybertec-postgresql.com/en/products/cybertec-migrator#form),  a __free version__ of the CYBERTEC Migrator, follow the offline instructions provided in [Getting Started](#offline-installation) section, and try it out.
 
+The blog article [Meet the CYBERTEC Migrator](https://www.cybertec-postgresql.com/en/meet-the-cybertec-migrator/) provides a good introduction on how to migrate Oracle's HR demo schema to PostgreSQL.
+Alternatively, you may want to watch the complementary [CYBERTEC Migrator YouTube playlist](https://www.youtube.com/playlist?list=PLt4uYyc72accw-Wi1Egn-IcOOSitK5Lcq).
+
 <br/>
 
 <p align="center">
@@ -42,38 +45,32 @@ For detailed information see the list of [supported migration features for Oracl
 
 For older releases see [Release Notes](RELEASE_NOTES.md).
 
-### v3.8.0 - 2022-06-29
+### v3.9.0 - 2022-07-26
 
 #### Features
 
-- Configure the maximal number of parallel data transfers and index creation workers for each migration.  
-  The Migrator picks reasonable default values when a new migration is created:
-  - `Data Tranfers`: number of CPUs where the Migrator is hosted
-  - `Database Workers`: number of CPUs of the target database. Make sure to tune this parameter with the PostgreSQL configuration of [max_worker_processes, max_parallel_workers, max_parallel_maintenance_workers](https://www.postgresql.org/docs/current/runtime-config-resource.html)
-  <p align="left">
-      <img src="./docs/pictures/release-notes/v3.8.0/settings-parallel-workers.png"></img>
-  </p>
-- Enhance sidebar: show synonym meta-data as pop-up
-  <p align="left">
-      <img src="./docs/pictures/release-notes/v3.8.0/sidebar-shows-synonym-meta-data.png"></img>
-  </p>
-- Set/clear object type filter by selecting an `Object Type` in the overview tab. Use the `CTRL` key to filter for more than one database object type.
-  <p align="left">
-      <img src="./docs/pictures/release-notes/v3.8.0/set-object-type-filter-from-overview-tab.png"></img>
-  </p>
-- Add [issue templates](https://github.com/cybertec-postgresql/cybertec_migrator/issues/new/choose) for asking questions.
+- Improve _Sidebar_:
+    - Show meta-data as pop-up for constraints and indices
+      <p align="left">
+          <img height="200px" src="./docs/pictures/release-notes/v3.9.0/sidebar-shows-constraint-meta-data.png" />
+          <img height="200px" src="./docs/pictures/release-notes/v3.9.0/sidebar-shows-index-meta-data.png" />
+      </p>
+    - Extend the Object Type filter options with `Partitions` and provide granularity for `Indexes` (`Unique`, `Functional`, and `Domain`)
+      <p align="left">
+          <img src="./docs/pictures/release-notes/v3.9.0/filter-on-index-type.png" />
+      </p>
+- _Migration Overview_: Additional index types on _Indices_ drill down
+      <p align="left">
+          <img src="./docs/pictures/release-notes/v3.9.0/overview-show-index-types.png" />
+      </p>
+- Switch Migrator core to the native `libpq` PostgreSQL driver to support additional authentication methods (e.g. GSSAPI)
+- Recurring security maintenance: upgrade package dependencies with known vulnerabilities to newest version
 
 #### Resolved Bugs
 
-* Empty connection check error message on `504 Gateway Time-Out`
-* Broken GUI workflow in the Analyze step on `504 Gateway Time-Out`
-* Error on migrating `REVERSE` indexes: PostgreSQL does not have/need an equivalent feature
-* Opening a non-existent migration endlessly shows the loading animation
-* Error on migrating sequences with negative `INCREMENT` - `START value cannot be greater than MAXVALUE`
-* Migration controls (resume, continue, etc.) occasionally do not behave as expected
-* Views depending on other views are not created in the correct order
-* Spacing between the migration log time and level is jumping
-* Incorrect name conflict detection for tables and triggers with the same identifier
+* PostgreSQL authentication with AuthenticationGSS causes a crash
+* Importing an Oracle View with a Null-Byte results in an unresponsive state
+* Unexpected shutdown of the target PostgreSQL connection may cause a crash
 
 ## Getting Started
 
@@ -120,12 +117,12 @@ The _CYBERTEC Migrator_ images can be obtained via two channels
   [OK] Generated environment file
   [INFO] Run './migrator install' to complete setup
   ➜ ./migrator install
-  [INFO] Pulling v3.8.0
+  [INFO] Pulling v3.9.0
   Pulling core_db ... done
   Pulling core    ... done
   Pulling web_gui ... done
-  [OK] Pulled v3.8.0
-  [INFO] Upgraded to v3.8.0
+  [OK] Pulled v3.9.0
+  [INFO] Upgraded to v3.9.0
   [INFO] Run './migrator up' to switch to new version
   [WARN] Switching will abort running migrations
   ➜ ./migrator up
@@ -149,18 +146,18 @@ The _CYBERTEC Migrator_ images can be obtained via two channels
   5. Start the Migrator
 
   ```sh
-  ➜ tar xf cybertec_migrator-v3.8.0-standard.tar.gz
+  ➜ tar xf cybertec_migrator-v3.9.0-standard.tar.gz
   ➜ cd cybertec_migrator
   ➜ ./migrator configure
   [OK] Generated environment file
   [INFO] Run './migrator install' to complete setup
-  ➜ ./migrator install --archive ../cybertec_migrator-v3.8.0-standard.tar.gz
+  ➜ ./migrator install --archive ../cybertec_migrator-v3.9.0-standard.tar.gz
   [INFO] Extracting upgrade information
-  Loaded image: cybertecpostgresql/cybertec_migrator-core:v3.8.0-standard
-  Loaded image: cybertecpostgresql/cybertec_migrator-web_gui:v3.8.0-standard
+  Loaded image: cybertecpostgresql/cybertec_migrator-core:v3.9.0-standard
+  Loaded image: cybertecpostgresql/cybertec_migrator-web_gui:v3.9.0-standard
   Loaded image: postgres:13-alpine
   [INFO] Extracted upgrade information
-  [INFO] Upgraded to v3.8.0-standard
+  [INFO] Upgraded to v3.9.0-standard
   [INFO] Run './migrator up' to switch to new version
   [WARN] Switching will abort running migrations
   ➜ ./migrator up
