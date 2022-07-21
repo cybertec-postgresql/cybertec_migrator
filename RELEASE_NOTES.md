@@ -1,6 +1,33 @@
-## Release Notes
+## CYBERTEC Migrator - Release Notes
 
 The release notes of the last release may be found on [README.md](README.md#whats-new).
+
+### v3.9.0 - 2022-07-26
+
+#### Features
+
+- Improve _Sidebar_:
+    - Show meta-data as pop-up for constraints and indices
+      <p align="left">
+          <img height="200px" src="./docs/pictures/release-notes/v3.9.0/sidebar-shows-constraint-meta-data.png" />
+          <img height="200px" src="./docs/pictures/release-notes/v3.9.0/sidebar-shows-index-meta-data.png" />
+      </p>
+    - Extend the Object Type filter options with `Partitions` and provide granularity for `Indexes` (`Unique`, `Functional`, and `Domain`)
+      <p align="left">
+          <img src="./docs/pictures/release-notes/v3.9.0/filter-on-index-type.png" />
+      </p>
+- _Migration Overview_: Additional index types on _Indices_ drill down
+      <p align="left">
+          <img src="./docs/pictures/release-notes/v3.9.0/overview-show-index-types.png" />
+      </p>
+- Switch Migrator core to the native `libpq` PostgreSQL driver to support additional authentication methods (e.g. GSSAPI)
+- Recurring security maintenance: upgrade package dependencies with known vulnerabilities to newest version
+
+#### Resolved Bugs
+
+* PostgreSQL authentication with AuthenticationGSS causes a crash
+* Importing an Oracle View with a Null-Byte results in an unresponsive state
+* Unexpected shutdown of the target PostgreSQL connection may cause a crash
 
 ### v3.8.0 - 2022-06-29
 
