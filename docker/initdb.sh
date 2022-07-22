@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# SPDX-License-Identifier: MIT
+# SPDX-FileCopyrightText: 2022 CYBERTEC PostgreSQL International GmbH <office@cybertec.at>
+
 set -e
 
 DATABASE="migrator"
