@@ -7,309 +7,8 @@ set -e
 
 shopt -s nullglob
 
-RED='\033[1;31m'
-GREEN='\033[1;32m'
-YELLOW='\033[1;33m'
-WHITE='\033[1;37m'
-LIGHT_GREY='\033[1;37m'
-
-NC='\033[0m'
-
-function print {
-	printf "${1}\n"
-}
-
-function ok {
-	printf "[${GREEN}OK${NC}] ${1}\n"
-}
-
-function info {
-	printf "[${WHITE}INFO${NC}] ${1}\n"
-}
-
-function warn {
-	printf "[${YELLOW}WARN${NC}] ${1}\n"
-}
-
-function error {
-	>&2 printf "[${RED}ERROR${NC}] ${1}\n"
-	return ${2-1}
-}
-
-function highlight {
-	echo "${LIGHT_GREY}${1}${NC}"
-}
-
-PASSWORD_CHARSET='A-Za-z0-9!&()*+,-./:;<=>?@{|}~'
-BACKUP_EXTENSION_CHARSET='A-Za-z0-9'
-PASSWORD_LENGTH=32
-TEMP_TEMPLATE='migrator.XXXXXX'
-
-IMAGE_PATH='./images'
-ENV_FILE='./.env'
-VERSION_FILE='./.version'
-
-function generate_random {
-	LC_ALL=C tr -dc "${1}" </dev/urandom | head -c "${2}"
-}
-
-function generate_environment_file {
-	password="$(generate_random "${PASSWORD_CHARSET}" "${PASSWORD_LENGTH}")"
-
-	version="$(git describe --exact-match --tags HEAD)"
-
-	cat <<EOF > "${1}"
-# —— User configurable ——
-EXTERNAL_HTTP_PORT=80
-VERSION=${version}
-
-# —— Internal ⚠ ——
-CORE_DB_PASSWORD="${password}"
-EOF
-
-	chmod 600 "${1}"
-}
-
-function sanctioned_tags {
-	git tag --sort=-v:refname | \
-		grep --invert-match "^.*-beta*" | \
-		grep --invert-match "^.*-alpha*" | \
-		grep --invert-match "^.*-rc*"
-
-}
-
-function most_recent_tag {
-	sanctioned_tags | head -n 1
-}
-
-function get_hostname {
-	# BSD `hostname` doesn't understand the `-I` flag
-	(hostname --all-ip-addresses 2> /dev/null || hostname) | awk '{ print $1 }'
-}
-
-function replace_in_place {
-	target=$(mktemp)
-	sed -e "${1}" "${2}" > "${target}"
-	mv "${target}" "${2}"
-}
-
-function print_url {
-	ip_addr="$(get_hostname)"
-	if [ ! -z "${ip_addr}" ]; then
-		port=":$(print_env 'EXTERNAL_HTTP_PORT')"
-		if [ "${port}" = ':80' ]; then
-			port=''
-		fi;
-
-		ok "Started on $(highlight "'http://${ip_addr}${port}'")"
-	fi;
-}
-
-function print_env {
-	env -i "${BASH}" -c "set -a; . "${ENV_FILE}"; set +a; echo \${${1}};"
-}
-
-function version_barrier {
-	if ! git tag | grep -q "^${1}$"; then
-		error "Unknown version $(highlight "${1}")"
-	fi;
-}
-
-function find_in_tar {
-	# Narrows down selection with `tar`'s built-in search first
-	# (significantly faster than just filtering with `grep`)
-	(tar --wildcards -tf "${1}" "*/${2}" 2>/dev/null || tar -tf "${1}" "*/${2}") | grep "^./.*/${2}$"
-}
-
-function archive_git_directory {
-	find_in_tar "${1}" '.git/'
-}
-
-function archive_images_directory {
-	find_in_tar "${1}" 'images/'
-}
-
-function archive_version_file {
-	find_in_tar "${1}" '.version'
-}
-
-function archive_barrier {
-	if [ -z "$(archive_git_directory "${1}")" ] || \
-		[ -z "$(archive_images_directory "${1}")" ] || \
-		[ -z "$(archive_version_file "${1}")" ]
-	then
-		error 'Incomplete / corrupt upgrade archive'
-	fi;
-}
-
-function dependency_barrier {
-	command -v docker &>/dev/null || \
-		error "$(highlight "docker") not installed"
-	command -v docker-compose &>/dev/null || \
-		error "$(highlight "docker-compose") not installed"
-	command -v git &>/dev/null || \
-		error "$(highlight "git") not installed"
-}
-
-dependency_barrier
-
-# Change working directory to directory that contains script
-cd "${0%/*}"
-
-catch_all_exit_code=1
-case "${1}" in
-'up')
-	docker-compose up -d
-	print_url
-	;;
-'down')
-	docker-compose down
-	;;
-'logs')
-	if [ ! -z "$(docker-compose top)" ]; then
-		docker-compose logs --timestamps --tail='all'
-	else
-		error "Logs not avaliable while not running ($(highlight "'${0} up'") to start)"
-	fi;
-	;;
-'configure')
-	if [ ! -f "${ENV_FILE}" ]; then
-		generate_environment_file "${ENV_FILE}"
-
-		ok 'Generated environment file'
-		info "Run $(highlight "'${0} install'") to complete setup"
-	else
-		warn 'Environment file already exists'
-		info "Please modify environment file $(highlight "'${ENV_FILE}'") manually"
-	fi;
-
-	;;
-'update')
-	# No archive provided → Fetch from origin
-	if [ -z "${2}" ]; then
-		info 'Updating release information'
-		git fetch || error 'Could not fetch versions'
-
-		info "Recommended version: "$(highlight "$(most_recent_tag)")""
-
-		if [ -f "${ENV_FILE}" ] && [ ! "$(most_recent_tag)" = $(print_env 'VERSION') ]; then
-			info "Run $(highlight "'${0} upgrade'") to complete upgrade"
-		fi;
-	# Archive provided → Use `.git` folder contained within archive as origin
-	elif [ "${2}" = '--archive' ] && [ -f "${3}" ]; then
-		info 'Updating release information'
-
-		archive_barrier "${3}"
-
-		temp_dir="$(mktemp -t "${TEMP_TEMPLATE}" -d)"
-
-		tar -xf "${3}" --strip-components=2 --directory "${temp_dir}" \
-			"$(archive_git_directory "${3}")"
-
-		# If interrupted previously
-		git remote remove archive 2>/dev/null || true
-
-		git remote add archive "${temp_dir}/.git"
-		git fetch --quiet --tags archive 1>/dev/null
-		git remote remove archive
-
-		rm -rf "${temp_dir}"
-
-		info "Updated release information"
-
-		info "Run $(highlight "'${0} upgrade --archive ${3}'") to proceed with upgrade"
-	else
-		error "Invalid path $(highlight "${3}")"
-	fi;
-	;;
-'install')
-	;&
-'upgrade')
-	# Ensure that the environment file exists
-	if [ ! -f "${ENV_FILE}" ]; then
-		generate_environment_file "${ENV_FILE}"
-	fi;
-
-	# No parameters provided → Fetch most recent images from online registry
-	if [ -z "${2}" ]; then
-		version="$(most_recent_tag)"
-
-		if [ -z "${version}" ]; then
-			error "No versions available (run $(highlight "'${0} update'") to fetch versions)"
-		fi;
-
-		info "Pulling $(highlight "${version}")"
-		VERSION="${version}" docker-compose pull
-		ok "Pulled $(highlight "${version}")"
-	# Archive provided → Import images from archive
-	elif [ "${2}" = '--archive' ] && [ -f "${3}" ]; then
-		info 'Extracting upgrade information'
-
-		archive_barrier "${3}"
-
-		temp_dir="$(mktemp -t "${TEMP_TEMPLATE}" -d)"
-
-		tar -xf "${3}" --strip-components=2 --directory "${temp_dir}" \
-			"$(archive_images_directory "${3}")" "$(archive_version_file "${3}")"
-
-		version="$(<"${temp_dir}/.version")"
-
-		version_barrier "${version}" || (
-			info "Run $(highlight "'${0} update --archive ${3}'") before attempting upgrade"
-			rm -rf "${temp_dir}"
-			exit 1
-		)
-
-		mkdir -p "${IMAGE_PATH}"
-
-		image_path="${temp_dir}/${IMAGE_PATH}"
-
-		# Import images *before* moving them to local image directory
-		for image in ${image_path}/*.tar; do
-			docker load < "${image}"
-		done
-
-		mv ${image_path}/*.tar "${IMAGE_PATH}"
-
-		info 'Extracted upgrade information'
-
-		rm -rf "${temp_dir}"
-	# Explicit version provided but no archive
-	elif [ ! -z "${2}" ] && [ -z "${3}" ]; then
-		version_barrier "${2}"
-
-		version="${2}"
-
-		info "Pulling $(highlight "${version}")"
-		VERSION="${version}" docker-compose pull
-		ok "Pulled $(highlight "${version}")"
-	else
-		error 'Unexpected usage'
-	fi
-
-	git checkout --quiet "${version}"
-	replace_in_place "s/^VERSION=.*/VERSION=${version}/" "${ENV_FILE}"
-
-	info "Upgraded to $(highlight "${version}")"
-
-	info "Run $(highlight "'${0} up'") to switch to new version"
-	warn 'Switching will abort running migrations'
-	;;
-'versions')
-	sanctioned_tags
-	;;
-'version')
-	if [ -f "${ENV_FILE}" ]; then
-		print_env 'VERSION'
-	else
-		error "Initial configuration outstanding (run $(highlight "'${0} configure'"))"
-	fi;
-	;;
-'help')
-	catch_all_exit_code='0'
-	;&
-*)
-	print "$(cat <<EOF
+function usage() {
+    print "$(cat <<EOF
 $(highlight "up")                                     Start Migrator in background
 $(highlight "down")                                   Stop Migrator
 $(highlight "logs")                                   Print logs
@@ -328,6 +27,317 @@ $(highlight "configure")                              Generate settings file
 $(highlight "help")                                   Display this help text
 EOF
 )"
-	exit "${catch_all_exit_code}"
-	;;
+}
+
+# Color codes
+RED='\033[1;31m'
+GREEN='\033[1;32m'
+YELLOW='\033[1;33m'
+WHITE='\033[1;37m'
+LIGHT_GREY='\033[1;37m'
+
+# No color
+NC='\033[0m'
+
+function print {
+    printf "${1}\n"
+}
+
+function highlight {
+    echo "${LIGHT_GREY}${1}${NC}"
+}
+
+function dependency_barrier {
+    command -v docker &>/dev/null || \
+        error "$(highlight "docker") not installed"
+    command -v docker-compose &>/dev/null || \
+        error "$(highlight "docker-compose") not installed"
+    command -v git &>/dev/null || \
+        error "$(highlight "git") not installed"
+}
+
+function error {
+    >&2 printf "[${RED}ERROR${NC}] ${1}\n"
+    return ${2-1}
+}
+
+function warn {
+    printf "[${YELLOW}WARN${NC}] ${1}\n"
+}
+
+function info {
+    printf "[${WHITE}INFO${NC}] ${1}\n"
+}
+
+function ok {
+    printf "[${GREEN}OK${NC}] ${1}\n"
+}
+
+function print_url {
+    ip_addr="$(get_hostname)"
+    if [ ! -z "${ip_addr}" ]; then
+        port=":$(print_env 'EXTERNAL_HTTP_PORT')"
+        if [ "${port}" = ':80' ]; then
+            port=''
+        fi;
+
+        ok "Started on $(highlight "'http://${ip_addr}${port}'")"
+    fi;
+}
+
+function print_env {
+    env -i "${BASH}" -c "set -a; . "${ENV_FILE}"; set +a; echo \${${1}};"
+}
+
+function generate_environment_file {
+    password="$(generate_random)"
+
+    version="$(git describe --exact-match --tags HEAD)"
+
+    cat <<EOF > "${1}"
+# —— User configurable ——
+EXTERNAL_HTTP_PORT=80
+VERSION=${version}
+
+# —— Internal ⚠ ——
+CORE_DB_PASSWORD="${password}"
+EOF
+
+    chmod 600 "${1}"
+}
+
+function generate_random {
+    local PASSWORD_CHARSET='A-Za-z0-9!&()*+,-./:;<=>?@{|}~'
+    local PASSWORD_LENGTH=32
+    LC_ALL=C tr -dc "${PASSWORD_CHARSET}" </dev/urandom | head -c "${PASSWORD_LENGTH}"
+}
+
+# Temporary directory
+TEMP_TEMPLATE='migrator.XXXXXX'
+
+# Environment configuration files
+ENV_FILE='./.env'
+
+# Directory where we save container images provided from offline installation packages
+IMAGE_PATH='./images'
+
+# This file exists only if the directory was provided by on offline installation package
+VERSION_FILE='.version'
+
+function archive_barrier {
+    if [ -z "$(archive_git_directory "${1}")" ] || \
+        [ -z "$(archive_images_directory "${1}")" ] || \
+        [ -z "$(archive_version_file "${1}")" ]
+    then
+        error 'Incomplete / corrupt upgrade archive'
+    fi;
+}
+
+function archive_git_directory {
+    find_in_tar "${1}" '.git/'
+}
+
+function archive_images_directory {
+    find_in_tar "${1}" 'images/'
+}
+
+function archive_version_file {
+    find_in_tar "${1}" "${VERSION_FILE}"
+}
+
+function find_in_tar {
+    # Narrows down selection with `tar`'s built-in search first
+    # (significantly faster than just filtering with `grep`)
+    (tar --wildcards -tf "${1}" "*/${2}" 2>/dev/null || tar -tf "${1}" "*/${2}") | grep "^./.*/${2}$"
+}
+
+function most_recent_tag {
+    sanctioned_tags | head -n 1
+}
+
+function sanctioned_tags {
+    git tag --sort=-v:refname | \
+        grep --invert-match "^.*-beta*" | \
+        grep --invert-match "^.*-alpha*" | \
+        grep --invert-match "^.*-rc*"
+}
+
+function get_hostname {
+    # BSD `hostname` doesn't understand the `-I` flag
+    (hostname --all-ip-addresses 2> /dev/null || hostname) | awk '{ print $1 }'
+}
+
+function replace_in_place {
+    target=$(mktemp)
+    sed -e "${1}" "${2}" > "${target}"
+    mv "${target}" "${2}"
+}
+
+function version_barrier {
+    if ! git tag | grep -q "^${1}$"; then
+        error "Unknown version $(highlight "${1}")"
+    fi;
+}
+
+dependency_barrier
+
+# Change working directory to directory that contains script
+cd "${0%/*}"
+
+catch_all_exit_code=1
+case "${1}" in
+'up')
+    docker-compose up -d
+    print_url
+    ;;
+'down')
+    docker-compose down
+    ;;
+'logs')
+    if [ ! -z "$(docker-compose top)" ]; then
+        docker-compose logs --timestamps --tail='all'
+    else
+        error "Logs not avaliable while not running ($(highlight "'${0} up'") to start)"
+    fi;
+    ;;
+'configure')
+    if [ ! -f "${ENV_FILE}" ]; then
+        generate_environment_file "${ENV_FILE}"
+
+        ok 'Generated environment file'
+        info "Run $(highlight "'${0} install'") to complete setup"
+    else
+        warn 'Environment file already exists'
+        info "Please modify environment file $(highlight "'${ENV_FILE}'") manually"
+    fi;
+
+    ;;
+'update')
+    # No archive provided → Fetch from origin
+    if [ -z "${2}" ]; then
+        info 'Updating release information'
+        git fetch || error 'Could not fetch versions'
+
+        info "Recommended version: "$(highlight "$(most_recent_tag)")""
+
+        if [ -f "${ENV_FILE}" ] && [ ! "$(most_recent_tag)" = $(print_env 'VERSION') ]; then
+            info "Run $(highlight "'${0} upgrade'") to complete upgrade"
+        fi;
+    # Archive provided → Use `.git` folder contained within archive as origin
+    elif [ "${2}" = '--archive' ] && [ -f "${3}" ]; then
+        info 'Updating release information'
+
+        archive_barrier "${3}"
+
+        temp_dir="$(mktemp -t "${TEMP_TEMPLATE}" -d)"
+
+        tar -xf "${3}" --strip-components=2 --directory "${temp_dir}" \
+            "$(archive_git_directory "${3}")"
+
+        # If interrupted previously
+        git remote remove archive 2>/dev/null || true
+
+        git remote add archive "${temp_dir}/.git"
+        git fetch --quiet --tags archive 1>/dev/null
+        git remote remove archive
+
+        rm -rf "${temp_dir}"
+
+        info "Updated release information"
+
+        info "Run $(highlight "'${0} upgrade --archive ${3}'") to proceed with upgrade"
+    else
+        error "Invalid path $(highlight "${3}")"
+    fi;
+    ;;
+'install')
+    ;&
+'upgrade')
+    # Ensure that the environment file exists
+    if [ ! -f "${ENV_FILE}" ]; then
+        generate_environment_file "${ENV_FILE}"
+    fi;
+
+    # No parameters provided → Fetch most recent images from online registry
+    if [ -z "${2}" ]; then
+        version="$(most_recent_tag)"
+
+        if [ -z "${version}" ]; then
+            error "No versions available (run $(highlight "'${0} update'") to fetch versions)"
+        fi;
+
+        info "Pulling $(highlight "${version}")"
+        VERSION="${version}" docker-compose pull
+        ok "Pulled $(highlight "${version}")"
+    # Archive provided → Import images from archive
+    elif [ "${2}" = '--archive' ] && [ -f "${3}" ]; then
+        info 'Extracting upgrade information'
+
+        archive_barrier "${3}"
+
+        temp_dir="$(mktemp -t "${TEMP_TEMPLATE}" -d)"
+
+        tar -xf "${3}" --strip-components=2 --directory "${temp_dir}" \
+            "$(archive_images_directory "${3}")" "$(archive_version_file "${3}")"
+
+        version="$(<"${temp_dir}/${VERSION_FILE}")"
+
+        version_barrier "${version}" || (
+            info "Run $(highlight "'${0} update --archive ${3}'") before attempting upgrade"
+            rm -rf "${temp_dir}"
+            exit 1
+        )
+
+        mkdir -p "${IMAGE_PATH}"
+
+        image_path="${temp_dir}/${IMAGE_PATH}"
+
+        # Import images *before* moving them to local image directory
+        for image in ${image_path}/*.tar; do
+            docker load < "${image}"
+        done
+
+        mv ${image_path}/*.tar "${IMAGE_PATH}"
+
+        info 'Extracted upgrade information'
+
+        rm -rf "${temp_dir}"
+    # Explicit version provided but no archive
+    elif [ ! -z "${2}" ] && [ -z "${3}" ]; then
+        version_barrier "${2}"
+
+        version="${2}"
+
+        info "Pulling $(highlight "${version}")"
+        VERSION="${version}" docker-compose pull
+        ok "Pulled $(highlight "${version}")"
+    else
+        error 'Unexpected usage'
+    fi
+
+    git checkout --quiet "${version}"
+    replace_in_place "s/^VERSION=.*/VERSION=${version}/" "${ENV_FILE}"
+
+    info "Upgraded to $(highlight "${version}")"
+
+    info "Run $(highlight "'${0} up'") to switch to new version"
+    warn 'Switching will abort running migrations'
+    ;;
+'versions')
+    sanctioned_tags
+    ;;
+'version')
+    if [ -f "${ENV_FILE}" ]; then
+        print_env 'VERSION'
+    else
+        error "Initial configuration outstanding (run $(highlight "'${0} configure'"))"
+    fi;
+    ;;
+'help')
+    catch_all_exit_code='0'
+    ;&
+*)
+    usage
+    exit "${catch_all_exit_code}"
+    ;;
 esac
