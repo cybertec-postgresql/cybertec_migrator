@@ -87,10 +87,18 @@ Detailed information about Oracle built-in data types may be found in the [Oracl
         <td colspan="2">DOUBLE PRECISION</td>
     </tr>
     <tr>
-        <td>10</td>
-        <td>FLOAT(<em>p</em>)</td>
-        <td>Floating-point number</td>
+        <td rowspan="3">10</td>
+        <td rowspan="3">FLOAT(<em>p</em>)</td>
+        <td>1 &lt;= <em>p</em> &lt; 24</td>
+        <td colspan="2">REAL</td>
+    </tr>
+    <tr>
+        <td>25 &lt;= <em>p</em> &lt; 53</td>
         <td colspan="2">DOUBLE PRECISION</td>
+    </tr>
+    <tr>
+        <td>54 &lt;= <em>p</em> &lt;= 126 (<em>p</em> not provided)</td>
+        <td colspan="2">NUMERIC</td>
     </tr>
     <tr>
         <td>11</td>
