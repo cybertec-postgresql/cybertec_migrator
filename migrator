@@ -127,6 +127,7 @@ function get_hostname {
     (hostname --all-ip-addresses 2> /dev/null || hostname) | awk '{ print $1 }'
 }
 
+# TODO: replace this with sed -I
 function replace_in_place {
     target=$(mktemp)
     sed -e "${1}" "${2}" > "${target}"
@@ -155,6 +156,13 @@ function print_env {
     env -i "${BASH}" -c "set -a; . "${ENV_FILE}"; set +a; echo \${${1}};"
 }
 
+# TODO Switch to .meta-inf file which contains more information. For now we
+# remain on the .version file for backwards compatiblity.
+function installed_from_archive() {
+    [ -f "${VERSION_FILE}" ] && return
+    false
+}
+
 dependency_barrier
 
 # Change working directory to directory that contains script
@@ -181,7 +189,9 @@ case "${1}" in
         generate_environment_file "${ENV_FILE}"
 
         ok 'Generated environment file'
-        info "Run $(highlight "'${0} install'") to complete setup"
+        next_command="install"
+        installed_from_archive && next_command="${next_command} --archive <archive_file>"
+        info "Run $(highlight "'${0} ${next_command}'") to complete setup"
     else
         warn 'Environment file already exists'
         info "Please modify environment file $(highlight "'${ENV_FILE}'") manually"
@@ -211,7 +221,7 @@ case "${1}" in
         git fetch --quiet --tags "${temp_dir}/.git" 1>/dev/null
 
         info "Updated release information"
-        info "Run $(highlight "'${0} upgrade --archive ${3}'") to proceed with upgrade"
+        info "Run $(highlight "'${0} upgrade --archive ${3}'") to upgrade"
     else
         error "Invalid path $(highlight "${3}")"
     fi;
@@ -232,9 +242,17 @@ case "${1}" in
             error "No versions available (run $(highlight "'${0} update'") to fetch versions)"
         fi;
 
-        info "Pulling $(highlight "${version}")"
-        VERSION="${version}" docker-compose pull
-        ok "Pulled $(highlight "${version}")"
+        info "Pulling images for $(highlight "${version}")"
+        if pull_error=$(VERSION="${version}" docker-compose pull 2>&1 > /dev/null); then
+            ok "Pulled $(highlight "${version}")"
+        elif installed_from_archive; then
+            # || true to prevent exit with the error message so we can provide a suggestion
+            error "Failed to pull container images\n${pull_error}\n" || true
+            info "Migrator was extracted from archive file: run $(highlight "'${0} ${1} --archive <archive_file>'") to proceed with upgrade"
+            exit 2
+        else
+            error "Failed to pull container images\n${pull_error}"
+        fi
     # Archive provided → Import images from archive
     elif [ "${2}" = '--archive' ] && [ -f "${3}" ]; then
         # TODO move reading version incl. version check to a function
@@ -249,7 +267,6 @@ case "${1}" in
         info "Upgrading to version $version"
 
         info "Extracting archive file '${3}'"
-
         temp_dir="$(mktemp -t "${TEMP_TEMPLATE}" -d)"
         trap 'rm -rf -- "${temp_dir}"' EXIT
 
