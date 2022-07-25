@@ -29,6 +29,15 @@ EOF
 )"
 }
 
+function dependency_barrier {
+    command -v docker &>/dev/null || \
+        error "$(highlight "docker") not installed"
+    command -v docker-compose &>/dev/null || \
+        error "$(highlight "docker-compose") not installed"
+    command -v git &>/dev/null || \
+        error "$(highlight "git") not installed"
+}
+
 # Color codes
 RED='\033[1;31m'
 GREEN='\033[1;32m'
@@ -47,15 +56,6 @@ function highlight {
     echo "${LIGHT_GREY}${1}${NC}"
 }
 
-function dependency_barrier {
-    command -v docker &>/dev/null || \
-        error "$(highlight "docker") not installed"
-    command -v docker-compose &>/dev/null || \
-        error "$(highlight "docker-compose") not installed"
-    command -v git &>/dev/null || \
-        error "$(highlight "git") not installed"
-}
-
 function error {
     >&2 printf "[${RED}ERROR${NC}] ${1}\n"
     return ${2-1}
@@ -71,22 +71,6 @@ function info {
 
 function ok {
     printf "[${GREEN}OK${NC}] ${1}\n"
-}
-
-function print_url {
-    ip_addr="$(get_hostname)"
-    if [ ! -z "${ip_addr}" ]; then
-        port=":$(print_env 'EXTERNAL_HTTP_PORT')"
-        if [ "${port}" = ':80' ]; then
-            port=''
-        fi;
-
-        ok "Started on $(highlight "'http://${ip_addr}${port}'")"
-    fi;
-}
-
-function print_env {
-    env -i "${BASH}" -c "set -a; . "${ENV_FILE}"; set +a; echo \${${1}};"
 }
 
 function generate_environment_file {
@@ -115,41 +99,17 @@ function generate_random {
 # Temporary directory
 TEMP_TEMPLATE='migrator.XXXXXX'
 
+# Directory name in archive
+ARCHIVE_DIR='./cybertec_migrator'
+
 # Environment configuration files
 ENV_FILE='./.env'
 
 # Directory where we save container images provided from offline installation packages
-IMAGE_PATH='./images'
+IMAGE_PATH='images'
 
 # This file exists only if the directory was provided by on offline installation package
 VERSION_FILE='.version'
-
-function archive_barrier {
-    if [ -z "$(archive_git_directory "${1}")" ] || \
-        [ -z "$(archive_images_directory "${1}")" ] || \
-        [ -z "$(archive_version_file "${1}")" ]
-    then
-        error 'Incomplete / corrupt upgrade archive'
-    fi;
-}
-
-function archive_git_directory {
-    find_in_tar "${1}" '.git/'
-}
-
-function archive_images_directory {
-    find_in_tar "${1}" 'images/'
-}
-
-function archive_version_file {
-    find_in_tar "${1}" "${VERSION_FILE}"
-}
-
-function find_in_tar {
-    # Narrows down selection with `tar`'s built-in search first
-    # (significantly faster than just filtering with `grep`)
-    (tar --wildcards -tf "${1}" "*/${2}" 2>/dev/null || tar -tf "${1}" "*/${2}") | grep "^./.*/${2}$"
-}
 
 function most_recent_tag {
     sanctioned_tags | head -n 1
@@ -177,6 +137,22 @@ function version_barrier {
     if ! git tag | grep -q "^${1}$"; then
         error "Unknown version $(highlight "${1}")"
     fi;
+}
+
+function print_url {
+    ip_addr="$(get_hostname)"
+    if [ ! -z "${ip_addr}" ]; then
+        port=":$(print_env 'EXTERNAL_HTTP_PORT')"
+        if [ "${port}" = ':80' ]; then
+            port=''
+        fi;
+
+        ok "Started on $(highlight "'http://${ip_addr}${port}'")"
+    fi;
+}
+
+function print_env {
+    env -i "${BASH}" -c "set -a; . "${ENV_FILE}"; set +a; echo \${${1}};"
 }
 
 dependency_barrier
@@ -225,25 +201,16 @@ case "${1}" in
         fi;
     # Archive provided → Use `.git` folder contained within archive as origin
     elif [ "${2}" = '--archive' ] && [ -f "${3}" ]; then
-        info "Updating release information from archive '{3}'"
-
-        archive_barrier "${3}"
+        info "Updating release information from archive '${3}'"
 
         temp_dir="$(mktemp -t "${TEMP_TEMPLATE}" -d)"
         trap 'rm -rf -- "${temp_dir}"' EXIT
+        extract_error=$(tar -xf "${3}" --strip-components=2 --directory "${temp_dir}" "${ARCHIVE_DIR}/.git" 2>&1 > /dev/null) || \
+            error "Failed to extract update information\n${extract_error}"
 
-        tar -xf "${3}" --strip-components=2 --directory "${temp_dir}" \
-            "$(archive_git_directory "${3}")"
-
-        # If interrupted previously
-        git remote remove archive 2>/dev/null || true
-
-        git remote add archive "${temp_dir}/.git"
-        git fetch --quiet --tags archive 1>/dev/null
-        git remote remove archive
+        git fetch --quiet --tags ${temp_dir}/.git 1>/dev/null
 
         info "Updated release information"
-
         info "Run $(highlight "'${0} upgrade --archive ${3}'") to proceed with upgrade"
     else
         error "Invalid path $(highlight "${3}")"
@@ -272,8 +239,7 @@ case "${1}" in
     elif [ "${2}" = '--archive' ] && [ -f "${3}" ]; then
         # TODO move reading version incl. version check to a function
         info "Reading version information from archive file '${3}'"
-        # TODO: Replace .version with variable
-        version=$(tar -xf "${3}" "./cybertec_migrator/.version" --to-stdout 2>&1) || \
+        version=$(tar -xf "${3}" "${ARCHIVE_DIR}/${VERSION_FILE}" --to-stdout 2>&1) || \
             error "Failed to extract archive file\n$version"
 
         version_barrier "${version}" || (
