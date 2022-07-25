@@ -225,11 +225,12 @@ case "${1}" in
         fi;
     # Archive provided → Use `.git` folder contained within archive as origin
     elif [ "${2}" = '--archive' ] && [ -f "${3}" ]; then
-        info 'Updating release information'
+        info "Updating release information from archive '{3}'"
 
         archive_barrier "${3}"
 
         temp_dir="$(mktemp -t "${TEMP_TEMPLATE}" -d)"
+        trap 'rm -rf -- "${temp_dir}"' EXIT
 
         tar -xf "${3}" --strip-components=2 --directory "${temp_dir}" \
             "$(archive_git_directory "${3}")"
@@ -240,8 +241,6 @@ case "${1}" in
         git remote add archive "${temp_dir}/.git"
         git fetch --quiet --tags archive 1>/dev/null
         git remote remove archive
-
-        rm -rf "${temp_dir}"
 
         info "Updated release information"
 
@@ -271,37 +270,41 @@ case "${1}" in
         ok "Pulled $(highlight "${version}")"
     # Archive provided → Import images from archive
     elif [ "${2}" = '--archive' ] && [ -f "${3}" ]; then
-        info 'Extracting upgrade information'
-
-        archive_barrier "${3}"
-
-        temp_dir="$(mktemp -t "${TEMP_TEMPLATE}" -d)"
-
-        tar -xf "${3}" --strip-components=2 --directory "${temp_dir}" \
-            "$(archive_images_directory "${3}")" "$(archive_version_file "${3}")"
-
-        version="$(<"${temp_dir}/${VERSION_FILE}")"
+        # TODO move reading version incl. version check to a function
+        info "Reading version information from archive file '${3}'"
+        # TODO: Replace .version with variable
+        version=$(tar -xf "${3}" "./cybertec_migrator/.version" --to-stdout 2>&1) || \
+            error "Failed to extract archive file\n$version"
 
         version_barrier "${version}" || (
             info "Run $(highlight "'${0} update --archive ${3}'") before attempting upgrade"
-            rm -rf "${temp_dir}"
             exit 1
         )
+        info "Upgrading to version $version"
 
-        mkdir -p "${IMAGE_PATH}"
+        info "Extracting archive file '${3}'"
 
-        image_path="${temp_dir}/${IMAGE_PATH}"
+        temp_dir="$(mktemp -t "${TEMP_TEMPLATE}" -d)"
+        trap 'rm -rf -- "${temp_dir}"' EXIT
+
+        extraction_error=$(tar -xf "${3}" --strip-components=2 --directory "${temp_dir}" 2>&1 > /dev/null) || \
+            error "Failed to extract archive file\n$extraction_error"
+
+        archive_image_path="${temp_dir}/${IMAGE_PATH}"
+        [ -d "${archive_image_path}" ] || error "Archive file corrupted - '${IMAGE_PATH}' directory with container images missing"
 
         # Import images *before* moving them to local image directory
-        for image in ${image_path}/*.tar; do
+        info 'Loading container images'
+        for image in ${archive_image_path}/*.tar; do
             docker load < "${image}"
         done
+        info 'Container images loaded'
 
-        mv ${image_path}/*.tar "${IMAGE_PATH}"
+        # Save loaded images from the archive file.
+        mkdir -p "${IMAGE_PATH}"
+        mv ${archive_image_path}/*.tar "${IMAGE_PATH}"
+        info 'Archived container images'
 
-        info 'Extracted upgrade information'
-
-        rm -rf "${temp_dir}"
     # Explicit version provided but no archive
     elif [ ! -z "${2}" ] && [ -z "${3}" ]; then
         version_barrier "${2}"
