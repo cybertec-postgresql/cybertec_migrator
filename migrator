@@ -116,10 +116,7 @@ function most_recent_tag {
 }
 
 function sanctioned_tags {
-    git tag --sort=-v:refname | \
-        grep --invert-match "^.*-beta*" | \
-        grep --invert-match "^.*-alpha*" | \
-        grep --invert-match "^.*-rc*"
+    git tag --sort=-v:refname
 }
 
 function get_hostname {
@@ -204,10 +201,11 @@ case "${1}" in
         info 'Updating release information'
         git fetch || error 'Could not fetch versions'
 
-        info "Recommended version: "$(highlight "$(most_recent_tag)")""
+        new_version=$(most_recent_tag)
+        info "Recommended version: "$(highlight "${new_version}")""
 
-        if [ -f "${ENV_FILE}" ] && [ ! "$(most_recent_tag)" = $(print_env 'VERSION') ]; then
-            info "Run $(highlight "'${0} upgrade'") to complete upgrade"
+        if [ -f "${ENV_FILE}" ] && [ ! "${new_version}" = $(print_env 'VERSION') ]; then
+            info "Run $(highlight "'${0} upgrade'") to upgrade to version ${new_version}"
         fi;
     # Archive provided → Use `.git` folder contained within archive as origin
     elif [ "${2}" = '--archive' ] && [ -f "${3}" ]; then
@@ -215,13 +213,16 @@ case "${1}" in
 
         temp_dir="$(mktemp -t "${TEMP_TEMPLATE}" -d)"
         trap 'rm -rf -- "${temp_dir}"' EXIT
-        extract_error=$(tar -xf "${3}" --strip-components=2 --directory "${temp_dir}" "${ARCHIVE_DIR}/.git" 2>&1 > /dev/null) || \
+        extract_error=$(tar -xf "${3}" --strip-components=2 --directory "${temp_dir}" "${ARCHIVE_DIR}/${VERSION_FILE}" "${ARCHIVE_DIR}/.git" 2>&1 > /dev/null) || \
             error "Failed to extract update information\n${extract_error}"
 
+        archive_version=$(<"${temp_dir}/${VERSION_FILE}")
         git fetch --quiet --tags "${temp_dir}/.git" 1>/dev/null
 
         info "Updated release information"
-        info "Run $(highlight "'${0} upgrade --archive ${3}'") to upgrade"
+        if [ -f "${ENV_FILE}" ] && [ ! "${archive_version}" = $(print_env 'VERSION') ]; then
+            info "Run $(highlight "'${0} upgrade --archive ${3}'") to upgrade to version ${archive_version}"
+        fi;
     else
         error "Invalid path $(highlight "${3}")"
     fi;
