@@ -2,6 +2,34 @@
 
 The release notes of the last release may be found on [README.md](README.md#whats-new).
 
+### v3.10.0 - 2022-08-31
+
+#### Features
+
+- Improve _Search Panel_:
+    - Search package specifications and bodies
+    - Consolidate DBO type filter into a single input
+      <p align="left">
+        <img src="./docs/pictures/release-notes/v3.10.0/replace-panel-object-type-filter.png" />
+      </p>
+    - Select multiple search results to replace at once
+        - `Shift-Click` to add multiple rows
+        - `Ctrl-Click` to add/remove a single row
+      <p align="left">
+        <img src="./docs/pictures/release-notes/v3.10.0/replace-panel-multi-selection.gif" />
+      </p>
+    - Improve keyboard navigation when using `<Tab>`
+- Show information for Oracle _Queues_ in the Sidebar
+  <p align="left">
+    <img src="./docs/pictures/release-notes/v3.10.0/sidebar-shows-queue-meta-data.png" />
+  </p>
+
+#### Resolved Bugs
+
+* DBO creation fails due to global `lock_timeout` setting on target database
+* Running `ps` inside the core container during the data stage reveals the database passwords
+* Abort of data stage may sometimes hang indefinitely
+
 ### v3.9.0 - 2022-07-26
 
 #### Features
