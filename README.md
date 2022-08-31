@@ -45,32 +45,33 @@ For detailed information see the list of [supported migration features for Oracl
 
 For older releases see [Release Notes](RELEASE_NOTES.md).
 
-### v3.9.0 - 2022-07-26
+### v3.10.0 - 2022-08-31
 
 #### Features
 
-- Improve _Sidebar_:
-    - Show meta-data as pop-up for constraints and indices
+- Improve _Search Panel_:
+    - Search package specifications and bodies
+    - Consolidate DBO type filter into a single input
       <p align="left">
-          <img height="200px" src="./docs/pictures/release-notes/v3.9.0/sidebar-shows-constraint-meta-data.png" />
-          <img height="200px" src="./docs/pictures/release-notes/v3.9.0/sidebar-shows-index-meta-data.png" />
+        <img src="./docs/pictures/release-notes/v3.10.0/replace-panel-object-type-filter.png" />
       </p>
-    - Extend the Object Type filter options with `Partitions` and provide granularity for `Indexes` (`Unique`, `Functional`, and `Domain`)
+    - Select multiple search results to replace at once
+        - `Shift-Click` to add multiple rows
+        - `Ctrl-Click` to add/remove a single row
       <p align="left">
-          <img src="./docs/pictures/release-notes/v3.9.0/filter-on-index-type.png" />
+        <img src="./docs/pictures/release-notes/v3.10.0/replace-panel-multi-selection.gif" />
       </p>
-- _Migration Overview_: Additional index types on _Indices_ drill down
-      <p align="left">
-          <img src="./docs/pictures/release-notes/v3.9.0/overview-show-index-types.png" />
-      </p>
-- Switch Migrator core to the native `libpq` PostgreSQL driver to support additional authentication methods (e.g. GSSAPI)
-- Recurring security maintenance: upgrade package dependencies with known vulnerabilities to newest version
+    - Improve keyboard navigation when using `<Tab>`
+- Show information for Oracle _Queues_ in the Sidebar
+  <p align="left">
+    <img src="./docs/pictures/release-notes/v3.10.0/sidebar-shows-queue-meta-data.png" />
+  </p>
 
 #### Resolved Bugs
 
-* PostgreSQL authentication with AuthenticationGSS causes a crash
-* Importing an Oracle View with a Null-Byte results in an unresponsive state
-* Unexpected shutdown of the target PostgreSQL connection may cause a crash
+* DBO creation fails due to global `lock_timeout` setting on target database
+* Running `ps` inside the core container during the data stage reveals the database passwords
+* Abort of data stage may sometimes hang indefinitely
 
 ## Getting Started
 
@@ -117,12 +118,12 @@ The _CYBERTEC Migrator_ images can be obtained via two channels
   [OK] Generated environment file
   [INFO] Run './migrator install' to complete setup
   ➜ ./migrator install
-  [INFO] Pulling v3.9.0
+  [INFO] Pulling v3.10.0
   Pulling core_db ... done
   Pulling core    ... done
   Pulling web_gui ... done
-  [OK] Pulled v3.9.0
-  [INFO] Upgraded to v3.9.0
+  [OK] Pulled v3.10.0
+  [INFO] Upgraded to v3.10.0
   [INFO] Run './migrator up' to switch to new version
   [WARN] Switching will abort running migrations
   ➜ ./migrator up
@@ -146,18 +147,18 @@ The _CYBERTEC Migrator_ images can be obtained via two channels
   5. Start the Migrator
 
   ```sh
-  ➜ tar xf cybertec_migrator-v3.9.0-standard.tar.gz
+  ➜ tar xf cybertec_migrator-v3.10.0-standard.tar.gz
   ➜ cd cybertec_migrator
   ➜ ./migrator configure
   [OK] Generated environment file
   [INFO] Run './migrator install' to complete setup
-  ➜ ./migrator install --archive ../cybertec_migrator-v3.9.0-standard.tar.gz
+  ➜ ./migrator install --archive ../cybertec_migrator-v3.10.0-standard.tar.gz
   [INFO] Extracting upgrade information
-  Loaded image: cybertecpostgresql/cybertec_migrator-core:v3.9.0-standard
-  Loaded image: cybertecpostgresql/cybertec_migrator-web_gui:v3.9.0-standard
+  Loaded image: cybertecpostgresql/cybertec_migrator-core:v3.10.0-standard
+  Loaded image: cybertecpostgresql/cybertec_migrator-web_gui:v3.10.0-standard
   Loaded image: postgres:13-alpine
   [INFO] Extracted upgrade information
-  [INFO] Upgraded to v3.9.0-standard
+  [INFO] Upgraded to v3.10.0-standard
   [INFO] Run './migrator up' to switch to new version
   [WARN] Switching will abort running migrations
   ➜ ./migrator up
