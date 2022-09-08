@@ -2,6 +2,17 @@
 
 The release notes of the last release may be found on [README.md](README.md#whats-new).
 
+### v3.10.1 - 2022-09-08
+
+#### Resolved Bugs
+
+* Creating a migration for Oracle 11 and below fails on reading out sequences due to a non-existent table
+* The `lower_bound` of range subpartitions is not determined correctly during migration creation
+* Running the Structure stage with `REFERENCE` partitions results in a non-descriptive error
+* Regression in v3.10.0 causing the data of individual partitions to not be migrated correctly
+* Code editors mark their complete content as erroneous instead of only the faulty section
+* Revert style changes in the search and replace panel
+
 ### v3.10.0 - 2022-08-31
 
 #### Features
