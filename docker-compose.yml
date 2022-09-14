@@ -25,11 +25,14 @@ services:
       - CORE_DB_HOST=core_db
       - CORE_DB_PASSWORD=${CORE_DB_PASSWORD}
       - CORE_DB_DATABASE=migrator
+      - TNS_ADMIN=/app/config/oracle/network/admin
     depends_on:
       core_db:
         condition: service_healthy
     networks:
       - common
+    volumes:
+      - ./volumes/core/config:/app/config
 
   # Internal Migrator database
   core_db:

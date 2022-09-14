@@ -1,0 +1,12 @@
+NAMES.DIRECTORY_PATH= (TNSNAMES, EZCONNECT)
+
+# Don't forget to adjust the 'volumes' configuration in the docker-compose.yml in
+# case you change the location of the wallet.
+
+WALLET_LOCATION =
+  (SOURCE =
+    (METHOD = FILE)
+    (METHOD_DATA =
+      (DIRECTORY = /app/config/oracle/wallet)
+    )
+  )
