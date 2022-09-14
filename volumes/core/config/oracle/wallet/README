@@ -1,0 +1,5 @@
+Copy the files for the Oracle wallet store (client) into this directory.
+
+Since the Migrator core acts as client to the database servers the wallet store
+contains the certificates to connect to the database servers via TLS (TCPS
+protocol).

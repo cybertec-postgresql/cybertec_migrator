@@ -1,0 +1,13 @@
+# Template file to define TNS names using TCPS (secure data transfer using TLS)
+# Check sqlnet.ora for the location of the wallet file.
+
+# Identifiers enclosed with ## have to adjusted to your needs.
+
+# ##net_service_name## =
+#   (DESCRIPTION =
+#     (ADDRESS = (PROTOCOL = TCPS)(HOST = ##host_name_or_ip_address##)(PORT = 2484))
+#     (CONNECT_DATA =
+#       (SERVER = DEDICATED)
+#       (SERVICE_NAME = ##service_name##)
+#     )
+#   )

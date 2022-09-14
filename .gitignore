@@ -1,4 +1,9 @@
 .env
 .meta-inf
-images/
 .version
+images/
+volumes/core/config/oracle/network/admin/*.ora
+volumes/core/config/oracle/network/admin/tnsnames.ora
+volumes/core/config/oracle/wallet/*.lck
+volumes/core/config/oracle/wallet/*.p12
+volumes/core/config/oracle/wallet/*.sso
