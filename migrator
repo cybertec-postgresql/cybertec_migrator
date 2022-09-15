@@ -24,6 +24,9 @@ $(highlight "upgrade") --archive <archive-file>       Upgrade to version contain
 $(highlight "upgrade") <version>                      Upgrade to specific version
 
 $(highlight "configure")                              Generate settings file
+$(highlight "configure --tls self-signed-cert")       Generate self-signed TLS/SSL certificate
+$(highlight "configure --tls cert:<file-location>")   Install TLS/SSL certificate
+$(highlight "configure --tls key:<file-location>")    Install private key of TLS/SSL certificate
 $(highlight "help")                                   Display this help text
 EOF
 )"
@@ -38,63 +41,73 @@ dependency_barrier() {
         error "$(highlight "git") not installed"
 }
 
+# TODO: replace arguments with variables to make the code readable
 main() {
     catch_all_exit_code=1
     case "${1}" in
-    'up')
+    up)
+        fix_https_default_port
         docker-compose up -d
         print_url
         ;;
-    'down')
+    down)
         docker-compose down
         ;;
-    'logs')
+    logs)
         if [ ! -z "$(docker-compose top)" ]; then
             docker-compose logs --timestamps --tail='all'
         else
             error "Logs not avaliable while not running ($(highlight "'${0} up'") to start)"
         fi
         ;;
-    'configure')
+    configure)
         configure "$@"
         ;;
-    'update')
+    update)
         update "$@"
         ;;
-    'install')
+    install)
         ;&
-    'upgrade')
+    upgrade)
         upgrade "$@"
         ;;
-    'versions')
+    versions)
         sanctioned_tags
         ;;
-    'version')
+    version)
         if env_file_exists; then
             print_env 'VERSION'
         else
             error "Initial configuration outstanding (run $(highlight "'${0} configure'"))"
         fi
         ;;
-    'help')
+    help)
         catch_all_exit_code='0'
         ;&
     *)
+        error "Unknown command [${1}]" || true
         usage
         exit "${catch_all_exit_code}"
         ;;
     esac
 }
 
+fix_https_default_port() {
+    # With v3.11.0 we switched from HTTP to HTTPS. In case the HTTP standard port
+    # is used, replace it with the standard HTTPS port.
+    # TODO: remove this function after a couple releases
+    sed -i'.orig' -e 's/^EXTERNAL_HTTP_PORT=80$/EXTERNAL_HTTP_PORT=443/' "${ENV_FILE}"
+}
+
 print_url() {
     ip_addr="$(get_hostname)"
     if [ ! -z "${ip_addr}" ]; then
         port=":$(print_env 'EXTERNAL_HTTP_PORT')"
-        if [ "${port}" = ':80' ]; then
+        if [ "${port}" = ":${HTTPS_PORT_DEFAULT}" ]; then
             port=''
         fi
 
-        ok "Started on $(highlight "'http://${ip_addr}${port}'")"
+        ok "Started on $(highlight "'https://${ip_addr}${port}'")"
     fi
 }
 
@@ -112,14 +125,46 @@ env_file_exists() {
 }
 
 configure() {
-    if  generate_environment_file; then
-        next_command="install"
-        installed_from_archive && next_command="${next_command} --archive <archive_file>"
-        info "Run $(highlight "'${0} ${next_command}'") to complete setup"
-    else
-        warn 'Environment file already exists'
-        info "Please modify environment file $(highlight "'${ENV_FILE}'") manually"
-    fi
+    case "${2}" in
+        "")
+            if generate_environment_file; then
+                next_command="install"
+                installed_from_archive && next_command="${next_command} --archive <archive_file>"
+                info "Run $(highlight "'${0} ${next_command}'") to complete setup"
+            else
+                warn 'Environment file already exists'
+                info "Please modify environment file $(highlight "'${ENV_FILE}'") manually"
+            fi
+            ;;
+        --tls)
+            local tls_sub_command=$(echo "${3}" | cut --delimiter=":" --fields=1)
+            local tls_file_location=$(echo "${3}" | cut --delimiter=":" --fields=2)
+            case ${tls_sub_command} in
+                "")
+                    error "Missing argument for option '${2}'"
+                    ;;
+                self-signed-cert)
+                    generate_self_signed_certificate
+                    ;;
+                key)
+                    exec_error=$(cp "${tls_file_location}" "${HOST_SSL_CERTIFICATE_KEY}" 2>&1 > /dev/null) || \
+                        error "Failed to install TLS/SSL certificate key\n${exec_error}"
+                    ok "Installed TLS/SSL certificate key"
+                    ;;
+                cert)
+                    exec_error=$(cp "${tls_file_location}" "${HOST_SSL_CERTIFICATE}" 2>&1 > /dev/null) || \
+                        error "Failed to install TLS/SSL certificate\n${exec_error}"
+                    ok "Installed TLS/SSL certificate"
+                    ;;
+                *)
+                    error "Unknown argument '${2} ${3}'"
+                    ;;
+            esac
+            ;;
+        *)
+            error "Unknown argument '${2}'"
+            ;;
+    esac
 }
 
 generate_environment_file() {
@@ -132,7 +177,7 @@ generate_environment_file() {
 
     cat <<EOF > "${ENV_FILE}"
 # —— User configurable ——
-EXTERNAL_HTTP_PORT=80
+EXTERNAL_HTTP_PORT=${HTTPS_PORT_DEFAULT}
 VERSION=${version}
 
 # —— Internal ⚠ ——
@@ -154,6 +199,17 @@ generate_random() {
 installed_from_archive() {
     [ -f "${VERSION_FILE}" ] && return
     false
+}
+
+generate_self_signed_certificate() {
+    info "Generating self-signed TLS/SSL certificate"
+    docker-compose run --no-deps web_gui \
+        openssl req -x509 -nodes -newkey rsa:2048 \
+        -keyout "${NGINX_SSL_CERTIFICATE_KEY}" -out "${NGINX_SSL_CERTIFICATE}"
+    docker-compose run --no-deps web_gui \
+        chown $UID:$(id -g) "${NGINX_SSL_CERTIFICATE_KEY}" "${NGINX_SSL_CERTIFICATE}"
+    ok "Generated self-signed TLS/SSL certificate"
+    next_step_upgrade
 }
 
 update() {
@@ -201,7 +257,7 @@ upgrade() {
     # Provide the means to upgrade to a specific version. Needed if we want to
     # install to an older version than the current one. Especially usefule for
     # testing.
-    generate_environment_file || true
+    [ generate_environment_file ] || true
 
     # No parameters provided → Fetch most recent images from online registry
     if [ -z "${2}" ]; then
@@ -275,8 +331,12 @@ upgrade() {
 
     info "Upgraded to $(highlight "${version}")"
 
-    info "Run $(highlight "'${0} up'") to switch to new version"
-    warn 'Switching will abort running migrations'
+    if is_tls_cert_configured; then
+        next_step_upgrade
+    else
+        warn "Could not find TLS/SSL certificate"
+        info "Run $(highlight "'${0} configure --tls self-signed-cert'") to generate a self-signed TLS/SSL certificate"
+    fi
 }
 
 version_barrier() {
@@ -290,6 +350,15 @@ replace_in_place() {
     target=$(mktemp)
     sed -e "${1}" "${2}" > "${target}"
     mv "${target}" "${2}"
+}
+
+is_tls_cert_configured() {
+    [ -f "${HOST_SSL_CERTIFICATE}" -a -f "${HOST_SSL_CERTIFICATE_KEY}" ]
+}
+
+next_step_upgrade() {
+    info "Run $(highlight "'${0} up'") to switch to new version"
+    warn 'Switching will abort running migrations'
 }
 
 # Color codes
@@ -327,6 +396,8 @@ ok() {
     printf "[${GREEN}OK${NC}] ${1}\n"
 }
 
+HTTPS_PORT_DEFAULT=443
+
 # Temporary directory
 TEMP_TEMPLATE='migrator.XXXXXX'
 
@@ -341,6 +412,13 @@ IMAGE_PATH='images'
 
 # This file exists only if the directory was provided by on offline installation package
 VERSION_FILE='.version'
+
+# TLS/SSL files location defined in the nginx.conf (in the container)
+NGINX_SSL_CERTIFICATE=/etc/nginx/certs/nginx.crt
+NGINX_SSL_CERTIFICATE_KEY=/etc/nginx/certs/nginx.key
+# TLS/SSL file on host (local bind mounts)
+HOST_SSL_CERTIFICATE=${NGINX_SSL_CERTIFICATE/"/etc"/"./volumes/web_gui"}
+HOST_SSL_CERTIFICATE_KEY=${NGINX_SSL_CERTIFICATE_KEY/"/etc"/"./volumes/web_gui"}
 
 dependency_barrier
 

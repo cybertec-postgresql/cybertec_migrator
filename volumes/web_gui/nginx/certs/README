@@ -1,0 +1,4 @@
+This is the directory for NGINX to look for the certificate files. The provided
+configuration expects to find following files:
+- nginx.crt: certificate
+- nginx.key: certificate private key
