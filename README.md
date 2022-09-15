@@ -45,44 +45,54 @@ For detailed information see the list of [supported migration features for Oracl
 
 For older releases see [Release Notes](RELEASE_NOTES.md).
 
-### v3.10.1 - 2022-09-08
-
-#### Resolved Bugs
-
-* Creating a migration for Oracle 11 and below fails on reading out sequences due to a non-existent table
-* The `lower_bound` of range subpartitions is not determined correctly during migration creation
-* Running the Structure stage with `REFERENCE` partitions results in a non-descriptive error
-* Regression in v3.10.0 causing the data of individual partitions to not be migrated correctly
-* Code editors mark their complete content as erroneous instead of only the faulty section
-* Revert style changes in the search and replace panel
-
-### v3.10.0 - 2022-08-31
+### v3.11.0 - 2022-09-28
 
 #### Features
 
-- Improve _Search Panel_:
-    - Search package specifications and bodies
-    - Consolidate DBO type filter into a single input
-      <p align="left">
-        <img src="./docs/pictures/release-notes/v3.10.0/replace-panel-object-type-filter.png" />
-      </p>
-    - Select multiple search results to replace at once
-        - `Shift-Click` to add multiple rows
-        - `Ctrl-Click` to add/remove a single row
-      <p align="left">
-        <img src="./docs/pictures/release-notes/v3.10.0/replace-panel-multi-selection.gif" />
-      </p>
-    - Improve keyboard navigation when using `<Tab>`
-- Show information for Oracle _Queues_ in the Sidebar
+- Add support for Oracle 11 (closes #14).
+- We changed the default configuration of the reverse proxy to use HTTPS.  
+  This means you have to **install a TLS/SSL certificate** or create a self signed certificate, otherwise the web-server will refuse to start.
+  To facilitate the installation of the certificate we added a new option `--tls` to the `migrator configure` command.
+  Check out the [FAQ](docs/faq.md) for detailed information how to install a TLS/SSL certificate.
+
+  ```sh
+  migrator configure --tls self-signed-cert       Generate self-signed TLS/SSL certificate
+  migrator configure --tls cert:<file-location>   Install TLS/SSL certificate
+  migrator configure --tls key:<file-location>    Install private key of TLS/SSL certificate
+  ```
+  > **Attention**  
+  > If you upgrade from a previous Migrator version you have to create the TLS/SSL certificate after upgrading to the new version, **before restarting** the new Migrator.
+  >
+  > ```sh
+  > ./migrator update
+  > ./migrator upgrade
+  > # Don't forget the create or install a TLS/SSL certificate
+  > ./migrator configure --tls self-signed-cert
+  > ./migrator up
+  > ```
+- Add support for **secured communication** (TCPS) access to Oracle databases. For details check our [FAQ - How do I configure TCPS for Oracle databases?](docs/faq.md#how-do-i-configure-tcps-for-oracle-databases).
+- Read meta-data of additional Oracle database object types: **Jobs**, **Operators**
   <p align="left">
-    <img src="./docs/pictures/release-notes/v3.10.0/sidebar-shows-queue-meta-data.png" />
+    <img height="250px" src="./docs/pictures/release-notes/v3.11.0/read-job-meta-data.png" />
+    <img height="250px" src="./docs/pictures/release-notes/v3.11.0/read-operators-meta-data.png" />
   </p>
+- Users may provide a custom **Data Query**, the `SELECT` statement executed on the source database to migrate the data.
+  <p align="left">
+    <img src="./docs/pictures/release-notes/v3.11.0/custom-data-query.png" />
+  </p>
+  Here just a few use cases where this feature may be useful:
+
+  - Migrate the table partially by filtering rows with `WHERE`
+  - Migrate only the table structure but no data (`WHERE ROWID < 0`)
+  - You want to keep the table structure, but not the data of a specific column (see screenshot above)
+  - Retrieve (and thus insert) the data in a specific `ORDER BY`
+  - Convert the column data of an unsupported data type into a string representation which can be “cast” into a valid PostgreSQL type via the COPY statement
+- Improve output for erroneous SQL execution when reading Oracle meta-data.
 
 #### Resolved Bugs
 
-* DBO creation fails due to global `lock_timeout` setting on target database
-* Running `ps` inside the core container during the data stage reveals the database passwords
-* Abort of data stage may sometimes hang indefinitely
+- Columns starting with `SYS` are not included in primary keys or unique constraints
+- Data stage fails when column is named after an SQL reserved keywords (for example `IN`)
 
 ## Getting Started
 
@@ -120,7 +130,8 @@ The _CYBERTEC Migrator_ images can be obtained via two channels
   2. Change working directory to the previously cloned repository
   3. Generate default configuration
   4. Download and load container images
-  5. Start the Migrator
+  5. Generate a self-signed TLS/SSL certificate or install a certificate (see [FAQ](docs/faq.md) for more details)
+  6. Start the Migrator
 
   ```sh
   ➜ git clone https://github.com/cybertec-postgresql/cybertec_migrator
@@ -129,20 +140,45 @@ The _CYBERTEC Migrator_ images can be obtained via two channels
   [OK] Generated environment file
   [INFO] Run './migrator install' to complete setup
   ➜ ./migrator install
-  [INFO] Pulling v3.10.0
+  [INFO] Pulling v3.11.0
   Pulling core_db ... done
   Pulling core    ... done
   Pulling web_gui ... done
-  [OK] Pulled v3.10.0
-  [INFO] Upgraded to v3.10.0
+  [OK] Pulled v3.11.0
+  [INFO] Upgraded to v3.11.0
+  [WARN] Could not find TLS/SSL certificate
+  [INFO] Run './migrator configure --tls self-signed-cert' to generate a self-signed TLS/SSL certificate
+  ➜ ./migrator configure --tls self-signed-cert
+  [INFO] Generating self-signed TLS/SSL certificate
+  Creating cybertec_migrator_web_gui_run ... done
+  Generating a RSA private key
+  .+++++
+  ........................+++++
+  writing new private key to '/etc/nginx/certs/nginx.key'
+  -----
+  You are about to be asked to enter information that will be incorporated
+  into your certificate request.
+  What you are about to enter is what is called a Distinguished Name or a DN.
+  There are quite a few fields but you can leave some blank
+  For some fields there will be a default value,
+  If you enter '.', the field will be left blank.
+  -----
+  Country Name (2 letter code) [AU]:AT
+  State or Province Name (full name) [Some-State]:Lower Austria
+  Locality Name (eg, city) []:Wöllersdorf
+  Organization Name (eg, company) [Internet Widgits Pty Ltd]:CYBERTEC PostgreSQL International GmbH
+  Organizational Unit Name (eg, section) []:CYBERTEC Solutions
+  Common Name (e.g. server FQDN or YOUR name) []:
+  Email Address []:invalid@cybertec.at
+  Creating cybertec_migrator_web_gui_run ... done
+  [OK] Generated self-signed TLS/SSL certificate
   [INFO] Run './migrator up' to switch to new version
   [WARN] Switching will abort running migrations
   ➜ ./migrator up
-  Creating network "cybertec_migrator-network" with the default driver
-  Creating cybertec_migrator_core_db_1 ... done
-  Creating cybertec_migrator_core_1    ... done
-  Creating cybertec_migrator_web_gui_1 ... done
-  [OK] Started on 'http://localhost'
+  Recreating cybertec_migrator_core_db_1 ... done
+  Recreating cybertec_migrator_core_1    ... done
+  Recreating cybertec_migrator_web_gui_1 ... done
+  [OK] Started on 'https://localhost'
   ```
 
 #### Offline installation
@@ -155,39 +191,63 @@ The _CYBERTEC Migrator_ images can be obtained via two channels
   2. Change working directory to newly created directory
   3. Generate default configuration
   4. Import container images from archive
-  5. Start the Migrator
+  5. Generate a self-signed TLS/SSL certificate or install a certificate (see [FAQ](docs/faq.md) for more details)
+  6. Start the Migrator
 
   ```sh
-  ➜ tar xf cybertec_migrator-v3.10.0-standard.tar.gz
+  ➜ tar xf cybertec_migrator-v3.11.0-standard.tar.gz
   ➜ cd cybertec_migrator
   ➜ ./migrator configure
   [OK] Generated environment file
   [INFO] Run './migrator install' to complete setup
-  ➜ ./migrator install --archive ../cybertec_migrator-v3.10.0-standard.tar.gz
+  ➜ ./migrator install --archive ../cybertec_migrator-v3.11.0-standard.tar.gz
   [INFO] Extracting upgrade information
-  Loaded image: cybertecpostgresql/cybertec_migrator-core:v3.10.0-standard
-  Loaded image: cybertecpostgresql/cybertec_migrator-web_gui:v3.10.0-standard
+  Loaded image: cybertecpostgresql/cybertec_migrator-core:v3.11.0-standard
+  Loaded image: cybertecpostgresql/cybertec_migrator-web_gui:v3.11.0-standard
   Loaded image: postgres:13-alpine
   [INFO] Extracted upgrade information
-  [INFO] Upgraded to v3.10.0-standard
+  [INFO] Upgraded to v3.11.0-standard
+  [WARN] Could not find TLS/SSL certificate
+  [INFO] Run './migrator configure --tls self-signed-cert' to generate a self-signed TLS/SSL certificate
+  ➜ ./migrator configure --tls self-signed-cert
+  [INFO] Generating self-signed TLS/SSL certificate
+  Creating cybertec_migrator_web_gui_run ... done
+  Generating a RSA private key
+  .+++++
+  ........................+++++
+  writing new private key to '/etc/nginx/certs/nginx.key'
+  -----
+  You are about to be asked to enter information that will be incorporated
+  into your certificate request.
+  What you are about to enter is what is called a Distinguished Name or a DN.
+  There are quite a few fields but you can leave some blank
+  For some fields there will be a default value,
+  If you enter '.', the field will be left blank.
+  -----
+  Country Name (2 letter code) [AU]:AT
+  State or Province Name (full name) [Some-State]:Lower Austria
+  Locality Name (eg, city) []:Wöllersdorf
+  Organization Name (eg, company) [Internet Widgits Pty Ltd]:CYBERTEC PostgreSQL International GmbH
+  Organizational Unit Name (eg, section) []:CYBERTEC Solutions
+  Common Name (e.g. server FQDN or YOUR name) []:
+  Email Address []:invalid@cybertec.at
+  Creating cybertec_migrator_web_gui_run ... done
+  [OK] Generated self-signed TLS/SSL certificate
   [INFO] Run './migrator up' to switch to new version
   [WARN] Switching will abort running migrations
   ➜ ./migrator up
-  Creating network "cybertec_migrator-network" with the default driver
-  Creating cybertec_migrator_core_db_1 ... done
-  Creating cybertec_migrator_core_1    ... done
-  Creating cybertec_migrator_web_gui_1 ... done
-  [OK] Started on 'http://localhost'
+  Recreating cybertec_migrator_core_db_1 ... done
+  Recreating cybertec_migrator_core_1    ... done
+  Recreating cybertec_migrator_web_gui_1 ... done
+  [OK] Started on 'https://localhost'
   ```
 
 ## Running the Migrator
 
-Use your web browser to access the Migrator on the URL shown in the terminal with `migrator up`. In our example it would be `http://localhost`.
+Use your web browser to access the Migrator on the URL shown in the terminal with `migrator up`. In our example it would be `https://localhost`.
 
-The configuration provided with this repository starts the CYBERTEC Migrator over HTTP. The `EXTERNAL_HTTP_PORT` variable in the `.env` file (generated by `./migrator configure`) controls the choice of port on which the Migrator is served.
-
-The configuration is __not meant to be used in production environment__.
-Adapt the NGINX configuration in `docker/templates/default.conf.template` to your needs to run the service on HTTPS with proper credentials.
+The configuration provided with this repository starts the CYBERTEC Migrator on the standard HTTPS port.
+The `EXTERNAL_HTTP_PORT` variable in the `.env` file (generated by `./migrator configure`) controls the choice of port on which the Migrator is served.
 
 If you don't have access to an Oracle or PostgreSQL database to test the Migrator, use our [Migrator demo database environment](https://github.com/cybertec-postgresql/cybertec_migrator_demo).
 
@@ -195,6 +255,17 @@ If you don't have access to an Oracle or PostgreSQL database to test the Migrato
 
 | ⚠️   | Running migrations _will_ be interrupted by applying upgrades |
 | --- | ------------------------------------------------------------- |
+
+> **Attention**  
+> If you upgrade from a Migrator version previous of 3.11.0 you have to create the TLS/SSL certificate after upgrading to the new version, **before restarting** the new Migrator.
+>
+> ```sh
+> ./migrator update
+> ./migrator upgrade
+> # Don't forget the create or install a TLS/SSL certificate
+> ./migrator configure --tls self-signed-cert
+> ./migrator up
+> ```
 
 - Online upgrade
 
@@ -229,8 +300,13 @@ If you don't have access to an Oracle or PostgreSQL database to test the Migrato
 
 ## Getting Help
 
+If you have a questions maybe you want to check the [Migrator FAQ](docs/faq.md).
+If you can't find the answer there you may have more luck in one of the [existing questions](https://github.com/cybertec-postgresql/cybertec_migrator/issues?q=label%3Aquestion+).
+
 Raising an [issue](https://github.com/cybertec-postgresql/cybertec_migrator/issues/new/choose) is encouraged.
 We have templates to report bugs, requesting a new feature or for general questions.
+
+Customers of the paid Migrator license may use the [Migrator Service Desk](https://cybertec.atlassian.net/servicedesk/customer/portal/3/group/-1).
 
 ## Contact
 

@@ -2,16 +2,66 @@
 
 The release notes of the last release may be found on [README.md](README.md#whats-new).
 
+### v3.11.0 - 2022-09-28
+
+#### Features
+
+- Add support for Oracle 11 (closes #14).
+- We changed the default configuration of the reverse proxy to use HTTPS.  
+  This means you have to **install a TLS/SSL certificate** or create a self signed certificate, otherwise the web-server will refuse to start.
+  To facilitate the installation of the certificate we added a new option `--tls` to the `migrator configure` command.
+  Check out the [FAQ](docs/faq.md) for detailed information how to install a TLS/SSL certificate.
+
+  ```sh
+  migrator configure --tls self-signed-cert       Generate self-signed TLS/SSL certificate
+  migrator configure --tls cert:<file-location>   Install TLS/SSL certificate
+  migrator configure --tls key:<file-location>    Install private key of TLS/SSL certificate
+  ```
+  > **Attention**  
+  > If you upgrade from a previous Migrator version you have to create the TLS/SSL certificate after upgrading to the new version, **before restarting** the new Migrator.
+  >
+  > ```sh
+  > ./migrator update
+  > ./migrator upgrade
+  > # Don't forget the create or install a TLS/SSL certificate
+  > ./migrator configure --tls self-signed-cert
+  > ./migrator up
+  > ```
+- Add support for **secured communication** (TCPS) access to Oracle databases. For details check our [FAQ - How do I configure TCPS for Oracle databases?](docs/faq.md#how-do-i-configure-tcps-for-oracle-databases).
+- Read meta-data of additional Oracle database object types: **Jobs**, **Operators**
+  <p align="left">
+    <img height="250px" src="./docs/pictures/release-notes/v3.11.0/read-job-meta-data.png" />
+    <img height="250px" src="./docs/pictures/release-notes/v3.11.0/read-operators-meta-data.png" />
+  </p>
+- Users may provide a custom **Data Query**, the `SELECT` statement executed on the source database to migrate the data.
+  <p align="left">
+    <img src="./docs/pictures/release-notes/v3.11.0/custom-data-query.png" />
+  </p>
+  Here just a few use cases where this feature may be useful:
+
+  - Migrate the table partially by filtering rows with `WHERE`
+  - Migrate only the table structure but no data (`WHERE ROWID < 0`)
+  - You want to keep the table structure, but not the data of a specific column (see screenshot above)
+  - Retrieve (and thus insert) the data in a specific `ORDER BY`
+  - Convert the column data of an unsupported data type into a string representation which can be “cast” into a valid PostgreSQL type via the COPY statement
+- Improve output for erroneous SQL execution when reading Oracle meta-data.
+
+#### Resolved Bugs
+
+- Columns starting with `SYS` are not included in primary keys or unique constraints
+- Data stage fails when column is named after an SQL reserved keywords (for example `IN`)
+
+
 ### v3.10.1 - 2022-09-08
 
 #### Resolved Bugs
 
-* Creating a migration for Oracle 11 and below fails on reading out sequences due to a non-existent table
-* The `lower_bound` of range subpartitions is not determined correctly during migration creation
-* Running the Structure stage with `REFERENCE` partitions results in a non-descriptive error
-* Regression in v3.10.0 causing the data of individual partitions to not be migrated correctly
-* Code editors mark their complete content as erroneous instead of only the faulty section
-* Revert style changes in the search and replace panel
+- Creating a migration for Oracle 11 and below fails on reading out sequences due to a non-existent table
+- The `lower_bound` of range subpartitions is not determined correctly during migration creation
+- Running the Structure stage with `REFERENCE` partitions results in a non-descriptive error
+- Regression in v3.10.0 causing the data of individual partitions to not be migrated correctly
+- Code editors mark their complete content as erroneous instead of only the faulty section
+- Revert style changes in the search and replace panel
 
 ### v3.10.0 - 2022-08-31
 
@@ -21,7 +71,7 @@ The release notes of the last release may be found on [README.md](README.md#what
     - Search package specifications and bodies
     - Consolidate DBO type filter into a single input
       <p align="left">
-        <img src="./docs/pictures/release-notes/v3.10.0/replace-panel-object-type-filter.png" />
+        <img height="450px" src="./docs/pictures/release-notes/v3.10.0/replace-panel-object-type-filter.png" />
       </p>
     - Select multiple search results to replace at once
         - `Shift-Click` to add multiple rows
@@ -32,14 +82,14 @@ The release notes of the last release may be found on [README.md](README.md#what
     - Improve keyboard navigation when using `<Tab>`
 - Show information for Oracle _Queues_ in the Sidebar
   <p align="left">
-    <img src="./docs/pictures/release-notes/v3.10.0/sidebar-shows-queue-meta-data.png" />
+    <img height="200px" src="./docs/pictures/release-notes/v3.10.0/sidebar-shows-queue-meta-data.png" />
   </p>
 
 #### Resolved Bugs
 
-* DBO creation fails due to global `lock_timeout` setting on target database
-* Running `ps` inside the core container during the data stage reveals the database passwords
-* Abort of data stage may sometimes hang indefinitely
+- DBO creation fails due to global `lock_timeout` setting on target database
+- Running `ps` inside the core container during the data stage reveals the database passwords
+- Abort of data stage may sometimes hang indefinitely
 
 ### v3.9.0 - 2022-07-26
 
@@ -91,15 +141,15 @@ The release notes of the last release may be found on [README.md](README.md#what
 
 #### Resolved Bugs
 
-* Empty connection check error message on `504 Gateway Time-Out`
-* Broken GUI workflow in the Analyze step on `504 Gateway Time-Out`
-* Error on migrating `REVERSE` indexes: PostgreSQL does not have/need an equivalent feature
-* Opening a non-existent migration endlessly shows the loading animation
-* Error on migrating sequences with negative `INCREMENT` - `START value cannot be greater than MAXVALUE`
-* Migration controls (resume, continue, etc.) occasionally do not behave as expected
-* Views depending on other views are not created in the correct order
-* Spacing between the migration log time and level is jumping
-* Incorrect name conflict detection for tables and triggers with the same identifier
+- Empty connection check error message on `504 Gateway Time-Out`
+- Broken GUI workflow in the Analyze step on `504 Gateway Time-Out`
+- Error on migrating `REVERSE` indexes: PostgreSQL does not have/need an equivalent feature
+- Opening a non-existent migration endlessly shows the loading animation
+- Error on migrating sequences with negative `INCREMENT` - `START value cannot be greater than MAXVALUE`
+- Migration controls (resume, continue, etc.) occasionally do not behave as expected
+- Views depending on other views are not created in the correct order
+- Spacing between the migration log time and level is jumping
+- Incorrect name conflict detection for tables and triggers with the same identifier
 
 ### v3.7.0 - 2022-05-18
 

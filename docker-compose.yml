@@ -12,10 +12,11 @@ services:
         condition: service_started
     volumes:
       - ./volumes/web_gui/nginx/templates:/etc/nginx/templates
-    ports:
-      - ${EXTERNAL_HTTP_PORT}:80
+      - ./volumes/web_gui/nginx/certs:/etc/nginx/certs
     networks:
       - common
+    ports:
+      - ${EXTERNAL_HTTP_PORT}:443
 
   # Migrator core exposed as REST service API
   core:
@@ -29,10 +30,10 @@ services:
     depends_on:
       core_db:
         condition: service_healthy
-    networks:
-      - common
     volumes:
       - ./volumes/core/config:/app/config
+    networks:
+      - common
 
   # Internal Migrator database
   core_db:
