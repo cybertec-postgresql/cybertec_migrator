@@ -42,7 +42,7 @@ services:
       - POSTGRES_PASSWORD=${CORE_DB_PASSWORD}
     volumes:
       - core_db-data:/var/lib/postgresql/data
-      - ./docker/initdb.sh:/docker-entrypoint-initdb.d/init-user-db.sh:Z
+      - ./volumes/core_db/initdb.sh:/docker-entrypoint-initdb.d/init-user-db.sh:Z
     healthcheck:
       # Ensures that the database is ready *and* the password is in sync
       test:
