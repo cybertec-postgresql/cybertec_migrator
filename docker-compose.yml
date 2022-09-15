@@ -11,7 +11,7 @@ services:
       core:
         condition: service_started
     volumes:
-      - ./docker/templates:/etc/nginx/templates
+      - ./volumes/web_gui/nginx/templates:/etc/nginx/templates
     ports:
       - ${EXTERNAL_HTTP_PORT}:80
     networks:
