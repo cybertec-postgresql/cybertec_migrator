@@ -32,6 +32,11 @@ EOF
 )"
 }
 
+# TODO use ERR_* constants instead of hard coded values
+ERR_GENERAL=1
+ERR_ARG=2
+ERR_USAGE=3
+
 dependency_barrier() {
     command -v docker &>/dev/null || \
         error "$(highlight "docker") not installed"
@@ -46,6 +51,12 @@ main() {
     catch_all_exit_code=1
     case "${1}" in
     up)
+        if ! is_tls_cert_configured; then
+            # || true to prevent exit with the error message so we can provide a suggestion
+            error "Could not find TLS/SSL certificate" || true
+            info "Run $(highlight "'${0} configure --tls self-signed-cert'") to generate a self-signed TLS/SSL certificate"
+            exit ${ERR_USAGE}
+        fi
         fix_https_default_port
         docker-compose up -d
         print_url
@@ -96,7 +107,10 @@ fix_https_default_port() {
     # With v3.11.0 we switched from HTTP to HTTPS. In case the HTTP standard port
     # is used, replace it with the standard HTTPS port.
     # TODO: remove this function after a couple releases
-    sed -i'.orig' -e 's/^EXTERNAL_HTTP_PORT=80$/EXTERNAL_HTTP_PORT=443/' "${ENV_FILE}"
+    if grep "^EXTERNAL_HTTP_PORT=80\s*$" ${ENV_FILE} &>/dev/null; then
+        sed -i'.orig' -e 's/^EXTERNAL_HTTP_PORT=80[ \t]*$/EXTERNAL_HTTP_PORT=443/' "${ENV_FILE}"
+        info "Changed port for web-frontend from HTTP to HTTPS"
+    fi
 }
 
 print_url() {
