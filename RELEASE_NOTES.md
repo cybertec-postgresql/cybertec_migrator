@@ -2,6 +2,15 @@
 
 The release notes of the last release may be found on [README.md](README.md#whats-new).
 
+### v3.11.1 - 2022-10-05
+
+#### Resolved Bugs
+
+- Data stage reported as successful for certain corner cases when transfer failed with `No space left on device`
+- Connectivity check to PostgreSQL with connection parameters fails when port is omitted (`FATAL: database does not exist`)
+- Failed to read data from Oracle for tables with lowercase identifiers
+- Regression: can not provide hostname with '-' in connection string
+
 ### v3.11.0 - 2022-09-28
 
 #### Features
