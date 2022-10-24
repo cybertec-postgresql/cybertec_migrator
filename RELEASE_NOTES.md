@@ -26,6 +26,7 @@ The release notes of the last release may be found on [README.md](README.md#what
   migrator configure --tls cert:<file-location>   Install TLS/SSL certificate
   migrator configure --tls key:<file-location>    Install private key of TLS/SSL certificate
   ```
+
   > **Attention**  
   > If you upgrade from a previous Migrator version you have to create the TLS/SSL certificate after upgrading to the new version, **before restarting** the new Migrator.
   >
@@ -36,6 +37,7 @@ The release notes of the last release may be found on [README.md](README.md#what
   > ./migrator configure --tls self-signed-cert
   > ./migrator up
   > ```
+
 - Add support for **secured communication** (TCPS) access to Oracle databases. For details check our [FAQ - How do I configure TCPS for Oracle databases?](docs/faq.md#how-do-i-configure-tcps-for-oracle-databases).
 - Read meta-data of additional Oracle database object types: **jobs** and **operators**
   <p align="left">
@@ -53,13 +55,13 @@ The release notes of the last release may be found on [README.md](README.md#what
   - You want to keep the table structure, but not the data of a specific column (see screenshot above)
   - Retrieve (and thus insert) the data in a specific `ORDER BY`
   - Convert the column data of an unsupported data type into a string representation which can be “cast” into a valid PostgreSQL type via the COPY statement
+
 - Improve output for erroneous SQL execution when reading Oracle meta-data.
 
 #### Resolved Bugs
 
 - Columns starting with `SYS` are not included in primary keys or unique constraints
 - Data stage fails when column is named after an SQL reserved keywords (for example `IN`)
-
 
 ### v3.10.1 - 2022-09-08
 
@@ -77,18 +79,18 @@ The release notes of the last release may be found on [README.md](README.md#what
 #### Features
 
 - Improve _Search Panel_:
-    - Search package specifications and bodies
-    - Consolidate DBO type filter into a single input
-      <p align="left">
-        <img height="450px" src="./docs/pictures/release-notes/v3.10.0/replace-panel-object-type-filter.png" />
-      </p>
-    - Select multiple search results to replace at once
-        - `Shift-Click` to add multiple rows
-        - `Ctrl-Click` to add/remove a single row
-      <p align="left">
-        <img src="./docs/pictures/release-notes/v3.10.0/replace-panel-multi-selection.gif" />
-      </p>
-    - Improve keyboard navigation when using `<Tab>`
+  - Search package specifications and bodies
+  - Consolidate DBO type filter into a single input
+    <p align="left">
+      <img height="450px" src="./docs/pictures/release-notes/v3.10.0/replace-panel-object-type-filter.png" />
+    </p>
+  - Select multiple search results to replace at once
+    - `Shift-Click` to add multiple rows
+    - `Ctrl-Click` to add/remove a single row
+    <p align="left">
+      <img src="./docs/pictures/release-notes/v3.10.0/replace-panel-multi-selection.gif" />
+    </p>
+  - Improve keyboard navigation when using `<Tab>`
 - Show information for Oracle _Queues_ in the Sidebar
   <p align="left">
     <img height="200px" src="./docs/pictures/release-notes/v3.10.0/sidebar-shows-queue-meta-data.png" />
@@ -105,27 +107,27 @@ The release notes of the last release may be found on [README.md](README.md#what
 #### Features
 
 - Improve _Sidebar_:
-    - Show meta-data as pop-up for constraints and indices
-      <p align="left">
-          <img height="200px" src="./docs/pictures/release-notes/v3.9.0/sidebar-shows-constraint-meta-data.png" />
-          <img height="200px" src="./docs/pictures/release-notes/v3.9.0/sidebar-shows-index-meta-data.png" />
-      </p>
-    - Extend the Object Type filter options with `Partitions` and provide granularity for `Indexes` (`Unique`, `Functional`, and `Domain`)
-      <p align="left">
-          <img src="./docs/pictures/release-notes/v3.9.0/filter-on-index-type.png" />
-      </p>
+  - Show meta-data as pop-up for constraints and indices
+    <p align="left">
+        <img height="200px" src="./docs/pictures/release-notes/v3.9.0/sidebar-shows-constraint-meta-data.png" />
+        <img height="200px" src="./docs/pictures/release-notes/v3.9.0/sidebar-shows-index-meta-data.png" />
+    </p>
+  - Extend the Object Type filter options with `Partitions` and provide granularity for `Indexes` (`Unique`, `Functional`, and `Domain`)
+    <p align="left">
+        <img src="./docs/pictures/release-notes/v3.9.0/filter-on-index-type.png" />
+    </p>
 - _Migration Overview_: Additional index types on _Indices_ drill down
-      <p align="left">
-          <img src="./docs/pictures/release-notes/v3.9.0/overview-show-index-types.png" />
-      </p>
+  <p align="left">
+  <img src="./docs/pictures/release-notes/v3.9.0/overview-show-index-types.png" />
+  </p>
 - Switch Migrator core to the native `libpq` PostgreSQL driver to support additional authentication methods (e.g. GSSAPI)
 - Recurring security maintenance: upgrade package dependencies with known vulnerabilities to newest version
 
 #### Resolved Bugs
 
-* PostgreSQL authentication with AuthenticationGSS causes a crash
-* Importing an Oracle View with a Null-Byte results in an unresponsive state
-* Unexpected shutdown of the target PostgreSQL connection may cause a crash
+- PostgreSQL authentication with AuthenticationGSS causes a crash
+- Importing an Oracle View with a Null-Byte results in an unresponsive state
+- Unexpected shutdown of the target PostgreSQL connection may cause a crash
 
 ### v3.8.0 - 2022-06-29
 
@@ -164,7 +166,7 @@ The release notes of the last release may be found on [README.md](README.md#what
 
 Do you want to know if the Migrator can migrate your Oracle database to PostgreSQL?
 
-Then [get the Migrator Standard Edition](https://www.cybertec-postgresql.com/en/products/cybertec-migrator#form),  a __free version__ (as in beer) of the CYBERTEC Migrator, follow the offline instructions provided in [Getting Started](#offline-installation) section, and try it out.
+Then [get the Migrator Standard Edition](https://www.cybertec-postgresql.com/en/products/cybertec-migrator#form), a **free version** (as in beer) of the CYBERTEC Migrator, follow the offline instructions provided in [Getting Started](#offline-installation) section, and try it out.
 
 #### Features
 
@@ -183,29 +185,29 @@ Then [get the Migrator Standard Edition](https://www.cybertec-postgresql.com/en/
 
 #### Features
 
-- Add support for __stage post-hook SQL scripts__ to adapt the migration with functionalities not provided by the Migrator.
+- Add support for **stage post-hook SQL scripts** to adapt the migration with functionalities not provided by the Migrator.
   The scripts are executed at the end of a stage.
   Typical use cases for such scripts are to create database objects which are not present in the source database, or to define ownership and access permissions.
-    - Add a stage post-hook script in the _Stages Tab_.
-      <p align="left">
-          <img src="./docs/pictures/release-notes/v3.6.0/stage-post-hook-scripts.png"></img>
-      </p>
-    - Editor for stage hook scripts. It is possible to temporary disable a hook script.
-      <p align="left">
-          <img src="./docs/pictures/release-notes/v3.6.0/stage-post-hook-script-editor.png"></img>
-      </p>
-    - The execution of the stage post-hook scripts are __logged for audit purposes__.
-      <p align="left">
-          <img src="./docs/pictures/release-notes/v3.6.0/stage-post-hook-script-logging.png"></img>
-      </p>
-- Improve _Data stage_: list and range __partitions and sub-partitions__ of partitioned tables are __migrated in parallel__.
+  - Add a stage post-hook script in the _Stages Tab_.
+    <p align="left">
+        <img src="./docs/pictures/release-notes/v3.6.0/stage-post-hook-scripts.png"></img>
+    </p>
+  - Editor for stage hook scripts. It is possible to temporary disable a hook script.
+    <p align="left">
+        <img src="./docs/pictures/release-notes/v3.6.0/stage-post-hook-script-editor.png"></img>
+    </p>
+  - The execution of the stage post-hook scripts are **logged for audit purposes**.
+    <p align="left">
+        <img src="./docs/pictures/release-notes/v3.6.0/stage-post-hook-script-logging.png"></img>
+    </p>
+- Improve _Data stage_: list and range **partitions and sub-partitions** of partitioned tables are **migrated in parallel**.
 - Support migration of `GENERATED AS IDENTITY` constraint.
 - Improve user experience:
-    - Code editors verify DDL code to provide fast error feedback.
-      <p align="left">
-          <img src="./docs/pictures/release-notes/v3.6.0/editor-code-verification.png"></img>
-      </p>
-    - Add keyboard hotkey `Ctrl`-`Enter` to start migration job execution.
+  - Code editors verify DDL code to provide fast error feedback.
+    <p align="left">
+        <img src="./docs/pictures/release-notes/v3.6.0/editor-code-verification.png"></img>
+    </p>
+  - Add keyboard hotkey `Ctrl`-`Enter` to start migration job execution.
 
 #### Resolved Bugs
 
@@ -219,43 +221,43 @@ Then [get the Migrator Standard Edition](https://www.cybertec-postgresql.com/en/
 #### Features
 
 - Several improvements in the execution of a migration:
-    - Swap **execution order of *Integrity* and *Logic* stage**.
-      Having indices in the Logic stage makes it easier to test performance of views, stored procedures and triggers.
-      <p align="left">
-          <img src="./docs/pictures/release-notes/v3.5.0/change-stage-execution-order.png"></img>
-      </p>
-    - Move **creation of [check constraints](https://www.postgresql.org/docs/current/ddl-constraints.html#DDL-CONSTRAINTS-CHECK-CONSTRAINTS) from Logic into Structure stage**.
-      Checking the data during the data bulk load is negligible compared to the time needed to re-read the table from disk in the Logic stage.
-    - As a consequence, **functions are created in the Structure stage** prior to tables, since they may be used by check constraints.
-      The Logic stage re-creates the functions once again still providing the means for fast change-test round-trips.
+  - Swap **execution order of _Integrity_ and _Logic_ stage**.
+    Having indices in the Logic stage makes it easier to test performance of views, stored procedures and triggers.
+    <p align="left">
+        <img src="./docs/pictures/release-notes/v3.5.0/change-stage-execution-order.png"></img>
+    </p>
+  - Move **creation of [check constraints](https://www.postgresql.org/docs/current/ddl-constraints.html#DDL-CONSTRAINTS-CHECK-CONSTRAINTS) from Logic into Structure stage**.
+    Checking the data during the data bulk load is negligible compared to the time needed to re-read the table from disk in the Logic stage.
+  - As a consequence, **functions are created in the Structure stage** prior to tables, since they may be used by check constraints.
+    The Logic stage re-creates the functions once again still providing the means for fast change-test round-trips.
 - The _Migration Overview_ was updated to reflect the changes in the migration execution:
-    - It is visible in which order the database objects are created: first schemas, then user defined types, followed by sequences, etc.
-      <p align="left">
-          <img src="./docs/pictures/release-notes/v3.5.0/overview-shows-stage-execution.png"></img>
-      </p>
-    - Provide drill down on _Indices_ entry to show the number of unique indices. We will enrich the _Migration Overview_ with additional information in future releases.
-      <p align="left">
-          <img src="./docs/pictures/release-notes/v3.5.0/overview-show-unique-indices.png"></img>
-      </p>
+  - It is visible in which order the database objects are created: first schemas, then user defined types, followed by sequences, etc.
+    <p align="left">
+        <img src="./docs/pictures/release-notes/v3.5.0/overview-shows-stage-execution.png"></img>
+    </p>
+  - Provide drill down on _Indices_ entry to show the number of unique indices. We will enrich the _Migration Overview_ with additional information in future releases.
+    <p align="left">
+        <img src="./docs/pictures/release-notes/v3.5.0/overview-show-unique-indices.png"></img>
+    </p>
 - Enhance migration configuration:
-    - Constraint Renaming  
-      Rename constraints in case there are naming collisions with other database objects.
-      <p align="left">
-          <img src="./docs/pictures/release-notes/v3.5.0/constraints-rename.png"></img>
-      </p>
+  - Constraint Renaming  
+    Rename constraints in case there are naming collisions with other database objects.
+    <p align="left">
+        <img src="./docs/pictures/release-notes/v3.5.0/constraints-rename.png"></img>
+    </p>
 - Improve handling of implicitly created indices via [Unique Constraints](https://www.postgresql.org/docs/current/ddl-constraints.html#DDL-CONSTRAINTS-UNIQUE-CONSTRAINTS) or [Primary Keys](https://www.postgresql.org/docs/current/ddl-constraints.html#DDL-CONSTRAINTS-PRIMARY-KEYS):
-    - Show implicitly created indices in the sidebar and the _Indices_ view. In our example, `dept_id_pk` is shown in the _Constraints_ as well as the _Indices_ section.
-    - A hyperlink in the _Indices_ view facilitates navigation to the constraint.
-      <p align="left">
-          <img src="./docs/pictures/release-notes/v3.5.0/indices-show-unique-indices.png"></img>
-      </p>
-    - Rename implicitly created indices by renaming its constraint.
-- *Log view* shows detailed information about the started migration job:
+  - Show implicitly created indices in the sidebar and the _Indices_ view. In our example, `dept_id_pk` is shown in the _Constraints_ as well as the _Indices_ section.
+  - A hyperlink in the _Indices_ view facilitates navigation to the constraint.
+    <p align="left">
+        <img src="./docs/pictures/release-notes/v3.5.0/indices-show-unique-indices.png"></img>
+    </p>
+  - Rename implicitly created indices by renaming its constraint.
+- _Log view_ shows detailed information about the started migration job:
   <p align="left">
       <img src="./docs/pictures/release-notes/v3.5.0/log.provide-job-information.png"></img>
   </p>
-- Improve *Sidebar*:
-    - Object Type Filter: add option for User Defined Types (UDT).
+- Improve _Sidebar_:
+  - Object Type Filter: add option for User Defined Types (UDT).
 
 #### Resolved Bugs
 
@@ -299,18 +301,18 @@ This includes improvements to the GUI to be responsive with a large number of da
 #### Features
 
 - Reading and analyzing the source database meta-data is now faster
-- *Overview page*: drill down to show specific data types
-- Improve *Sidebar*:
-    - Show number of database objects
-    - Add new `Constraints` Object Type filter (`Check`, `Foreign Keys`, and `Unique/Primary Keys`)
-    - Add `Disable Partitioning` for multiple tables
-- Improve *Search and Replace*
-    - Include index names
-    - Scope search with sidebar filter
+- _Overview page_: drill down to show specific data types
+- Improve _Sidebar_:
+  - Show number of database objects
+  - Add new `Constraints` Object Type filter (`Check`, `Foreign Keys`, and `Unique/Primary Keys`)
+  - Add `Disable Partitioning` for multiple tables
+- Improve _Search and Replace_
+  - Include index names
+  - Scope search with sidebar filter
 - Highlight element in the table editor when selected in the sidebar or when navigated from the log view
-- *Log View*:
-    - Scope log entries based on job execution: `ALL`, `CURRENT MIGRATION`, and `LAST EXECUTED JOB`
-    - Download content of log view
+- _Log View_:
+  - Scope log entries based on job execution: `ALL`, `CURRENT MIGRATION`, and `LAST EXECUTED JOB`
+  - Download content of log view
 
 #### Resolved Bugs
 
@@ -320,26 +322,24 @@ This includes improvements to the GUI to be responsive with a large number of da
 - Resuming data stage results in migrating the data from a different SCN
 - Data stage was not aborted properly by user request
 
-
 ### v3.3.0 - 2021-12-21
 
 #### Features
 
-  - Show information of additional Oracle database object types
-    - Database links
-    - Packages (specification and body)
-    - Synonyms
-  - Show procedures and functions as separate types (until now both types were shown under `Functions`)
-  - Improve data transfer for Oracle `BLOB, CLOB, NCLOB` and `BFILE` columns for rows with big LOBs.
-    This may fix out-of-memory errors on the Oracle side, namely `MSG: ORA-01062: unable to allocate memory for define buffer`.
-    It also _significantly_ reduces the Migrator memory footprint.
-  - The transfer of a row containing a LOB bigger than 500MB will abort with an informative error message.
+- Show information of additional Oracle database object types
+  - Database links
+  - Packages (specification and body)
+  - Synonyms
+- Show procedures and functions as separate types (until now both types were shown under `Functions`)
+- Improve data transfer for Oracle `BLOB, CLOB, NCLOB` and `BFILE` columns for rows with big LOBs.
+  This may fix out-of-memory errors on the Oracle side, namely `MSG: ORA-01062: unable to allocate memory for define buffer`.
+  It also _significantly_ reduces the Migrator memory footprint.
+- The transfer of a row containing a LOB bigger than 500MB will abort with an informative error message.
 
 #### Resolved Bugs
 
-  - Creating a migration of a database with invisible columns causes a failure during meta-data import
-    (`null value in column "position" of relation "table_column" violates not-null constraint`)
-
+- Creating a migration of a database with invisible columns causes a failure during meta-data import
+  (`null value in column "position" of relation "table_column" violates not-null constraint`)
 
 ### v3.2.0 - 2021-11-26
 
@@ -352,11 +352,11 @@ This includes improvements to the GUI to be responsive with a large number of da
     Add, remove and change the order of table columns in a primary/unique key
 - Browser Tab Syncing  
   Work on the same migration in multiple browser tabs, with them being synced in real-time
-- *Search and Replace* on check constraints and expression indexes
+- _Search and Replace_ on check constraints and expression indexes
 - Usability Improvements
   - Improved sidebar functionalities:
-      - Object Type filter: add options for indices, triggers, and sequences
-      - Bulk exclude of schemata and tables
+    - Object Type filter: add options for indices, triggers, and sequences
+    - Bulk exclude of schemata and tables
   - The tabs in the table editor (Columns, Constraints, etc.) display the identifiers used in the target database
   - Provide examples for source and target connection strings when creating new migrations
   - Performance improvements when running migration jobs
@@ -364,16 +364,15 @@ This includes improvements to the GUI to be responsive with a large number of da
 
 #### Resolved Bugs
 
-  - Creating a migration of a database with a view containing numerous columns causes a failure during meta-data import (`ORA-40478: output value too large (maximum: 4000)`)
-  - Creating a migration with an unreachable host shows a non-descriptive error
-  - *Replace All* on different database object types sometimes doesn't replace all search results
-
+- Creating a migration of a database with a view containing numerous columns causes a failure during meta-data import (`ORA-40478: output value too large (maximum: 4000)`)
+- Creating a migration with an unreachable host shows a non-descriptive error
+- _Replace All_ on different database object types sometimes doesn't replace all search results
 
 ### v3.1.0 - 2021-10-20
 
 #### Features
 
-- *Search and Replace*  
+- _Search and Replace_  
   Perform bulk changes on column data types / default values, functions, views, and triggers (with support for even more object properties coming soon)
 
 - Significant Speed Improvements  
@@ -404,28 +403,27 @@ This includes improvements to the GUI to be responsive with a large number of da
 - Migration status is sometimes displayed incorrectly
 - Excluding partition columns via the sidebar prevents the Structure stage from succeeding
 
-
 ### v3.0.0 - 2022-09-16
 
 With _CYBERTEC Migrator_ v3 we've rebuilt the GUI from the ground up to simplify database migrations even further
 
-  - Get a brief look at the structure of your source database by using the migration _Overview_
-  - Quickly drill down into your data model with the help of the new _Sidebar_
-  - Stages (natural synchronization points of a migration process) now guide you through the migration process
-      - **Structure** stage: create database objects necessary to migrate the table data
-      - **Data** stage: migrate table data in parallel
-      - **Logic** stage: create functions, triggers, views
-      - **Integrity** stage: parallel creation of primary keys, indices, foreign keys, and constraint checks
-  - Enjoy quick round trips and gain confidence in the correctness of your migration thanks to the reworked _Migration Controls_
-      - **Start** migration from the beginning
-      - **Rerun stage** in case of an error
-      - **Continue** to next stage
-      - **Abort** migration and restart at any time
-  - Explore the inner workings of your migration with the new, and easily accessible _Log View_
-      - Log entries are inter-linked to the database objects configuration
-      - Filter on log level (`ERROR`, `WARNING`, `INFO`, `VERBOSE`)
-  - Extensive configuration
-      - Exclude database objects (schemas, tables, columns, indexes, ...) from migration
-      - Table editor to configure columns, constraints, indices, triggers, and partitions
-      - Bulk change of data types (for example change all `NUMBER(4)` to `int`, instead of `smallint`)
-      - Integrated code editor for functions, stored procedures, and views with diff feature
+- Get a brief look at the structure of your source database by using the migration _Overview_
+- Quickly drill down into your data model with the help of the new _Sidebar_
+- Stages (natural synchronization points of a migration process) now guide you through the migration process
+  - **Structure** stage: create database objects necessary to migrate the table data
+  - **Data** stage: migrate table data in parallel
+  - **Logic** stage: create functions, triggers, views
+  - **Integrity** stage: parallel creation of primary keys, indices, foreign keys, and constraint checks
+- Enjoy quick round trips and gain confidence in the correctness of your migration thanks to the reworked _Migration Controls_
+  - **Start** migration from the beginning
+  - **Rerun stage** in case of an error
+  - **Continue** to next stage
+  - **Abort** migration and restart at any time
+- Explore the inner workings of your migration with the new, and easily accessible _Log View_
+  - Log entries are inter-linked to the database objects configuration
+  - Filter on log level (`ERROR`, `WARNING`, `INFO`, `VERBOSE`)
+- Extensive configuration
+  - Exclude database objects (schemas, tables, columns, indexes, ...) from migration
+  - Table editor to configure columns, constraints, indices, triggers, and partitions
+  - Bulk change of data types (for example change all `NUMBER(4)` to `int`, instead of `smallint`)
+  - Integrated code editor for functions, stored procedures, and views with diff feature
