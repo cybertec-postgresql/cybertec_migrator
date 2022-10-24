@@ -27,6 +27,9 @@ FAQ for the [CYBERTEC Migrator](../README.md).
   ```
 - When creating a new migration use the Oracle net service name defined in the previous steps. The URL format is `oracle://net_service_name`.
 
+- Alternatively, connect directly using the `protocol` parameter (e.g. `oracle://localhost:2484/pdb2?protocol=tcps`).
+  This requires at least the Oracle Wallet to have been set up correctly.
+
 #### How do I generate a self-signed certificate
 
 Generate the certificate with `migrator configure --tls self-signed-cert` and restart the Migrator.
@@ -82,3 +85,8 @@ Recreating cybertec_migrator_core_1    ... done
 Recreating cybertec_migrator_web_gui_1 ... done
 [OK] Started on 'https://example.org'
 ```
+
+#### How do I set environment variables
+
+The initial `./migrator configure` command will generate a `.env` file, the contents of which will be used in the `core` docker-compose service.
+When editing, make sure not to alter the `# —— Internal ⚠ ——` section.
