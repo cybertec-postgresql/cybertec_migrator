@@ -45,66 +45,51 @@ For detailed information see the list of [supported migration features for Oracl
 
 For older releases see [Release Notes](RELEASE_NOTES.md).
 
-### v3.11.1 - 2022-10-05
-
-#### Resolved Bugs
-
-- Data stage reported as successful for certain corner cases when transfer failed with `No space left on device`
-- Connectivity check to PostgreSQL with connection parameters fails when port is omitted (`FATAL: database does not exist`)
-- Failed to read data from Oracle for tables with lowercase identifiers
-- Regression: can not provide hostname with '-' in connection string
-
-### v3.11.0 - 2022-09-28
+### v3.12.0 - 2022-10-25
 
 #### Features
 
-- Add support for Oracle 11 (closes #14).
-- We changed the default configuration of the reverse proxy to use HTTPS.  
-  This means you have to **install a TLS/SSL certificate** or create a self signed certificate, otherwise the web-server will refuse to start.
-  To facilitate the installation of the certificate we added a new option `--tls` to the `migrator configure` command.
-  Check out the [FAQ](docs/faq.md) for detailed information how to install a TLS/SSL certificate.
+- Enhance migration log in the data stage:
 
-  ```sh
-  migrator configure --tls self-signed-cert       Generate self-signed TLS/SSL certificate
-  migrator configure --tls cert:<file-location>   Install TLS/SSL certificate
-  migrator configure --tls key:<file-location>    Install private key of TLS/SSL certificate
-  ```
+  - Improve summary of the start and end logs
 
-  > **Attention**  
-  > If you upgrade from a previous Migrator version you have to create the TLS/SSL certificate after upgrading to the new version, **before restarting** the new Migrator.
-  >
-  > ```sh
-  > ./migrator update
-  > ./migrator upgrade
-  > # Don't forget the create or install a TLS/SSL certificate
-  > ./migrator configure --tls self-signed-cert
-  > ./migrator up
-  > ```
+    ```text
+    resumed data stage from oracle://localhost:1521/pdb1 to postgresql://localhost:5432/postgres: using 8 workers
+      excluded tables: 1
+      successful transfers: 1 (out of 7)
+      remaining transfers: 6
 
-- Add support for **secured communication** (TCPS) access to Oracle databases. For details check our [FAQ - How do I configure TCPS for Oracle databases?](docs/faq.md#how-do-i-configure-tcps-for-oracle-databases).
-- Read meta-data of additional Oracle database object types: **jobs** and **operators**
-  <p align="left">
-    <img height="250px" src="./docs/pictures/release-notes/v3.11.0/read-job-meta-data.png" />
-    <img height="250px" src="./docs/pictures/release-notes/v3.11.0/read-operators-meta-data.png" />
-  </p>
-- Users may provide a custom **Data Query**, thus manipulating the `SELECT` statement executed on the source database to migrate the data.
-  <p align="left">
-    <img src="./docs/pictures/release-notes/v3.11.0/custom-data-query.png" />
-  </p>
-  A few use cases where this feature may be useful:
+    ...
 
-  - Migrate the table partially by filtering rows with `WHERE`
-  - Migrate only the table structure but no data (`WHERE ROWID < 0`)
-  - You want to keep the table structure, but not the data of a specific column (see screenshot above)
-  - Retrieve (and thus insert) the data in a specific `ORDER BY`
-  - Convert the column data of an unsupported data type into a string representation which can be “cast” into a valid PostgreSQL type via the COPY statement
+    failed executing data stage: stage run-time 00:01:534
+      excluded tables: 1
+      successful transfers: 6 (out of 7)
+      remaining transfers: 1
+      failed transfers: 1
+    ```
 
-- Improve output for erroneous SQL execution when reading Oracle meta-data.
+  - Print a warning if the source and/or target connection are not encrypted
+    ```text
+    Info     Data  using secure connection to read data from oracle://pdb_sec [oracle://10.0.0.127:2484/pdb?protocol=tcps]
+    Warning  Data  using insecure connection to write data to postgresql://localhost:5432/postgres
+    ```
+  - Periodically log `data-migrator` transfer statistics for each table.
+    This interval may be set using the [`CORE_DATA_MIGRATOR_PROGRESS_INTERVAL` environment variable](docs/faq.md#how-do-i-set-environment-variables) (default: `600000` milliseconds, `10` minutes)
+
+    ```text
+    Verbose  Data  loading data for table:"HR"."EMPLOYEES" [hr.employees]: processed 982 rows in 01:20.000 - 45 rows/sec (total: 41 rows/sec in 05:00.000)
+    Verbose  Data  finished loading data for table:"HR"."EMPLOYEES" [hr.employees]: processed 1012 rows in 00:02:01 - 40 rows/sec
+    ```
+
+- Quote reserved identifiers when generating data queries for both Oracle and PostgreSQL
+- Add support for **secured communication** (TCPS) access to Oracle databases without using a _net service name_.
+  For details, check out our [FAQ - How do I configure TCPS for Oracle databases](docs/faq.md#how-do-i-configure-tcps-for-oracle-databases) section
+- Configure the [`FREEZE` parameter](https://www.postgresql.org/docs/current/sql-copy.html) during the data transfer by setting the [`CORE_DATA_MIGRATOR_USE_COPY_FREEZE` environment variable](docs/faq.md#how-do-i-set-environment-variables) (default: `false`).
+  Only use this setting if you are aware of its implications
 
 #### Resolved Bugs
 
-- Columns starting with `SYS` are not included in primary keys or unique constraints
-- Data stage fails when column is named after an SQL reserved keywords (for example `IN`)
+- An error on the target connection during the structure, integrity or logic stage may cause the Migrator core to crash
 
 ## Getting Started
 
@@ -152,12 +137,12 @@ cat ~/password.txt | docker login --username <username> --password-stdin
 [OK] Generated environment file
 [INFO] Run './migrator install' to complete setup
 ➜ ./migrator install
-[INFO] Pulling v3.11.0
+[INFO] Pulling v3.12.0
 Pulling core_db ... done
 Pulling core    ... done
 Pulling web_gui ... done
-[OK] Pulled v3.11.0
-[INFO] Upgraded to v3.11.0
+[OK] Pulled v3.12.0
+[INFO] Upgraded to v3.12.0
 [WARN] Could not find TLS/SSL certificate
 [INFO] Run './migrator configure --tls self-signed-cert' to generate a self-signed TLS/SSL certificate
 ➜ ./migrator configure --tls self-signed-cert
@@ -207,18 +192,18 @@ You can get the Migrator Standard Edition [here](https://www.cybertec-postgresql
 6. Start the Migrator
 
 ```sh
-➜ tar xf cybertec_migrator-v3.11.0-standard.tar.gz
+➜ tar xf cybertec_migrator-v3.12.0-standard.tar.gz
 ➜ cd cybertec_migrator
 ➜ ./migrator configure
 [OK] Generated environment file
 [INFO] Run './migrator install' to complete setup
-➜ ./migrator install --archive ../cybertec_migrator-v3.11.0-standard.tar.gz
+➜ ./migrator install --archive ../cybertec_migrator-v3.12.0-standard.tar.gz
 [INFO] Extracting upgrade information
-Loaded image: cybertecpostgresql/cybertec_migrator-core:v3.11.0-standard
-Loaded image: cybertecpostgresql/cybertec_migrator-web_gui:v3.11.0-standard
+Loaded image: cybertecpostgresql/cybertec_migrator-core:v3.12.0-standard
+Loaded image: cybertecpostgresql/cybertec_migrator-web_gui:v3.12.0-standard
 Loaded image: postgres:13-alpine
 [INFO] Extracted upgrade information
-[INFO] Upgraded to v3.11.0-standard
+[INFO] Upgraded to v3.12.0-standard
 [WARN] Could not find TLS/SSL certificate
 [INFO] Run './migrator configure --tls self-signed-cert' to generate a self-signed TLS/SSL certificate
 ➜ ./migrator configure --tls self-signed-cert

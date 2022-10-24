@@ -2,6 +2,52 @@
 
 The release notes of the last release may be found on [README.md](README.md#whats-new).
 
+### v3.12.0 - 2022-10-25
+
+#### Features
+
+- Enhance migration log in the data stage:
+
+  - Improve summary of the start and end logs
+
+    ```text
+    resumed data stage from oracle://localhost:1521/pdb1 to postgresql://localhost:5432/postgres: using 8 workers
+      excluded tables: 1
+      successful transfers: 1 (out of 7)
+      remaining transfers: 6
+
+    ...
+
+    failed executing data stage: stage run-time 00:01:534
+      excluded tables: 1
+      successful transfers: 6 (out of 7)
+      remaining transfers: 1
+      failed transfers: 1
+    ```
+
+  - Print a warning if the source and/or target connection are not encrypted
+    ```text
+    Info     Data  using secure connection to read data from oracle://pdb_sec [oracle://10.0.0.127:2484/pdb?protocol=tcps]
+    Warning  Data  using insecure connection to write data to postgresql://localhost:5432/postgres
+    ```
+  - Periodically log `data-migrator` transfer statistics for each table.
+    This interval may be set using the [`CORE_DATA_MIGRATOR_PROGRESS_INTERVAL` environment variable](docs/faq.md#how-do-i-set-environment-variables) (default: `600000` milliseconds, `10` minutes)
+
+    ```text
+    Verbose  Data  loading data for table:"HR"."EMPLOYEES" [hr.employees]: processed 982 rows in 01:20.000 - 45 rows/sec (total: 41 rows/sec in 05:00.000)
+    Verbose  Data  finished loading data for table:"HR"."EMPLOYEES" [hr.employees]: processed 1012 rows in 00:02:01 - 40 rows/sec
+    ```
+
+- Quote reserved identifiers when generating data queries for both Oracle and PostgreSQL
+- Add support for **secured communication** (TCPS) access to Oracle databases without using a _net service name_.
+  For details, check out our [FAQ - How do I configure TCPS for Oracle databases](docs/faq.md#how-do-i-configure-tcps-for-oracle-databases) section
+- Configure the [`FREEZE` parameter](https://www.postgresql.org/docs/current/sql-copy.html) during the data transfer by setting the [`CORE_DATA_MIGRATOR_USE_COPY_FREEZE` environment variable](docs/faq.md#how-do-i-set-environment-variables) (default: `false`).
+  Only use this setting if you are aware of its implications
+
+#### Resolved Bugs
+
+- An error on the target connection during the structure, integrity or logic stage may cause the Migrator core to crash
+
 ### v3.11.1 - 2022-10-05
 
 #### Resolved Bugs
