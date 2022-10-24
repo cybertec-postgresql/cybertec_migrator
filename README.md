@@ -16,7 +16,7 @@
 In addition to migrating your data professionally and securely with minimum effort, _CYBERTEC Migrator_ allows you to visually monitor and track the whole process at any time.
 
 Do you want to know if the Migrator can migrate your Oracle database to PostgreSQL?
-Then [get the Migrator Standard Edition](https://www.cybertec-postgresql.com/en/products/cybertec-migrator#form),  a __free version__ of the CYBERTEC Migrator, follow the offline instructions provided in [Getting Started](#offline-installation) section, and try it out.
+Then [get the Migrator Standard Edition](https://www.cybertec-postgresql.com/en/products/cybertec-migrator#form), a **free version** of the CYBERTEC Migrator, follow the offline instructions provided in [Getting Started](#offline-installation) section, and try it out.
 
 The blog article [Meet the CYBERTEC Migrator](https://www.cybertec-postgresql.com/en/meet-the-cybertec-migrator/) provides a good introduction on how to migrate Oracle's HR demo schema to PostgreSQL.
 Alternatively, you may want to watch the complementary [CYBERTEC Migrator YouTube playlist](https://www.youtube.com/playlist?list=PLt4uYyc72accw-Wi1Egn-IcOOSitK5Lcq).
@@ -69,6 +69,7 @@ For older releases see [Release Notes](RELEASE_NOTES.md).
   migrator configure --tls cert:<file-location>   Install TLS/SSL certificate
   migrator configure --tls key:<file-location>    Install private key of TLS/SSL certificate
   ```
+
   > **Attention**  
   > If you upgrade from a previous Migrator version you have to create the TLS/SSL certificate after upgrading to the new version, **before restarting** the new Migrator.
   >
@@ -79,6 +80,7 @@ For older releases see [Release Notes](RELEASE_NOTES.md).
   > ./migrator configure --tls self-signed-cert
   > ./migrator up
   > ```
+
 - Add support for **secured communication** (TCPS) access to Oracle databases. For details check our [FAQ - How do I configure TCPS for Oracle databases?](docs/faq.md#how-do-i-configure-tcps-for-oracle-databases).
 - Read meta-data of additional Oracle database object types: **jobs** and **operators**
   <p align="left">
@@ -96,6 +98,7 @@ For older releases see [Release Notes](RELEASE_NOTES.md).
   - You want to keep the table structure, but not the data of a specific column (see screenshot above)
   - Retrieve (and thus insert) the data in a specific `ORDER BY`
   - Convert the column data of an unsupported data type into a string representation which can be “cast” into a valid PostgreSQL type via the COPY statement
+
 - Improve output for erroneous SQL execution when reading Oracle meta-data.
 
 #### Resolved Bugs
@@ -114,10 +117,10 @@ _CYBERTEC Migrator_ is distributed as a set of [container images](https://github
 - `git` (`>= 2.20.1`)
 - `bash` (`>= 4.0`)
 
-
 ### Migrator Installation
 
 The _CYBERTEC Migrator_ images can be obtained via two channels
+
 - [Online installation via container registry](#online-installation)
 - From an [offline installation](#offline-installation) package for environments in which networking restrictions are imposed
 
@@ -126,130 +129,130 @@ The _CYBERTEC Migrator_ images can be obtained via two channels
 
 #### Online installation
 
-  You need an account on the [Docker Hub](https://hub.docker.com/) container image registry.
+You need an account on the [Docker Hub](https://hub.docker.com/) container image registry.
 
-  Please [get in touch with us](#contact) if your account has not been granted access to the respective images.
-  Make sure you are logged in the Docker Hub registry with the correct user.
+Please [get in touch with us](#contact) if your account has not been granted access to the respective images.
+Make sure you are logged in the Docker Hub registry with the correct user.
 
-  ```sh
-  cat ~/password.txt | docker login --username <username> --password-stdin
-  ```
+```sh
+cat ~/password.txt | docker login --username <username> --password-stdin
+```
 
-  1. Clone this git repository
-  2. Change working directory to the previously cloned repository
-  3. Generate default configuration
-  4. Download and load container images
-  5. Generate a self-signed TLS/SSL certificate or install a certificate (see [FAQ](docs/faq.md) for more details)
-  6. Start the Migrator
+1. Clone this git repository
+2. Change working directory to the previously cloned repository
+3. Generate default configuration
+4. Download and load container images
+5. Generate a self-signed TLS/SSL certificate or install a certificate (see [FAQ](docs/faq.md) for more details)
+6. Start the Migrator
 
-  ```sh
-  ➜ git clone https://github.com/cybertec-postgresql/cybertec_migrator
-  ➜ cd cybertec_migrator
-  ➜ ./migrator configure
-  [OK] Generated environment file
-  [INFO] Run './migrator install' to complete setup
-  ➜ ./migrator install
-  [INFO] Pulling v3.11.0
-  Pulling core_db ... done
-  Pulling core    ... done
-  Pulling web_gui ... done
-  [OK] Pulled v3.11.0
-  [INFO] Upgraded to v3.11.0
-  [WARN] Could not find TLS/SSL certificate
-  [INFO] Run './migrator configure --tls self-signed-cert' to generate a self-signed TLS/SSL certificate
-  ➜ ./migrator configure --tls self-signed-cert
-  [INFO] Generating self-signed TLS/SSL certificate
-  Creating cybertec_migrator_web_gui_run ... done
-  Generating a RSA private key
-  .+++++
-  ........................+++++
-  writing new private key to '/etc/nginx/certs/nginx.key'
-  -----
-  You are about to be asked to enter information that will be incorporated
-  into your certificate request.
-  What you are about to enter is what is called a Distinguished Name or a DN.
-  There are quite a few fields but you can leave some blank
-  For some fields there will be a default value,
-  If you enter '.', the field will be left blank.
-  -----
-  Country Name (2 letter code) [AU]:AT
-  State or Province Name (full name) [Some-State]:Lower Austria
-  Locality Name (eg, city) []:Wöllersdorf
-  Organization Name (eg, company) [Internet Widgits Pty Ltd]:CYBERTEC PostgreSQL International GmbH
-  Organizational Unit Name (eg, section) []:CYBERTEC Solutions
-  Common Name (e.g. server FQDN or YOUR name) []:
-  Email Address []:invalid@cybertec.at
-  Creating cybertec_migrator_web_gui_run ... done
-  [OK] Generated self-signed TLS/SSL certificate
-  [INFO] Run './migrator up' to switch to new version
-  [WARN] Switching will abort running migrations
-  ➜ ./migrator up
-  Recreating cybertec_migrator_core_db_1 ... done
-  Recreating cybertec_migrator_core_1    ... done
-  Recreating cybertec_migrator_web_gui_1 ... done
-  [OK] Started on 'https://localhost'
-  ```
+```sh
+➜ git clone https://github.com/cybertec-postgresql/cybertec_migrator
+➜ cd cybertec_migrator
+➜ ./migrator configure
+[OK] Generated environment file
+[INFO] Run './migrator install' to complete setup
+➜ ./migrator install
+[INFO] Pulling v3.11.0
+Pulling core_db ... done
+Pulling core    ... done
+Pulling web_gui ... done
+[OK] Pulled v3.11.0
+[INFO] Upgraded to v3.11.0
+[WARN] Could not find TLS/SSL certificate
+[INFO] Run './migrator configure --tls self-signed-cert' to generate a self-signed TLS/SSL certificate
+➜ ./migrator configure --tls self-signed-cert
+[INFO] Generating self-signed TLS/SSL certificate
+Creating cybertec_migrator_web_gui_run ... done
+Generating a RSA private key
+.+++++
+........................+++++
+writing new private key to '/etc/nginx/certs/nginx.key'
+-----
+You are about to be asked to enter information that will be incorporated
+into your certificate request.
+What you are about to enter is what is called a Distinguished Name or a DN.
+There are quite a few fields but you can leave some blank
+For some fields there will be a default value,
+If you enter '.', the field will be left blank.
+-----
+Country Name (2 letter code) [AU]:AT
+State or Province Name (full name) [Some-State]:Lower Austria
+Locality Name (eg, city) []:Wöllersdorf
+Organization Name (eg, company) [Internet Widgits Pty Ltd]:CYBERTEC PostgreSQL International GmbH
+Organizational Unit Name (eg, section) []:CYBERTEC Solutions
+Common Name (e.g. server FQDN or YOUR name) []:
+Email Address []:invalid@cybertec.at
+Creating cybertec_migrator_web_gui_run ... done
+[OK] Generated self-signed TLS/SSL certificate
+[INFO] Run './migrator up' to switch to new version
+[WARN] Switching will abort running migrations
+➜ ./migrator up
+Recreating cybertec_migrator_core_db_1 ... done
+Recreating cybertec_migrator_core_1    ... done
+Recreating cybertec_migrator_web_gui_1 ... done
+[OK] Started on 'https://localhost'
+```
 
 #### Offline installation
 
-  Get your Migrator offline installation package.
-  You can get the Migrator Standard Edition [here](https://www.cybertec-postgresql.com/en/products/cybertec-migrator#form) for free.  
-  For the Professional or Enterprise Edition [get in touch with us](#contact) to request download credentials.
+Get your Migrator offline installation package.
+You can get the Migrator Standard Edition [here](https://www.cybertec-postgresql.com/en/products/cybertec-migrator#form) for free.  
+ For the Professional or Enterprise Edition [get in touch with us](#contact) to request download credentials.
 
-  1. Extract the provided archive file
-  2. Change working directory to newly created directory
-  3. Generate default configuration
-  4. Import container images from archive
-  5. Generate a self-signed TLS/SSL certificate or install a certificate (see [FAQ](docs/faq.md) for more details)
-  6. Start the Migrator
+1. Extract the provided archive file
+2. Change working directory to newly created directory
+3. Generate default configuration
+4. Import container images from archive
+5. Generate a self-signed TLS/SSL certificate or install a certificate (see [FAQ](docs/faq.md) for more details)
+6. Start the Migrator
 
-  ```sh
-  ➜ tar xf cybertec_migrator-v3.11.0-standard.tar.gz
-  ➜ cd cybertec_migrator
-  ➜ ./migrator configure
-  [OK] Generated environment file
-  [INFO] Run './migrator install' to complete setup
-  ➜ ./migrator install --archive ../cybertec_migrator-v3.11.0-standard.tar.gz
-  [INFO] Extracting upgrade information
-  Loaded image: cybertecpostgresql/cybertec_migrator-core:v3.11.0-standard
-  Loaded image: cybertecpostgresql/cybertec_migrator-web_gui:v3.11.0-standard
-  Loaded image: postgres:13-alpine
-  [INFO] Extracted upgrade information
-  [INFO] Upgraded to v3.11.0-standard
-  [WARN] Could not find TLS/SSL certificate
-  [INFO] Run './migrator configure --tls self-signed-cert' to generate a self-signed TLS/SSL certificate
-  ➜ ./migrator configure --tls self-signed-cert
-  [INFO] Generating self-signed TLS/SSL certificate
-  Creating cybertec_migrator_web_gui_run ... done
-  Generating a RSA private key
-  .+++++
-  ........................+++++
-  writing new private key to '/etc/nginx/certs/nginx.key'
-  -----
-  You are about to be asked to enter information that will be incorporated
-  into your certificate request.
-  What you are about to enter is what is called a Distinguished Name or a DN.
-  There are quite a few fields but you can leave some blank
-  For some fields there will be a default value,
-  If you enter '.', the field will be left blank.
-  -----
-  Country Name (2 letter code) [AU]:AT
-  State or Province Name (full name) [Some-State]:Lower Austria
-  Locality Name (eg, city) []:Wöllersdorf
-  Organization Name (eg, company) [Internet Widgits Pty Ltd]:CYBERTEC PostgreSQL International GmbH
-  Organizational Unit Name (eg, section) []:CYBERTEC Solutions
-  Common Name (e.g. server FQDN or YOUR name) []:
-  Email Address []:invalid@cybertec.at
-  Creating cybertec_migrator_web_gui_run ... done
-  [OK] Generated self-signed TLS/SSL certificate
-  [INFO] Run './migrator up' to switch to new version
-  [WARN] Switching will abort running migrations
-  ➜ ./migrator up
-  Recreating cybertec_migrator_core_db_1 ... done
-  Recreating cybertec_migrator_core_1    ... done
-  Recreating cybertec_migrator_web_gui_1 ... done
-  [OK] Started on 'https://localhost'
-  ```
+```sh
+➜ tar xf cybertec_migrator-v3.11.0-standard.tar.gz
+➜ cd cybertec_migrator
+➜ ./migrator configure
+[OK] Generated environment file
+[INFO] Run './migrator install' to complete setup
+➜ ./migrator install --archive ../cybertec_migrator-v3.11.0-standard.tar.gz
+[INFO] Extracting upgrade information
+Loaded image: cybertecpostgresql/cybertec_migrator-core:v3.11.0-standard
+Loaded image: cybertecpostgresql/cybertec_migrator-web_gui:v3.11.0-standard
+Loaded image: postgres:13-alpine
+[INFO] Extracted upgrade information
+[INFO] Upgraded to v3.11.0-standard
+[WARN] Could not find TLS/SSL certificate
+[INFO] Run './migrator configure --tls self-signed-cert' to generate a self-signed TLS/SSL certificate
+➜ ./migrator configure --tls self-signed-cert
+[INFO] Generating self-signed TLS/SSL certificate
+Creating cybertec_migrator_web_gui_run ... done
+Generating a RSA private key
+.+++++
+........................+++++
+writing new private key to '/etc/nginx/certs/nginx.key'
+-----
+You are about to be asked to enter information that will be incorporated
+into your certificate request.
+What you are about to enter is what is called a Distinguished Name or a DN.
+There are quite a few fields but you can leave some blank
+For some fields there will be a default value,
+If you enter '.', the field will be left blank.
+-----
+Country Name (2 letter code) [AU]:AT
+State or Province Name (full name) [Some-State]:Lower Austria
+Locality Name (eg, city) []:Wöllersdorf
+Organization Name (eg, company) [Internet Widgits Pty Ltd]:CYBERTEC PostgreSQL International GmbH
+Organizational Unit Name (eg, section) []:CYBERTEC Solutions
+Common Name (e.g. server FQDN or YOUR name) []:
+Email Address []:invalid@cybertec.at
+Creating cybertec_migrator_web_gui_run ... done
+[OK] Generated self-signed TLS/SSL certificate
+[INFO] Run './migrator up' to switch to new version
+[WARN] Switching will abort running migrations
+➜ ./migrator up
+Recreating cybertec_migrator_core_db_1 ... done
+Recreating cybertec_migrator_core_1    ... done
+Recreating cybertec_migrator_web_gui_1 ... done
+[OK] Started on 'https://localhost'
+```
 
 ## Running the Migrator
 
@@ -262,7 +265,7 @@ If you don't have access to an Oracle or PostgreSQL database to test the Migrato
 
 ### Upgrades
 
-| ⚠️   | Running migrations _will_ be interrupted by applying upgrades |
+| ⚠️  | Running migrations _will_ be interrupted by applying upgrades |
 | --- | ------------------------------------------------------------- |
 
 > **Attention**  
