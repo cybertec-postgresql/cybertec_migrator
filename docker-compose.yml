@@ -21,6 +21,7 @@ services:
   # Migrator core exposed as REST service API
   core:
     image: docker.io/cybertecpostgresql/cybertec_migrator-core:${VERSION}
+    env_file: .env
     environment:
       # —— Internal database ——
       - CORE_DB_HOST=core_db
