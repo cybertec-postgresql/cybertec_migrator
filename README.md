@@ -45,51 +45,52 @@ For detailed information see the list of [supported migration features for Oracl
 
 For older releases see [Release Notes](RELEASE_NOTES.md).
 
-### v3.12.0 - 2022-10-25
+### v3.13.0 - 2022-11-30
 
 #### Features
 
-- Enhance migration log in the data stage:
+- _Migration Assessment_:
 
-  - Improve summary of the start and end logs
+  - Quickly determine how much effort an individual migration encompasses
+    <p align="left">
+      <img src="./docs/pictures/release-notes/v3.13.0/migration-assessment-bar-chart.png" />
+    </p>
+  - Inspect the cost for discrete database objects and identify outliers
+    <p align="left">
+      <img src="./docs/pictures/release-notes/v3.13.0/migration-assessment-table-and-donut-chart.png" />
+    </p>
 
-    ```text
-    resumed data stage from oracle://localhost:1521/pdb1 to postgresql://localhost:5432/postgres: using 8 workers
-      excluded tables: 1
-      successful transfers: 1 (out of 7)
-      remaining transfers: 6
+  > Note: The figures given by the assessment are only a rough estimation. \
+  > We will continue to tweak and improve these values as we collect experience and introduce new technologies, such as a PL/SQL parser.
 
-    ...
+- _Migration Overview_: List empty and non-empty schemas separately
+  <p align="left">
+    <img src="./docs/pictures/release-notes/v3.13.0/migration-overview-empty-schemas.png" />
+  </p>
 
-    failed executing data stage: stage run-time 00:01:534
-      excluded tables: 1
-      successful transfers: 6 (out of 7)
-      remaining transfers: 1
-      failed transfers: 1
-    ```
+  > Note: Empty schemas are now excluded per default
 
-  - Print a warning if the source and/or target connection are not encrypted
-    ```text
-    Info     Data  using secure connection to read data from oracle://pdb_sec [oracle://10.0.0.127:2484/pdb?protocol=tcps]
-    Warning  Data  using insecure connection to write data to postgresql://localhost:5432/postgres
-    ```
-  - Periodically log `data-migrator` transfer statistics for each table.
-    This interval may be set using the [`CORE_DATA_MIGRATOR_PROGRESS_INTERVAL` environment variable](docs/faq.md#how-do-i-set-environment-variables) (default: `600000` milliseconds, `10` minutes)
+- _Migration Creation_: Improve feedback for invalid connection strings
+  <p align="left">
+    <img src="./docs/pictures/release-notes/v3.13.0/improved-connection-string-feedback.png" />
+  </p>
 
-    ```text
-    Verbose  Data  loading data for table:"HR"."EMPLOYEES" [hr.employees]: processed 982 rows in 01:20.000 - 45 rows/sec (total: 41 rows/sec in 05:00.000)
-    Verbose  Data  finished loading data for table:"HR"."EMPLOYEES" [hr.employees]: processed 1012 rows in 00:02:01 - 40 rows/sec
-    ```
+- _Migration Lifecycle_:
 
-- Quote reserved identifiers when generating data queries for both Oracle and PostgreSQL
-- Add support for **secured communication** (TCPS) access to Oracle databases without using a _net service name_.
-  For details, check out our [FAQ - How do I configure TCPS for Oracle databases](docs/faq.md#how-do-i-configure-tcps-for-oracle-databases) section
-- Configure the [`FREEZE` parameter](https://www.postgresql.org/docs/current/sql-copy.html) during the data transfer by setting the [`CORE_DATA_MIGRATOR_USE_COPY_FREEZE` environment variable](docs/faq.md#how-do-i-set-environment-variables) (default: `false`).
-  Only use this setting if you are aware of its implications
+  - Defer the creation of functions after those of tables to allow for the use of the `%TYPE` attribute
+  - Enhance the migration log of the structure, integrity and logic stages to be on a par with those of the data stage
+  - Configure the `COPY FREEZE` functionality introduced in `v3.12.0` for each individual table instead of the whole system.
+    The `CORE_DATA_MIGRATOR_USE_COPY_FREEZE` environment variable has subsequently been removed.
+
+- _Miscellaneous_: Rework the log output format and fidelity throughout the `core` container
 
 #### Resolved Bugs
 
-- An error on the target connection during the structure, integrity or logic stage may cause the Migrator core to crash
+- The Analyze step of the migration creation always shows `Jobs` as pending
+- LOBs exceeding the maximum size of 500MB do not fail with an appropriate error message
+- Setting the sidebar filter to `Index` does not include all indexes in the filter result
+- Usernames and passwords containing special characters cause the target connection check during migration creation to fail
+- Deleting a migration after executing a stage fails with an unexpected error
 
 ## Getting Started
 
@@ -137,12 +138,12 @@ cat ~/password.txt | docker login --username <username> --password-stdin
 [OK] Generated environment file
 [INFO] Run './migrator install' to complete setup
 ➜ ./migrator install
-[INFO] Pulling v3.12.0
+[INFO] Pulling v3.13.0
 Pulling core_db ... done
 Pulling core    ... done
 Pulling web_gui ... done
-[OK] Pulled v3.12.0
-[INFO] Upgraded to v3.12.0
+[OK] Pulled v3.13.0
+[INFO] Upgraded to v3.13.0
 [WARN] Could not find TLS/SSL certificate
 [INFO] Run './migrator configure --tls self-signed-cert' to generate a self-signed TLS/SSL certificate
 ➜ ./migrator configure --tls self-signed-cert
@@ -192,18 +193,18 @@ You can get the Migrator Standard Edition [here](https://www.cybertec-postgresql
 6. Start the Migrator
 
 ```sh
-➜ tar xf cybertec_migrator-v3.12.0-standard.tar.gz
+➜ tar xf cybertec_migrator-v3.13.0-standard.tar.gz
 ➜ cd cybertec_migrator
 ➜ ./migrator configure
 [OK] Generated environment file
 [INFO] Run './migrator install' to complete setup
-➜ ./migrator install --archive ../cybertec_migrator-v3.12.0-standard.tar.gz
+➜ ./migrator install --archive ../cybertec_migrator-v3.13.0-standard.tar.gz
 [INFO] Extracting upgrade information
-Loaded image: cybertecpostgresql/cybertec_migrator-core:v3.12.0-standard
-Loaded image: cybertecpostgresql/cybertec_migrator-web_gui:v3.12.0-standard
+Loaded image: cybertecpostgresql/cybertec_migrator-core:v3.13.0-standard
+Loaded image: cybertecpostgresql/cybertec_migrator-web_gui:v3.13.0-standard
 Loaded image: postgres:13-alpine
 [INFO] Extracted upgrade information
-[INFO] Upgraded to v3.12.0-standard
+[INFO] Upgraded to v3.13.0-standard
 [WARN] Could not find TLS/SSL certificate
 [INFO] Run './migrator configure --tls self-signed-cert' to generate a self-signed TLS/SSL certificate
 ➜ ./migrator configure --tls self-signed-cert

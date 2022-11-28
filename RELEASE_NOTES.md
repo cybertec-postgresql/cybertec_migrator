@@ -2,6 +2,53 @@
 
 The release notes of the last release may be found on [README.md](README.md#whats-new).
 
+### v3.13.0 - 2022-11-30
+
+#### Features
+
+- _Migration Assessment_:
+
+  - Quickly determine how much effort an individual migration encompasses
+    <p align="left">
+      <img src="./docs/pictures/release-notes/v3.13.0/migration-assessment-bar-chart.png" />
+    </p>
+  - Inspect the cost for discrete database objects and identify outliers
+    <p align="left">
+      <img src="./docs/pictures/release-notes/v3.13.0/migration-assessment-table-and-donut-chart.png" />
+    </p>
+
+  > Note: The figures given by the assessment are only a rough estimation. \
+  > We will continue to tweak and improve these values as we collect experience and introduce new technologies, such as a PL/SQL parser.
+
+- _Migration Overview_: List empty and non-empty schemas separately
+  <p align="left">
+    <img src="./docs/pictures/release-notes/v3.13.0/migration-overview-empty-schemas.png" />
+  </p>
+
+  > Note: Empty schemas are now excluded per default
+
+- _Migration Creation_: Improve feedback for invalid connection strings
+  <p align="left">
+    <img src="./docs/pictures/release-notes/v3.13.0/improved-connection-string-feedback.png" />
+  </p>
+
+- _Migration Lifecycle_:
+
+  - Defer the creation of functions after those of tables to allow for the use of the `%TYPE` attribute
+  - Enhance the migration log of the structure, integrity and logic stages to be on a par with those of the data stage
+  - Configure the `COPY FREEZE` functionality introduced in `v3.12.0` for each individual table instead of the whole system.
+    The `CORE_DATA_MIGRATOR_USE_COPY_FREEZE` environment variable has subsequently been removed.
+
+- _Miscellaneous_: Rework the log output format and fidelity throughout the `core` container
+
+#### Resolved Bugs
+
+- The Analyze step of the migration creation always shows `Jobs` as pending
+- LOBs exceeding the maximum size of 500MB do not fail with an appropriate error message
+- Setting the sidebar filter to `Index` does not include all indexes in the filter result
+- Usernames and passwords containing special characters cause the target connection check during migration creation to fail
+- Deleting a migration after executing a stage fails with an unexpected error
+
 ### v3.12.0 - 2022-10-25
 
 #### Features
