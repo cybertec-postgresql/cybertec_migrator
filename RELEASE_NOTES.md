@@ -2,6 +2,12 @@
 
 The release notes of the last release may be found on [README.md](README.md#whats-new).
 
+### v3.13.1 - 2022-12-01
+
+#### Resolved Bugs
+
+- Tables containing columns named after Oracle-only reserved identifiers (e.g. `SIZE`) fail during the data stage
+
 ### v3.13.0 - 2022-11-30
 
 #### Features
