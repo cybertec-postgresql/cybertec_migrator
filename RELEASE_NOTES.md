@@ -2,6 +2,12 @@
 
 The release notes of the last release may be found on [README.md](README.md#whats-new).
 
+### v3.13.2 - 2022-12-02
+
+#### Resolved Bugs
+
+- Regression: Can't create table and column comments containing single quotes
+
 ### v3.13.1 - 2022-12-01
 
 #### Resolved Bugs

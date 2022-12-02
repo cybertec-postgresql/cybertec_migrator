@@ -45,6 +45,12 @@ For detailed information see the list of [supported migration features for Oracl
 
 For older releases see [Release Notes](RELEASE_NOTES.md).
 
+### v3.13.2 - 2022-12-02
+
+#### Resolved Bugs
+
+- Regression: Can't create table and column comments containing single quotes
+
 ### v3.13.1 - 2022-12-01
 
 #### Resolved Bugs
