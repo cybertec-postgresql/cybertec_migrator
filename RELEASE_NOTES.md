@@ -2,6 +2,48 @@
 
 The release notes of the last release may be found on [README.md](README.md#whats-new).
 
+### v3.14.0 - 2023-01-10
+
+#### Features
+
+- _Live Data stage overview_: Determine the migration status of each table at a glance
+
+  <p align="left">
+    <img src="./docs/pictures/release-notes/v3.14.0/live-data-stage.png" />
+  </p>
+
+- _Import migration_: Create a new migration using a migration export, as an alternative to cloning
+
+  > Note: Only migration exports created with v3.14.0 and later are supported.
+
+  <p align="left">
+    <img src="./docs/pictures/release-notes/v3.14.0/import-migration.png" />
+  </p>
+
+- _Log Panel Timezone_: Choose a custom timezone for migration log timestamps
+  <p align="left">
+    <img src="./docs/pictures/release-notes/v3.14.0/log-panel-timezone.png" />
+  </p>
+
+- _Sequence Editor_: View and edit the details of sequences
+  <p align="left">
+    <img src="./docs/pictures/release-notes/v3.14.0/sequence-popover.png" />
+  </p>
+
+- _Rename table columns_:
+
+  - Oracle columns named after PostgreSQL system columns (`xmin`, `xmax`, etc.) can not be migrated as is and must be renamed
+    <p align="left">
+      <img src="./docs/pictures/release-notes/v3.14.0/rename-table-column.png" />
+    </p>
+
+- _Migration Settings_:
+  - Change migration name and description
+    <p align="left">
+      <img src="./docs/pictures/release-notes/v3.14.0/rename-migration.png" />
+    </p>
+  - Configure the interval between each data transfer report
+
 ### v3.13.2 - 2022-12-02
 
 #### Resolved Bugs
