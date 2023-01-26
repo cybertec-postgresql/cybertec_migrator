@@ -45,6 +45,13 @@ For detailed information see the list of [supported migration features for Oracl
 
 For older releases see [Release Notes](RELEASE_NOTES.md).
 
+### 3.14.1 - 2023-01-26
+
+#### Resolved Bugs
+
+- Importing a migration archive on Windows causes `File must be a .zip archive`
+- Switching between procedure editors causes their contents to be overwritten
+
 ### v3.14.0 - 2023-01-10
 
 #### Features

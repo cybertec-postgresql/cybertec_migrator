@@ -2,6 +2,13 @@
 
 The release notes of the last release may be found on [README.md](README.md#whats-new).
 
+### 3.14.1 - 2023-01-26
+
+#### Resolved Bugs
+
+- Importing a migration archive on Windows causes `File must be a .zip archive`
+- Switching between procedure editors causes their contents to be overwritten
+
 ### v3.14.0 - 2023-01-10
 
 #### Features
