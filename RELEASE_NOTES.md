@@ -2,6 +2,40 @@
 
 The release notes of the last release may be found on [README.md](README.md#whats-new).
 
+### v3.15.0 - 2023-02-21
+
+#### Features
+
+- _Table chunking_: Speed up your data transfers through parallelization
+
+  <p align="left">
+    <img src="./docs/pictures/release-notes/v3.15.0/table-chunking.png" />
+  </p>
+
+  At present, chunking is limited to tables with
+  - a primary/unique **key** or **index**
+  - over exactly **one** column
+  - of a **numeric** type
+
+  Using a key/index, the migrator will create approximate chunks with it's `min` and `max` values.
+
+- _View triggers_: Show, edit and migrate view triggers
+
+  <p align="left">
+    <img src="./docs/pictures/release-notes/v3.15.0/view-trigger.png" />
+  </p>
+
+- _Improved migration creation_: Enhanced keyboard navigation and introduced `Go Back` button
+
+  <p align="left">
+    <img src="./docs/pictures/release-notes/v3.15.0/migration-creation-go-back.png" />
+  </p>
+
+- _Sidebar_: Show or hide excluded DBOs
+  <p align="left">
+    <img src="./docs/pictures/release-notes/v3.15.0/hide-excluded-dbos.gif" />
+  </p>
+
 ### 3.14.1 - 2023-01-26
 
 #### Resolved Bugs

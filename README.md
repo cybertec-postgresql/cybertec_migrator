@@ -45,54 +45,39 @@ For detailed information see the list of [supported migration features for Oracl
 
 For older releases see [Release Notes](RELEASE_NOTES.md).
 
-### 3.14.1 - 2023-01-26
-
-#### Resolved Bugs
-
-- Importing a migration archive on Windows causes `File must be a .zip archive`
-- Switching between procedure editors causes their contents to be overwritten
-
-### v3.14.0 - 2023-01-10
+### v3.15.0 - 2023-02-21
 
 #### Features
 
-- _Live Data stage overview_: Determine the migration status of each table at a glance
+- _Table chunking_: Speed up your data transfers through parallelization
 
   <p align="left">
-    <img src="./docs/pictures/release-notes/v3.14.0/live-data-stage.png" />
+    <img src="./docs/pictures/release-notes/v3.15.0/table-chunking.png" />
   </p>
 
-- _Import migration_: Create a new migration using a migration export, as an alternative to cloning
+  At present, chunking is limited to tables with
+  - a primary/unique **key** or **index**
+  - over exactly **one** column
+  - of a **numeric** type
 
-  > Note: Only migration exports created with v3.14.0 and later are supported.
+  Using a key/index, the migrator will create approximate chunks with it's `min` and `max` values.
+
+- _View triggers_: Show, edit and migrate view triggers
 
   <p align="left">
-    <img src="./docs/pictures/release-notes/v3.14.0/import-migration.png" />
+    <img src="./docs/pictures/release-notes/v3.15.0/view-trigger.png" />
   </p>
 
-- _Log Panel Timezone_: Choose a custom timezone for migration log timestamps
+- _Improved migration creation_: Enhanced keyboard navigation and introduced `Go Back` button
+
   <p align="left">
-    <img src="./docs/pictures/release-notes/v3.14.0/log-panel-timezone.png" />
+    <img src="./docs/pictures/release-notes/v3.15.0/migration-creation-go-back.png" />
   </p>
 
-- _Sequence Editor_: View and edit the details of sequences
+- _Sidebar_: Show or hide excluded DBOs
   <p align="left">
-    <img src="./docs/pictures/release-notes/v3.14.0/sequence-popover.png" />
+    <img src="./docs/pictures/release-notes/v3.15.0/hide-excluded-dbos.gif" />
   </p>
-
-- _Rename table columns_:
-
-  - Oracle columns named after PostgreSQL system columns (`xmin`, `xmax`, etc.) can not be migrated as is and must be renamed
-    <p align="left">
-      <img src="./docs/pictures/release-notes/v3.14.0/rename-table-column.png" />
-    </p>
-
-- _Migration Settings_:
-  - Change migration name and description
-    <p align="left">
-      <img src="./docs/pictures/release-notes/v3.14.0/rename-migration.png" />
-    </p>
-  - Configure the interval between each data transfer report
 
 ## Getting Started
 
@@ -140,12 +125,12 @@ cat ~/password.txt | docker login --username <username> --password-stdin
 [OK] Generated environment file
 [INFO] Run './migrator install' to complete setup
 ➜ ./migrator install
-[INFO] Pulling v3.13.0
+[INFO] Pulling v3.15.0
 Pulling core_db ... done
 Pulling core    ... done
 Pulling web_gui ... done
-[OK] Pulled v3.13.0
-[INFO] Upgraded to v3.13.0
+[OK] Pulled v3.15.0
+[INFO] Upgraded to v3.15.0
 [WARN] Could not find TLS/SSL certificate
 [INFO] Run './migrator configure --tls self-signed-cert' to generate a self-signed TLS/SSL certificate
 ➜ ./migrator configure --tls self-signed-cert
@@ -195,18 +180,18 @@ You can get the Migrator Standard Edition [here](https://www.cybertec-postgresql
 6. Start the Migrator
 
 ```sh
-➜ tar xf cybertec_migrator-v3.13.0-standard.tar.gz
+➜ tar xf cybertec_migrator-v3.15.0-standard.tar.gz
 ➜ cd cybertec_migrator
 ➜ ./migrator configure
 [OK] Generated environment file
 [INFO] Run './migrator install' to complete setup
-➜ ./migrator install --archive ../cybertec_migrator-v3.13.0-standard.tar.gz
+➜ ./migrator install --archive ../cybertec_migrator-v3.15.0-standard.tar.gz
 [INFO] Extracting upgrade information
-Loaded image: cybertecpostgresql/cybertec_migrator-core:v3.13.0-standard
-Loaded image: cybertecpostgresql/cybertec_migrator-web_gui:v3.13.0-standard
+Loaded image: cybertecpostgresql/cybertec_migrator-core:v3.15.0-standard
+Loaded image: cybertecpostgresql/cybertec_migrator-web_gui:v3.15.0-standard
 Loaded image: postgres:13-alpine
 [INFO] Extracted upgrade information
-[INFO] Upgraded to v3.13.0-standard
+[INFO] Upgraded to v3.15.0-standard
 [WARN] Could not find TLS/SSL certificate
 [INFO] Run './migrator configure --tls self-signed-cert' to generate a self-signed TLS/SSL certificate
 ➜ ./migrator configure --tls self-signed-cert
