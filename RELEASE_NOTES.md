@@ -2,6 +2,12 @@
 
 The release notes of the last release may be found on [README.md](README.md#whats-new).
 
+### v3.15.1 - 2023-03-16
+
+#### Resolved Bugs
+
+- Resuming data stage after chunking a table would truncate other chunked tables
+
 ### v3.15.0 - 2023-02-21
 
 #### Features
