@@ -45,45 +45,64 @@ For detailed information see the list of [supported migration features for Oracl
 
 For older releases see [Release Notes](RELEASE_NOTES.md).
 
-### v3.15.1 - 2023-03-16
-
-#### Resolved Bugs
-
-- Resuming data stage after chunking a table would truncate other chunked tables
-
-### v3.15.0 - 2023-02-21
+### v3.16.0 - 2023-03-29
 
 #### Features
 
-- _Table chunking_: Speed up your data transfers through parallelization
+- _Migration overview_: View the assessed migration effort for each migration alongside performance improvements
 
   <p align="left">
-    <img src="./docs/pictures/release-notes/v3.15.0/table-chunking.png" />
+    <img src="./docs/pictures/release-notes/v3.16.0/migration-overview.png" />
   </p>
 
-  At present, chunking is limited to tables with
-  - a primary/unique **key** or **index**
-  - over exactly **one** column
-  - of a **numeric** type
-
-  Using a key/index, the migrator will create approximate chunks with it's `min` and `max` values.
-
-- _View triggers_: Show, edit and migrate view triggers
+- _Bulk migration creation_: Rapidly create a multitude of migrations
 
   <p align="left">
-    <img src="./docs/pictures/release-notes/v3.15.0/view-trigger.png" />
+    <img src="./docs/pictures/release-notes/v3.16.0/bulk-migration-creation.png" />
   </p>
 
-- _Improved migration creation_: Enhanced keyboard navigation and introduced `Go Back` button
+  Example JSON:
+  
+  ```json
+  {
+    "migrations": [
+      {
+        "name": "Migration",
+        "description": "An optional description",
+        "source": {
+          "connection_string": "oracle://localhost:1521/pdb1",
+          "username": "system",
+          "password": "oracle"
+        },
+        "target": {
+          "connection_string": "postgresql://localhost:5432/postgres",
+          "username": "postgres",
+          "password": "postgres"
+        },
+        "schema_selection": [
+          "TOOLS", "ONLINE_STORE"
+        ]
+      }
+    ]
+  }
+  ```
+
+- _Data transfer prioritization_: Customize the order in which tables are transferred
 
   <p align="left">
-    <img src="./docs/pictures/release-notes/v3.15.0/migration-creation-go-back.png" />
+    <img src="./docs/pictures/release-notes/v3.16.0/table-priority.png" />
   </p>
 
-- _Sidebar_: Show or hide excluded DBOs
+- _Custom SCN_: Force the migrator to use a fixed SCN for the data stage
+
   <p align="left">
-    <img src="./docs/pictures/release-notes/v3.15.0/hide-excluded-dbos.gif" />
+    <img src="./docs/pictures/release-notes/v3.16.0/custom-scn.png" />
   </p>
+
+#### Other
+
+- Removed upper limit when generating table chunks
+- Removed deprecated C data migrator (and the correlating `CORE_DATA_MIGRATOR_USE_RUST` environment variable).
 
 ## Getting Started
 
@@ -131,12 +150,12 @@ cat ~/password.txt | docker login --username <username> --password-stdin
 [OK] Generated environment file
 [INFO] Run './migrator install' to complete setup
 ➜ ./migrator install
-[INFO] Pulling v3.15.0
+[INFO] Pulling v3.16.0
 Pulling core_db ... done
 Pulling core    ... done
 Pulling web_gui ... done
-[OK] Pulled v3.15.0
-[INFO] Upgraded to v3.15.0
+[OK] Pulled v3.16.0
+[INFO] Upgraded to v3.16.0
 [WARN] Could not find TLS/SSL certificate
 [INFO] Run './migrator configure --tls self-signed-cert' to generate a self-signed TLS/SSL certificate
 ➜ ./migrator configure --tls self-signed-cert
@@ -186,18 +205,18 @@ You can get the Migrator Standard Edition [here](https://www.cybertec-postgresql
 6. Start the Migrator
 
 ```sh
-➜ tar xf cybertec_migrator-v3.15.0-standard.tar.gz
+➜ tar xf cybertec_migrator-v3.16.0-standard.tar.gz
 ➜ cd cybertec_migrator
 ➜ ./migrator configure
 [OK] Generated environment file
 [INFO] Run './migrator install' to complete setup
-➜ ./migrator install --archive ../cybertec_migrator-v3.15.0-standard.tar.gz
+➜ ./migrator install --archive ../cybertec_migrator-v3.16.0-standard.tar.gz
 [INFO] Extracting upgrade information
-Loaded image: cybertecpostgresql/cybertec_migrator-core:v3.15.0-standard
-Loaded image: cybertecpostgresql/cybertec_migrator-web_gui:v3.15.0-standard
+Loaded image: cybertecpostgresql/cybertec_migrator-core:v3.16.0-standard
+Loaded image: cybertecpostgresql/cybertec_migrator-web_gui:v3.16.0-standard
 Loaded image: postgres:13-alpine
 [INFO] Extracted upgrade information
-[INFO] Upgraded to v3.15.0-standard
+[INFO] Upgraded to v3.16.0-standard
 [WARN] Could not find TLS/SSL certificate
 [INFO] Run './migrator configure --tls self-signed-cert' to generate a self-signed TLS/SSL certificate
 ➜ ./migrator configure --tls self-signed-cert

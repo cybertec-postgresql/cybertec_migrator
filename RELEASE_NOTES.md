@@ -2,6 +2,65 @@
 
 The release notes of the last release may be found on [README.md](README.md#whats-new).
 
+### v3.16.0 - 2023-03-29
+
+#### Features
+
+- _Migration overview_: View the assessed migration effort for each migration alongside performance improvements
+
+  <p align="left">
+    <img src="./docs/pictures/release-notes/v3.16.0/migration-overview.png" />
+  </p>
+
+- _Bulk migration creation_: Rapidly create a multitude of migrations
+
+  <p align="left">
+    <img src="./docs/pictures/release-notes/v3.16.0/bulk-migration-creation.png" />
+  </p>
+
+  Example JSON:
+
+  ```json
+  {
+    "migrations": [
+      {
+        "name": "Migration",
+        "description": "An optional description",
+        "source": {
+          "connection_string": "oracle://localhost:1521/pdb1",
+          "username": "system",
+          "password": "oracle"
+        },
+        "target": {
+          "connection_string": "postgresql://localhost:5432/postgres",
+          "username": "postgres",
+          "password": "postgres"
+        },
+        "schema_selection": [
+          "TOOLS", "ONLINE_STORE"
+        ]
+      }
+    ]
+  }
+  ```
+
+- _Data transfer prioritization_: Customize the order in which tables are transferred
+
+  <p align="left">
+    <img src="./docs/pictures/release-notes/v3.16.0/table-priority.png" />
+  </p>
+
+- _Custom SCN_: Force the migrator to use a fixed SCN for the data stage
+
+  <p align="left">
+    <img src="./docs/pictures/release-notes/v3.16.0/custom-scn.png" />
+  </p>
+
+#### Other
+
+- Removed upper limit when generating table chunks
+- Removed deprecated C data migrator (and the correlating `CORE_DATA_MIGRATOR_USE_RUST` environment variable).
+
 ### v3.15.1 - 2023-03-16
 
 #### Resolved Bugs
