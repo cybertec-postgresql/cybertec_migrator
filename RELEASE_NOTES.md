@@ -2,6 +2,12 @@
 
 The release notes of the last release may be found on [README.md](README.md#whats-new).
 
+### v3.16.1 - 2023-05-02
+
+#### Resolved Bugs
+
+- Creating and cloning a migration may become unresponsive during schema selection
+
 ### v3.16.0 - 2023-03-29
 
 #### Features

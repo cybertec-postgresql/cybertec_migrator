@@ -45,6 +45,12 @@ For detailed information see the list of [supported migration features for Oracl
 
 For older releases see [Release Notes](RELEASE_NOTES.md).
 
+### v3.16.1 - 2023-05-02
+
+#### Resolved Bugs
+
+- Creating and cloning a migration may become unresponsive during schema selection
+
 ### v3.16.0 - 2023-03-29
 
 #### Features
