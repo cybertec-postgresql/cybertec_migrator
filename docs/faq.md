@@ -88,5 +88,5 @@ Recreating cybertec_migrator_web_gui_1 ... done
 
 #### How do I set environment variables
 
-The initial `./migrator configure` command will generate a `.env` file, the contents of which will be used in the `core` docker-compose service.
+The initial `./migrator configure` command will generate a `.env` file, the contents of which will be used in the `core` docker compose service.
 When editing, make sure not to alter the `# —— Internal ⚠ ——` section.

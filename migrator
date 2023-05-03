@@ -40,8 +40,8 @@ ERR_USAGE=3
 dependency_barrier() {
     command -v docker &>/dev/null || \
         error "$(highlight "docker") not installed"
-    command -v docker-compose &>/dev/null || \
-        error "$(highlight "docker-compose") not installed"
+    docker compose version &>/dev/null || \
+        error "$(highlight "docker compose") plugin not installed"
     command -v git &>/dev/null || \
         error "$(highlight "git") not installed"
 }
@@ -58,15 +58,15 @@ main() {
             exit ${ERR_USAGE}
         fi
         fix_https_default_port
-        docker-compose up -d
+        docker compose up -d
         print_url
         ;;
     down)
-        docker-compose down
+        docker compose down
         ;;
     logs)
-        if [ ! -z "$(docker-compose top)" ]; then
-            docker-compose logs --timestamps --tail='all'
+        if [ ! -z "$(docker compose top)" ]; then
+            docker compose logs --timestamps --tail='all'
         else
             error "Logs not avaliable while not running ($(highlight "'${0} up'") to start)"
         fi
@@ -217,10 +217,10 @@ installed_from_archive() {
 
 generate_self_signed_certificate() {
     info "Generating self-signed TLS/SSL certificate"
-    docker-compose run --no-deps web_gui \
+    docker compose run --no-deps web_gui \
         openssl req -x509 -nodes -newkey rsa:2048 \
         -keyout "${NGINX_SSL_CERTIFICATE_KEY}" -out "${NGINX_SSL_CERTIFICATE}"
-    docker-compose run --no-deps web_gui \
+    docker compose run --no-deps web_gui \
         chown $UID:$(id -g) "${NGINX_SSL_CERTIFICATE_KEY}" "${NGINX_SSL_CERTIFICATE}"
     ok "Generated self-signed TLS/SSL certificate"
     next_step_upgrade
@@ -282,7 +282,7 @@ upgrade() {
         fi
 
         info "Pulling images for $(highlight "${version}")"
-        if pull_error=$(VERSION="${version}" docker-compose pull 2>&1 > /dev/null); then
+        if pull_error=$(VERSION="${version}" docker compose pull 2>&1 > /dev/null); then
             ok "Pulled $(highlight "${version}")"
         elif installed_from_archive; then
             # || true to prevent exit with the error message so we can provide a suggestion
@@ -334,7 +334,7 @@ upgrade() {
         version="${2}"
 
         info "Pulling $(highlight "${version}")"
-        VERSION="${version}" docker-compose pull
+        VERSION="${version}" docker compose pull
         ok "Pulled $(highlight "${version}")"
     else
         error 'Unexpected usage'

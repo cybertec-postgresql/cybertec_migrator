@@ -45,6 +45,12 @@ For detailed information see the list of [supported migration features for Oracl
 
 For older releases see [Release Notes](RELEASE_NOTES.md).
 
+### v3.16.2 - 2023-05-03
+
+#### Changes
+
+- Drop Docker Compose V1 support (EOL June 2023) in favour of Compose V2
+
 ### v3.16.1 - 2023-05-02
 
 #### Resolved Bugs
@@ -117,7 +123,7 @@ For older releases see [Release Notes](RELEASE_NOTES.md).
 _CYBERTEC Migrator_ is distributed as a set of [container images](https://github.com/opencontainers/image-spec/blob/main/spec.md) that are managed with the help of [Docker Compose](https://docs.docker.com/compose/).
 
 - [`docker`](https://docs.docker.com/get-docker/)
-- [`docker-compose`](https://docs.docker.com/compose/install/) (`>= 1.27.0`)
+- [`docker compose`](https://docs.docker.com/compose/install/) (`>= 2.0.0`)
 - `git` (`>= 2.20.1`)
 - `bash` (`>= 4.0`)
 

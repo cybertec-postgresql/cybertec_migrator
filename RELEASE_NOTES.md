@@ -2,6 +2,12 @@
 
 The release notes of the last release may be found on [README.md](README.md#whats-new).
 
+### v3.16.2 - 2023-05-03
+
+#### Changes
+
+- Drop Docker Compose V1 support (EOL June 2023) in favour of Compose V2
+
 ### v3.16.1 - 2023-05-02
 
 #### Resolved Bugs
