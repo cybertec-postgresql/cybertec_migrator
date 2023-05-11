@@ -2,6 +2,12 @@
 
 The release notes of the last release may be found on [README.md](README.md#whats-new).
 
+### v3.16.3 - 2023-05-11
+
+#### Resolved Bugs
+
+- Creating a migration for Oracle 23 fails during the Analyze step
+
 ### v3.16.2 - 2023-05-03
 
 #### Changes
