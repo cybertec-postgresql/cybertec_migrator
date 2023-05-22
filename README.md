@@ -45,6 +45,13 @@ For detailed information see the list of [supported migration features for Oracl
 
 For older releases see [Release Notes](RELEASE_NOTES.md).
 
+### v3.16.4 - 2023-05-22
+
+#### Resolved Bugs
+
+- `Error during data transfer: Failed to connect to database: could not translate host name "@localhost" to address: Name or service not known` \
+  Data stage fails if the PostgreSQL username, password or database contain special characters such as `@`
+
 ### v3.16.3 - 2023-05-11
 
 #### Resolved Bugs
