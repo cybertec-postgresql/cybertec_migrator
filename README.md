@@ -45,89 +45,25 @@ For detailed information see the list of [supported migration features for Oracl
 
 For older releases see [Release Notes](RELEASE_NOTES.md).
 
-### v3.16.4 - 2023-05-22
+### v3.17.0 - 2023-06-19
 
-#### Resolved Bugs
-
-- `Error during data transfer: Failed to connect to database: could not translate host name "@localhost" to address: Name or service not known` \
-  Data stage fails if the PostgreSQL username, password or database contain special characters such as `@`
-
-### v3.16.3 - 2023-05-11
-
-#### Resolved Bugs
-
-- Creating a migration for Oracle 23 fails during the Analyze step
-
-### v3.16.2 - 2023-05-03
-
-#### Changes
-
-- Drop Docker Compose V1 support (EOL June 2023) in favour of Compose V2
-
-### v3.16.1 - 2023-05-02
-
-#### Resolved Bugs
-
-- Creating and cloning a migration may become unresponsive during schema selection
-
-### v3.16.0 - 2023-03-29
-
-#### Features
-
-- _Migration overview_: View the assessed migration effort for each migration alongside performance improvements
+- _Dependency Control_: Manually manage object dependencies to precisely control the order of database object creation
 
   <p align="left">
-    <img src="./docs/pictures/release-notes/v3.16.0/migration-overview.png" />
+    <img src="./docs/pictures/release-notes/v3.17.0/dbo-dependencies.png" />
   </p>
 
-- _Bulk migration creation_: Rapidly create a multitude of migrations
+- _Migration Creation_: Enhanced error handling now allows you to identify and address issues, at the same time allowing the creation process to continue
 
   <p align="left">
-    <img src="./docs/pictures/release-notes/v3.16.0/bulk-migration-creation.png" />
+    <img src="./docs/pictures/release-notes/v3.17.0/migration-creation-error.png" />
   </p>
 
-  Example JSON:
-  
-  ```json
-  {
-    "migrations": [
-      {
-        "name": "Migration",
-        "description": "An optional description",
-        "source": {
-          "connection_string": "oracle://localhost:1521/pdb1",
-          "username": "system",
-          "password": "oracle"
-        },
-        "target": {
-          "connection_string": "postgresql://localhost:5432/postgres",
-          "username": "postgres",
-          "password": "postgres"
-        },
-        "schema_selection": [
-          "TOOLS", "ONLINE_STORE"
-        ]
-      }
-    ]
-  }
-  ```
-
-- _Data transfer prioritization_: Customize the order in which tables are transferred
+- _Bulk Migration Creation_: Provide expected JSON schema and downloadable template
 
   <p align="left">
-    <img src="./docs/pictures/release-notes/v3.16.0/table-priority.png" />
+    <img src="./docs/pictures/release-notes/v3.17.0/bulk-migration-creation-schema.png" />
   </p>
-
-- _Custom SCN_: Force the migrator to use a fixed SCN for the data stage
-
-  <p align="left">
-    <img src="./docs/pictures/release-notes/v3.16.0/custom-scn.png" />
-  </p>
-
-#### Other
-
-- Removed upper limit when generating table chunks
-- Removed deprecated C data migrator (and the correlating `CORE_DATA_MIGRATOR_USE_RUST` environment variable).
 
 ## Getting Started
 
@@ -175,12 +111,12 @@ cat ~/password.txt | docker login --username <username> --password-stdin
 [OK] Generated environment file
 [INFO] Run './migrator install' to complete setup
 ➜ ./migrator install
-[INFO] Pulling v3.16.0
+[INFO] Pulling v3.17.0
 Pulling core_db ... done
 Pulling core    ... done
 Pulling web_gui ... done
-[OK] Pulled v3.16.0
-[INFO] Upgraded to v3.16.0
+[OK] Pulled v3.17.0
+[INFO] Upgraded to v3.17.0
 [WARN] Could not find TLS/SSL certificate
 [INFO] Run './migrator configure --tls self-signed-cert' to generate a self-signed TLS/SSL certificate
 ➜ ./migrator configure --tls self-signed-cert
@@ -230,18 +166,18 @@ You can get the Migrator Standard Edition [here](https://www.cybertec-postgresql
 6. Start the Migrator
 
 ```sh
-➜ tar xf cybertec_migrator-v3.16.0-standard.tar.gz
+➜ tar xf cybertec_migrator-v3.17.0-standard.tar.gz
 ➜ cd cybertec_migrator
 ➜ ./migrator configure
 [OK] Generated environment file
 [INFO] Run './migrator install' to complete setup
-➜ ./migrator install --archive ../cybertec_migrator-v3.16.0-standard.tar.gz
+➜ ./migrator install --archive ../cybertec_migrator-v3.17.0-standard.tar.gz
 [INFO] Extracting upgrade information
-Loaded image: cybertecpostgresql/cybertec_migrator-core:v3.16.0-standard
-Loaded image: cybertecpostgresql/cybertec_migrator-web_gui:v3.16.0-standard
+Loaded image: cybertecpostgresql/cybertec_migrator-core:v3.17.0-standard
+Loaded image: cybertecpostgresql/cybertec_migrator-web_gui:v3.17.0-standard
 Loaded image: postgres:13-alpine
 [INFO] Extracted upgrade information
-[INFO] Upgraded to v3.16.0-standard
+[INFO] Upgraded to v3.17.0-standard
 [WARN] Could not find TLS/SSL certificate
 [INFO] Run './migrator configure --tls self-signed-cert' to generate a self-signed TLS/SSL certificate
 ➜ ./migrator configure --tls self-signed-cert

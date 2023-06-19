@@ -2,6 +2,26 @@
 
 The release notes of the last release may be found on [README.md](README.md#whats-new).
 
+### v3.17.0 - 2023-06-19
+
+- _Dependency Control_: Manually manage object dependencies to precisely control the order of database object creation
+
+  <p align="left">
+    <img src="./docs/pictures/release-notes/v3.17.0/dbo-dependencies.png" />
+  </p>
+
+- _Migration Creation_: Enhanced error handling now allows you to identify and address issues, at the same time allowing the creation process to continue
+
+  <p align="left">
+    <img src="./docs/pictures/release-notes/v3.17.0/migration-creation-error.png" />
+  </p>
+
+- _Bulk Migration Creation_: Provide expected JSON schema and downloadable template
+
+  <p align="left">
+    <img src="./docs/pictures/release-notes/v3.17.0/bulk-migration-creation-schema.png" />
+  </p>
+
 ### v3.16.4 - 2023-05-22
 
 #### Resolved Bugs
