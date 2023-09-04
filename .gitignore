@@ -1,6 +1,7 @@
 .env
 .meta-inf
 .version
+.idea
 images/
 volumes/core/config/oracle/network/admin/*.ora
 volumes/core/config/oracle/network/admin/tnsnames.ora
