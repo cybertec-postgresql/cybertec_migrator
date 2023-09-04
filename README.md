@@ -16,7 +16,7 @@
 In addition to migrating your data professionally and securely with minimum effort, _CYBERTEC Migrator_ allows you to visually monitor and track the whole process at any time.
 
 Do you want to know if the Migrator can migrate your Oracle database to PostgreSQL?
-Then [get the Migrator Standard Edition](https://www.cybertec-postgresql.com/en/products/cybertec-migrator#form), a **free version** of the CYBERTEC Migrator, follow the offline instructions provided in [Getting Started](#offline-installation) section, and try it out.
+Then [get the Migrator Trial Edition](https://www.cybertec-postgresql.com/en/products/cybertec-migrator#form), a **free version** of the CYBERTEC Migrator, follow the offline instructions provided in [Getting Started](#offline-installation) section, and try it out.
 
 The blog article [Meet the CYBERTEC Migrator](https://www.cybertec-postgresql.com/en/meet-the-cybertec-migrator/) provides a good introduction on how to migrate Oracle's HR demo schema to PostgreSQL.
 Alternatively, you may want to watch the complementary [CYBERTEC Migrator YouTube playlist](https://www.youtube.com/playlist?list=PLt4uYyc72accw-Wi1Egn-IcOOSitK5Lcq).
@@ -45,25 +45,26 @@ For detailed information see the list of [supported migration features for Oracl
 
 For older releases see [Release Notes](RELEASE_NOTES.md).
 
-### v3.17.0 - 2023-06-19
+### v3.18.0 - 2023-09-04
 
-- _Dependency Control_: Manually manage object dependencies to precisely control the order of database object creation
-
-  <p align="left">
-    <img src="./docs/pictures/release-notes/v3.17.0/dbo-dependencies.png" />
-  </p>
-
-- _Migration Creation_: Enhanced error handling now allows you to identify and address issues, at the same time allowing the creation process to continue
+- _Automatic Code Transpilation_: Receive suggestions from the CYBERTEC Migrator when rewriting functions, procedures, triggers and views.
 
   <p align="left">
-    <img src="./docs/pictures/release-notes/v3.17.0/migration-creation-error.png" />
+    <img src="./docs/pictures/release-notes/v3.18.0/code-transpiler-warning.png" />
   </p>
-
-- _Bulk Migration Creation_: Provide expected JSON schema and downloadable template
-
   <p align="left">
-    <img src="./docs/pictures/release-notes/v3.17.0/bulk-migration-creation-schema.png" />
+    <img src="./docs/pictures/release-notes/v3.18.0/applied-code-transpiler.png" />
   </p>
+
+  For more information, see [Transpiler Features](./docs/transpiler-features.md).
+
+#### ⚠️ Breaking changes
+
+Beginning with this release, the Docker images include the edition in their name (e.g. `cybertecpostgresql/cybertec_migrator-professional-core`).
+Furthermore, the `Standard` edition has been renamed to `Trial`; its features have been adapted accordingly.
+
+**For users operating the installer:** Execute `./migrator configure --edition <edition>`. \
+**Users operating on Kubernetes or OpenShift:** Please modify your configurations accordingly.
 
 ## Getting Started
 
@@ -83,8 +84,8 @@ The _CYBERTEC Migrator_ images can be obtained via two channels
 - [Online installation via container registry](#online-installation)
 - From an [offline installation](#offline-installation) package for environments in which networking restrictions are imposed
 
-| 💡  | The Migrator Standard Edition is only available as an [offline installation package](https://www.cybertec-postgresql.com/en/products/cybertec-migrator#form) |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 💡  | The Migrator Trial Edition is only available as an [offline installation package](https://www.cybertec-postgresql.com/en/products/cybertec-migrator#form) |
+| --- |-----------------------------------------------------------------------------------------------------------------------------------------------------------|
 
 #### Online installation
 
@@ -99,7 +100,7 @@ cat ~/password.txt | docker login --username <username> --password-stdin
 
 1. Clone this git repository
 2. Change working directory to the previously cloned repository
-3. Generate default configuration
+3. Generate default configuration with the respective edition
 4. Download and load container images
 5. Generate a self-signed TLS/SSL certificate or install a certificate (see [FAQ](docs/faq.md) for more details)
 6. Start the Migrator
@@ -107,16 +108,16 @@ cat ~/password.txt | docker login --username <username> --password-stdin
 ```sh
 ➜ git clone https://github.com/cybertec-postgresql/cybertec_migrator
 ➜ cd cybertec_migrator
-➜ ./migrator configure
+➜ ./migrator configure professional
 [OK] Generated environment file
 [INFO] Run './migrator install' to complete setup
 ➜ ./migrator install
-[INFO] Pulling v3.17.0
+[INFO] Pulling images for professional:v3.18.0
 Pulling core_db ... done
 Pulling core    ... done
 Pulling web_gui ... done
-[OK] Pulled v3.17.0
-[INFO] Upgraded to v3.17.0
+[OK] Pulled professional:v3.18.0
+[INFO] Upgraded to professional:v3.18.0
 [WARN] Could not find TLS/SSL certificate
 [INFO] Run './migrator configure --tls self-signed-cert' to generate a self-signed TLS/SSL certificate
 ➜ ./migrator configure --tls self-signed-cert
@@ -155,29 +156,34 @@ Recreating cybertec_migrator_web_gui_1 ... done
 #### Offline installation
 
 Get your Migrator offline installation package.
-You can get the Migrator Standard Edition [here](https://www.cybertec-postgresql.com/en/products/cybertec-migrator#form) for free.  
- For the Professional or Enterprise Edition [get in touch with us](#contact) to request download credentials.
+You can get the Migrator Trial Edition [here](https://www.cybertec-postgresql.com/en/products/cybertec-migrator#form) for free.
+\
+For the Professional or Enterprise Edition [get in touch with us](#contact) to request download credentials.
 
 1. Extract the provided archive file
 2. Change working directory to newly created directory
-3. Generate default configuration
+3. Generate default configuration with the respective edition
 4. Import container images from archive
 5. Generate a self-signed TLS/SSL certificate or install a certificate (see [FAQ](docs/faq.md) for more details)
 6. Start the Migrator
 
 ```sh
-➜ tar xf cybertec_migrator-v3.17.0-standard.tar.gz
+➜ tar xf cybertec_migrator-trial-v3.18.0.tar.gz
 ➜ cd cybertec_migrator
-➜ ./migrator configure
+➜ ./migrator configure trial
 [OK] Generated environment file
-[INFO] Run './migrator install' to complete setup
-➜ ./migrator install --archive ../cybertec_migrator-v3.17.0-standard.tar.gz
-[INFO] Extracting upgrade information
-Loaded image: cybertecpostgresql/cybertec_migrator-core:v3.17.0-standard
-Loaded image: cybertecpostgresql/cybertec_migrator-web_gui:v3.17.0-standard
+[INFO] Run './migrator install --archive <archive_file>' to complete setup
+➜ ./migrator install --archive ../cybertec_migrator-trial-v3.18.0.tar.gz                                                                                                                                                                                                                                                            ✔  at 15:37:52  
+[INFO] Reading meta-information from archive file '../cybertec_migrator-trial-v3.18.0.tar.gz'
+[INFO] Upgrading to trial:v3.18.0
+[INFO] Extracting archive file '../cybertec_migrator-trial-v3.18.0.tar.gz'
+[INFO] Loading container images
+Loaded image: cybertecpostgresql/cybertec_migrator-trial-core:v3.18.0
+Loaded image: cybertecpostgresql/cybertec_migrator-trial-web_gui:v3.18.0
 Loaded image: postgres:13-alpine
-[INFO] Extracted upgrade information
-[INFO] Upgraded to v3.17.0-standard
+[INFO] Container images loaded
+[INFO] Archived container images
+[INFO] Upgraded to trial:v3.18.0
 [WARN] Could not find TLS/SSL certificate
 [INFO] Run './migrator configure --tls self-signed-cert' to generate a self-signed TLS/SSL certificate
 ➜ ./migrator configure --tls self-signed-cert
@@ -264,10 +270,15 @@ If you don't have access to an Oracle or PostgreSQL database to test the Migrato
   <br/>
 
   ```sh
-  ./migrator update --archive cybertec_migrator-vX.Y.Z.tar.gz
-  ./migrator upgrade --archive cybertec_migrator-vX.Y.Z.tar.gz
+  ./migrator update --archive cybertec_migrator-edition-vX.Y.Z.tar.gz
+  ./migrator upgrade --archive cybertec_migrator-edition-vX.Y.Z.tar.gz
   ./migrator up
   ```
+
+## Automatic Code Transpilation
+
+The CYBERTEC Migrator is able to parse, analyze and transpile certain PL/SQL constructs to PL/pgSQL automatically.
+For more information, see [Transpiler Features](./docs/transpiler-features.md).
 
 ## Getting Help
 

@@ -2,6 +2,27 @@
 
 The release notes of the last release may be found on [README.md](README.md#whats-new).
 
+### v3.18.0 - 2023-09-04
+
+- _Automatic Code Transpilation_: Receive suggestions from the CYBERTEC Migrator when rewriting functions, procedures, triggers and views.
+
+  <p align="left">
+    <img src="./docs/pictures/release-notes/v3.18.0/code-transpiler-warning.png" />
+  </p>
+  <p align="left">
+    <img src="./docs/pictures/release-notes/v3.18.0/applied-code-transpiler.png" />
+  </p>
+
+  For more information, see [Transpiler Features](./docs/transpiler-features.md).
+
+#### ⚠️ Breaking changes
+
+Beginning with this release, the Docker images include the edition in their name (e.g. `cybertecpostgresql/cybertec_migrator-professional-core`).
+Furthermore, the `Standard` edition has been renamed to `Trial`; its features have been adapted accordingly.
+
+**For users operating the installer:** Execute `./migrator configure --edition <edition>`. \
+**Users operating on Kubernetes or OpenShift:** Please modify your configurations accordingly.
+
 ### v3.17.0 - 2023-06-19
 
 - _Dependency Control_: Manually manage object dependencies to precisely control the order of database object creation
@@ -464,13 +485,13 @@ The release notes of the last release may be found on [README.md](README.md#what
 
 Do you want to know if the Migrator can migrate your Oracle database to PostgreSQL?
 
-Then [get the Migrator Standard Edition](https://www.cybertec-postgresql.com/en/products/cybertec-migrator#form), a **free version** (as in beer) of the CYBERTEC Migrator, follow the offline instructions provided in [Getting Started](#offline-installation) section, and try it out.
+Then [get the Migrator Trial Edition](https://www.cybertec-postgresql.com/en/products/cybertec-migrator#form), a **free version** (as in beer) of the CYBERTEC Migrator, follow the offline instructions provided in [Getting Started](#offline-installation) section, and try it out.
 
 #### Features
 
 - Improve migration job execution (which removed the Redis job queue as a dependency)
 - Provide help menu to reach out to CYBERTEC
-- Provide a [Migrator demo database environment](https://github.com/cybertec-postgresql/cybertec_migrator_demo) to facilitate a test-run of the Migrator Standard Edition
+- Provide a [Migrator demo database environment](https://github.com/cybertec-postgresql/cybertec_migrator_demo) to facilitate a test-run of the Migrator Trial Edition
 - Added [License](#license) information
 
 #### Resolved Bugs
