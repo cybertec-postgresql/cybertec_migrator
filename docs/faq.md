@@ -8,6 +8,7 @@ FAQ for the [CYBERTEC Migrator](../README.md).
   - [How do I configure TCPS for Oracle databases?](#how-do-i-configure-tcps-for-oracle-databases)
   - [How do I generate a self-signed certificate?](#how-do-i-generate-a-self-signed-certificate)
   - [How do I install an existing certificate?](#how-do-i-install-an-existing-certificate)
+  - [How do I set environment variables](#how-do-i-set-environment-variables)
 - [Troubleshooting](#troubleshooting)
   - [`ORA-12637: Packet receive failed` while verifying source credentials](#ora-12637-packet-receive-failed-while-verifying-source-credentials)
 

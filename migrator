@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # SPDX-License-Identifier: MIT
-# SPDX-FileCopyrightText: 2022 CYBERTEC PostgreSQL International GmbH <office@cybertec.at>
+# SPDX-FileCopyrightText: 2022-2023 CYBERTEC PostgreSQL International GmbH <office@cybertec.at>
 
 set -e
 
@@ -23,10 +23,12 @@ $(highlight "upgrade")                                Upgrade to newest version
 $(highlight "upgrade") --archive <archive-file>       Upgrade to version contained in archive
 $(highlight "upgrade") <version>                      Upgrade to specific version
 
-$(highlight "configure")                              Generate settings file
+$(highlight "configure <edition>")                    Generate settings file
+$(highlight "configure --edition <edition>")          Set CYBERTEC Migrator edition. Must be one of (assessment,trial,professional,enterprise)
 $(highlight "configure --tls self-signed-cert")       Generate self-signed TLS/SSL certificate
 $(highlight "configure --tls cert:<file-location>")   Install TLS/SSL certificate
 $(highlight "configure --tls key:<file-location>")    Install private key of TLS/SSL certificate
+
 $(highlight "help")                                   Display this help text
 EOF
 )"
@@ -140,15 +142,10 @@ env_file_exists() {
 
 configure() {
     case "${2}" in
-        "")
-            if generate_environment_file; then
-                next_command="install"
-                installed_from_archive && next_command="${next_command} --archive <archive_file>"
-                info "Run $(highlight "'${0} ${next_command}'") to complete setup"
-            else
-                warn 'Environment file already exists'
-                info "Please modify environment file $(highlight "'${ENV_FILE}'") manually"
-            fi
+        --edition)
+            edition=$(echo "${3}" | tr '[:upper:]' '[:lower:]')
+            verify_edition "$edition"
+            set_env_file_variable "EDITION" "$edition"
             ;;
         --tls)
             local tls_sub_command=$(echo "${3}" | cut --delimiter=":" --fields=1)
@@ -175,8 +172,21 @@ configure() {
                     ;;
             esac
             ;;
+        "")
+            error "Missing argument $(highlight "<edition>")"
+            ;;
         *)
-            error "Unknown argument '${2}'"
+            edition=$(echo "${2}" | tr '[:upper:]' '[:lower:]')
+            verify_edition "$edition"
+            if generate_environment_file; then
+                ./"${0}" configure --edition "$edition"
+                next_command="install"
+                installed_from_archive && next_command="${next_command} --archive <archive_file>"
+                info "Run $(highlight "'${0} ${next_command}'") to complete setup"
+            else
+                warn 'Environment file already exists'
+                info "Please modify environment file $(highlight "'${ENV_FILE}'") manually"
+            fi
             ;;
     esac
 }
@@ -193,6 +203,7 @@ generate_environment_file() {
 # —— User configurable ——
 EXTERNAL_HTTP_PORT=${HTTPS_PORT_DEFAULT}
 VERSION=${version}
+EDITION=trial
 
 # —— Internal ⚠ ——
 CORE_DB_PASSWORD="${password}"
@@ -202,6 +213,14 @@ EOF
     ok 'Generated environment file'
 }
 
+set_env_file_variable() {
+    if grep "^$1=.*$" "${ENV_FILE}" &>/dev/null; then
+        sed -i -e "s/^$1=.*$/$1=$2/" "${ENV_FILE}"
+    else
+        sed -i "1{G;s/$/$1=$2/}" "${ENV_FILE}"
+    fi
+}
+
 generate_random() {
     local PASSWORD_CHARSET='A-Za-z0-9!&()*+,-./:;<=>?@{|}~'
     local PASSWORD_LENGTH=32
@@ -209,7 +228,7 @@ generate_random() {
 }
 
 # TODO Switch to .meta-inf file which contains more information. For now we
-# remain on the .version file for backwards compatiblity.
+# remain on the .version file for backwards compatibility.
 installed_from_archive() {
     [ -f "${VERSION_FILE}" ] && return
     false
@@ -235,9 +254,7 @@ update() {
         new_version=$(most_recent_tag)
         info "Recommended version: "$(highlight "${new_version}")""
 
-        if env_file_exists && [ ! "${new_version}" = $(print_env 'VERSION') ]; then
-            info "Run $(highlight "'${0} upgrade'") to upgrade to version ${new_version}"
-        fi
+        info "Run $(highlight "'${0} upgrade'") to upgrade to version ${new_version}"
     # Archive provided → Use `.git` folder contained within archive as origin
     elif [ "${2}" = '--archive' ] && [ -f "${3}" ]; then
         info "Updating release information from archive '${3}'"
@@ -251,9 +268,7 @@ update() {
         git fetch --quiet --tags "${temp_dir}/.git" 1>/dev/null
 
         info "Updated release information"
-        if env_file_exists && [ ! "${archive_version}" = $(print_env 'VERSION') ]; then
-            info "Run $(highlight "'${0} upgrade --archive ${3}'") to upgrade to version ${archive_version}"
-        fi
+        info "Run $(highlight "'${0} upgrade --archive ${3}'") to upgrade to version ${archive_version}"
     else
         error "Invalid path $(highlight "${3}")"
     fi
@@ -276,14 +291,17 @@ upgrade() {
     # No parameters provided → Fetch most recent images from online registry
     if [ -z "${2}" ]; then
         version="$(most_recent_tag)"
+        edition=$(print_env 'EDITION')
 
         if [ -z "${version}" ]; then
             error "No versions available (run $(highlight "'${0} update'") to fetch versions)"
         fi
 
-        info "Pulling images for $(highlight "${version}")"
-        if pull_error=$(VERSION="${version}" docker compose pull 2>&1 > /dev/null); then
-            ok "Pulled $(highlight "${version}")"
+        edition_barrier
+
+        info "Pulling images for $(highlight "${edition}:${version}")"
+        if pull_error=$(VERSION="${version}" EDITION="${edition}" docker compose pull 2>&1 > /dev/null); then
+            ok "Pulled $(highlight "${edition}:${version}")"
         elif installed_from_archive; then
             # || true to prevent exit with the error message so we can provide a suggestion
             error "Failed to pull container images\n${pull_error}\n" || true
@@ -295,15 +313,17 @@ upgrade() {
     # Archive provided → Import images from archive
     elif [ "${2}" = '--archive' ] && [ -f "${3}" ]; then
         # TODO move reading version incl. version check to a function
-        info "Reading version information from archive file '${3}'"
+        info "Reading meta-information from archive file '${3}'"
         version=$(tar -xf "${3}" "${ARCHIVE_DIR}/${VERSION_FILE}" --to-stdout 2>&1) || \
             error "Failed to extract archive file\n$version"
+        edition=$(tar -xf "${3}" "${ARCHIVE_DIR}/${EDITION_FILE}" --to-stdout 2>&1) || \
+                    error "Failed to extract archive file\n$edition"
 
         version_barrier "${version}" || (
             info "Run $(highlight "'${0} update --archive ${3}'") before attempting upgrade"
             exit 1
         )
-        info "Upgrading to version $version"
+        info "Upgrading to $edition:$version"
 
         info "Extracting archive file '${3}'"
         temp_dir="$(mktemp -t "${TEMP_TEMPLATE}" -d)"
@@ -327,23 +347,29 @@ upgrade() {
         mv ${archive_image_path}/*.tar "${IMAGE_PATH}"
         info 'Archived container images'
 
+        # Save the edition in the .env file.
+        set_env_file_variable EDITION "${edition}"
+
     # Explicit version provided but no archive
     elif [ ! -z "${2}" ] && [ -z "${3}" ]; then
         version_barrier "${2}"
+        edition_barrier
 
         version="${2}"
+        edition=$(print_env 'EDITION')
 
-        info "Pulling $(highlight "${version}")"
-        VERSION="${version}" docker compose pull
-        ok "Pulled $(highlight "${version}")"
+        info "Pulling $(highlight "${edition}:${version}")"
+        VERSION="${version}" EDITION="${edition}" docker compose pull
+        ok "Pulled $(highlight "${edition}:${version}")"
     else
         error 'Unexpected usage'
     fi
 
     git checkout --quiet "${version}"
     replace_in_place "s/^VERSION=.*/VERSION=${version}/" "${ENV_FILE}"
+    edition=$(print_env 'EDITION')
 
-    info "Upgraded to $(highlight "${version}")"
+    info "Upgraded to $(highlight "${edition}:${version}")"
 
     if is_tls_cert_configured; then
         next_step_upgrade
@@ -356,6 +382,23 @@ upgrade() {
 version_barrier() {
     if ! git tag | grep -q "^${1}$"; then
         error "Unknown version $(highlight "${1}")"
+    fi
+}
+
+edition_barrier() {
+    edition=$(print_env 'EDITION')
+    if [ -z "${edition}" ]; then
+        error "No edition specified. Run $(highlight "'${0} configure --edition <edition>'") to continue"
+    fi
+}
+
+verify_edition() {
+  edition="${1}"
+    if [ "$edition" != "assessment" ] \
+    && [ "$edition" != "trial" ] \
+    && [ "$edition" != "professional" ] \
+    && [ "$edition" != "enterprise" ]; then
+        error "Edition $(highlight "'$edition'") is invalid. Possible values: assessment,trial,professional,enterprise"
     fi
 }
 
@@ -424,7 +467,8 @@ ENV_FILE='./.env'
 # Directory where we save container images provided from offline installation packages
 IMAGE_PATH='images'
 
-# This file exists only if the directory was provided by on offline installation package
+# These files exist only if the directory was provided by on offline installation package
+EDITION_FILE='.edition'
 VERSION_FILE='.version'
 
 # TLS/SSL files location defined in the nginx.conf (in the container)

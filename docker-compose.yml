@@ -1,12 +1,12 @@
 # SPDX-License-Identifier: MIT
-# SPDX-FileCopyrightText: 2022 CYBERTEC PostgreSQL International GmbH <office@cybertec.at>
+# SPDX-FileCopyrightText: 2022-2023 CYBERTEC PostgreSQL International GmbH <office@cybertec.at>
 
 version: "3"
 
 services:
   # Single page application served via nginx web server
   web_gui:
-    image: docker.io/cybertecpostgresql/cybertec_migrator-web_gui:${VERSION}
+    image: docker.io/cybertecpostgresql/cybertec_migrator-${EDITION}-web_gui:${VERSION}
     depends_on:
       core:
         condition: service_started
@@ -20,7 +20,7 @@ services:
 
   # Migrator core exposed as REST service API
   core:
-    image: docker.io/cybertecpostgresql/cybertec_migrator-core:${VERSION}
+    image: docker.io/cybertecpostgresql/cybertec_migrator-${EDITION}-core:${VERSION}
     env_file: .env
     environment:
       # —— Internal database ——
