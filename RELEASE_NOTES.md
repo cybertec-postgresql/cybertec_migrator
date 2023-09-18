@@ -2,6 +2,13 @@
 
 The release notes of the last release may be found on [README.md](README.md#whats-new).
 
+### v3.18.1 - 2023-09-18
+
+#### Resolved Bugs
+
+- `unable to connect to internal database: Error: Entity metadata for Schema#packages was not found. Check if you specified a correct entity object and if it's connected in the connection options.` \
+  Fresh installation fails during the database setup.
+
 ### v3.18.0 - 2023-09-04
 
 - _Automatic Code Transpilation_: Receive suggestions from the CYBERTEC Migrator when rewriting functions, procedures, triggers and views.
