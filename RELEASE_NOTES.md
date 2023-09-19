@@ -2,6 +2,10 @@
 
 The release notes of the last release may be found on [README.md](README.md#whats-new).
 
+### v3.18.2 - 2023-09-19
+
+- Package `ping`, `telnet` and `traceroute` with the `core` image for troubleshooting purposes
+
 ### v3.18.1 - 2023-09-18
 
 #### Resolved Bugs
