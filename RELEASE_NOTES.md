@@ -2,6 +2,10 @@
 
 The release notes of the last release may be found on [README.md](README.md#whats-new).
 
+### v3.18.3 - 2023-09-20
+
+- Package `curl` and `psql` with the `core` image for troubleshooting purposes
+
 ### v3.18.2 - 2023-09-19
 
 - Package `ping`, `telnet` and `traceroute` with the `core` image for troubleshooting purposes
