@@ -18,6 +18,9 @@ In addition to migrating your data professionally and securely with minimum effo
 Do you want to know if the Migrator can migrate your Oracle database to PostgreSQL?
 Then [get the Migrator Trial Edition](https://www.cybertec-postgresql.com/en/products/cybertec-migrator#form), a **free version** of the CYBERTEC Migrator, follow the offline instructions provided in [Getting Started](#offline-installation) section, and try it out.
 
+| 💡 | The Trial Edition of the CYBERTEC Migrator is exclusively intended for private or testing purposes, unless explicit authorization is obtained. |
+|----|------------------------------------------------------------------------------------------------------------------------------------------------|
+
 The blog article [Meet the CYBERTEC Migrator](https://www.cybertec-postgresql.com/en/meet-the-cybertec-migrator/) provides a good introduction on how to migrate Oracle's HR demo schema to PostgreSQL.
 Alternatively, you may want to watch the complementary [CYBERTEC Migrator YouTube playlist](https://www.youtube.com/playlist?list=PLt4uYyc72accw-Wi1Egn-IcOOSitK5Lcq).
 
@@ -44,6 +47,10 @@ For detailed information see the list of [supported migration features for Oracl
 ## What's New
 
 For older releases see [Release Notes](RELEASE_NOTES.md).
+
+### v3.18.4 - 2023-09-27
+
+- Upon opening the Trial edition, the user must acknowledge the usage restrictions prior to using the application.
 
 ### v3.18.3 - 2023-09-20
 
@@ -99,8 +106,8 @@ The _CYBERTEC Migrator_ images can be obtained via two channels
 - [Online installation via container registry](#online-installation)
 - From an [offline installation](#offline-installation) package for environments in which networking restrictions are imposed
 
-| 💡  | The Migrator Trial Edition is only available as an [offline installation package](https://www.cybertec-postgresql.com/en/products/cybertec-migrator#form) |
-| --- |-----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 💡 | The Migrator Trial Edition is only available as an [offline installation package](https://www.cybertec-postgresql.com/en/products/cybertec-migrator#form). <br/><br/> It is exclusively intended for private or testing purposes, unless explicit authorization is obtained. |
+|----|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
 #### Online installation
 

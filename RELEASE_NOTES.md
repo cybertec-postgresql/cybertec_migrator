@@ -2,6 +2,10 @@
 
 The release notes of the last release may be found on [README.md](README.md#whats-new).
 
+### v3.18.4 - 2023-09-27
+
+- Upon opening the Trial edition, the user must acknowledge the usage restrictions prior to using the application.
+
 ### v3.18.3 - 2023-09-20
 
 - Package `curl` and `psql` with the `core` image for troubleshooting purposes
