@@ -48,45 +48,9 @@ For detailed information see the list of [supported migration features for Oracl
 
 For older releases see [Release Notes](RELEASE_NOTES.md).
 
-### v3.18.4 - 2023-09-27
+### v3.19.0-rc.1 - 2023-12-12
 
-- Upon opening the Trial edition, the user must acknowledge the usage restrictions prior to using the application.
-
-### v3.18.3 - 2023-09-20
-
-- Package `curl` and `psql` with the `core` image for troubleshooting purposes
-
-### v3.18.2 - 2023-09-19
-
-- Package `ping`, `telnet` and `traceroute` with the `core` image for troubleshooting purposes
-
-### v3.18.1 - 2023-09-18
-
-#### Resolved Bugs
-
-- `unable to connect to internal database: Error: Entity metadata for Schema#packages was not found. Check if you specified a correct entity object and if it's connected in the connection options.` \
-  Fresh installation fails during the database setup.
-
-### v3.18.0 - 2023-09-04
-
-- _Automatic Code Transpilation_: Receive suggestions from the CYBERTEC Migrator when rewriting functions, procedures, triggers and views.
-
-  <p align="left">
-    <img src="./docs/pictures/release-notes/v3.18.0/code-transpiler-warning.png" />
-  </p>
-  <p align="left">
-    <img src="./docs/pictures/release-notes/v3.18.0/applied-code-transpiler.png" />
-  </p>
-
-  For more information, see [Transpiler Features](./docs/transpiler-features.md).
-
-#### ⚠️ Breaking changes
-
-Beginning with this release, the Docker images include the edition in their name (e.g. `cybertecpostgresql/cybertec_migrator-professional-core`).
-Furthermore, the `Standard` edition has been renamed to `Trial`; its features have been adapted accordingly.
-
-**For users operating the installer:** Execute `./migrator configure --edition <edition>`. \
-**Users operating on Kubernetes or OpenShift:** Please modify your configurations accordingly.
+Release candidate.
 
 ## Getting Started
 
