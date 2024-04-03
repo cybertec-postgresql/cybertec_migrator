@@ -1,4 +1,4 @@
-# Values File for the CYBERTEC-Migrator Helm-Chart
+# Values file for the CYBERTEC-Migrator Helm-Chart
 
 image:
   repository: docker.io
@@ -10,7 +10,7 @@ imagePullSecrets:
 
 migrator:
   ui:
-    # Typical NodePort or LoadBalancer | is used for the k8s-service-type
+    # Typical NodePort or LoadBalancer | is used for the k8s service type
     serviceType: NodePort
   db:
     init:
