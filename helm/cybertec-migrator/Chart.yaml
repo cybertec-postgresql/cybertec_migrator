@@ -1,0 +1,8 @@
+apiVersion: v2
+name: cybertec-migrator
+description: A Helm chart for Kubernetes to install the sophisticated cybertec-migrator
+
+type: application
+icon: "https://www.cybertec-postgresql.com/wp-content/uploads/2018/03/Migrator_neu-1024x270.png"
+version: 1.0.1
+appVersion: "3.18.4"
