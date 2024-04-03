@@ -1,6 +1,4 @@
-# Default values for cybertec-migrator.
-# This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
+# Values File for the CYBERTEC-Migrator Helm-Chart
 
 image:
   repository: docker.io
@@ -12,6 +10,7 @@ imagePullSecrets:
 
 migrator:
   ui:
+    # Typical NodePort or LoadBalancer | is used for the k8s-service-type
     serviceType: NodePort
   db:
     init:
