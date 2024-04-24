@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: cybertec-migrator-core-db-pvc
+  namespace: {{ .Release.Namespace }}
+spec:
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: {{ .Values.migrator.storage.core_db.size }}
+  storageClassName: {{ .Values.migrator.storage.core_db.storageClass }}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: cybertec-migrator-core-log-pvc
+  namespace: {{ .Release.Namespace }}
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: {{ .Values.migrator.storage.core_log.size }}
+  storageClassName: {{ .Values.migrator.storage.core_log.storageClass }}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: cybertec-migrator-core-config-pvc
+  namespace: {{ .Release.Namespace }}
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: {{ .Values.migrator.storage.core_config.size }}
+  storageClassName: {{ .Values.migrator.storage.core_config.storageClass }}

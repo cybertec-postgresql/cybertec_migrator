@@ -1,0 +1,258 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: initdb.sh
+  namespace: {{ .Release.Namespace }}
+data:
+  initdb.sh: |
+    #!/bin/bash
+
+    set -e
+
+    DATABASE="migrator"
+    SCHEMA="cybertec_migrator"
+
+    psql -U postgres -v ON_ERROR_STOP=1 <<-EOF
+    CREATE DATABASE ${DATABASE};
+    EOF
+
+    psql -U postgres -v ON_ERROR_STOP=1 --dbname "${DATABASE}" <<-EOF
+    CREATE SCHEMA ${SCHEMA};
+    EOF
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-cert
+  namespace:  {{ .Release.Namespace }}
+data:
+  nginx.cert: |
+    -----BEGIN CERTIFICATE-----
+    MIIDazCCAlOgAwIBAgIUQH0gHfDzbja1DEZa9y5jRpsh2jowDQYJKoZIhvcNAQEL
+    BQAwRTELMAkGA1UEBhMCQVUxEzARBgNVBAgMClNvbWUtU3RhdGUxITAfBgNVBAoM
+    GEludGVybmV0IFdpZGdpdHMgUHR5IEx0ZDAeFw0yMzAyMDYxNDA1MjhaFw0yMzAz
+    MDgxNDA1MjhaMEUxCzAJBgNVBAYTAkFVMRMwEQYDVQQIDApTb21lLVN0YXRlMSEw
+    HwYDVQQKDBhJbnRlcm5ldCBXaWRnaXRzIFB0eSBMdGQwggEiMA0GCSqGSIb3DQEB
+    AQUAA4IBDwAwggEKAoIBAQCgvdrNeOgt2TJgYanm5elBy3fYfTqayAIETo6AWajQ
+    B8botE8HMGzsXf3qHLUkUOPtrSxj2Hr4+NDL7dpCBHtVKbSWP37w9Sf6eD89Yv5T
+    ZcjQr2Oes07ifx1Ow494DuIshlwgNxtTpCHgpQHgMYr/NhGJyJeXuEaEbsVvez9i
+    Byhg5a94P7VAr5AVID+6j0KmixHCOSDXSq+X417YWfrGu1ahZDelaAqe8Nl2HKFW
+    YKs056/OKL7q5oFu2S8bx00WOwHwDK5K6+7BLu8w98PLXktjZzQxFZw4uEIBy/Gw
+    /gIamPM0dGeVqgVEW4j8KenKmMhlugs8q9LURiUKYgZvAgMBAAGjUzBRMB0GA1Ud
+    DgQWBBQQT00HcRQHftlZi8EuFkqwCTYxoTAfBgNVHSMEGDAWgBQQT00HcRQHftlZ
+    i8EuFkqwCTYxoTAPBgNVHRMBAf8EBTADAQH/MA0GCSqGSIb3DQEBCwUAA4IBAQCH
+    V7noTAsRb3fOqwiKS2eGu93EWkrLopD82h8ugoibKV3R/Ck57JETmAtypQiVtBrc
+    zSBAdSemMHfWXFK88OgSFVBMZF2XFb5TMxyKALvicNSWYosRhRhq/fTCQNlK351H
+    Q9xiPwpJLlpG3G4XApqLiUifWYWQsAntAKG+ts4DsLhfzrjcOziQpPFvcjfrQkwO
+    mZFibkVOkjgBUqArt1J/mZNUXuSlU6rzX91HmRHCMS1Eg1jA37XiBhmvrS55mq3/
+    BwEGI1cZPl7c79ngl0WXiwDnvriDKOC5tSgWho5WcUQvC0kFFeWJZB2ZdmhwlneI
+    cMxgJGsMdizznEzPSAeD
+    -----END CERTIFICATE-----
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-cert-key
+  namespace:  {{ .Release.Namespace }}
+data:
+  nginx.key: |
+    -----BEGIN PRIVATE KEY-----
+    MIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQCgvdrNeOgt2TJg
+    Yanm5elBy3fYfTqayAIETo6AWajQB8botE8HMGzsXf3qHLUkUOPtrSxj2Hr4+NDL
+    7dpCBHtVKbSWP37w9Sf6eD89Yv5TZcjQr2Oes07ifx1Ow494DuIshlwgNxtTpCHg
+    pQHgMYr/NhGJyJeXuEaEbsVvez9iByhg5a94P7VAr5AVID+6j0KmixHCOSDXSq+X
+    417YWfrGu1ahZDelaAqe8Nl2HKFWYKs056/OKL7q5oFu2S8bx00WOwHwDK5K6+7B
+    Lu8w98PLXktjZzQxFZw4uEIBy/Gw/gIamPM0dGeVqgVEW4j8KenKmMhlugs8q9LU
+    RiUKYgZvAgMBAAECggEBAJMazQhoE0wKTvEnz/6xABSnqellSeHnEvlwDzflVfn0
+    dBP5F64Dolt69WpwlVJD+SRF7K7/qiL6StOmvKzYPyrEPTGXsIvCQLEXpQB//TLD
+    ntFlAa12ecYNAPxZOo5sSI7o85zD8e1M83gMargLfyJrEAfhnOJL0bVXTrbkuy/w
+    263vlAN7+oaYW3v6UCMX0TmpNbsDfbi6xRp//SgKt2lqAVgKj3yqitoTAbSV7WmE
+    P2Yc+Zhr6yBBQ1fSScm+W6Z6eCOMNt/ujBguvWv5zRNNEsmQDmeM8H0cxo6SZ+xy
+    v53PD6Kmls+kWXU7KSWq1eHdqxAm4ZMmhdwmPUHSI+ECgYEAzaI8Q9sdWNXuUByI
+    l+rLmW0nwwhqr44Czn/ZZUHfB3FcB0Lnap1NDApot9tRISRjqwlG2L46LbirK/TY
+    Ue/mpzsm3a4zVTGG5I+yVbwfZiL/XEm7KabuZcBXHvqB4DoYB+ly7JNCrK+xovR1
+    JGNV4hyG7kl+o4fTvWy6wGnpY/8CgYEAyBzEq1+aNwQEb9jhOTa+70YFLmWP3baH
+    uJLhXQ97oargn6JjWMVKECZxvZ39OxOleI+FpMnZM7Tzfuz679ueuOW6QudQAmNU
+    E9UQ3FITGyPZEjM5BxI6vo5qYiWLEFaWtMQCaMa4YEBa6tku2rS3p/+qHqbF2lpX
+    w/ztF8EjnZECgYAeH/NWOYZuGkEkaVm1b8dN/cjCcLw4ZcSRffdaNzE2ROwngCyo
+    2MyNxASdUrrq8QrM5roDTLL3OcOR1/fM4SlYPHkwJrIMfAn39/k3SC0NaHkiiwap
+    TnREYc4hkq9uKvSUTCXy9IvjAoYyij+TCh5t1qIJzKiJyn9Bk+k0ARAY/wKBgQCx
+    apATQFeBn1Yvs6E7EIaHrRS65eB/OW1q/w4/a5K46r7ryRU7hu77EpqU+pWg4vI5
+    yUU7rJmddjjLt19jeNtoIoTY/Cu7ckUAsE6ah0nZLhcuQ6uz0T2z5J/9FDwO6DYF
+    XiKkskqVS3lP7e3UiZSqpck2E7YmuSJG6N9ryBjDgQKBgQCVQ8Qy/wSuZwW8NA7g
+    IjWVfggvMFiWqbZjm+qTEawkwsC2fq3nNeJ0LLbTE7dS2qkUuyLyUpEniuURazLV
+    NN7DBAFngAkKulW1kcA7dmh1fNdC+2ZmIZCrMqzfQBq3TBnNiacQg/QrYruoSoWh
+    k+wUxPlG4BOde86KybPx+4iXQw==
+    -----END PRIVATE KEY-----
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-config
+  namespace: {{ .Release.Namespace }}
+data:
+  nginx.conf: |
+    error_log stderr;
+    pid /tmp/nginx.pid;
+
+    events {
+       worker_connections 512;
+    }
+
+    http {
+        client_body_temp_path /tmp/client_temp;
+        proxy_temp_path /tmp/proxy_temp;
+        fastcgi_temp_path /tmp/fastcgi_temp;
+        uwsgi_temp_path /tmp/uwsgi_temp;
+        scgi_temp_path /tmp/scgi_temp;
+        access_log off;
+
+        upstream api {
+           server localhost:3000;
+        }
+
+      #  server {
+      #     listen 8080 default_server;
+      #     return 301 https://$host$request_uri;
+      #   }
+        server {
+           listen 8080 default_server ssl;
+           #listen 8080 default_server;
+
+           root /usr/share/nginx/html/;
+           index index.html;
+
+           client_max_body_size 50m;
+
+           ssl_certificate     /etc/ssl/nginx.crt;
+           ssl_certificate_key /etc/ssl/nginx.key;
+           ssl_protocols       TLSv1.1 TLSv1.2;
+
+           location / {
+              try_files $uri /index.html;
+              add_header Cache-Control no-store always;
+              autoindex off;
+              include /etc/nginx/mime.types;
+           }
+
+           location /api/ {
+              proxy_pass http://api/;
+              proxy_redirect / /api/;
+              absolute_redirect off;
+              proxy_set_header Host $host;
+              proxy_set_header X-Real-IP $remote_addr;
+              proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+              proxy_set_header X-Forwarded-Host $server_name;
+           }
+        }
+    }
+  mime.types: |
+    types {
+       text/html                                        html htm shtml;
+       text/css                                         css;
+       text/xml                                         xml;
+       image/gif                                        gif;
+       image/jpeg                                       jpeg jpg;
+       application/javascript                           js;
+       application/atom+xml                             atom;
+       application/rss+xml                              rss;
+
+       text/mathml                                      mml;
+       text/plain                                       txt;
+       text/vnd.sun.j2me.app-descriptor                 jad;
+       text/vnd.wap.wml                                 wml;
+       text/x-component                                 htc;
+
+       image/avif                                       avif;
+       image/png                                        png;
+       image/svg+xml                                    svg svgz;
+       image/tiff                                       tif tiff;
+       image/vnd.wap.wbmp                               wbmp;
+       image/webp                                       webp;
+       image/x-icon                                     ico;
+       image/x-jng                                      jng;
+       image/x-ms-bmp                                   bmp;
+
+       font/woff                                        woff;
+       font/woff2                                       woff2;
+
+       application/java-archive                         jar war ear;
+       application/json                                 json;
+       application/mac-binhex40                         hqx;
+       application/msword                               doc;
+       application/pdf                                  pdf;
+       application/postscript                           ps eps ai;
+       application/rtf                                  rtf;
+       application/vnd.apple.mpegurl                    m3u8;
+       application/vnd.google-earth.kml+xml             kml;
+       application/vnd.google-earth.kmz                 kmz;
+       application/vnd.ms-excel                         xls;
+       application/vnd.ms-fontobject                    eot;
+       application/vnd.ms-powerpoint                    ppt;
+       application/vnd.oasis.opendocument.graphics      odg;
+       application/vnd.oasis.opendocument.presentation  odp;
+       application/vnd.oasis.opendocument.spreadsheet   ods;
+       application/vnd.oasis.opendocument.text          odt;
+       application/vnd.openxmlformats-officedocument.presentationml.presentation       pptx;
+       application/vnd.openxmlformats-officedocument.spreadsheetml.sheet       xlsx;
+       application/vnd.openxmlformats-officedocument.wordprocessingml.document    docx;
+       application/vnd.wap.wmlc                         wmlc;
+       application/wasm                                 wasm;
+       application/x-7z-compressed                      7z;
+       application/x-cocoa                              cco;
+       application/x-java-archive-diff                  jardiff;
+       application/x-java-jnlp-file                     jnlp;
+       application/x-makeself                           run;
+       application/x-perl                               pl pm;
+       application/x-pilot                              prc pdb;
+       application/x-rar-compressed                     rar;
+       application/x-redhat-package-manager             rpm;
+       application/x-sea                                sea;
+       application/x-shockwave-flash                    swf;
+       application/x-stuffit                            sit;
+       application/x-tcl                                tcl tk;
+       application/x-x509-ca-cert                       der pem crt;
+       application/x-xpinstall                          xpi;
+       application/xhtml+xml                            xhtml;
+       application/xspf+xml                             xspf;
+       application/zip                                  zip;
+
+       application/octet-stream                         bin exe dll;
+       application/octet-stream                         deb;
+       application/octet-stream                         dmg;
+       application/octet-stream                         iso img;
+       application/octet-stream                         msi msp msm;
+
+       audio/midi                                       mid midi kar;
+       audio/mpeg                                       mp3;
+       audio/ogg                                        ogg;
+       audio/x-m4a                                      m4a;
+       audio/x-realaudio                                ra;
+
+       video/3gpp                                       3gpp 3gp;
+       video/mp2t                                       ts;
+       video/mp4                                        mp4;
+       video/mpeg                                       mpeg mpg;
+       video/quicktime                                  mov;
+       video/webm                                       webm;
+       video/x-flv                                      flv;
+       video/x-m4v                                      m4v;
+       video/x-mng                                      mng;
+       video/x-ms-asf                                   asx asf;
+       video/x-ms-wmv                                   wmv;
+       video/x-msvideo                                  avi;
+    }
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: db-coninfo
+  namespace: {{ .Release.Namespace }}
+data:
+  CORE_DB_DATABASE: migrator
+  CORE_DB_HOST: localhost
+  CORE_EXIT_ON_DATABASE_INITIALIZATION_ERROR: "true"
+  CORE_PORT: "8080"
+  NGINX_ENTRYPOINT_QUIET_LOGS: "1"
