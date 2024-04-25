@@ -1,0 +1,134 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: {{ .Release.Name }}-app
+spec:
+  replicas: 1
+  serviceName: {{ .Release.Name }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-app
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-app
+    spec:
+      containers:
+        - name: core-db
+          image: docker.io/postgres:13-alpine
+          volumeMounts:
+            - name: initdb
+              mountPath: /docker-entrypoint-initdb.d
+            - name: core-db-vol
+              mountPath: /var/lib/postgresql/data
+          env:
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: migrator.postgres.core.db
+                  key: password
+                  optional: false
+
+        - name: core
+          image: docker.io/cybertecpostgresql/cybertec_migrator-professional-core:{{ .Values.image.release }}
+          env:
+
+            - name: CORE_DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: migrator.postgres.core.db
+                  key: password
+                  optional: false
+
+            - name: CORE_EXIT_ON_DATABASE_INITIALIZATION_ERROR
+              valueFrom:
+                configMapKeyRef:
+                  name: db-coninfo
+                  key: CORE_EXIT_ON_DATABASE_INITIALIZATION_ERROR
+
+            - name: CORE_DB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: db-coninfo
+                  key: CORE_DB_HOST
+
+            - name: CORE_DB_DATABASE
+              valueFrom:
+                configMapKeyRef:
+                  name: db-coninfo
+                  key: CORE_DB_DATABASE
+
+          imagePullPolicy: IfNotPresent
+
+          volumeMounts:
+            - name: core-log
+              mountPath: /app/logs
+            - name: core-config
+              mountPath: /volumes/core/config
+              subPath: oracle
+
+        - name: web-gui
+          image: docker.io/cybertecpostgresql/cybertec_migrator-professional-web_gui:{{ .Values.image.release }}
+          volumeMounts:
+            - name: nginx-config
+              mountPath: /etc/nginx/
+            - name: nginx-cert
+              mountPath: /etc/ssl/nginx.crt
+              subPath: nginx.cert
+              readOnly: true
+            - name: nginx-cert-key
+              mountPath: /etc/ssl/nginx.key
+              subPath: nginx.key
+              readOnly: true
+          imagePullPolicy: IfNotPresent
+
+
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end}}
+
+      volumes:
+        - name: initdb
+          configMap:
+            name: initdb.sh
+
+        - name: core-db-vol
+          persistentVolumeClaim:
+            claimName: cybertec-migrator-core-db-pvc
+
+        - name: core-log
+          persistentVolumeClaim:
+            claimName: cybertec-migrator-core-log-pvc
+
+        - name: core-config
+          persistentVolumeClaim:
+            claimName: cybertec-migrator-core-config-pvc
+
+
+        - name: nginx-config
+          configMap:
+            name: nginx-config
+            items:
+              - key: nginx.conf
+                path: nginx.conf
+              - key: mime.types
+                path: mime.types
+
+        - name: nginx-cert
+          configMap:
+            name: nginx-cert
+            items:
+              - key: nginx.cert
+                path: nginx.cert
+
+        - name: nginx-cert-key
+          configMap:
+            name: nginx-cert-key
+            items:
+              - key: nginx.key
+                path: nginx.key
+---

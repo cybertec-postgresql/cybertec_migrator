@@ -1,0 +1,28 @@
+# Values file for the CYBERTEC-Migrator Helm-Chart
+
+image:
+  repository: docker.io
+  pullPolicy: IfNotPresent
+  release: "v3.18.4"
+
+imagePullSecrets:
+  - name: "docker.io"
+
+migrator:
+  ui:
+    # Typical NodePort or LoadBalancer | is used for the k8s service type
+    serviceType: NodePort
+  db:
+    init:
+      username: postgres
+      password: postgres
+  storage:
+    core_db: 
+      size: 5Gi
+      storageClass: standard
+    core_log: 
+      size: 5Gi
+      storageClass: standard
+    core_config: 
+      size: 5Gi
+      storageClass: standard
