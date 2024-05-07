@@ -2,6 +2,34 @@
 
 The release notes of the last release may be found on [README.md](README.md#whats-new).
 
+### v3.19.0 - 2024-05-07
+
+- _Migration List_:
+    - Display migration status in list
+    - Wrap long connection strings
+        <p align="left">
+          <img src="./docs/pictures/release-notes/v3.19.0/migration-list.png" />
+        </p>
+- _Structure stage_:
+    - Detect Index Organized Tables and automatically exclude their overflow tables
+- _Data stage_:
+    - Show total bytes and bytes per seconds for a finished transfer
+    - Indicate whether a child process died from a signal, such as from the out-of-memory killer
+    - Gracefully handle `INT` signals to hasten abort request
+- _Migration Settings_:
+    - Changed data progress interval unit from milliseconds to seconds
+    - Migration passwords are now encrypted within the database
+
+#### Resolved Bugs
+
+- Code editors occasionally loose changes while typing
+- Renaming a table column does not display the new name in the constraint tab
+- PostgreSQL reserved identifiers are not read if the amount of CPU cores can not be retrieved
+- Replacing trigger code using the `Search` tab does not update the code in the editor without refreshing
+- `ORA-01652: unable to grow temp segment in tablespace TEMP by 1MB during operation` when reading indexes from some Oracle databases
+- Enabling the diff mode on a view-editor causes a page crash
+- `DEFAULT is not allowed in this context` when migrating list partitions with a non-uppercase `default` statement
+
 ### v3.18.4 - 2023-09-27
 
 - Upon opening the Trial edition, the user must acknowledge the usage restrictions prior to using the application.
