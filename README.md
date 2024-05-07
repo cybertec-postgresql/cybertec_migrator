@@ -48,45 +48,33 @@ For detailed information see the list of [supported migration features for Oracl
 
 For older releases see [Release Notes](RELEASE_NOTES.md).
 
-### v3.18.4 - 2023-09-27
+### v3.19.0 - 2024-05-07
 
-- Upon opening the Trial edition, the user must acknowledge the usage restrictions prior to using the application.
-
-### v3.18.3 - 2023-09-20
-
-- Package `curl` and `psql` with the `core` image for troubleshooting purposes
-
-### v3.18.2 - 2023-09-19
-
-- Package `ping`, `telnet` and `traceroute` with the `core` image for troubleshooting purposes
-
-### v3.18.1 - 2023-09-18
+- _Migration List_:
+  - Display migration status in list
+  - Wrap long connection strings
+      <p align="left">
+        <img src="./docs/pictures/release-notes/v3.19.0/migration-list.png" />
+      </p>
+- _Structure stage_:
+  - Detect Index Organized Tables and automatically exclude their overflow tables
+- _Data stage_:
+  - Show total bytes and bytes per seconds for a finished transfer
+  - Indicate whether a child process died from a signal, such as from the out-of-memory killer
+  - Gracefully handle `INT` signals to hasten abort request
+- _Migration Settings_:
+  - Changed data progress interval unit from milliseconds to seconds
+  - Migration passwords are now encrypted within the database
 
 #### Resolved Bugs
 
-- `unable to connect to internal database: Error: Entity metadata for Schema#packages was not found. Check if you specified a correct entity object and if it's connected in the connection options.` \
-  Fresh installation fails during the database setup.
-
-### v3.18.0 - 2023-09-04
-
-- _Automatic Code Transpilation_: Receive suggestions from the CYBERTEC Migrator when rewriting functions, procedures, triggers and views.
-
-  <p align="left">
-    <img src="./docs/pictures/release-notes/v3.18.0/code-transpiler-warning.png" />
-  </p>
-  <p align="left">
-    <img src="./docs/pictures/release-notes/v3.18.0/applied-code-transpiler.png" />
-  </p>
-
-  For more information, see [Transpiler Features](./docs/transpiler-features.md).
-
-#### ⚠️ Breaking changes
-
-Beginning with this release, the Docker images include the edition in their name (e.g. `cybertecpostgresql/cybertec_migrator-professional-core`).
-Furthermore, the `Standard` edition has been renamed to `Trial`; its features have been adapted accordingly.
-
-**For users operating the installer:** Execute `./migrator configure --edition <edition>`. \
-**Users operating on Kubernetes or OpenShift:** Please modify your configurations accordingly.
+- Code editors occasionally loose changes while typing
+- Renaming a table column does not display the new name in the constraint tab
+- PostgreSQL reserved identifiers are not read if the amount of CPU cores can not be retrieved
+- Replacing trigger code using the `Search` tab does not update the code in the editor without refreshing
+- `ORA-01652: unable to grow temp segment in tablespace TEMP by 1MB during operation` when reading indexes from some Oracle databases
+- Enabling the diff mode on a view-editor causes a page crash
+- `DEFAULT is not allowed in this context` when migrating list partitions with a non-uppercase `default` statement
 
 ## Getting Started
 
@@ -134,12 +122,12 @@ cat ~/password.txt | docker login --username <username> --password-stdin
 [OK] Generated environment file
 [INFO] Run './migrator install' to complete setup
 ➜ ./migrator install
-[INFO] Pulling images for professional:v3.18.0
+[INFO] Pulling images for professional:v3.19.0
 Pulling core_db ... done
 Pulling core    ... done
 Pulling web_gui ... done
-[OK] Pulled professional:v3.18.0
-[INFO] Upgraded to professional:v3.18.0
+[OK] Pulled professional:v3.19.0
+[INFO] Upgraded to professional:v3.19.0
 [WARN] Could not find TLS/SSL certificate
 [INFO] Run './migrator configure --tls self-signed-cert' to generate a self-signed TLS/SSL certificate
 ➜ ./migrator configure --tls self-signed-cert
@@ -190,22 +178,22 @@ For the Professional or Enterprise Edition [get in touch with us](#contact) to r
 6. Start the Migrator
 
 ```sh
-➜ tar xf cybertec_migrator-trial-v3.18.0.tar.gz
+➜ tar xf cybertec_migrator-trial-v3.19.0.tar.gz
 ➜ cd cybertec_migrator
 ➜ ./migrator configure trial
 [OK] Generated environment file
 [INFO] Run './migrator install --archive <archive_file>' to complete setup
-➜ ./migrator install --archive ../cybertec_migrator-trial-v3.18.0.tar.gz                                                                                                                                                                                                                                                            ✔  at 15:37:52  
-[INFO] Reading meta-information from archive file '../cybertec_migrator-trial-v3.18.0.tar.gz'
-[INFO] Upgrading to trial:v3.18.0
-[INFO] Extracting archive file '../cybertec_migrator-trial-v3.18.0.tar.gz'
+➜ ./migrator install --archive ../cybertec_migrator-trial-v3.19.0.tar.gz                                                                                                                                                                                                                                                            ✔  at 15:37:52  
+[INFO] Reading meta-information from archive file '../cybertec_migrator-trial-v3.19.0.tar.gz'
+[INFO] Upgrading to trial:v3.19.0
+[INFO] Extracting archive file '../cybertec_migrator-trial-v3.19.0.tar.gz'
 [INFO] Loading container images
-Loaded image: cybertecpostgresql/cybertec_migrator-trial-core:v3.18.0
-Loaded image: cybertecpostgresql/cybertec_migrator-trial-web_gui:v3.18.0
+Loaded image: cybertecpostgresql/cybertec_migrator-trial-core:v3.19.0
+Loaded image: cybertecpostgresql/cybertec_migrator-trial-web_gui:v3.19.0
 Loaded image: postgres:13-alpine
 [INFO] Container images loaded
 [INFO] Archived container images
-[INFO] Upgraded to trial:v3.18.0
+[INFO] Upgraded to trial:v3.19.0
 [WARN] Could not find TLS/SSL certificate
 [INFO] Run './migrator configure --tls self-signed-cert' to generate a self-signed TLS/SSL certificate
 ➜ ./migrator configure --tls self-signed-cert
