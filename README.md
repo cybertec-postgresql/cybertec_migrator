@@ -1,5 +1,5 @@
 <p align="center">
-  <img alt="CYBERTEC Migrator" width="300px" src="https://www.cybertec-postgresql.com/wp-content/uploads/2018/03/Migrator_neu-300x79.png"/>
+  <img alt="CYBERTEC Migrator" width="300px" src="./docs/pictures/migrator-logo.svg"/>
   <br/><br/>
   <i>Streamlined Oracle to PostgreSQL migration</i>
 </p>
