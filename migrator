@@ -60,6 +60,7 @@ main() {
             exit ${ERR_USAGE}
         fi
         fix_https_default_port
+        fix_encryption_key
         docker compose up -d
         print_url
         ;;
@@ -113,6 +114,19 @@ fix_https_default_port() {
         sed -i'.orig' -e 's/^EXTERNAL_HTTP_PORT=80[ \t]*$/EXTERNAL_HTTP_PORT=443/' "${ENV_FILE}"
         info "Changed port for web-frontend from HTTP to HTTPS"
     fi
+}
+
+fix_encryption_key() {
+  # With v3.19.0, all passwords within the database are encrypted
+  # TODO: remove after a couple of releases
+  if [ -z "$(print_env 'CORE_ENCRYPTION_KEY')" ]; then
+    encryption_key="$(generate_random 'A-Za-z0-9' 32)"
+    encryption_iv="$(generate_random 'A-Za-z0-9' 16)"
+
+    echo "CORE_ENCRYPTION_KEY=\"${encryption_key}\"" >> "${ENV_FILE}"
+    echo "CORE_ENCRYPTION_IV=\"${encryption_iv}\"" >> "${ENV_FILE}"
+    info "Generated encryption key and IV"
+  fi
 }
 
 print_url() {
@@ -196,7 +210,9 @@ generate_environment_file() {
     ! env_file_exists || return
 
     # File doesn't exist, so generate it
-    password="$(generate_random)"
+    password="$(generate_random 'A-Za-z0-9!&()*+,-./:;<=>?@{|}~' 32)"
+    encryption_key="$(generate_random 'A-Za-z0-9' 32)"
+    encryption_iv="$(generate_random 'A-Za-z0-9' 16)"
     version="$(git describe --exact-match --tags HEAD)"
 
     cat <<EOF > "${ENV_FILE}"
@@ -207,6 +223,8 @@ EDITION=trial
 
 # —— Internal ⚠ ——
 CORE_DB_PASSWORD="${password}"
+CORE_ENCRYPTION_KEY="${encryption_key}"
+CORE_ENCRYPTION_IV="${encryption_iv}"
 EOF
 
     chmod 600 "${ENV_FILE}"
@@ -222,8 +240,8 @@ set_env_file_variable() {
 }
 
 generate_random() {
-    local PASSWORD_CHARSET='A-Za-z0-9!&()*+,-./:;<=>?@{|}~'
-    local PASSWORD_LENGTH=32
+    local PASSWORD_CHARSET="$1"
+    local PASSWORD_LENGTH=$2
     LC_ALL=C tr -dc "${PASSWORD_CHARSET}" </dev/urandom | head -c "${PASSWORD_LENGTH}"
 }
 
