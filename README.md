@@ -48,6 +48,13 @@ For detailed information see the list of [supported migration features for Oracl
 
 For older releases see [Release Notes](RELEASE_NOTES.md).
 
+### v3.19.1 - 2024-05-21
+
+#### Resolved Bugs
+
+- Format overly long migration effort estimates on the migration list
+- `Certificate could not be obtained: no SSL error reported` when using SSL for the PostgreSQL connection
+
 ### v3.19.0 - 2024-05-07
 
 - _Migration List_:

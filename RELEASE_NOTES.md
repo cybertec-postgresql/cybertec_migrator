@@ -2,6 +2,13 @@
 
 The release notes of the last release may be found on [README.md](README.md#whats-new).
 
+### v3.19.1 - 2024-05-21
+
+#### Resolved Bugs
+
+- Format overly long migration effort estimates on the migration list
+- `Certificate could not be obtained: no SSL error reported` when using SSL for the PostgreSQL connection
+
 ### v3.19.0 - 2024-05-07
 
 - _Migration List_:
