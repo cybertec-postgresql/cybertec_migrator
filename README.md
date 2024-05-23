@@ -48,6 +48,17 @@ For detailed information see the list of [supported migration features for Oracl
 
 For older releases see [Release Notes](RELEASE_NOTES.md).
 
+### v3.19.2 - 2024-05-27
+
+#### Resolved Bugs
+
+- Code editors occasionally loosing changes when saving
+- Dependency searchbar closing randomly
+
+#### Regressions
+
+- Replacing code using the `Search/Replace` tab does not update the code in the editor without refreshing
+
 ### v3.19.1 - 2024-05-21
 
 #### Resolved Bugs
