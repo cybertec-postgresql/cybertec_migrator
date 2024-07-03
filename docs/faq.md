@@ -3,12 +3,13 @@
 FAQ for the [CYBERTEC Migrator](../README.md).
 
 ## Table of Contents
-
 - [Installation and Configuration](#installation-and-configuration)
   - [How do I configure TCPS for Oracle databases?](#how-do-i-configure-tcps-for-oracle-databases)
   - [How do I generate a self-signed certificate?](#how-do-i-generate-a-self-signed-certificate)
   - [How do I install an existing certificate?](#how-do-i-install-an-existing-certificate)
   - [How do I set environment variables](#how-do-i-set-environment-variables)
+- [Permissions](#permissions)
+  - [What permissions does the Migrator require for Oracle?](#what-permissions-does-the-migrator-require-for-oracle) 
 - [Troubleshooting](#troubleshooting)
   - [`ORA-12637: Packet receive failed` while verifying source credentials](#ora-12637-packet-receive-failed-while-verifying-source-credentials)
 
@@ -93,6 +94,18 @@ Recreating cybertec_migrator_web_gui_1 ... done
 
 The initial `./migrator configure` command will generate a `.env` file, the contents of which will be used in the `core` docker compose service.
 When editing, make sure not to alter the `# —— Internal ⚠ ——` section.
+
+## Permissions
+
+#### What permissions does the Migrator require for Oracle
+
+The Migrator requires the following permissions in order to introspect and migrate an Oracle database:
+
+| Permission            | Usage                                 | 
+|-----------------------|---------------------------------------|
+| `SELECT_CATALOG_ROLE` | Querying the system catalog           |
+| `SELECT ANY TABLE`    | Migrating table data                  |
+| `FLASHBACK ANY TABLE` | Migrating table data at a certain SCN |
 
 ## Troubleshooting
 
