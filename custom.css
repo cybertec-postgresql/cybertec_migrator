@@ -1,0 +1,20 @@
+/* You can add custom styles here. */
+.gdoc-brand__img {
+    width: auto;
+}
+
+.gdoc-nav__entry:hover, .gdoc-nav__entry.is-active {
+    text-decoration: none;
+}
+
+.gdoc-nav__entry:hover {
+    font-weight: bold;
+}
+
+blockquote {
+    border: 3px solid var(--accent-color);
+    /* background: rgb(57, 63, 68); */
+    box-shadow: 0 2px 20px -10px #06111e;
+    /* background: red;
+    color: #000; */
+}
