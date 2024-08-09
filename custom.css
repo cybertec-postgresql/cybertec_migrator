@@ -1,26 +1,333 @@
-/* You can add custom styles here. */
+/* Custom variables */
+:root {
+    --ci-color-primary: #153558;
+    --ci-color-secondary: #4ec1ec;
+    --ci-color-tertiary: #3880ad;
+    --ci-color-text: #40424a;
+    --ci-color-success: #006600;
+    --ci-color-error1: #cc3333;
+    --ci-color-error2: #f52222;
+    --ci-lightest-of-blues: #eaf4ff;
+    --ci-color-white: #ffffff;
+
+    --custom-border-radius: 3px;
+    --custom-color-heading-color-alternative: var(--ci-color-tertiary);
+    --custom-color-heading-color: var(--ci-color-primary);
+    --custom-footer-link-color: var(--ci-color-white);
+    --custom-header-height: 80px;
+    --custom-header-margin: 2rem;
+    --custom-link-color: var(--ci-color-tertiary);
+    --custom-paper-color: #ffffff;
+}
+
+/* Light mode (modify both object at the same time) */
+:root[color-theme="light"] {
+    --accent-color: unset;
+    --body-background: var(--ci-lightest-of-blues);
+    --body-font-color: var(--ci-color-text);
+    --code-copy-success-color: var(--ci-color-success);
+    --custom-color-heading-color-alternative: var(--ci-color-tertiary);
+    --custom-color-heading-color: var(--ci-color-primary);
+    --custom-paper-color: var(--ci-color-white);
+    --footer-background: var(--ci-color-primary);
+    --header-background: var(--ci-color-primary);
+}
+
+@media (prefers-color-scheme: light) {
+    :root {
+        --accent-color: unset;
+        --body-background: var(--ci-lightest-of-blues);
+        --body-font-color: var(--ci-color-text);
+        --code-copy-success-color: var(--ci-color-success);
+        --custom-color-heading-color-alternative: var(--ci-color-tertiary);
+        --custom-color-heading-color: var(--ci-color-primary);
+        --custom-paper-color: var(--ci-color-white);
+        --footer-background: var(--ci-color-primary);
+        --header-background: var(--ci-color-primary);
+    }
+}
+
+
+/* Dark mode (modify both object at the same time) */
+:root[color-theme="dark"] {
+    --accent-color: unset;
+    --body-background: #0b223a;
+    --custom-color-heading-color-alternative: var(--ci-color-secondary);
+    --custom-color-heading-color: var(--ci-color-white);
+    --custom-paper-color: var(--ci-color-primary);
+    --header-background: var(--ci-color-primary);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --accent-color: unset;
+        --body-background: #0b223a;
+        --custom-color-heading-color-alternative: var(--ci-color-secondary);
+        --custom-color-heading-color: var(--ci-color-white);
+        --custom-paper-color: var(--ci-color-primary);
+        --header-background: var(--ci-color-primary);
+    }
+}
+
+/* Custom fonts */
+@font-face {
+    font-family: "Roboto";
+    src: url("fonts/Roboto.ttf") format('truetype');
+}
+
+@font-face {
+    font-family: "Roboto";
+    src: url("fonts/Roboto-Bold.ttf") format('truetype');
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: "Roboto";
+    src: url("fonts/Roboto-Italic.ttf") format('truetype');
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "Source Code Pro";
+    src: url("fonts/SourceCodePro.ttf") format('truetype');
+}
+
+html, body, .gdoc-header {
+    font-family: "Roboto", sans-serif;
+}
+
+code {
+    font-family: "Source Code Pro", monospace;
+    overflow: scroll;
+}
+
+/* Make the logo a little bit bigger */
 .gdoc-brand__img {
     width: auto;
 }
 
-.gdoc-header{
-  background: rgb(65, 134, 201);
-  color: var(--header-font-color);
-  border-bottom: .3em solid var(--footer-background);
+/* Make the arrows in the navigation look to the right if the menu entry is collapsed */
+.gdoc_keyboard_arrow_left {
+    transform: rotate(180deg);
 }
 
+/* Use a solid underline for links within the navigation */
 .gdoc-nav__entry:hover, .gdoc-nav__entry.is-active {
-    text-decoration: none;
+    text-decoration: underline !important;
 }
 
-.gdoc-nav__entry:hover {
-    font-weight: bold;
+/* Fix the header to the top of the screen */
+.gdoc-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    height: var(--custom-header-height);
+    display: flex;
+    align-items: center;
 }
 
-blockquote {
-    border: 3px solid var(--accent-color);
-    /* background: rgb(57, 63, 68); */
-    box-shadow: 0 2px 20px -10px #06111e;
-    /* background: red;
-    color: #000; */
+/* Center items within header */
+.gdoc-menu-header__items {
+    align-items: center;
 }
+
+/* Increase the margin between header items */
+.gdoc-menu-header__items > span {
+    margin-left: 0.75rem;
+}
+
+.gdoc-language {
+    margin-right: 0.25rem;
+}
+
+/* Style the support button */
+.gdoc-support__button {
+    background-color: var(--ci-color-secondary);
+    padding-left: 8px;
+    padding-right: 8px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    border-radius: var(--custom-border-radius);
+
+    a {
+        color: var(--ci-color-white);
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+}
+
+/* Ensure the content is leaving enough space to the top so it's not hidden beneath the fixed header */
+main {
+    margin-top: var(--custom-header-margin) !important;
+}
+
+/* Increase the height of the Search and Breadcrumbs while centering their content */
+.gdoc-search__input, .gdoc-page__header {
+    height: 40px;
+    align-items: center;
+}
+
+/* Ensure a uniform distance between the main components */
+.gdoc-page__header {
+    margin-bottom: var(--custom-header-margin);
+}
+
+.gdoc-nav--main {
+    margin-top: var(--custom-header-margin);
+}
+
+/* Add a border radius and drop shadow to the main components */
+.gdoc-markdown, .gdoc-nav--main, .gdoc-nav--more {
+    padding: 0 2rem 0.5rem 2rem;
+    border-radius: var(--custom-border-radius);
+    border: 1px solid var(--custom-paper-color);
+    box-shadow: 0 2px 20px -10px rgba(64, 66, 74, 0.2);
+}
+
+/* Ensure proper fit between markdown title and body */
+.gdoc-markdown {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+/* Add paper background to main components */
+.gdoc-markdown, .gdoc-nav--main, .gdoc-search__input, .gdoc-search__list, .gdoc-page__header, .gdoc-language__list, .gdoc-nav--more {
+    background-color: var(--custom-paper-color);
+}
+
+/* Use custom CI colors for warning */
+.gdoc-hint.warning, .gdoc-hint__title i.fa.warning {
+    background-color: var(--ci-color-error1);
+    color: #fff;
+    filter: unset
+}
+
+/* Style headings according to our CI */
+h1, h2, h3, h4, h5, h6 {
+    text-transform: uppercase;
+    letter-spacing: 0.75px;
+    font-weight: 600;
+    line-height: 1.2em;
+}
+
+h1, h3, h5 {
+    color: var(--custom-color-heading-color);
+}
+
+h2, h4, h6 {
+    color: var(--custom-color-heading-color-alternative);
+}
+
+h1 {
+    font-size: 42px !important;
+}
+
+h2 {
+    font-size: 27px !important;
+}
+
+h3 {
+    font-size: 21px !important;
+}
+
+h4 {
+    font-size: 20px !important;
+}
+
+h5 {
+    font-size: 18px !important;
+}
+
+h6 {
+    font-size: 16px !important;
+}
+
+/* Format links according to CI */
+.gdoc-markdown__link:link {
+    color: var(--custom-link-color);
+}
+
+/* Add a blue background and the big-data-circle to each page title */
+.gdoc-markdown__title {
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-bottom: 0;
+    background-color: var(--ci-color-primary);
+
+    background-image: linear-gradient(var(--ci-color-primary), var(--ci-color-primary)), url(img/big-data-circle.svg);
+    background-size: auto, 50% 650px;
+    background-repeat: no-repeat;
+    min-height: 150px;
+    background-position: 140% -300px;
+    border-top-left-radius: var(--custom-border-radius);
+    border-top-right-radius: var(--custom-border-radius);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    h1 {
+        color: var(--ci-color-white);
+        margin: 0 2rem 0 2rem;
+    }
+}
+
+
+/* Shade the `A product of CYBERTEC` */
+.gdoc-page__nav__product {
+    color: #888;
+}
+
+/* Customize the footer */
+.gdoc-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: var(--custom-header-height);
+
+    .gdoc-footer__wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        max-width: 82rem;
+        width: 100%;
+    }
+
+    .gdoc-footer__line {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+        padding: 1.25rem;
+        width: 100%;
+        height: 100%;
+
+    }
+
+    .gdoc-footer__item {
+        align-items: center;
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    .gdoc-footer__item__icon {
+        height: 24px;
+        fill: var(--ci-color-secondary)
+    }
+
+    .gdoc-footer__link {
+        color: var(--custom-footer-link-color);
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+}
+
