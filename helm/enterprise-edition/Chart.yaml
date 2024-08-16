@@ -4,5 +4,5 @@ description: A Helm chart for Kubernetes/Openshift to install the sophisticated 
 
 type: application
 icon: "https://www.cybertec-postgresql.com/wp-content/uploads/2018/03/Migrator_neu-1024x270.png"
-version: 1.0.2
+version: 1.0.3
 appVersion: "3.19.0"

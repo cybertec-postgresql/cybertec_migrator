@@ -136,6 +136,12 @@ data:
               autoindex off;
               include /etc/nginx/mime.types;
            }
+  
+           location /docs {
+              index index.html;
+              try_files $uri $uri/ /docs/index.html;
+              include /etc/nginx/mime.types;
+           }
 
            location /api/ {
               proxy_pass http://api/;
