@@ -60,6 +60,11 @@ server {
 		autoindex off;
 	}
 
+	location /docs {
+	    index index.html;
+	    try_files $uri $uri/ /docs/index.html;
+	}
+
 	location /api/ {
 		proxy_pass http://api/;
 		proxy_read_timeout 180s;
