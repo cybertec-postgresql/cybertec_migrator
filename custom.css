@@ -56,6 +56,11 @@
     --custom-color-heading-color: var(--ci-color-white);
     --custom-paper-color: var(--ci-color-primary);
     --header-background: var(--ci-color-primary);
+    /* Fix the $$ highlighting */
+    .chroma .err {
+        color: inherit;
+        background-color: inherit;
+    }
 }
 
 @media (prefers-color-scheme: dark) {
@@ -66,6 +71,11 @@
         --custom-color-heading-color: var(--ci-color-white);
         --custom-paper-color: var(--ci-color-primary);
         --header-background: var(--ci-color-primary);
+        /* Fix the $$ highlighting */
+        .chroma .err {
+            color: inherit;
+            background-color: inherit;
+        }
     }
 }
 
@@ -98,7 +108,7 @@ html, body, .gdoc-header {
 
 code {
     font-family: "Source Code Pro", monospace;
-    overflow: scroll;
+    overflow: auto;
 }
 
 /* Make the logo a little bit bigger */
