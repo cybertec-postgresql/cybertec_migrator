@@ -1,2 +1,47 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Hilfe on CYBERTEC Migrator Documentation</title><link>https://cybertec-postgresql.github.io/cybertec_migrator/de/help/</link><description>Recent content in Hilfe on CYBERTEC Migrator Documentation</description><generator>Hugo</generator><language>de</language><lastBuildDate>Tue, 07 Mar 2023 14:26:51 +0100</lastBuildDate><atom:link href="https://cybertec-postgresql.github.io/cybertec_migrator/de/help/index.xml" rel="self" type="application/rss+xml"/><item><title>FAQ</title><link>https://cybertec-postgresql.github.io/cybertec_migrator/de/help/faq/</link><pubDate>Tue, 07 Mar 2023 14:26:51 +0100</pubDate><guid>https://cybertec-postgresql.github.io/cybertec_migrator/de/help/faq/</guid><description>Installation und Konfiguration Wie konfiguriere ich TCPS für Oracle Datenbanken? Wie generiere ich ein selbst-signiertest Zertifikat Wie verwende ich ein existierendes Zertifikat? Wie setze ich Umgebungsvariablen Berechtigungen Troubleshooting ORA-12637: Packet receive failed während die Oracle Verbindung getestet wird Installation und Konfiguration Wie konfiguriere ich TCPS für Oracle Datenbanken? Kopieren Sie sqlnet.ora und tnsnames.ora aus den Template Dateien.
-➜ TNS_ADMIN=./volumes/core/config/oracle/network/admin ➜ cp &amp;#34;$TNS_ADMIN/templates&amp;#34;/*.ora &amp;#34;$TNS_ADMIN/&amp;#34; Fügen Sie den Net Service Namen der sicheren Verbindung zu volumes/core/config/oracle/network/admin/tnsnames.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Hilfe on CYBERTEC Migrator Documentation</title><link>https://cybertec-postgresql.github.io/cybertec_migrator/de/help/</link><description>Recent content in Hilfe on CYBERTEC Migrator Documentation</description><generator>Hugo</generator><language>de</language><lastBuildDate>Tue, 07 Mar 2023 14:26:51 +0100</lastBuildDate><atom:link href="https://cybertec-postgresql.github.io/cybertec_migrator/de/help/index.xml" rel="self" type="application/rss+xml"/><item><title>FAQ</title><link>https://cybertec-postgresql.github.io/cybertec_migrator/de/help/faq/</link><pubDate>Tue, 07 Mar 2023 14:26:51 +0100</pubDate><guid>https://cybertec-postgresql.github.io/cybertec_migrator/de/help/faq/</guid><description>&lt;div class="gdoc-toc gdoc-toc__level--6">
+ &lt;nav id="TableOfContents">
+ &lt;ul>
+ &lt;li>&lt;a href="#installation-und-konfiguration">Installation und Konfiguration&lt;/a>
+ &lt;ul>
+ &lt;li>&lt;a href="#wie-konfiguriere-ich-tcps-für-oracle-datenbanken">Wie konfiguriere ich TCPS für Oracle Datenbanken?&lt;/a>&lt;/li>
+ &lt;li>&lt;a href="#wie-generiere-ich-ein-selbst-signiertest-zertifikat">Wie generiere ich ein selbst-signiertest Zertifikat&lt;/a>&lt;/li>
+ &lt;li>&lt;a href="#wie-verwende-ich-ein-existierendes-zertifikat">Wie verwende ich ein existierendes Zertifikat?&lt;/a>&lt;/li>
+ &lt;li>&lt;a href="#wie-konfiguriere-ich-http-basic-auth">Wie konfiguriere ich HTTP Basic Auth?&lt;/a>&lt;/li>
+ &lt;li>&lt;a href="#wie-setze-ich-umgebungsvariablen">Wie setze ich Umgebungsvariablen&lt;/a>&lt;/li>
+ &lt;/ul>
+ &lt;/li>
+ &lt;li>&lt;a href="#berechtigungen">Berechtigungen&lt;/a>
+ &lt;ul>
+ &lt;li>&lt;a href="#welche-berechtigungen-benötigt-der-migrator-für-oracle">Welche Berechtigungen benötigt der Migrator für Oracle&lt;/a>&lt;/li>
+ &lt;/ul>
+ &lt;/li>
+ &lt;li>&lt;a href="#troubleshooting">Troubleshooting&lt;/a>
+ &lt;ul>
+ &lt;li>&lt;a href="#ora-12637-packet-receive-failed-während-die-oracle-verbindung-getestet-wird">&lt;code>ORA-12637: Packet receive failed&lt;/code> während die Oracle Verbindung getestet wird&lt;/a>&lt;/li>
+ &lt;/ul>
+ &lt;/li>
+ &lt;/ul>
+&lt;/nav>
+ &lt;hr />
+ &lt;/div>
+&lt;div class="flex align-center gdoc-page__anchorwrap">
+ &lt;h2 id="installation-und-konfiguration"
+ >
+ Installation und Konfiguration
+ &lt;/h2>
+ &lt;a data-clipboard-text="https://cybertec-postgresql.github.io/cybertec_migrator/de/help/faq/#installation-und-konfiguration" class="gdoc-page__anchor clip flex align-center" title="Link zu: Installation und Konfiguration" aria-label="Link zu: Installation und Konfiguration" href="#installation-und-konfiguration">
+ &lt;svg class="gdoc-icon gdoc_link">&lt;use xlink:href="#gdoc_link">&lt;/use>&lt;/svg>
+ &lt;/a>
+&lt;/div>
+&lt;div class="flex align-center gdoc-page__anchorwrap">
+ &lt;h3 id="wie-konfiguriere-ich-tcps-für-oracle-datenbanken"
+ >
+ Wie konfiguriere ich TCPS für Oracle Datenbanken?
+ &lt;/h3>
+ &lt;a data-clipboard-text="https://cybertec-postgresql.github.io/cybertec_migrator/de/help/faq/#wie-konfiguriere-ich-tcps-für-oracle-datenbanken" class="gdoc-page__anchor clip flex align-center" title="Link zu: Wie konfiguriere ich TCPS für Oracle Datenbanken?" aria-label="Link zu: Wie konfiguriere ich TCPS für Oracle Datenbanken?" href="#wie-konfiguriere-ich-tcps-f%c3%bcr-oracle-datenbanken">
+ &lt;svg class="gdoc-icon gdoc_link">&lt;use xlink:href="#gdoc_link">&lt;/use>&lt;/svg>
+ &lt;/a>
+&lt;/div>
+&lt;ul>
+&lt;li>
+&lt;p>Kopieren Sie &lt;code>sqlnet.ora&lt;/code> und &lt;code>tnsnames.ora&lt;/code> aus den Template Dateien.&lt;/p></description></item></channel></rss>

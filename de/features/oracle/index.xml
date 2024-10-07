@@ -1,1 +1,108 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Oracle on CYBERTEC Migrator Documentation</title><link>https://cybertec-postgresql.github.io/cybertec_migrator/de/features/oracle/</link><description>Recent content in Oracle on CYBERTEC Migrator Documentation</description><generator>Hugo</generator><language>de</language><lastBuildDate>Fri, 26 Jul 2024 09:12:43 +0200</lastBuildDate><atom:link href="https://cybertec-postgresql.github.io/cybertec_migrator/de/features/oracle/index.xml" rel="self" type="application/rss+xml"/><item><title>Unterstütze Features</title><link>https://cybertec-postgresql.github.io/cybertec_migrator/de/features/oracle/supported-features/</link><pubDate>Fri, 26 Jul 2024 09:12:43 +0200</pubDate><guid>https://cybertec-postgresql.github.io/cybertec_migrator/de/features/oracle/supported-features/</guid><description>Datenbank-Objekttypen CREATE Hinweis DATABASE LINK ✅ Verwenden Sie PostgreSQL [Foreign Data Wrapper] DIRECTORY ❌ FUNCTION ✅ Code kann teils automatisch migriert werden INDEX ✅ MATERIALIZED VIEW ✅ PACKAGE ✅ Code muss manuell migriert werden PROCEDURE ✅ Code kann teils automatisch migriert werden SCHEMA ✅ SEQUENCE ✅ SYNONYMS ✅ Müssen manuell migriert werden TABLE ✅ Partitionen (hash, list, range) unterstützt TRIGGER ✅ TYPE ✅ USER ❌ VIEW ✅ Eingebaute Datentypen Genauere Informationen über die eingebauten Oracle Datentypen können in Oracle SQL Language Reference gefunden werden.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Oracle on CYBERTEC Migrator Documentation</title><link>https://cybertec-postgresql.github.io/cybertec_migrator/de/features/oracle/</link><description>Recent content in Oracle on CYBERTEC Migrator Documentation</description><generator>Hugo</generator><language>de</language><lastBuildDate>Fri, 26 Jul 2024 09:12:43 +0200</lastBuildDate><atom:link href="https://cybertec-postgresql.github.io/cybertec_migrator/de/features/oracle/index.xml" rel="self" type="application/rss+xml"/><item><title>Unterstütze Features</title><link>https://cybertec-postgresql.github.io/cybertec_migrator/de/features/oracle/supported-features/</link><pubDate>Fri, 26 Jul 2024 09:12:43 +0200</pubDate><guid>https://cybertec-postgresql.github.io/cybertec_migrator/de/features/oracle/supported-features/</guid><description>&lt;div class="flex align-center gdoc-page__anchorwrap">
+ &lt;h2 id="datenbank-objekttypen"
+ >
+ Datenbank-Objekttypen
+ &lt;/h2>
+ &lt;a data-clipboard-text="https://cybertec-postgresql.github.io/cybertec_migrator/de/features/oracle/supported-features/#datenbank-objekttypen" class="gdoc-page__anchor clip flex align-center" title="Link zu: Datenbank-Objekttypen" aria-label="Link zu: Datenbank-Objekttypen" href="#datenbank-objekttypen">
+ &lt;svg class="gdoc-icon gdoc_link">&lt;use xlink:href="#gdoc_link">&lt;/use>&lt;/svg>
+ &lt;/a>
+&lt;/div>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th style="text-align: left">CREATE&lt;/th>
+ &lt;th style="text-align: left">&lt;/th>
+ &lt;th style="text-align: left">Hinweis&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td style="text-align: left">DATABASE LINK&lt;/td>
+ &lt;td style="text-align: left">✅&lt;/td>
+ &lt;td style="text-align: left">Verwenden Sie PostgreSQL [Foreign Data Wrapper]&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">DIRECTORY&lt;/td>
+ &lt;td style="text-align: left">❌&lt;/td>
+ &lt;td style="text-align: left">&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">FUNCTION&lt;/td>
+ &lt;td style="text-align: left">✅&lt;/td>
+ &lt;td style="text-align: left">Code kann teils automatisch migriert werden&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">INDEX&lt;/td>
+ &lt;td style="text-align: left">✅&lt;/td>
+ &lt;td style="text-align: left">&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">MATERIALIZED VIEW&lt;/td>
+ &lt;td style="text-align: left">✅&lt;/td>
+ &lt;td style="text-align: left">&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">PACKAGE&lt;/td>
+ &lt;td style="text-align: left">✅&lt;/td>
+ &lt;td style="text-align: left">Code muss manuell migriert werden&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">PROCEDURE&lt;/td>
+ &lt;td style="text-align: left">✅&lt;/td>
+ &lt;td style="text-align: left">Code kann teils automatisch migriert werden&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">SCHEMA&lt;/td>
+ &lt;td style="text-align: left">✅&lt;/td>
+ &lt;td style="text-align: left">&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">SEQUENCE&lt;/td>
+ &lt;td style="text-align: left">✅&lt;/td>
+ &lt;td style="text-align: left">&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">SYNONYMS&lt;/td>
+ &lt;td style="text-align: left">✅&lt;/td>
+ &lt;td style="text-align: left">Müssen manuell migriert werden&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">TABLE&lt;/td>
+ &lt;td style="text-align: left">✅&lt;/td>
+ &lt;td style="text-align: left">Partitionen (hash, list, range) unterstützt&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">TRIGGER&lt;/td>
+ &lt;td style="text-align: left">✅&lt;/td>
+ &lt;td style="text-align: left">&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">TYPE&lt;/td>
+ &lt;td style="text-align: left">✅&lt;/td>
+ &lt;td style="text-align: left">&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">USER&lt;/td>
+ &lt;td style="text-align: left">❌&lt;/td>
+ &lt;td style="text-align: left">&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">VIEW&lt;/td>
+ &lt;td style="text-align: left">✅&lt;/td>
+ &lt;td style="text-align: left">&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+&lt;div class="flex align-center gdoc-page__anchorwrap">
+ &lt;h2 id="eingebaute-datentypen"
+ >
+ Eingebaute Datentypen
+ &lt;/h2>
+ &lt;a data-clipboard-text="https://cybertec-postgresql.github.io/cybertec_migrator/de/features/oracle/supported-features/#eingebaute-datentypen" class="gdoc-page__anchor clip flex align-center" title="Link zu: Eingebaute Datentypen" aria-label="Link zu: Eingebaute Datentypen" href="#eingebaute-datentypen">
+ &lt;svg class="gdoc-icon gdoc_link">&lt;use xlink:href="#gdoc_link">&lt;/use>&lt;/svg>
+ &lt;/a>
+&lt;/div>
+&lt;p>Genauere Informationen über die eingebauten Oracle Datentypen können in &lt;a
+ class="gdoc-markdown__link"
+ href="https://docs.oracle.com/en/database/oracle/oracle-database/19/sqlrf/Data-Types.html#GUID-7B72E154-677A-4342-A1EA-C74C1EA928E6"
+>Oracle SQL Language Reference&lt;/a> gefunden werden.&lt;/p></description></item></channel></rss>

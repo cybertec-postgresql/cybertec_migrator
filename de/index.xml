@@ -1,12 +1,352 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>CYBERTEC Migrator on CYBERTEC Migrator Documentation</title><link>https://cybertec-postgresql.github.io/cybertec_migrator/de/</link><description>Recent content in CYBERTEC Migrator on CYBERTEC Migrator Documentation</description><generator>Hugo</generator><language>de</language><lastBuildDate>Mon, 29 Jul 2024 15:28:36 +0200</lastBuildDate><atom:link href="https://cybertec-postgresql.github.io/cybertec_migrator/de/index.xml" rel="self" type="application/rss+xml"/><item><title>Voraussetzungen</title><link>https://cybertec-postgresql.github.io/cybertec_migrator/de/getting-started/requirements/</link><pubDate>Thu, 25 Jul 2024 15:27:44 +0200</pubDate><guid>https://cybertec-postgresql.github.io/cybertec_migrator/de/getting-started/requirements/</guid><description>CYBERTEC Migrator wird als eine Reihe von Container Images vertrieben, welche durch Docker Compose orchestriert werden.
-docker docker compose (&amp;gt;= 2.0.0) git (&amp;gt;= 2.20.1) bash (&amp;gt;= 4.0)</description></item><item><title>Installation</title><link>https://cybertec-postgresql.github.io/cybertec_migrator/de/getting-started/installation/</link><pubDate>Thu, 25 Jul 2024 15:28:36 +0200</pubDate><guid>https://cybertec-postgresql.github.io/cybertec_migrator/de/getting-started/installation/</guid><description>Die CYBERTEC Migrator Images können über zwei Wege bezogen werden
-Online Installation über die Container Registry Offline Installation für Umgebungen, in welchen Netzwerkeinschränkungen herrschen Die Migrator Trial Edition ist nur als OfflinesInstallationspaket erhältlich. Sie ist ausschließlich für private oder Testzwecke bestimmt, es sei denn, es liegt eine ausdrückliche Genehmigung vor. Online Die Docker-Images sind in der Docker Hub Registry verfügbar.
-Bitte setzen Sie sich mit uns in Verbindung, wenn Ihrem Konto kein Zugriff auf die entsprechenden Images gewährt wurde.</description></item><item><title>Verwendung</title><link>https://cybertec-postgresql.github.io/cybertec_migrator/de/getting-started/usage/</link><pubDate>Mon, 29 Jul 2024 15:28:36 +0200</pubDate><guid>https://cybertec-postgresql.github.io/cybertec_migrator/de/getting-started/usage/</guid><description>Verwenden Sie Ihren Web-Browser um die vom Migrator im Terminal angezeigte (durch ./migrator up) URL aufzurufen. In unserem Beispiel wäre das https://localhost, wobei sich dies durch Netzwerkgegebenheiten unterscheiden kann.
-Die Standardkonfiguration des Migrators verwendet den standard 443 HTTPS port. Dies kann in der .env Datei (generiert durch ./migrator configure) durch setzen der EXTERNAL_HTTP_PORT Variable angepasst werden.
-Falls Sie keinen Zugriff auf laufende Oracle und/oder PostgreSQL Datenbanken verfügen und dennoch den Migrator testen wollen, probieren sie unser Migrator demo database environment.</description></item><item><title>Upgrade</title><link>https://cybertec-postgresql.github.io/cybertec_migrator/de/getting-started/upgrade/</link><pubDate>Thu, 25 Jul 2024 15:28:36 +0200</pubDate><guid>https://cybertec-postgresql.github.io/cybertec_migrator/de/getting-started/upgrade/</guid><description>Analog zur installation können Upgrades online oder offline durchgeführt werden.
-Upgrades zwischen verschiedenen Versionen können beliebig durchgeführt werden, es werden keine Daten verloren.
-Laufende Migrationen werden durch Upgrades unterbrochen. Online Abrufen der neuesten Versionen Upgrade auf die neueste Version Upgrade anwenden und Migrator neustarten ./migrator update ./migrator upgrade ./migrator up Offline Abrufen der neuesten Versionen Upgrade auf die Version des Pakets Upgrade anwenden und Migrator neustarten ./migrator update --archive cybertec_migrator-edition-vX.Y.Z.tar.gz .</description></item><item><title>FAQ</title><link>https://cybertec-postgresql.github.io/cybertec_migrator/de/help/faq/</link><pubDate>Tue, 07 Mar 2023 14:26:51 +0100</pubDate><guid>https://cybertec-postgresql.github.io/cybertec_migrator/de/help/faq/</guid><description>Installation und Konfiguration Wie konfiguriere ich TCPS für Oracle Datenbanken? Wie generiere ich ein selbst-signiertest Zertifikat Wie verwende ich ein existierendes Zertifikat? Wie setze ich Umgebungsvariablen Berechtigungen Troubleshooting ORA-12637: Packet receive failed während die Oracle Verbindung getestet wird Installation und Konfiguration Wie konfiguriere ich TCPS für Oracle Datenbanken? Kopieren Sie sqlnet.ora und tnsnames.ora aus den Template Dateien.
-➜ TNS_ADMIN=./volumes/core/config/oracle/network/admin ➜ cp &amp;#34;$TNS_ADMIN/templates&amp;#34;/*.ora &amp;#34;$TNS_ADMIN/&amp;#34; Fügen Sie den Net Service Namen der sicheren Verbindung zu volumes/core/config/oracle/network/admin/tnsnames.</description></item><item><title>Unterstütze Features</title><link>https://cybertec-postgresql.github.io/cybertec_migrator/de/features/oracle/supported-features/</link><pubDate>Fri, 26 Jul 2024 09:12:43 +0200</pubDate><guid>https://cybertec-postgresql.github.io/cybertec_migrator/de/features/oracle/supported-features/</guid><description>Datenbank-Objekttypen CREATE Hinweis DATABASE LINK ✅ Verwenden Sie PostgreSQL [Foreign Data Wrapper] DIRECTORY ❌ FUNCTION ✅ Code kann teils automatisch migriert werden INDEX ✅ MATERIALIZED VIEW ✅ PACKAGE ✅ Code muss manuell migriert werden PROCEDURE ✅ Code kann teils automatisch migriert werden SCHEMA ✅ SEQUENCE ✅ SYNONYMS ✅ Müssen manuell migriert werden TABLE ✅ Partitionen (hash, list, range) unterstützt TRIGGER ✅ TYPE ✅ USER ❌ VIEW ✅ Eingebaute Datentypen Genauere Informationen über die eingebauten Oracle Datentypen können in Oracle SQL Language Reference gefunden werden.</description></item><item><title>Code Transpilierung</title><link>https://cybertec-postgresql.github.io/cybertec_migrator/de/features/code-transpilation/</link><pubDate>Fri, 26 Jul 2024 09:11:10 +0200</pubDate><guid>https://cybertec-postgresql.github.io/cybertec_migrator/de/features/code-transpilation/</guid><description>Der CYBERTEC Migrator ist in der Lage, bestimmte PL/SQL-Konstrukte zu parsen, zu analysieren und automatisch nach PL/pgSQL zu transpilieren. Jedes unterstützte Konstrukt wird durch eine entsprechende Regel dargestellt.
-Dieses Feature-Set wird ständig weiterentwickelt, wobei neue Regeln hinzugefügt werden, wo immer dies möglich ist. Wenn Sie einen Vorschlag für eine neue Regel haben, öffnen Sie bitte einen feature request.
-CYAR-0001: AddParamlistParentheses Beispiel CYAR-0002: ReplacePrologue Beispiel CYAR-0003: ReplaceEpilogue Beispiel CYAR-0004: FixTrunc CYAR-0005: ReplaceSysdate Beispiel CYAR-0006: ReplaceNvl Beispiel CYAR-0007: RemoveEditionable Beispiel CYAR-0008: ReplaceNvl2 Beispiel CYAR-0001: AddParamlistParentheses In Oracle kann eine Prozedur ohne Parameter in ihrer Definition Klammern weglassen, während PostgreSQL sie immer benötigt.</description></item><item><title>EULA</title><link>https://cybertec-postgresql.github.io/cybertec_migrator/de/license/eula/</link><pubDate>Tue, 07 Mar 2023 14:26:51 +0100</pubDate><guid>https://cybertec-postgresql.github.io/cybertec_migrator/de/license/eula/</guid><description>Endbenutzer-Lizenzvereinbarung Zuletzt aktualisiert am: 02.05.2022
-Dieser Endbenutzer-Lizenzvertrag (im Folgenden als „EULA“ bezeichnet) ist ein rechtsverbindlicher Vertrag zwischen Ihnen, dem Lizenznehmer, einem einzelnen Kunden oder einer juristischen Person, und der CYBERTEC PostgreSQL International GmbH, dem Unternehmen und dem Autor von CYBERTEC MIGRATOR, der Software, die zugehörige Medien, gedruckte Materialien und Online- oder elektronische Dokumentation enthalten kann. Diese Vereinbarung ist ein rechtsverbindlicher Vertrag, der Bedingungen enthält, die Ihre gesetzlichen Rechte und die Haftung des Lizenzgebers Ihnen gegenüber einschränken, und regelt den gesamten Zugriff auf und die Nutzung dieser Software.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>CYBERTEC Migrator on CYBERTEC Migrator Documentation</title><link>https://cybertec-postgresql.github.io/cybertec_migrator/de/</link><description>Recent content in CYBERTEC Migrator on CYBERTEC Migrator Documentation</description><generator>Hugo</generator><language>de</language><lastBuildDate>Mon, 29 Jul 2024 15:28:36 +0200</lastBuildDate><atom:link href="https://cybertec-postgresql.github.io/cybertec_migrator/de/index.xml" rel="self" type="application/rss+xml"/><item><title>Voraussetzungen</title><link>https://cybertec-postgresql.github.io/cybertec_migrator/de/getting-started/requirements/</link><pubDate>Thu, 25 Jul 2024 15:27:44 +0200</pubDate><guid>https://cybertec-postgresql.github.io/cybertec_migrator/de/getting-started/requirements/</guid><description>&lt;p>&lt;em>CYBERTEC Migrator&lt;/em> wird als eine Reihe von &lt;a
+ class="gdoc-markdown__link"
+ href="https://github.com/opencontainers/image-spec/blob/main/spec.md"
+>Container Images&lt;/a> vertrieben, welche durch &lt;a
+ class="gdoc-markdown__link"
+ href="https://docs.docker.com/compose/"
+>Docker Compose&lt;/a> orchestriert werden.&lt;/p>
+&lt;ul>
+&lt;li>&lt;a
+ class="gdoc-markdown__link--code"
+ href="https://docs.docker.com/get-docker/"
+>&lt;code>docker&lt;/code>&lt;/a>&lt;/li>
+&lt;li>&lt;a
+ class="gdoc-markdown__link--code"
+ href="https://docs.docker.com/compose/install/"
+>&lt;code>docker compose&lt;/code>&lt;/a> (&lt;code>&amp;gt;= 2.0.0&lt;/code>)&lt;/li>
+&lt;li>&lt;code>git&lt;/code> (&lt;code>&amp;gt;= 2.20.1&lt;/code>)&lt;/li>
+&lt;li>&lt;code>bash&lt;/code> (&lt;code>&amp;gt;= 4.0&lt;/code>)&lt;/li>
+&lt;/ul></description></item><item><title>Installation</title><link>https://cybertec-postgresql.github.io/cybertec_migrator/de/getting-started/installation/</link><pubDate>Thu, 25 Jul 2024 15:28:36 +0200</pubDate><guid>https://cybertec-postgresql.github.io/cybertec_migrator/de/getting-started/installation/</guid><description>&lt;p>Die &lt;em>CYBERTEC Migrator&lt;/em> Images können über zwei Wege bezogen werden&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Online Installation&lt;/strong> über die Container Registry&lt;/li>
+&lt;li>&lt;strong>Offline Installation&lt;/strong> für Umgebungen, in welchen Netzwerkeinschränkungen herrschen&lt;/li>
+&lt;/ul>
+
+
+
+
+
+&lt;blockquote class="gdoc-hint note">
+ &lt;div class="gdoc-hint__title flex align-center">&lt;i class="fa note" title="Note">&lt;/i>&lt;/div>
+ &lt;div class="gdoc-hint__text">Die Migrator Trial Edition ist nur als &lt;a
+ class="gdoc-markdown__link"
+ href="https://www.cybertec-postgresql.com/en/products/cybertec-migrator#form"
+>OfflinesInstallationspaket&lt;/a> erhältlich. &lt;br>
+Sie ist ausschließlich für private oder Testzwecke bestimmt, es sei denn, es liegt eine ausdrückliche Genehmigung vor.&lt;/div>
+&lt;/blockquote>
+
+
+
+
+&lt;div class="gdoc-tabs">
+ &lt;input
+ type="radio"
+ class="gdoc-tabs__control hidden"
+ name="tabs-installation-variant"
+ id="tabs-installation-variant-0"
+ checked="checked"
+ />
+ &lt;label for="tabs-installation-variant-0" class="gdoc-tabs__label">
+ Online
+ &lt;/label>
+ &lt;div class="gdoc-markdown--nested gdoc-tabs__content">
+ &lt;p>Die Docker-Images sind in der &lt;a
+ class="gdoc-markdown__link"
+ href="https://hub.docker.com/"
+>Docker Hub&lt;/a> Registry verfügbar.&lt;/p>
+&lt;p>Bitte &lt;a
+ class="gdoc-markdown__link"
+ href="#contact"
+>setzen Sie sich mit uns in Verbindung&lt;/a>, wenn Ihrem Konto kein Zugriff auf die entsprechenden Images gewährt wurde.
+Vergewissern Sie sich, dass Sie in der DockerHub Registry mit dem richtigen Benutzer angemeldet sind.&lt;/p></description></item><item><title>Verwendung</title><link>https://cybertec-postgresql.github.io/cybertec_migrator/de/getting-started/usage/</link><pubDate>Mon, 29 Jul 2024 15:28:36 +0200</pubDate><guid>https://cybertec-postgresql.github.io/cybertec_migrator/de/getting-started/usage/</guid><description>&lt;p>Verwenden Sie Ihren Web-Browser um die vom Migrator im Terminal angezeigte (durch &lt;code>./migrator up&lt;/code>) URL aufzurufen.
+In unserem Beispiel wäre das &lt;code>https://localhost&lt;/code>, wobei sich dies durch Netzwerkgegebenheiten unterscheiden kann.&lt;/p>
+&lt;p>Die Standardkonfiguration des Migrators verwendet den standard &lt;code>443&lt;/code> HTTPS port.
+Dies kann in der &lt;code>.env&lt;/code> Datei (generiert durch &lt;code>./migrator configure&lt;/code>) durch setzen der &lt;code>EXTERNAL_HTTP_PORT&lt;/code> Variable angepasst werden.&lt;/p>
+&lt;p>Falls Sie keinen Zugriff auf laufende Oracle und/oder PostgreSQL Datenbanken verfügen und dennoch den Migrator testen wollen, probieren sie unser &lt;a
+ class="gdoc-markdown__link"
+ href="https://github.com/cybertec-postgresql/cybertec_migrator_demo"
+>Migrator demo database environment&lt;/a>.&lt;/p></description></item><item><title>Upgrade</title><link>https://cybertec-postgresql.github.io/cybertec_migrator/de/getting-started/upgrade/</link><pubDate>Thu, 25 Jul 2024 15:28:36 +0200</pubDate><guid>https://cybertec-postgresql.github.io/cybertec_migrator/de/getting-started/upgrade/</guid><description>&lt;p>Analog zur &lt;a
+ class="gdoc-markdown__link"
+ href="https://cybertec-postgresql.github.io/cybertec_migrator/de/getting-started/installation/"
+>installation&lt;/a> können Upgrades &lt;strong>online&lt;/strong> oder &lt;strong>offline&lt;/strong> durchgeführt werden.&lt;br>
+Upgrades zwischen verschiedenen Versionen können beliebig durchgeführt werden, es werden keine Daten verloren.&lt;/p>
+
+
+
+
+
+&lt;blockquote class="gdoc-hint warning">
+ &lt;div class="gdoc-hint__title flex align-center">&lt;i class="fa warning" title="Warning">&lt;/i>&lt;/div>
+ &lt;div class="gdoc-hint__text">Laufende Migrationen werden durch Upgrades &lt;em>unterbrochen&lt;/em>.&lt;/div>
+&lt;/blockquote>
+
+
+
+
+&lt;div class="gdoc-tabs">
+ &lt;input
+ type="radio"
+ class="gdoc-tabs__control hidden"
+ name="tabs-upgrade-variant"
+ id="tabs-upgrade-variant-0"
+ checked="checked"
+ />
+ &lt;label for="tabs-upgrade-variant-0" class="gdoc-tabs__label">
+ Online
+ &lt;/label>
+ &lt;div class="gdoc-markdown--nested gdoc-tabs__content">
+ &lt;ol>
+&lt;li>Abrufen der neuesten Versionen&lt;/li>
+&lt;li>Upgrade auf die neueste Version&lt;/li>
+&lt;li>Upgrade anwenden und Migrator neustarten&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-sh" data-lang="sh">&lt;span class="line">&lt;span class="cl">./migrator update
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">./migrator upgrade
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">./migrator up
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>
+ &lt;/div>
+ &lt;input
+ type="radio"
+ class="gdoc-tabs__control hidden"
+ name="tabs-upgrade-variant"
+ id="tabs-upgrade-variant-1"
+ 
+ />
+ &lt;label for="tabs-upgrade-variant-1" class="gdoc-tabs__label">
+ Offline
+ &lt;/label>
+ &lt;div class="gdoc-markdown--nested gdoc-tabs__content">
+ &lt;!-- raw HTML omitted -->
+&lt;ol>
+&lt;li>Abrufen der neuesten Versionen&lt;/li>
+&lt;li>Upgrade auf die Version des Pakets&lt;/li>
+&lt;li>Upgrade anwenden und Migrator neustarten&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-sh" data-lang="sh">&lt;span class="line">&lt;span class="cl">./migrator update --archive cybertec_migrator-edition-vX.Y.Z.tar.gz
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">./migrator upgrade --archive cybertec_migrator-edition-vX.Y.Z.tar.gz
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">./migrator up
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>
+ &lt;/div>
+&lt;/div></description></item><item><title>FAQ</title><link>https://cybertec-postgresql.github.io/cybertec_migrator/de/help/faq/</link><pubDate>Tue, 07 Mar 2023 14:26:51 +0100</pubDate><guid>https://cybertec-postgresql.github.io/cybertec_migrator/de/help/faq/</guid><description>&lt;div class="gdoc-toc gdoc-toc__level--6">
+ &lt;nav id="TableOfContents">
+ &lt;ul>
+ &lt;li>&lt;a href="#installation-und-konfiguration">Installation und Konfiguration&lt;/a>
+ &lt;ul>
+ &lt;li>&lt;a href="#wie-konfiguriere-ich-tcps-für-oracle-datenbanken">Wie konfiguriere ich TCPS für Oracle Datenbanken?&lt;/a>&lt;/li>
+ &lt;li>&lt;a href="#wie-generiere-ich-ein-selbst-signiertest-zertifikat">Wie generiere ich ein selbst-signiertest Zertifikat&lt;/a>&lt;/li>
+ &lt;li>&lt;a href="#wie-verwende-ich-ein-existierendes-zertifikat">Wie verwende ich ein existierendes Zertifikat?&lt;/a>&lt;/li>
+ &lt;li>&lt;a href="#wie-konfiguriere-ich-http-basic-auth">Wie konfiguriere ich HTTP Basic Auth?&lt;/a>&lt;/li>
+ &lt;li>&lt;a href="#wie-setze-ich-umgebungsvariablen">Wie setze ich Umgebungsvariablen&lt;/a>&lt;/li>
+ &lt;/ul>
+ &lt;/li>
+ &lt;li>&lt;a href="#berechtigungen">Berechtigungen&lt;/a>
+ &lt;ul>
+ &lt;li>&lt;a href="#welche-berechtigungen-benötigt-der-migrator-für-oracle">Welche Berechtigungen benötigt der Migrator für Oracle&lt;/a>&lt;/li>
+ &lt;/ul>
+ &lt;/li>
+ &lt;li>&lt;a href="#troubleshooting">Troubleshooting&lt;/a>
+ &lt;ul>
+ &lt;li>&lt;a href="#ora-12637-packet-receive-failed-während-die-oracle-verbindung-getestet-wird">&lt;code>ORA-12637: Packet receive failed&lt;/code> während die Oracle Verbindung getestet wird&lt;/a>&lt;/li>
+ &lt;/ul>
+ &lt;/li>
+ &lt;/ul>
+&lt;/nav>
+ &lt;hr />
+ &lt;/div>
+&lt;div class="flex align-center gdoc-page__anchorwrap">
+ &lt;h2 id="installation-und-konfiguration"
+ >
+ Installation und Konfiguration
+ &lt;/h2>
+ &lt;a data-clipboard-text="https://cybertec-postgresql.github.io/cybertec_migrator/de/help/faq/#installation-und-konfiguration" class="gdoc-page__anchor clip flex align-center" title="Link zu: Installation und Konfiguration" aria-label="Link zu: Installation und Konfiguration" href="#installation-und-konfiguration">
+ &lt;svg class="gdoc-icon gdoc_link">&lt;use xlink:href="#gdoc_link">&lt;/use>&lt;/svg>
+ &lt;/a>
+&lt;/div>
+&lt;div class="flex align-center gdoc-page__anchorwrap">
+ &lt;h3 id="wie-konfiguriere-ich-tcps-für-oracle-datenbanken"
+ >
+ Wie konfiguriere ich TCPS für Oracle Datenbanken?
+ &lt;/h3>
+ &lt;a data-clipboard-text="https://cybertec-postgresql.github.io/cybertec_migrator/de/help/faq/#wie-konfiguriere-ich-tcps-für-oracle-datenbanken" class="gdoc-page__anchor clip flex align-center" title="Link zu: Wie konfiguriere ich TCPS für Oracle Datenbanken?" aria-label="Link zu: Wie konfiguriere ich TCPS für Oracle Datenbanken?" href="#wie-konfiguriere-ich-tcps-f%c3%bcr-oracle-datenbanken">
+ &lt;svg class="gdoc-icon gdoc_link">&lt;use xlink:href="#gdoc_link">&lt;/use>&lt;/svg>
+ &lt;/a>
+&lt;/div>
+&lt;ul>
+&lt;li>
+&lt;p>Kopieren Sie &lt;code>sqlnet.ora&lt;/code> und &lt;code>tnsnames.ora&lt;/code> aus den Template Dateien.&lt;/p></description></item><item><title>Unterstütze Features</title><link>https://cybertec-postgresql.github.io/cybertec_migrator/de/features/oracle/supported-features/</link><pubDate>Fri, 26 Jul 2024 09:12:43 +0200</pubDate><guid>https://cybertec-postgresql.github.io/cybertec_migrator/de/features/oracle/supported-features/</guid><description>&lt;div class="flex align-center gdoc-page__anchorwrap">
+ &lt;h2 id="datenbank-objekttypen"
+ >
+ Datenbank-Objekttypen
+ &lt;/h2>
+ &lt;a data-clipboard-text="https://cybertec-postgresql.github.io/cybertec_migrator/de/features/oracle/supported-features/#datenbank-objekttypen" class="gdoc-page__anchor clip flex align-center" title="Link zu: Datenbank-Objekttypen" aria-label="Link zu: Datenbank-Objekttypen" href="#datenbank-objekttypen">
+ &lt;svg class="gdoc-icon gdoc_link">&lt;use xlink:href="#gdoc_link">&lt;/use>&lt;/svg>
+ &lt;/a>
+&lt;/div>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th style="text-align: left">CREATE&lt;/th>
+ &lt;th style="text-align: left">&lt;/th>
+ &lt;th style="text-align: left">Hinweis&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td style="text-align: left">DATABASE LINK&lt;/td>
+ &lt;td style="text-align: left">✅&lt;/td>
+ &lt;td style="text-align: left">Verwenden Sie PostgreSQL [Foreign Data Wrapper]&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">DIRECTORY&lt;/td>
+ &lt;td style="text-align: left">❌&lt;/td>
+ &lt;td style="text-align: left">&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">FUNCTION&lt;/td>
+ &lt;td style="text-align: left">✅&lt;/td>
+ &lt;td style="text-align: left">Code kann teils automatisch migriert werden&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">INDEX&lt;/td>
+ &lt;td style="text-align: left">✅&lt;/td>
+ &lt;td style="text-align: left">&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">MATERIALIZED VIEW&lt;/td>
+ &lt;td style="text-align: left">✅&lt;/td>
+ &lt;td style="text-align: left">&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">PACKAGE&lt;/td>
+ &lt;td style="text-align: left">✅&lt;/td>
+ &lt;td style="text-align: left">Code muss manuell migriert werden&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">PROCEDURE&lt;/td>
+ &lt;td style="text-align: left">✅&lt;/td>
+ &lt;td style="text-align: left">Code kann teils automatisch migriert werden&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">SCHEMA&lt;/td>
+ &lt;td style="text-align: left">✅&lt;/td>
+ &lt;td style="text-align: left">&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">SEQUENCE&lt;/td>
+ &lt;td style="text-align: left">✅&lt;/td>
+ &lt;td style="text-align: left">&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">SYNONYMS&lt;/td>
+ &lt;td style="text-align: left">✅&lt;/td>
+ &lt;td style="text-align: left">Müssen manuell migriert werden&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">TABLE&lt;/td>
+ &lt;td style="text-align: left">✅&lt;/td>
+ &lt;td style="text-align: left">Partitionen (hash, list, range) unterstützt&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">TRIGGER&lt;/td>
+ &lt;td style="text-align: left">✅&lt;/td>
+ &lt;td style="text-align: left">&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">TYPE&lt;/td>
+ &lt;td style="text-align: left">✅&lt;/td>
+ &lt;td style="text-align: left">&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">USER&lt;/td>
+ &lt;td style="text-align: left">❌&lt;/td>
+ &lt;td style="text-align: left">&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">VIEW&lt;/td>
+ &lt;td style="text-align: left">✅&lt;/td>
+ &lt;td style="text-align: left">&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+&lt;div class="flex align-center gdoc-page__anchorwrap">
+ &lt;h2 id="eingebaute-datentypen"
+ >
+ Eingebaute Datentypen
+ &lt;/h2>
+ &lt;a data-clipboard-text="https://cybertec-postgresql.github.io/cybertec_migrator/de/features/oracle/supported-features/#eingebaute-datentypen" class="gdoc-page__anchor clip flex align-center" title="Link zu: Eingebaute Datentypen" aria-label="Link zu: Eingebaute Datentypen" href="#eingebaute-datentypen">
+ &lt;svg class="gdoc-icon gdoc_link">&lt;use xlink:href="#gdoc_link">&lt;/use>&lt;/svg>
+ &lt;/a>
+&lt;/div>
+&lt;p>Genauere Informationen über die eingebauten Oracle Datentypen können in &lt;a
+ class="gdoc-markdown__link"
+ href="https://docs.oracle.com/en/database/oracle/oracle-database/19/sqlrf/Data-Types.html#GUID-7B72E154-677A-4342-A1EA-C74C1EA928E6"
+>Oracle SQL Language Reference&lt;/a> gefunden werden.&lt;/p></description></item><item><title>Code Transpilierung</title><link>https://cybertec-postgresql.github.io/cybertec_migrator/de/features/code-transpilation/</link><pubDate>Fri, 26 Jul 2024 09:11:10 +0200</pubDate><guid>https://cybertec-postgresql.github.io/cybertec_migrator/de/features/code-transpilation/</guid><description>&lt;p>Der CYBERTEC Migrator ist in der Lage, bestimmte PL/SQL-Konstrukte zu parsen, zu analysieren und automatisch nach PL/pgSQL zu transpilieren.
+Jedes unterstützte Konstrukt wird durch eine entsprechende Regel dargestellt.&lt;/p>
+&lt;p>Dieses Feature-Set wird ständig weiterentwickelt, wobei neue Regeln hinzugefügt werden, wo immer dies möglich ist.
+Wenn Sie einen Vorschlag für eine neue Regel haben, öffnen Sie bitte einen &lt;a
+ class="gdoc-markdown__link"
+ href="https://github.com/cybertec-postgresql/cybertec_migrator/issues/new?assignees=&amp;amp;labels=feature&amp;#43;request&amp;amp;template=feature_request.yml"
+>feature request&lt;/a>.&lt;/p>
+&lt;div class="gdoc-toc gdoc-toc__level--1">
+ &lt;nav id="TableOfContents">
+ &lt;ul>
+ &lt;li>&lt;a href="#cyar-0001-addparamlistparentheses">CYAR-0001: &lt;code>AddParamlistParentheses&lt;/code>&lt;/a>
+ &lt;ul>
+ &lt;li>&lt;a href="#beispiel">Beispiel&lt;/a>&lt;/li>
+ &lt;/ul>
+ &lt;/li>
+ &lt;li>&lt;a href="#cyar-0002-replaceprologue">CYAR-0002: &lt;code>ReplacePrologue&lt;/code>&lt;/a>
+ &lt;ul>
+ &lt;li>&lt;a href="#beispiel-1">Beispiel&lt;/a>&lt;/li>
+ &lt;/ul>
+ &lt;/li>
+ &lt;li>&lt;a href="#cyar-0003-replaceepilogue">CYAR-0003: &lt;code>ReplaceEpilogue&lt;/code>&lt;/a>
+ &lt;ul>
+ &lt;li>&lt;a href="#beispiel-2">Beispiel&lt;/a>&lt;/li>
+ &lt;/ul>
+ &lt;/li>
+ &lt;li>&lt;a href="#cyar-0004-fixtrunc">CYAR-0004: &lt;code>FixTrunc&lt;/code>&lt;/a>&lt;/li>
+ &lt;li>&lt;a href="#cyar-0005-replacesysdate">CYAR-0005: &lt;code>ReplaceSysdate&lt;/code>&lt;/a>
+ &lt;ul>
+ &lt;li>&lt;a href="#beispiel-3">Beispiel&lt;/a>&lt;/li>
+ &lt;/ul>
+ &lt;/li>
+ &lt;li>&lt;a href="#cyar-0006-replacenvl">CYAR-0006: &lt;code>ReplaceNvl&lt;/code>&lt;/a>
+ &lt;ul>
+ &lt;li>&lt;a href="#beispiel-4">Beispiel&lt;/a>&lt;/li>
+ &lt;/ul>
+ &lt;/li>
+ &lt;li>&lt;a href="#cyar-0007-removeeditionable">CYAR-0007: &lt;code>RemoveEditionable&lt;/code>&lt;/a>
+ &lt;ul>
+ &lt;li>&lt;a href="#beispiel-5">Beispiel&lt;/a>&lt;/li>
+ &lt;/ul>
+ &lt;/li>
+ &lt;li>&lt;a href="#cyar-0008-replacenvl2">CYAR-0008: &lt;code>ReplaceNvl2&lt;/code>&lt;/a>
+ &lt;ul>
+ &lt;li>&lt;a href="#beispiel-6">Beispiel&lt;/a>&lt;/li>
+ &lt;/ul>
+ &lt;/li>
+ &lt;/ul>
+&lt;/nav>
+ &lt;hr />
+ &lt;/div>
+&lt;div class="flex align-center gdoc-page__anchorwrap">
+ &lt;h2 id="cyar-0001-addparamlistparentheses"
+ >
+ CYAR-0001: &lt;code>AddParamlistParentheses&lt;/code>
+ &lt;/h2>
+ &lt;a data-clipboard-text="https://cybertec-postgresql.github.io/cybertec_migrator/de/features/code-transpilation/#cyar-0001-addparamlistparentheses" class="gdoc-page__anchor clip flex align-center" title="Link zu: CYAR-0001: AddParamlistParentheses" aria-label="Link zu: CYAR-0001: AddParamlistParentheses" href="#cyar-0001-addparamlistparentheses">
+ &lt;svg class="gdoc-icon gdoc_link">&lt;use xlink:href="#gdoc_link">&lt;/use>&lt;/svg>
+ &lt;/a>
+&lt;/div>
+&lt;p>In Oracle kann eine Prozedur ohne Parameter in ihrer Definition Klammern weglassen, während PostgreSQL sie immer benötigt.&lt;/p></description></item><item><title>EULA</title><link>https://cybertec-postgresql.github.io/cybertec_migrator/de/license/eula/</link><pubDate>Tue, 07 Mar 2023 14:26:51 +0100</pubDate><guid>https://cybertec-postgresql.github.io/cybertec_migrator/de/license/eula/</guid><description>&lt;div class="flex align-center gdoc-page__anchorwrap">
+ &lt;h1 id="endbenutzer-lizenzvereinbarung"
+ >
+ Endbenutzer-Lizenzvereinbarung
+ &lt;/h1>
+ &lt;a data-clipboard-text="https://cybertec-postgresql.github.io/cybertec_migrator/de/license/eula/#endbenutzer-lizenzvereinbarung" class="gdoc-page__anchor clip flex align-center" title="Link zu: Endbenutzer-Lizenzvereinbarung" aria-label="Link zu: Endbenutzer-Lizenzvereinbarung" href="#endbenutzer-lizenzvereinbarung">
+ &lt;svg class="gdoc-icon gdoc_link">&lt;use xlink:href="#gdoc_link">&lt;/use>&lt;/svg>
+ &lt;/a>
+&lt;/div>
+&lt;p>Zuletzt aktualisiert am: 02.05.2022&lt;/p>
+&lt;p>Dieser Endbenutzer-Lizenzvertrag (im Folgenden als „EULA“ bezeichnet) ist ein rechtsverbindlicher Vertrag zwischen Ihnen, dem Lizenznehmer, einem einzelnen Kunden oder einer juristischen Person, und der CYBERTEC PostgreSQL International GmbH, dem Unternehmen und dem Autor von CYBERTEC MIGRATOR, der Software, die zugehörige Medien, gedruckte Materialien und Online- oder elektronische Dokumentation enthalten kann. Diese Vereinbarung ist ein rechtsverbindlicher Vertrag, der Bedingungen enthält, die Ihre gesetzlichen Rechte und die Haftung des Lizenzgebers Ihnen gegenüber einschränken, und regelt den gesamten Zugriff auf und die Nutzung dieser Software. Sie erklären sich hiermit ohne Einschränkung oder Änderung mit allen hierin enthaltenen Bestimmungen und Bedingungen einverstanden.&lt;/p></description></item></channel></rss>
