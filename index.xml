@@ -1,58 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>CYBERTEC Migrator on CYBERTEC Migrator Documentation</title><link>https://cybertec-postgresql.github.io/cybertec_migrator/</link><description>Recent content in CYBERTEC Migrator on CYBERTEC Migrator Documentation</description><generator>Hugo</generator><language>en</language><lastBuildDate>Fri, 26 Jul 2024 09:12:43 +0200</lastBuildDate><atom:link href="https://cybertec-postgresql.github.io/cybertec_migrator/index.xml" rel="self" type="application/rss+xml"/><item><title>FAQ</title><link>https://cybertec-postgresql.github.io/cybertec_migrator/help/faq/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://cybertec-postgresql.github.io/cybertec_migrator/help/faq/</guid><description>&lt;div class="gdoc-toc gdoc-toc__level--6">
- &lt;nav id="TableOfContents">
- &lt;ul>
- &lt;li>&lt;a href="#installation-and-configuration">Installation and Configuration&lt;/a>
- &lt;ul>
- &lt;li>&lt;a href="#how-do-i-configure-tcps-for-oracle-databases">How do I configure TCPS for Oracle databases?&lt;/a>&lt;/li>
- &lt;li>&lt;a href="#how-do-i-generate-a-self-signed-certificate">How do I generate a self-signed certificate&lt;/a>&lt;/li>
- &lt;li>&lt;a href="#how-do-i-install-an-existing-certificate">How do I install an existing certificate?&lt;/a>&lt;/li>
- &lt;li>&lt;a href="#how-do-i-set-environment-variables">How do I set environment variables&lt;/a>&lt;/li>
- &lt;/ul>
- &lt;/li>
- &lt;li>&lt;a href="#permissions">Permissions&lt;/a>
- &lt;ul>
- &lt;li>&lt;/li>
- &lt;/ul>
- &lt;/li>
- &lt;li>&lt;a href="#troubleshooting">Troubleshooting&lt;/a>
- &lt;ul>
- &lt;li>&lt;a href="#ora-12637-packet-receive-failed-while-verifying-source-credentials">&lt;code>ORA-12637: Packet receive failed&lt;/code> while verifying source credentials&lt;/a>&lt;/li>
- &lt;/ul>
- &lt;/li>
- &lt;/ul>
-&lt;/nav>
- &lt;hr />
- &lt;/div>
-&lt;div class="flex align-center gdoc-page__anchorwrap">
- &lt;h2 id="installation-and-configuration"
- >
- Installation and Configuration
- &lt;/h2>
- &lt;a data-clipboard-text="https://cybertec-postgresql.github.io/cybertec_migrator/help/faq/#installation-and-configuration" class="gdoc-page__anchor clip flex align-center" title="Anchor to: Installation and Configuration" aria-label="Anchor to: Installation and Configuration" href="#installation-and-configuration">
- &lt;svg class="gdoc-icon gdoc_link">&lt;use xlink:href="#gdoc_link">&lt;/use>&lt;/svg>
- &lt;/a>
-&lt;/div>
-&lt;div class="flex align-center gdoc-page__anchorwrap">
- &lt;h3 id="how-do-i-configure-tcps-for-oracle-databases"
- >
- How do I configure TCPS for Oracle databases?
- &lt;/h3>
- &lt;a data-clipboard-text="https://cybertec-postgresql.github.io/cybertec_migrator/help/faq/#how-do-i-configure-tcps-for-oracle-databases" class="gdoc-page__anchor clip flex align-center" title="Anchor to: How do I configure TCPS for Oracle databases?" aria-label="Anchor to: How do I configure TCPS for Oracle databases?" href="#how-do-i-configure-tcps-for-oracle-databases">
- &lt;svg class="gdoc-icon gdoc_link">&lt;use xlink:href="#gdoc_link">&lt;/use>&lt;/svg>
- &lt;/a>
-&lt;/div>
-&lt;ul>
-&lt;li>
-&lt;p>Install &lt;code>sqlnet.ora&lt;/code> and &lt;code>tnsnames.ora&lt;/code> from the template files.&lt;/p></description></item><item><title>Glossary</title><link>https://cybertec-postgresql.github.io/cybertec_migrator/help/glossary/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://cybertec-postgresql.github.io/cybertec_migrator/help/glossary/</guid><description>&lt;div class="flex align-center gdoc-page__anchorwrap">
- &lt;h3 id="migration"
- >
- Migration
- &lt;/h3>
- &lt;a data-clipboard-text="https://cybertec-postgresql.github.io/cybertec_migrator/help/glossary/#migration" class="gdoc-page__anchor clip flex align-center" title="Anchor to: Migration" aria-label="Anchor to: Migration" href="#migration">
- &lt;svg class="gdoc-icon gdoc_link">&lt;use xlink:href="#gdoc_link">&lt;/use>&lt;/svg>
- &lt;/a>
-&lt;/div>
-&lt;p>A migration is the top-most differentiation within the CYBERTEC Migrator.&lt;/p></description></item><item><title>Requirements</title><link>https://cybertec-postgresql.github.io/cybertec_migrator/getting-started/requirements/</link><pubDate>Thu, 25 Jul 2024 15:27:44 +0200</pubDate><guid>https://cybertec-postgresql.github.io/cybertec_migrator/getting-started/requirements/</guid><description>&lt;p>&lt;em>CYBERTEC Migrator&lt;/em> is distributed as a set of &lt;a
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>CYBERTEC Migrator on CYBERTEC Migrator Documentation</title><link>https://cybertec-postgresql.github.io/cybertec_migrator/</link><description>Recent content in CYBERTEC Migrator on CYBERTEC Migrator Documentation</description><generator>Hugo</generator><language>en</language><lastBuildDate>Fri, 26 Jul 2024 09:12:43 +0200</lastBuildDate><atom:link href="https://cybertec-postgresql.github.io/cybertec_migrator/index.xml" rel="self" type="application/rss+xml"/><item><title>Requirements</title><link>https://cybertec-postgresql.github.io/cybertec_migrator/getting-started/requirements/</link><pubDate>Thu, 25 Jul 2024 15:27:44 +0200</pubDate><guid>https://cybertec-postgresql.github.io/cybertec_migrator/getting-started/requirements/</guid><description>&lt;p>&lt;em>CYBERTEC Migrator&lt;/em> is distributed as a set of &lt;a
  class="gdoc-markdown__link"
  href="https://github.com/opencontainers/image-spec/blob/main/spec.md"
 >container images&lt;/a> that are managed with the help of &lt;a
@@ -175,7 +121,52 @@ Upgrades between different editions may be done at will, no data will be lost.&l
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">./migrator up
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>
  &lt;/div>
-&lt;/div></description></item><item><title>Supported Features</title><link>https://cybertec-postgresql.github.io/cybertec_migrator/features/oracle/supported-features/</link><pubDate>Fri, 26 Jul 2024 09:12:43 +0200</pubDate><guid>https://cybertec-postgresql.github.io/cybertec_migrator/features/oracle/supported-features/</guid><description>&lt;div class="flex align-center gdoc-page__anchorwrap">
+&lt;/div></description></item><item><title>FAQ</title><link>https://cybertec-postgresql.github.io/cybertec_migrator/help/faq/</link><pubDate>Tue, 07 Mar 2023 14:26:51 +0100</pubDate><guid>https://cybertec-postgresql.github.io/cybertec_migrator/help/faq/</guid><description>&lt;div class="gdoc-toc gdoc-toc__level--6">
+ &lt;nav id="TableOfContents">
+ &lt;ul>
+ &lt;li>&lt;a href="#installation-and-configuration">Installation and Configuration&lt;/a>
+ &lt;ul>
+ &lt;li>&lt;a href="#how-do-i-configure-tcps-for-oracle-databases">How do I configure TCPS for Oracle databases?&lt;/a>&lt;/li>
+ &lt;li>&lt;a href="#how-do-i-generate-a-self-signed-certificate">How do I generate a self-signed certificate&lt;/a>&lt;/li>
+ &lt;li>&lt;a href="#how-do-i-install-an-existing-certificate">How do I install an existing certificate?&lt;/a>&lt;/li>
+ &lt;li>&lt;a href="#how-do-i-set-environment-variables">How do I set environment variables&lt;/a>&lt;/li>
+ &lt;/ul>
+ &lt;/li>
+ &lt;li>&lt;a href="#permissions">Permissions&lt;/a>
+ &lt;ul>
+ &lt;li>&lt;/li>
+ &lt;/ul>
+ &lt;/li>
+ &lt;li>&lt;a href="#troubleshooting">Troubleshooting&lt;/a>
+ &lt;ul>
+ &lt;li>&lt;a href="#ora-12637-packet-receive-failed-while-verifying-source-credentials">&lt;code>ORA-12637: Packet receive failed&lt;/code> while verifying source credentials&lt;/a>&lt;/li>
+ &lt;/ul>
+ &lt;/li>
+ &lt;/ul>
+&lt;/nav>
+ &lt;hr />
+ &lt;/div>
+&lt;div class="flex align-center gdoc-page__anchorwrap">
+ &lt;h2 id="installation-and-configuration"
+ >
+ Installation and Configuration
+ &lt;/h2>
+ &lt;a data-clipboard-text="https://cybertec-postgresql.github.io/cybertec_migrator/help/faq/#installation-and-configuration" class="gdoc-page__anchor clip flex align-center" title="Anchor to: Installation and Configuration" aria-label="Anchor to: Installation and Configuration" href="#installation-and-configuration">
+ &lt;svg class="gdoc-icon gdoc_link">&lt;use xlink:href="#gdoc_link">&lt;/use>&lt;/svg>
+ &lt;/a>
+&lt;/div>
+&lt;div class="flex align-center gdoc-page__anchorwrap">
+ &lt;h3 id="how-do-i-configure-tcps-for-oracle-databases"
+ >
+ How do I configure TCPS for Oracle databases?
+ &lt;/h3>
+ &lt;a data-clipboard-text="https://cybertec-postgresql.github.io/cybertec_migrator/help/faq/#how-do-i-configure-tcps-for-oracle-databases" class="gdoc-page__anchor clip flex align-center" title="Anchor to: How do I configure TCPS for Oracle databases?" aria-label="Anchor to: How do I configure TCPS for Oracle databases?" href="#how-do-i-configure-tcps-for-oracle-databases">
+ &lt;svg class="gdoc-icon gdoc_link">&lt;use xlink:href="#gdoc_link">&lt;/use>&lt;/svg>
+ &lt;/a>
+&lt;/div>
+&lt;ul>
+&lt;li>
+&lt;p>Install &lt;code>sqlnet.ora&lt;/code> and &lt;code>tnsnames.ora&lt;/code> from the template files.&lt;/p></description></item><item><title>Supported Features</title><link>https://cybertec-postgresql.github.io/cybertec_migrator/features/oracle/supported-features/</link><pubDate>Fri, 26 Jul 2024 09:12:43 +0200</pubDate><guid>https://cybertec-postgresql.github.io/cybertec_migrator/features/oracle/supported-features/</guid><description>&lt;div class="flex align-center gdoc-page__anchorwrap">
  &lt;h2 id="database-object-types"
  >
  Database Object Types
