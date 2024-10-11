@@ -129,12 +129,13 @@ Upgrades between different editions may be done at will, no data will be lost.&l
  &lt;li>&lt;a href="#how-do-i-configure-tcps-for-oracle-databases">How do I configure TCPS for Oracle databases?&lt;/a>&lt;/li>
  &lt;li>&lt;a href="#how-do-i-generate-a-self-signed-certificate">How do I generate a self-signed certificate&lt;/a>&lt;/li>
  &lt;li>&lt;a href="#how-do-i-install-an-existing-certificate">How do I install an existing certificate?&lt;/a>&lt;/li>
+ &lt;li>&lt;a href="#how-do-i-configure-http-basic-auth">How do I configure HTTP Basic Auth?&lt;/a>&lt;/li>
  &lt;li>&lt;a href="#how-do-i-set-environment-variables">How do I set environment variables&lt;/a>&lt;/li>
  &lt;/ul>
  &lt;/li>
  &lt;li>&lt;a href="#permissions">Permissions&lt;/a>
  &lt;ul>
- &lt;li>&lt;/li>
+ &lt;li>&lt;a href="#what-permissions-does-the-migrator-require-for-oracle">What permissions does the Migrator require for Oracle&lt;/a>&lt;/li>
  &lt;/ul>
  &lt;/li>
  &lt;li>&lt;a href="#troubleshooting">Troubleshooting&lt;/a>
