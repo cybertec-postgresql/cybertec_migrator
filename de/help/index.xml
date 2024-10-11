@@ -1,4 +1,13 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Hilfe on CYBERTEC Migrator Documentation</title><link>https://cybertec-postgresql.github.io/cybertec_migrator/de/help/</link><description>Recent content in Hilfe on CYBERTEC Migrator Documentation</description><generator>Hugo</generator><language>de</language><lastBuildDate>Tue, 07 Mar 2023 14:26:51 +0100</lastBuildDate><atom:link href="https://cybertec-postgresql.github.io/cybertec_migrator/de/help/index.xml" rel="self" type="application/rss+xml"/><item><title>FAQ</title><link>https://cybertec-postgresql.github.io/cybertec_migrator/de/help/faq/</link><pubDate>Tue, 07 Mar 2023 14:26:51 +0100</pubDate><guid>https://cybertec-postgresql.github.io/cybertec_migrator/de/help/faq/</guid><description>&lt;div class="gdoc-toc gdoc-toc__level--6">
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Hilfe on CYBERTEC Migrator Documentation</title><link>https://cybertec-postgresql.github.io/cybertec_migrator/de/help/</link><description>Recent content in Hilfe on CYBERTEC Migrator Documentation</description><generator>Hugo</generator><language>de</language><lastBuildDate>Tue, 07 Mar 2023 14:26:51 +0100</lastBuildDate><atom:link href="https://cybertec-postgresql.github.io/cybertec_migrator/de/help/index.xml" rel="self" type="application/rss+xml"/><item><title>Glossar</title><link>https://cybertec-postgresql.github.io/cybertec_migrator/de/help/glossary/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://cybertec-postgresql.github.io/cybertec_migrator/de/help/glossary/</guid><description>&lt;div class="flex align-center gdoc-page__anchorwrap">
+ &lt;h3 id="migration"
+ >
+ Migration
+ &lt;/h3>
+ &lt;a data-clipboard-text="https://cybertec-postgresql.github.io/cybertec_migrator/de/help/glossary/#migration" class="gdoc-page__anchor clip flex align-center" title="Link zu: Migration" aria-label="Link zu: Migration" href="#migration">
+ &lt;svg class="gdoc-icon gdoc_link">&lt;use xlink:href="#gdoc_link">&lt;/use>&lt;/svg>
+ &lt;/a>
+&lt;/div>
+&lt;p>Innerhalb des CYBERTEC Migrators ist eine Migration das oberste Objekt, mit dem wir arbeiten.&lt;/p></description></item><item><title>FAQ</title><link>https://cybertec-postgresql.github.io/cybertec_migrator/de/help/faq/</link><pubDate>Tue, 07 Mar 2023 14:26:51 +0100</pubDate><guid>https://cybertec-postgresql.github.io/cybertec_migrator/de/help/faq/</guid><description>&lt;div class="gdoc-toc gdoc-toc__level--6">
  &lt;nav id="TableOfContents">
  &lt;ul>
  &lt;li>&lt;a href="#installation-und-konfiguration">Installation und Konfiguration&lt;/a>
@@ -6,13 +15,12 @@
  &lt;li>&lt;a href="#wie-konfiguriere-ich-tcps-für-oracle-datenbanken">Wie konfiguriere ich TCPS für Oracle Datenbanken?&lt;/a>&lt;/li>
  &lt;li>&lt;a href="#wie-generiere-ich-ein-selbst-signiertest-zertifikat">Wie generiere ich ein selbst-signiertest Zertifikat&lt;/a>&lt;/li>
  &lt;li>&lt;a href="#wie-verwende-ich-ein-existierendes-zertifikat">Wie verwende ich ein existierendes Zertifikat?&lt;/a>&lt;/li>
- &lt;li>&lt;a href="#wie-konfiguriere-ich-http-basic-auth">Wie konfiguriere ich HTTP Basic Auth?&lt;/a>&lt;/li>
  &lt;li>&lt;a href="#wie-setze-ich-umgebungsvariablen">Wie setze ich Umgebungsvariablen&lt;/a>&lt;/li>
  &lt;/ul>
  &lt;/li>
  &lt;li>&lt;a href="#berechtigungen">Berechtigungen&lt;/a>
  &lt;ul>
- &lt;li>&lt;a href="#welche-berechtigungen-benötigt-der-migrator-für-oracle">Welche Berechtigungen benötigt der Migrator für Oracle&lt;/a>&lt;/li>
+ &lt;li>&lt;/li>
  &lt;/ul>
  &lt;/li>
  &lt;li>&lt;a href="#troubleshooting">Troubleshooting&lt;/a>

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Installation on CYBERTEC Migrator Documentation</title><link>https://cybertec-postgresql.github.io/cybertec_migrator/de/getting-started/installation/</link><description>Recent content in Installation on CYBERTEC Migrator Documentation</description><generator>Hugo</generator><language>de</language><lastBuildDate>Thu, 25 Jul 2024 15:28:36 +0200</lastBuildDate><atom:link href="https://cybertec-postgresql.github.io/cybertec_migrator/de/getting-started/installation/index.xml" rel="self" type="application/rss+xml"/><item><title>Online</title><link>https://cybertec-postgresql.github.io/cybertec_migrator/de/getting-started/installation/online/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://cybertec-postgresql.github.io/cybertec_migrator/de/getting-started/installation/online/</guid><description>&lt;p>Die Docker-Images sind in der &lt;a
+ class="gdoc-markdown__link"
+ href="https://hub.docker.com/"
+>Docker Hub&lt;/a> Registry verfügbar.&lt;/p>
+&lt;p>Bitte &lt;a
+ class="gdoc-markdown__link"
+ href="#contact"
+>setzen Sie sich mit uns in Verbindung&lt;/a>, wenn Ihrem Konto kein Zugriff auf die entsprechenden Images gewährt wurde.
+Vergewissern Sie sich, dass Sie in der DockerHub Registry mit dem richtigen Benutzer angemeldet sind.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-sh" data-lang="sh">&lt;span class="line">&lt;span class="cl">cat ~/password.txt &lt;span class="p">|&lt;/span> docker login --username &amp;lt;username&amp;gt; --password-stdin
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol>
+&lt;li>Klonen dieses Repositories&lt;/li>
+&lt;li>Wechseln des Arbeitsverzeichnisses in das geklonten Repository&lt;/li>
+&lt;li>Generierung der Standardkonfiguration mit der gewählten Edition&lt;/li>
+&lt;li>Herunterladen der Container Images&lt;/li>
+&lt;li>Generierung oder einhängen eines TLS/SSL-Zertifikates (siehe &lt;a
+ class="gdoc-markdown__link"
+ href="https://cybertec-postgresql.github.io/cybertec_migrator/de/help/faq/"
+>FAQ&lt;/a> für weitere Details)&lt;/li>
+&lt;li>Starten des Migrators&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-sh" data-lang="sh">&lt;span class="line">&lt;span class="cl">➜ git clone https://github.com/cybertec-postgresql/cybertec_migrator
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">➜ &lt;span class="nb">cd&lt;/span> cybertec_migrator
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">➜ ./migrator configure professional
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">[&lt;/span>OK&lt;span class="o">]&lt;/span> Generated environment file
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">[&lt;/span>INFO&lt;span class="o">]&lt;/span> Run &lt;span class="s1">&amp;#39;./migrator install&amp;#39;&lt;/span> to &lt;span class="nb">complete&lt;/span> setup
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">➜ ./migrator install
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">[&lt;/span>INFO&lt;span class="o">]&lt;/span> Pulling images &lt;span class="k">for&lt;/span> professional:v3.19.0
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Pulling core_db ... &lt;span class="k">done&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Pulling core ... &lt;span class="k">done&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Pulling web_gui ... &lt;span class="k">done&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">[&lt;/span>OK&lt;span class="o">]&lt;/span> Pulled professional:v3.19.0
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">[&lt;/span>INFO&lt;span class="o">]&lt;/span> Upgraded to professional:v3.19.0
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">[&lt;/span>WARN&lt;span class="o">]&lt;/span> Could not find TLS/SSL certificate
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">[&lt;/span>INFO&lt;span class="o">]&lt;/span> Run &lt;span class="s1">&amp;#39;./migrator configure --tls self-signed-cert&amp;#39;&lt;/span> to generate a self-signed TLS/SSL certificate
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">➜ ./migrator configure --tls self-signed-cert
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">[&lt;/span>INFO&lt;span class="o">]&lt;/span> Generating self-signed TLS/SSL certificate
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Creating cybertec_migrator_web_gui_run ... &lt;span class="k">done&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Generating a RSA private key
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">.+++++
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">........................+++++
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">writing new private key to &lt;span class="s1">&amp;#39;/etc/nginx/certs/nginx.key&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">-----
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">You are about to be asked to enter information that will be incorporated
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">into your certificate request.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">What you are about to enter is what is called a Distinguished Name or a DN.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">There are quite a few fields but you can leave some blank
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">For some fields there will be a default value,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">If you enter &lt;span class="s1">&amp;#39;.&amp;#39;&lt;/span>, the field will be left blank.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">-----
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Country Name &lt;span class="o">(&lt;/span>&lt;span class="m">2&lt;/span> letter code&lt;span class="o">)&lt;/span> &lt;span class="o">[&lt;/span>AU&lt;span class="o">]&lt;/span>:AT
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">State or Province Name &lt;span class="o">(&lt;/span>full name&lt;span class="o">)&lt;/span> &lt;span class="o">[&lt;/span>Some-State&lt;span class="o">]&lt;/span>:Lower Austria
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Locality Name &lt;span class="o">(&lt;/span>eg, city&lt;span class="o">)&lt;/span> &lt;span class="o">[]&lt;/span>:Wöllersdorf
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Organization Name &lt;span class="o">(&lt;/span>eg, company&lt;span class="o">)&lt;/span> &lt;span class="o">[&lt;/span>Internet Widgits Pty Ltd&lt;span class="o">]&lt;/span>:CYBERTEC PostgreSQL International GmbH
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Organizational Unit Name &lt;span class="o">(&lt;/span>eg, section&lt;span class="o">)&lt;/span> &lt;span class="o">[]&lt;/span>:CYBERTEC Solutions
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Common Name &lt;span class="o">(&lt;/span>e.g. server FQDN or YOUR name&lt;span class="o">)&lt;/span> &lt;span class="o">[]&lt;/span>:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Email Address &lt;span class="o">[]&lt;/span>:invalid@cybertec.at
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Creating cybertec_migrator_web_gui_run ... &lt;span class="k">done&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">[&lt;/span>OK&lt;span class="o">]&lt;/span> Generated self-signed TLS/SSL certificate
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">[&lt;/span>INFO&lt;span class="o">]&lt;/span> Run &lt;span class="s1">&amp;#39;./migrator up&amp;#39;&lt;/span> to switch to new version
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">[&lt;/span>WARN&lt;span class="o">]&lt;/span> Switching will abort running migrations
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">➜ ./migrator up
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Recreating cybertec_migrator_core_db_1 ... &lt;span class="k">done&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Recreating cybertec_migrator_core_1 ... &lt;span class="k">done&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Recreating cybertec_migrator_web_gui_1 ... &lt;span class="k">done&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">[&lt;/span>OK&lt;span class="o">]&lt;/span> Started on &lt;span class="s1">&amp;#39;https://localhost&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Offline</title><link>https://cybertec-postgresql.github.io/cybertec_migrator/de/getting-started/installation/offline/</link><pubDate>Thu, 25 Jul 2024 15:28:36 +0200</pubDate><guid>https://cybertec-postgresql.github.io/cybertec_migrator/de/getting-started/installation/offline/</guid><description>&lt;p>Das Offline-Installationspaket für die &lt;a
+ class="gdoc-markdown__link"
+ href="https://www.cybertec-postgresql.com/de/products/cybertec-migrator#form"
+>Trial Edition&lt;/a> kann kostenlos heruntergeladen werden.
+Für die Professional oder Enterprise Edition fordern Sie bitte &lt;a
+ class="gdoc-markdown__link"
+ href="#contact"
+>Kontakt mit uns an&lt;/a>, um Zugang zu unserem Download-Server zu erhalten.&lt;/p>
+&lt;ol>
+&lt;li>Entpacken des bereitgestellten Archives&lt;/li>
+&lt;li>Wechseln des Arbeitsverzeichnisses in den entpackten Ordner&lt;/li>
+&lt;li>Generierung der Standardkonfiguration mit der gewählten Edition&lt;/li>
+&lt;li>Importieren der Container Images aus dem Archiv&lt;/li>
+&lt;li>Generierung oder einhängen eines TLS/SSL-Zertifikates (siehe &lt;a
+ class="gdoc-markdown__link"
+ href="https://cybertec-postgresql.github.io/cybertec_migrator/de/help/faq/"
+>FAQ&lt;/a> für weitere Details)&lt;/li>
+&lt;li>Starten des Migrators&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-sh" data-lang="sh">&lt;span class="line">&lt;span class="cl">➜ tar xf cybertec_migrator-trial-v3.19.0.tar.gz
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">➜ &lt;span class="nb">cd&lt;/span> cybertec_migrator
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">➜ ./migrator configure trial
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">[&lt;/span>OK&lt;span class="o">]&lt;/span> Generated environment file
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">[&lt;/span>INFO&lt;span class="o">]&lt;/span> Run &lt;span class="s1">&amp;#39;./migrator install --archive &amp;lt;archive_file&amp;gt;&amp;#39;&lt;/span> to &lt;span class="nb">complete&lt;/span> setup
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">➜ ./migrator install --archive ../cybertec_migrator-trial-v3.19.0.tar.gz  ✔  at 15:37:52 
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">[&lt;/span>INFO&lt;span class="o">]&lt;/span> Reading meta-information from archive file &lt;span class="s1">&amp;#39;../cybertec_migrator-trial-v3.19.0.tar.gz&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">[&lt;/span>INFO&lt;span class="o">]&lt;/span> Upgrading to trial:v3.19.0
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">[&lt;/span>INFO&lt;span class="o">]&lt;/span> Extracting archive file &lt;span class="s1">&amp;#39;../cybertec_migrator-trial-v3.19.0.tar.gz&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">[&lt;/span>INFO&lt;span class="o">]&lt;/span> Loading container images
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Loaded image: cybertecpostgresql/cybertec_migrator-trial-core:v3.19.0
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Loaded image: cybertecpostgresql/cybertec_migrator-trial-web_gui:v3.19.0
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Loaded image: postgres:13-alpine
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">[&lt;/span>INFO&lt;span class="o">]&lt;/span> Container images loaded
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">[&lt;/span>INFO&lt;span class="o">]&lt;/span> Archived container images
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">[&lt;/span>INFO&lt;span class="o">]&lt;/span> Upgraded to trial:v3.19.0
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">[&lt;/span>WARN&lt;span class="o">]&lt;/span> Could not find TLS/SSL certificate
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">[&lt;/span>INFO&lt;span class="o">]&lt;/span> Run &lt;span class="s1">&amp;#39;./migrator configure --tls self-signed-cert&amp;#39;&lt;/span> to generate a self-signed TLS/SSL certificate
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">➜ ./migrator configure --tls self-signed-cert
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">[&lt;/span>INFO&lt;span class="o">]&lt;/span> Generating self-signed TLS/SSL certificate
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Creating cybertec_migrator_web_gui_run ... &lt;span class="k">done&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Generating a RSA private key
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">.+++++
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">........................+++++
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">writing new private key to &lt;span class="s1">&amp;#39;/etc/nginx/certs/nginx.key&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">-----
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">You are about to be asked to enter information that will be incorporated
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">into your certificate request.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">What you are about to enter is what is called a Distinguished Name or a DN.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">There are quite a few fields but you can leave some blank
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">For some fields there will be a default value,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">If you enter &lt;span class="s1">&amp;#39;.&amp;#39;&lt;/span>, the field will be left blank.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">-----
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Country Name &lt;span class="o">(&lt;/span>&lt;span class="m">2&lt;/span> letter code&lt;span class="o">)&lt;/span> &lt;span class="o">[&lt;/span>AU&lt;span class="o">]&lt;/span>:AT
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">State or Province Name &lt;span class="o">(&lt;/span>full name&lt;span class="o">)&lt;/span> &lt;span class="o">[&lt;/span>Some-State&lt;span class="o">]&lt;/span>:Lower Austria
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Locality Name &lt;span class="o">(&lt;/span>eg, city&lt;span class="o">)&lt;/span> &lt;span class="o">[]&lt;/span>:Wöllersdorf
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Organization Name &lt;span class="o">(&lt;/span>eg, company&lt;span class="o">)&lt;/span> &lt;span class="o">[&lt;/span>Internet Widgits Pty Ltd&lt;span class="o">]&lt;/span>:CYBERTEC PostgreSQL International GmbH
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Organizational Unit Name &lt;span class="o">(&lt;/span>eg, section&lt;span class="o">)&lt;/span> &lt;span class="o">[]&lt;/span>:CYBERTEC Solutions
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Common Name &lt;span class="o">(&lt;/span>e.g. server FQDN or YOUR name&lt;span class="o">)&lt;/span> &lt;span class="o">[]&lt;/span>:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Email Address &lt;span class="o">[]&lt;/span>:invalid@cybertec.at
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Creating cybertec_migrator_web_gui_run ... &lt;span class="k">done&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">[&lt;/span>OK&lt;span class="o">]&lt;/span> Generated self-signed TLS/SSL certificate
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">[&lt;/span>INFO&lt;span class="o">]&lt;/span> Run &lt;span class="s1">&amp;#39;./migrator up&amp;#39;&lt;/span> to switch to new version
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">[&lt;/span>WARN&lt;span class="o">]&lt;/span> Switching will abort running migrations
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">➜ ./migrator up
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Recreating cybertec_migrator_core_db_1 ... &lt;span class="k">done&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Recreating cybertec_migrator_core_1 ... &lt;span class="k">done&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Recreating cybertec_migrator_web_gui_1 ... &lt;span class="k">done&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">[&lt;/span>OK&lt;span class="o">]&lt;/span> Started on &lt;span class="s1">&amp;#39;https://localhost&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>

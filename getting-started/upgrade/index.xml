@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Upgrade on CYBERTEC Migrator Documentation</title><link>https://cybertec-postgresql.github.io/cybertec_migrator/getting-started/upgrade/</link><description>Recent content in Upgrade on CYBERTEC Migrator Documentation</description><generator>Hugo</generator><language>en</language><lastBuildDate>Mon, 01 Jan 0001 00:00:00 +0000</lastBuildDate><atom:link href="https://cybertec-postgresql.github.io/cybertec_migrator/getting-started/upgrade/index.xml" rel="self" type="application/rss+xml"/><item><title>Online</title><link>https://cybertec-postgresql.github.io/cybertec_migrator/getting-started/upgrade/online/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://cybertec-postgresql.github.io/cybertec_migrator/getting-started/upgrade/online/</guid><description>&lt;blockquote class="gdoc-hint warning">
+ &lt;div class="gdoc-hint__title flex align-center">&lt;i class="fa warning" title="Warning">&lt;/i>&lt;/div>
+ &lt;div class="gdoc-hint__text">Running migrations &lt;em>will&lt;/em> be interrupted by applying upgrades.&lt;/div>
+&lt;/blockquote>
+
+&lt;ol>
+&lt;li>Update release information&lt;/li>
+&lt;li>Upgrade to newest version&lt;/li>
+&lt;li>Apply upgrade&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-sh" data-lang="sh">&lt;span class="line">&lt;span class="cl">./migrator update
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">./migrator upgrade
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">./migrator up
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Offline</title><link>https://cybertec-postgresql.github.io/cybertec_migrator/getting-started/upgrade/offline/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://cybertec-postgresql.github.io/cybertec_migrator/getting-started/upgrade/offline/</guid><description>&lt;blockquote class="gdoc-hint warning">
+ &lt;div class="gdoc-hint__title flex align-center">&lt;i class="fa warning" title="Warning">&lt;/i>&lt;/div>
+ &lt;div class="gdoc-hint__text">Running migrations &lt;em>will&lt;/em> be interrupted by applying upgrades.&lt;/div>
+&lt;/blockquote>
+
+
+
+
+
+
+&lt;blockquote class="gdoc-hint tip">
+ &lt;div class="gdoc-hint__title flex align-center">&lt;i class="fa tip" title="Tip">&lt;/i>&lt;/div>
+ &lt;div class="gdoc-hint__text">Installation archives also serve for upgrading the Migrator.&lt;/div>
+&lt;/blockquote>
+
+&lt;ol>
+&lt;li>Update release information&lt;/li>
+&lt;li>Upgrade to version bundled in archive&lt;/li>
+&lt;li>Apply upgrade&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-sh" data-lang="sh">&lt;span class="line">&lt;span class="cl">./migrator update --archive cybertec_migrator-edition-vX.Y.Z.tar.gz
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">./migrator upgrade --archive cybertec_migrator-edition-vX.Y.Z.tar.gz
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">./migrator up
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>
