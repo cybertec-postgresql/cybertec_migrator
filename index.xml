@@ -363,7 +363,22 @@ The &lt;code>EXTERNAL_HTTP_PORT&lt;/code> variable in the &lt;code>.env&lt;/code
 &lt;p>Detailed information about Oracle built-in data types may be found in the &lt;a
  class="gdoc-markdown__link"
  href="https://docs.oracle.com/en/database/oracle/oracle-database/19/sqlrf/Data-Types.html#GUID-7B72E154-677A-4342-A1EA-C74C1EA928E6"
->Oracle SQL Language Reference&lt;/a>.&lt;/p></description></item><item><title>Code Transpilation</title><link>https://cybertec-postgresql.github.io/cybertec_migrator/features/code-transpilation/</link><pubDate>Fri, 26 Jul 2024 09:11:10 +0200</pubDate><guid>https://cybertec-postgresql.github.io/cybertec_migrator/features/code-transpilation/</guid><description>&lt;p>The CYBERTEC Migrator is able to parse, analyze and transpile certain PL/SQL constructs to PL/pgSQL automatically.
+>Oracle SQL Language Reference&lt;/a>.&lt;/p></description></item><item><title>EULA</title><link>https://cybertec-postgresql.github.io/cybertec_migrator/license/eula/</link><pubDate>Tue, 07 Mar 2023 14:26:51 +0100</pubDate><guid>https://cybertec-postgresql.github.io/cybertec_migrator/license/eula/</guid><description>&lt;div class="flex align-center gdoc-page__anchorwrap">
+ &lt;h1 id="end-user-license-agreement"
+ >
+ End-User License Agreement
+ &lt;/h1>
+ &lt;a data-clipboard-text="https://cybertec-postgresql.github.io/cybertec_migrator/license/eula/#end-user-license-agreement" class="gdoc-page__anchor clip flex align-center" title="Anchor to: End-User License Agreement" aria-label="Anchor to: End-User License Agreement" href="#end-user-license-agreement">
+ &lt;svg class="gdoc-icon gdoc_link">&lt;use xlink:href="#gdoc_link">&lt;/use>&lt;/svg>
+ &lt;/a>
+&lt;/div>
+&lt;p>Last updated: 02.05.2022&lt;/p>
+&lt;p>This End-User License Agreement (referred to as the &amp;ldquo;EULA&amp;rdquo;) is a legally binding agreement between you, the Licensee, an
+individual customer or entity, and the CYBERTEC PostgreSQL International GmbH, the company, and the author of CYBERTEC
+MIGRATOR, the Software, which may include associated media, printed materials, and online or electronic documentation.
+This Agreement is a legally binding contract that includes terms that limit your legal rights and Licensors&amp;rsquo; liability
+to you, and shall govern all access to and use of this Software. You hereby agree, without limitation or alteration, to
+all the terms and conditions contained herein.&lt;/p></description></item><item><title>Code Transpilation</title><link>https://cybertec-postgresql.github.io/cybertec_migrator/features/code-transpilation/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://cybertec-postgresql.github.io/cybertec_migrator/features/code-transpilation/</guid><description>&lt;p>The CYBERTEC Migrator is able to parse, analyze and transpile certain PL/SQL constructs to PL/pgSQL automatically.
 Each supported construct is represented by a corresponding rule.&lt;/p>
 &lt;p>This feature-set is under ongoing development, adding new rules wherever possible.
 If you have a suggestion for a new rule, please open a &lt;a
@@ -422,19 +437,4 @@ If you have a suggestion for a new rule, please open a &lt;a
  &lt;svg class="gdoc-icon gdoc_link">&lt;use xlink:href="#gdoc_link">&lt;/use>&lt;/svg>
  &lt;/a>
 &lt;/div>
-&lt;p>In Oracle, a procedure without parameters may omit parentheses in its definition, whereas PostgreSQL always requires them.&lt;/p></description></item><item><title>EULA</title><link>https://cybertec-postgresql.github.io/cybertec_migrator/license/eula/</link><pubDate>Tue, 07 Mar 2023 14:26:51 +0100</pubDate><guid>https://cybertec-postgresql.github.io/cybertec_migrator/license/eula/</guid><description>&lt;div class="flex align-center gdoc-page__anchorwrap">
- &lt;h1 id="end-user-license-agreement"
- >
- End-User License Agreement
- &lt;/h1>
- &lt;a data-clipboard-text="https://cybertec-postgresql.github.io/cybertec_migrator/license/eula/#end-user-license-agreement" class="gdoc-page__anchor clip flex align-center" title="Anchor to: End-User License Agreement" aria-label="Anchor to: End-User License Agreement" href="#end-user-license-agreement">
- &lt;svg class="gdoc-icon gdoc_link">&lt;use xlink:href="#gdoc_link">&lt;/use>&lt;/svg>
- &lt;/a>
-&lt;/div>
-&lt;p>Last updated: 02.05.2022&lt;/p>
-&lt;p>This End-User License Agreement (referred to as the &amp;ldquo;EULA&amp;rdquo;) is a legally binding agreement between you, the Licensee, an
-individual customer or entity, and the CYBERTEC PostgreSQL International GmbH, the company, and the author of CYBERTEC
-MIGRATOR, the Software, which may include associated media, printed materials, and online or electronic documentation.
-This Agreement is a legally binding contract that includes terms that limit your legal rights and Licensors&amp;rsquo; liability
-to you, and shall govern all access to and use of this Software. You hereby agree, without limitation or alteration, to
-all the terms and conditions contained herein.&lt;/p></description></item></channel></rss>
+&lt;p>In Oracle, a procedure without parameters may omit parentheses in its definition, whereas PostgreSQL always requires them.&lt;/p></description></item></channel></rss>
