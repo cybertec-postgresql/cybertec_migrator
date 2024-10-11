@@ -6,13 +6,12 @@
  &lt;li>&lt;a href="#wie-konfiguriere-ich-tcps-für-oracle-datenbanken">Wie konfiguriere ich TCPS für Oracle Datenbanken?&lt;/a>&lt;/li>
  &lt;li>&lt;a href="#wie-generiere-ich-ein-selbst-signiertest-zertifikat">Wie generiere ich ein selbst-signiertest Zertifikat&lt;/a>&lt;/li>
  &lt;li>&lt;a href="#wie-verwende-ich-ein-existierendes-zertifikat">Wie verwende ich ein existierendes Zertifikat?&lt;/a>&lt;/li>
- &lt;li>&lt;a href="#wie-konfiguriere-ich-http-basic-auth">Wie konfiguriere ich HTTP Basic Auth?&lt;/a>&lt;/li>
  &lt;li>&lt;a href="#wie-setze-ich-umgebungsvariablen">Wie setze ich Umgebungsvariablen&lt;/a>&lt;/li>
  &lt;/ul>
  &lt;/li>
  &lt;li>&lt;a href="#berechtigungen">Berechtigungen&lt;/a>
  &lt;ul>
- &lt;li>&lt;a href="#welche-berechtigungen-benötigt-der-migrator-für-oracle">Welche Berechtigungen benötigt der Migrator für Oracle&lt;/a>&lt;/li>
+ &lt;li>&lt;/li>
  &lt;/ul>
  &lt;/li>
  &lt;li>&lt;a href="#troubleshooting">Troubleshooting&lt;/a>
