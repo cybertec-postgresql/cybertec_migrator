@@ -254,11 +254,17 @@ installed_from_archive() {
 
 generate_self_signed_certificate() {
     info "Generating self-signed TLS/SSL certificate"
-    docker compose run --no-deps web_gui \
-        openssl req -x509 -nodes -newkey rsa:2048 \
-        -keyout "${NGINX_SSL_CERTIFICATE_KEY}" -out "${NGINX_SSL_CERTIFICATE}"
-    docker compose run --no-deps web_gui \
-        chown $UID:$(id -g) "${NGINX_SSL_CERTIFICATE_KEY}" "${NGINX_SSL_CERTIFICATE}"
+    edition=$(print_env 'EDITION')
+    version=$(print_env 'VERSION')
+    docker run -it \
+        cybertecpostgresql/cybertec_migrator-${edition}-web_gui:${version} \
+        bash -c "openssl genrsa -out /tmp/nginx.key 4096 && cat /tmp/nginx.key" \
+        > ./volumes/web_gui/nginx/certs/nginx.key
+    docker run -it \
+        --mount "type=bind,source=$(pwd)/volumes/web_gui/nginx/certs/nginx.key,target=/tmp/nginx.key" \
+        cybertecpostgresql/cybertec_migrator-${edition}-web_gui:${version} \
+        bash -c "openssl req -new -key /tmp/nginx.key -x509 -out /tmp/nginx.crt -days 3650 -subj \"/C=AT/ST=Lower Austria/L=Wöllersdorf/O=CYBERTEC PostgreSQL International GmbH/OU=Development/CN=cybertec.at\" && cat /tmp/nginx.crt" \
+        > ./volumes/web_gui/nginx/certs/nginx.crt
     ok "Generated self-signed TLS/SSL certificate"
     next_step_upgrade
 }

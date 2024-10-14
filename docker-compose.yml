@@ -10,13 +10,15 @@ services:
     depends_on:
       core:
         condition: service_started
+    environment:
+      - FRONTEND_BASE_URL=${FRONTEND_BASE_URL:-}
     volumes:
-      - ./volumes/web_gui/nginx/templates:/etc/nginx/templates
+      - ./volumes/web_gui/nginx/htpasswd:/etc/nginx/htpasswd
       - ./volumes/web_gui/nginx/certs:/etc/nginx/certs
     networks:
       - common
     ports:
-      - ${EXTERNAL_HTTP_PORT}:443
+      - ${EXTERNAL_HTTP_PORT}:8443
 
   # Migrator core exposed as REST service API
   core:

@@ -9,3 +9,4 @@ volumes/core/config/oracle/wallet/*.lck
 volumes/core/config/oracle/wallet/*.p12
 volumes/core/config/oracle/wallet/*.sso
 volumes/web_gui/nginx/certs/nginx.*
+volumes/web_gui/nginx/htpasswd/.htpasswd
