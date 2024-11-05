@@ -43,10 +43,6 @@ case "${1}" in
     env_barrier
     command_configure "$@"
     ;;
-  versions)
-    env_barrier
-    sanctioned_tags
-    ;;
   version)
     env_barrier
     print_env 'VERSION'

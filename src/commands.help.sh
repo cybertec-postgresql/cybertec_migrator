@@ -12,7 +12,6 @@ $(highlight "down")                                   Stop Migrator
 $(highlight "logs")                                   Print logs
 
 $(highlight "version")                                Display current version
-$(highlight "versions")                               Display all sanctioned versions
 
 $(highlight "upgrade")                                Upgrade to newest version
 $(highlight "upgrade") --archive <archive-file>       Upgrade to version contained in archive
