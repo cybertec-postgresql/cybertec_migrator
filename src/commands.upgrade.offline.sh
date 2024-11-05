@@ -3,7 +3,6 @@
 # SPDX-License-Identifier: MIT
 # SPDX-FileCopyrightText: 2022-2024 CYBERTEC PostgreSQL International GmbH <office@cybertec.at>
 
-source ./barriers.sh
 source ./constants.sh
 source ./env.sh
 source ./images.load.sh
