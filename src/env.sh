@@ -10,6 +10,12 @@ env_file_exists() {
   [ -f "${ENV_FILE}" ]
 }
 
+env_barrier() {
+  if ! env_file_exists; then
+    error "Initial configuration outstanding (run $(highlight "'./migrator install'"))"
+  fi
+}
+
 print_env() {
   env -i "${BASH}" -c "set -a; . "${ENV_FILE}"; set +a; echo \${${1}};"
 }
