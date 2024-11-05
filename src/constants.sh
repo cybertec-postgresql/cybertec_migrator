@@ -18,7 +18,6 @@ ENV_FILE='../.env'
 IMAGE_PATH='images'
 
 # These files exist only if the directory was provided by on offline installation package
-ARCH_FILE='.arch'
 EDITION_FILE='.edition'
 VERSION_FILE='.version'
 
