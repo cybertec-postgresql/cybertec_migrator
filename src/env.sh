@@ -38,7 +38,13 @@ generate_env_file() {
   password="$(generate_random 'A-Za-z0-9!&()*+,-./:;<=>?@{|}~' 32)"
   encryption_key="$(generate_random 'A-Za-z0-9' 32)"
   encryption_iv="$(generate_random 'A-Za-z0-9' 16)"
-  version="$(git describe --exact-match --tags HEAD)"
+
+  version=""
+  if installed_from_archive; then
+    version="$(cat "../${VERSION_FILE}")"
+  else
+    version="$(git describe --exact-match --tags HEAD)"
+  fi
 
   cat <<EOF > "${ENV_FILE}"
 # —— User configurable ——
