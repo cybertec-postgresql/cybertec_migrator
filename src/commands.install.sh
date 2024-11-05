@@ -24,7 +24,14 @@ command_install() {
     exit 1
   fi
   local arch="$(detect_arch)"
-  local edition="$(prompt_edition)"
+
+  local edition=""
+  if installed_from_archive; then
+    edition="$(cat "../${EDITION_FILE}")"
+  else
+    edition="$(prompt_edition)"
+  fi
+
   local runtime="$(prompt_runtime)"
 
   generate_env_file
@@ -56,9 +63,6 @@ detect_arch() {
 
 prompt_edition() {
   local edition="trial"
-  if installed_from_archive; then
-    edition=$(cat "../${EDITION_FILE}")
-  fi
   while true; do
     read -p "Migrator Edition (trial, professional, enterprise) [$edition]: " result
     case $result in
