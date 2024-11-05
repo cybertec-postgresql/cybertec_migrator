@@ -15,7 +15,7 @@ command_install() {
     error "Unable to install: $(highlight "env file already exists")"
   fi
 
-  # TODO: Handle git unsafe directory error case
+  git config --global --add safe.directory "*"
 
   info "You are about to be asked to enter some information relevant to the installation."
   info "The allowed values are in normal brackets, the default value in square brackets."
