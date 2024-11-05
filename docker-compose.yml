@@ -1,8 +1,5 @@
 # SPDX-License-Identifier: MIT
 # SPDX-FileCopyrightText: 2022-2023 CYBERTEC PostgreSQL International GmbH <office@cybertec.at>
-
-version: "3"
-
 services:
   # Single page application served via nginx web server
   web_gui:
