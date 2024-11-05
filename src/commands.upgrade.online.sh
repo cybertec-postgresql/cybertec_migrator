@@ -10,7 +10,8 @@ command_upgrade_online() {
   info 'Updating release information'
   git fetch || error 'Could not fetch versions'
 
-  local version="$(most_recent_tag)"
+  local arch=$(print_env 'ARCH')
+  local version="$(git tag --list --sort=-v:refname "*-${arch}" | head -n 1)"
   info "Upgrading to version $(highlight "${version}")"
   set_env_file_variable 'VERSION' "${version}"
 

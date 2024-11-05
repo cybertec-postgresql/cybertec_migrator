@@ -11,14 +11,6 @@ generate_random() {
   LC_ALL=C tr -dc "${PASSWORD_CHARSET}" </dev/urandom | head -c "${PASSWORD_LENGTH}"
 }
 
-sanctioned_tags() {
-  git tag --sort=-v:refname
-}
-
-most_recent_tag() {
-  sanctioned_tags | head -n 1
-}
-
 # TODO: Switch to .meta-inf file which contains more information
 installed_from_archive() {
   [ -f "../${VERSION_FILE}" ] && return
