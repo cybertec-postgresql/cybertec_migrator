@@ -67,10 +67,7 @@ prompt_edition() {
     read -p "Migrator Edition (trial, professional, enterprise) [$edition]: " result
     case $result in
       "") break ;;
-      assessment) ;&
-      trial) ;&
-      professional) ;&
-      enterprise) edition=$result; break ;;
+      assessment|trial|professional|enterprise) edition=$result; break ;;
       * ) ;;
     esac
   done
@@ -91,8 +88,7 @@ prompt_runtime() {
     read -p "Container runtime (docker, podman) [$runtime]: " result
     case $result in
       "") break ;;
-      docker) ;&
-      podman) runtime=$result; break ;;
+      docker|podman) runtime=$result; break ;;
       * ) ;;
     esac
   done
