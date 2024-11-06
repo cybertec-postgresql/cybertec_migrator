@@ -18,6 +18,6 @@ generate_self_signed_certificate() {
     > ../volumes/web_gui/nginx/certs/nginx.key
   runtime_run ${image} \
     "openssl req -new -key /tmp/nginx.key -x509 -out /tmp/nginx.crt -days 3650 -subj \\\"/C=AT/ST=Lower Austria/L=Wöllersdorf/O=CYBERTEC PostgreSQL International GmbH/OU=Development/CN=cybertec.at\\\" && cat /tmp/nginx.crt" \
-    "type=bind,source=$(pwd)/../volumes/web_gui/nginx/certs/nginx.key,target=/tmp/nginx.key" \
+    "type=bind,source=\"$(pwd)/../volumes/web_gui/nginx/certs/nginx.key\",target=/tmp/nginx.key" \
     > ../volumes/web_gui/nginx/certs/nginx.crt
 }
