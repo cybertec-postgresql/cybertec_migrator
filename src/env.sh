@@ -22,10 +22,11 @@ print_env() {
 
 set_env_file_variable() {
   if grep "^$1=.*$" "${ENV_FILE}" &>/dev/null; then
-    sed -i -e "s/^$1=.*$/$1=$2/" "${ENV_FILE}"
+    sed -i.bak -e "s/^$1=.*$/$1=$2/" "${ENV_FILE}"
   else
-    sed -i "1{G;s/$/$1=$2/}" "${ENV_FILE}"
+    sed -i.bak "1{G;s/$/$1=$2/}" "${ENV_FILE}"
   fi
+  rm "${ENV_FILE}.bak"
 }
 
 generate_env_file() {
