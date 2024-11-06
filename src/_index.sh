@@ -43,6 +43,10 @@ case "${1}" in
     env_barrier
     command_configure "$@"
     ;;
+  edition)
+    env_barrier
+    print_env 'EDITION'
+    ;;
   version)
     env_barrier
     print_env 'VERSION'

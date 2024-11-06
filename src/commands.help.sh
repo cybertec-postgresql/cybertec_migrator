@@ -11,6 +11,7 @@ $(highlight "up")                                     Start Migrator in backgrou
 $(highlight "down")                                   Stop Migrator
 $(highlight "logs")                                   Print logs
 
+$(highlight "edition")                                Display current edition
 $(highlight "version")                                Display current version
 
 $(highlight "upgrade")                                Upgrade to newest version
