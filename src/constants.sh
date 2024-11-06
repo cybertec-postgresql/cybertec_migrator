@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # SPDX-License-Identifier: MIT
-# SPDX-FileCopyrightText: 2022-2023 CYBERTEC PostgreSQL International GmbH <office@cybertec.at>
+# SPDX-FileCopyrightText: 2022-2024 CYBERTEC PostgreSQL International GmbH <office@cybertec.at>
 
 HTTPS_PORT_DEFAULT=443
 

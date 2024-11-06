@@ -40,6 +40,13 @@ command_install() {
   set_env_file_variable "EDITION" "${edition}"
   set_env_file_variable "CONTAINER_RUNTIME" "${runtime}"
 
+  if [[ $runtime = "podman" ]]; then
+    set_env_file_variable "EXTERNAL_HTTP_PORT" "8443"
+  fi
+
+  # Source the runtime again so it may now load the correct functions depending on the environment variable
+  source ./runtime.sh
+
   if installed_from_archive; then
     load_images_from_path "../${IMAGE_PATH}";
   else
