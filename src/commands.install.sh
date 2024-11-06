@@ -54,8 +54,8 @@ command_install() {
 detect_arch() {
   local architecture=""
   case $(uname -m) in
-    x86_64)  architecture="amd64" ;;
-    aarch64) architecture="arm64" ;;
+    x86_64) architecture="amd64" ;;
+    aarch64|arm64) architecture="arm64" ;;
     *)
       error "Unable to detect architecture $(highlight "$(uname -m)")"
       error "Please file a ticket so we may resolve this issue:"
