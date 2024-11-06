@@ -22,9 +22,12 @@ print_env() {
 
 set_env_file_variable() {
   if grep "^$1=.*$" "${ENV_FILE}" &>/dev/null; then
+    # Replace the value
     sed -i.bak -e "s/^$1=.*$/$1=$2/" "${ENV_FILE}"
   else
-    sed -i.bak "1{G;s/$/$1=$2/}" "${ENV_FILE}"
+    # Insert the value in the second line of the env file
+    cp "${ENV_FILE}" "${ENV_FILE}.bak"
+    awk "NR==1{print; print \"$1=$2\"} NR!=1" "${ENV_FILE}.bak" > "${ENV_FILE}"
   fi
   rm "${ENV_FILE}.bak"
 }
