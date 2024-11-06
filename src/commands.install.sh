@@ -56,7 +56,13 @@ detect_arch() {
   case $(uname -m) in
     x86_64)  architecture="amd64" ;;
     aarch64) architecture="arm64" ;;
-    *) error "Unable to detect architecture $(highlight "$(uname -m)")"; exit 1 ;;
+    *)
+      error "Unable to detect architecture $(highlight "$(uname -m)")"
+      error "Please file a ticket so we may resolve this issue:"
+      error "    Public:    https://github.com/cybertec-postgresql/cybertec_migrator/issues/new/choose"
+      error "    Customers: https://cybertec.atlassian.net/servicedesk/customer/portal/3/group/4/create/23"
+      exit 1
+      ;;
   esac
   echo "${architecture}"
 }
