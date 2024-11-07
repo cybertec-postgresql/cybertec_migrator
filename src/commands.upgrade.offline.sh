@@ -15,8 +15,10 @@ command_upgrade_offline() {
   info "Extracting archive"
   temp_dir="$(mktemp -t "${TEMP_TEMPLATE}" -d)"
   trap 'rm -rf -- "${temp_dir}"' EXIT
-  extraction_error=$(tar -xf "${archive}" --strip-components=2 --directory "${temp_dir}" 2>&1 > /dev/null) \
-    || error "Failed to extract archive file\n$extraction_error"
+  extraction_error=$(tar -xf "${archive}" --strip-components=2 --directory "${temp_dir}" 2>&1 > /dev/null) || true
+  if [ ! -z "${extraction_error}" ]; then
+    error "Failed to extract archive file:\n$extraction_error"
+  fi
 
   info "Updating release information"
   git fetch --quiet --tags "${temp_dir}/.git" 1>/dev/null

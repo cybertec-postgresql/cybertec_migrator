@@ -11,7 +11,7 @@ source ./runtime.sh
 command_upgrade() {
   if [ -z "${2}" ]; then
       command_upgrade_online
-  elif [ "${2}" = '--archive' ] && [ -f "${3}" ]; then
+  elif [ "${2}" = '--archive' ]; then
       command_upgrade_offline "${3}"
   else
       error 'Unexpected usage'
