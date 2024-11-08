@@ -59,8 +59,8 @@ CONTAINER_RUNTIME=docker
 
 # —— Internal ⚠ ——
 CORE_DB_PASSWORD="${password}"
-CORE_ENCRYPTION_KEY="${encryption_key}"
-CORE_ENCRYPTION_IV="${encryption_iv}"
+CORE_ENCRYPTION_KEY=${encryption_key}
+CORE_ENCRYPTION_IV=${encryption_iv}
 EOF
 
   chmod 600 "${ENV_FILE}"
