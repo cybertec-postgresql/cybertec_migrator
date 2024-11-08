@@ -36,7 +36,7 @@ runtime_run() {
   local mount="${3}"
 
   if [ -n "${mount}" ]; then
-    mount="--mount ${mount}"
+    mount="--volume ${mount}"
   fi
 
   eval "podman run ${mount} ${image} bash -c \"${cmd}\""

@@ -10,8 +10,8 @@ services:
     environment:
       - FRONTEND_BASE_URL=${FRONTEND_BASE_URL:-}
     volumes:
-      - ./volumes/web_gui/nginx/htpasswd:/etc/nginx/htpasswd
-      - ./volumes/web_gui/nginx/certs:/etc/nginx/certs
+      - ./volumes/web_gui/nginx/htpasswd:/etc/nginx/htpasswd:Z
+      - ./volumes/web_gui/nginx/certs:/etc/nginx/certs:Z
     networks:
       - common
     ports:
@@ -31,7 +31,7 @@ services:
       core_db:
         condition: service_healthy
     volumes:
-      - ./volumes/core/config:/app/config
+      - ./volumes/core/config:/app/config:Z
     networks:
       - common
 
