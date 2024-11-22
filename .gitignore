@@ -1,5 +1,6 @@
 .env
 .meta-inf
+.edition
 .version
 .idea
 images/

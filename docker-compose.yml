@@ -1,8 +1,5 @@
 # SPDX-License-Identifier: MIT
-# SPDX-FileCopyrightText: 2022-2023 CYBERTEC PostgreSQL International GmbH <office@cybertec.at>
-
-version: "3"
-
+# SPDX-FileCopyrightText: 2022-2024 CYBERTEC PostgreSQL International GmbH <office@cybertec.at>
 services:
   # Single page application served via nginx web server
   web_gui:
@@ -13,8 +10,8 @@ services:
     environment:
       - FRONTEND_BASE_URL=${FRONTEND_BASE_URL:-}
     volumes:
-      - ./volumes/web_gui/nginx/htpasswd:/etc/nginx/htpasswd
-      - ./volumes/web_gui/nginx/certs:/etc/nginx/certs
+      - ./volumes/web_gui/nginx/htpasswd:/etc/nginx/htpasswd:Z
+      - ./volumes/web_gui/nginx/certs:/etc/nginx/certs:Z
     networks:
       - common
     ports:
@@ -34,7 +31,7 @@ services:
       core_db:
         condition: service_healthy
     volumes:
-      - ./volumes/core/config:/app/config
+      - ./volumes/core/config:/app/config:Z
     networks:
       - common
 
