@@ -1,26 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Erste Schritte on CYBERTEC Migrator Documentation</title><link>https://cybertec-postgresql.github.io/cybertec_migrator/de/getting-started/</link><description>Recent content in Erste Schritte on CYBERTEC Migrator Documentation</description><generator>Hugo</generator><language>de</language><lastBuildDate>Mon, 29 Jul 2024 15:28:36 +0200</lastBuildDate><atom:link href="https://cybertec-postgresql.github.io/cybertec_migrator/de/getting-started/index.xml" rel="self" type="application/rss+xml"/><item><title>Voraussetzungen</title><link>https://cybertec-postgresql.github.io/cybertec_migrator/de/getting-started/requirements/</link><pubDate>Thu, 25 Jul 2024 15:27:44 +0200</pubDate><guid>https://cybertec-postgresql.github.io/cybertec_migrator/de/getting-started/requirements/</guid><description>&lt;p>&lt;em>CYBERTEC Migrator&lt;/em> wird als eine Reihe von &lt;a
- class="gdoc-markdown__link"
- href="https://github.com/opencontainers/image-spec/blob/main/spec.md"
->Container Images&lt;/a> vertrieben, welche durch &lt;a
- class="gdoc-markdown__link"
- href="https://docs.docker.com/compose/"
->Docker Compose&lt;/a> orchestriert werden.&lt;/p>
-&lt;ul>
-&lt;li>&lt;a
- class="gdoc-markdown__link--code"
- href="https://docs.docker.com/get-docker/"
->&lt;code>docker&lt;/code>&lt;/a>&lt;/li>
-&lt;li>&lt;a
- class="gdoc-markdown__link--code"
- href="https://docs.docker.com/compose/install/"
->&lt;code>docker compose&lt;/code>&lt;/a> (&lt;code>&amp;gt;= 2.0.0&lt;/code>)&lt;/li>
-&lt;li>&lt;code>git&lt;/code> (&lt;code>&amp;gt;= 2.20.1&lt;/code>)&lt;/li>
-&lt;li>&lt;code>bash&lt;/code> (&lt;code>&amp;gt;= 4.0&lt;/code>)&lt;/li>
-&lt;/ul></description></item><item><title>Verwendung</title><link>https://cybertec-postgresql.github.io/cybertec_migrator/de/getting-started/usage/</link><pubDate>Mon, 29 Jul 2024 15:28:36 +0200</pubDate><guid>https://cybertec-postgresql.github.io/cybertec_migrator/de/getting-started/usage/</guid><description>&lt;p>Verwenden Sie Ihren Web-Browser um die vom Migrator im Terminal angezeigte (durch &lt;code>./migrator up&lt;/code>) URL aufzurufen.
-In unserem Beispiel wäre das &lt;code>https://localhost&lt;/code>, wobei sich dies durch Netzwerkgegebenheiten unterscheiden kann.&lt;/p>
-&lt;p>Die Standardkonfiguration des Migrators verwendet den standard &lt;code>443&lt;/code> HTTPS port.
-Dies kann in der &lt;code>.env&lt;/code> Datei (generiert durch &lt;code>./migrator configure&lt;/code>) durch setzen der &lt;code>EXTERNAL_HTTP_PORT&lt;/code> Variable angepasst werden.&lt;/p>
-&lt;p>Falls Sie keinen Zugriff auf laufende Oracle und/oder PostgreSQL Datenbanken verfügen und dennoch den Migrator testen wollen, probieren sie unser &lt;a
- class="gdoc-markdown__link"
- href="https://github.com/cybertec-postgresql/cybertec_migrator_demo"
->Migrator demo database environment&lt;/a>.&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Erste Schritte on CYBERTEC Migrator Documentation</title><link>https://cybertec-postgresql.github.io/cybertec_migrator/de/getting-started/</link><description>Recent content in Erste Schritte on CYBERTEC Migrator Documentation</description><generator>Hugo</generator><language>de</language><lastBuildDate>Mon, 29 Jul 2024 15:28:36 +0200</lastBuildDate><atom:link href="https://cybertec-postgresql.github.io/cybertec_migrator/de/getting-started/index.xml" rel="self" type="application/rss+xml"/><item><title>Voraussetzungen</title><link>https://cybertec-postgresql.github.io/cybertec_migrator/de/getting-started/requirements/</link><pubDate>Thu, 25 Jul 2024 15:27:44 +0200</pubDate><guid>https://cybertec-postgresql.github.io/cybertec_migrator/de/getting-started/requirements/</guid><description>CYBERTEC Migrator wird als eine Reihe von Container Images vertrieben, welche durch Docker Compose orchestriert werden.
+docker oder podman docker compose (&amp;gt;= 2.0.0) oder podman-compose git (&amp;gt;= 2.20.1) bash (&amp;gt;= 4.0)</description></item><item><title>Verwendung</title><link>https://cybertec-postgresql.github.io/cybertec_migrator/de/getting-started/usage/</link><pubDate>Mon, 29 Jul 2024 15:28:36 +0200</pubDate><guid>https://cybertec-postgresql.github.io/cybertec_migrator/de/getting-started/usage/</guid><description>Verwenden Sie Ihren Web-Browser um die vom Migrator im Terminal angezeigte (durch ./migrator up) URL aufzurufen. In unserem Beispiel wäre das https://localhost, wobei sich dies durch Netzwerkgegebenheiten unterscheiden kann.
+Die Standardkonfiguration des Migrators verwendet den standard 443 HTTPS port. Dies kann in der .env Datei (generiert durch ./migrator install) durch setzen der EXTERNAL_HTTP_PORT Variable angepasst werden.
+Falls Sie keinen Zugriff auf laufende Oracle und/oder PostgreSQL Datenbanken verfügen und dennoch den Migrator testen wollen, probieren sie unser Migrator demo database environment.</description></item></channel></rss>

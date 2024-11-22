@@ -1,16 +1,2 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>License on CYBERTEC Migrator Documentation</title><link>https://cybertec-postgresql.github.io/cybertec_migrator/license/</link><description>Recent content in License on CYBERTEC Migrator Documentation</description><generator>Hugo</generator><language>en</language><lastBuildDate>Tue, 07 Mar 2023 14:26:51 +0100</lastBuildDate><atom:link href="https://cybertec-postgresql.github.io/cybertec_migrator/license/index.xml" rel="self" type="application/rss+xml"/><item><title>EULA</title><link>https://cybertec-postgresql.github.io/cybertec_migrator/license/eula/</link><pubDate>Tue, 07 Mar 2023 14:26:51 +0100</pubDate><guid>https://cybertec-postgresql.github.io/cybertec_migrator/license/eula/</guid><description>&lt;div class="flex align-center gdoc-page__anchorwrap">
- &lt;h1 id="end-user-license-agreement"
- >
- End-User License Agreement
- &lt;/h1>
- &lt;a data-clipboard-text="https://cybertec-postgresql.github.io/cybertec_migrator/license/eula/#end-user-license-agreement" class="gdoc-page__anchor clip flex align-center" title="Anchor to: End-User License Agreement" aria-label="Anchor to: End-User License Agreement" href="#end-user-license-agreement">
- &lt;svg class="gdoc-icon gdoc_link">&lt;use xlink:href="#gdoc_link">&lt;/use>&lt;/svg>
- &lt;/a>
-&lt;/div>
-&lt;p>Last updated: 02.05.2022&lt;/p>
-&lt;p>This End-User License Agreement (referred to as the &amp;ldquo;EULA&amp;rdquo;) is a legally binding agreement between you, the Licensee, an
-individual customer or entity, and the CYBERTEC PostgreSQL International GmbH, the company, and the author of CYBERTEC
-MIGRATOR, the Software, which may include associated media, printed materials, and online or electronic documentation.
-This Agreement is a legally binding contract that includes terms that limit your legal rights and Licensors&amp;rsquo; liability
-to you, and shall govern all access to and use of this Software. You hereby agree, without limitation or alteration, to
-all the terms and conditions contained herein.&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>License on CYBERTEC Migrator Documentation</title><link>https://cybertec-postgresql.github.io/cybertec_migrator/license/</link><description>Recent content in License on CYBERTEC Migrator Documentation</description><generator>Hugo</generator><language>en</language><lastBuildDate>Tue, 07 Mar 2023 14:26:51 +0100</lastBuildDate><atom:link href="https://cybertec-postgresql.github.io/cybertec_migrator/license/index.xml" rel="self" type="application/rss+xml"/><item><title>EULA</title><link>https://cybertec-postgresql.github.io/cybertec_migrator/license/eula/</link><pubDate>Tue, 07 Mar 2023 14:26:51 +0100</pubDate><guid>https://cybertec-postgresql.github.io/cybertec_migrator/license/eula/</guid><description>End-User License Agreement Last updated: 02.05.2022
+This End-User License Agreement (referred to as the &amp;ldquo;EULA&amp;rdquo;) is a legally binding agreement between you, the Licensee, an individual customer or entity, and the CYBERTEC PostgreSQL International GmbH, the company, and the author of CYBERTEC MIGRATOR, the Software, which may include associated media, printed materials, and online or electronic documentation. This Agreement is a legally binding contract that includes terms that limit your legal rights and Licensors&amp;rsquo; liability to you, and shall govern all access to and use of this Software.</description></item></channel></rss>
