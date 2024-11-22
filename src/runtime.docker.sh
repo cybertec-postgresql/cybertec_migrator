@@ -4,19 +4,19 @@
 # SPDX-FileCopyrightText: 2022-2024 CYBERTEC PostgreSQL International GmbH <office@cybertec.at>
 
 runtime_up() {
-  docker compose up -d
+  docker compose --env-file ../.env up -d
 }
 
 runtime_down() {
-  docker compose down
+  docker compose --env-file ../.env down
 }
 
 runtime_pull() {
-  docker compose pull 2>&1 > /dev/null
+  docker compose --env-file ../.env pull 2>&1 > /dev/null
 }
 
 runtime_logs() {
-  docker compose logs --timestamps --tail='all' $1
+  docker compose --env-file ../.env logs --timestamps --tail='all' $1
 }
 
 runtime_load() {
@@ -29,7 +29,7 @@ runtime_run() {
   local mount="${3}"
 
   if [ -n "${mount}" ]; then
-    mount="--mount ${mount}"
+    mount="--volume ${mount}"
   fi
 
   eval "docker run ${mount} ${image} bash -c \"${cmd}\""

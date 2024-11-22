@@ -5,6 +5,7 @@
 
 source ./constants.sh
 source ./util.sh
+source ./patches.sh
 
 env_file_exists() {
   [ -f "${ENV_FILE}" ]
@@ -14,6 +15,8 @@ env_barrier() {
   if ! env_file_exists; then
     error "Initial configuration outstanding (run $(highlight "'./migrator install'"))"
   fi
+
+  v3_20_0_add_arch_and_container_runtime
 }
 
 print_env() {

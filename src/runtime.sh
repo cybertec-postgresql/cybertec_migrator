@@ -7,6 +7,7 @@ source ./env.sh
 source ./console.sh
 
 if env_file_exists; then
+  v3_20_0_add_arch_and_container_runtime
   case "$(print_env 'CONTAINER_RUNTIME')" in
     docker) source ./runtime.docker.sh ;;
     podman) source ./runtime.podman.sh ;;
