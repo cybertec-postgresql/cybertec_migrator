@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: core-db
-          image: docker.io/postgres:13-alpine
+          image: {{ .Values.postgres.image }}
           volumeMounts:
             - name: initdb
               mountPath: /docker-entrypoint-initdb.d
@@ -33,7 +33,7 @@ spec:
                   optional: false
 
         - name: core
-          image: docker.io/cybertecpostgresql/cybertec_migrator-enterprise-core:{{ .Values.image.release }}
+          image: "{{ .Values.image.repository }}/core:{{ .Values.image.release }}"
           env:
 
             - name: CORE_DB_PASSWORD
@@ -71,7 +71,7 @@ spec:
               subPath: oracle
 
         - name: web-gui
-          image: docker.io/cybertecpostgresql/cybertec_migrator-enterprise-web_gui:{{ .Values.image.release }}
+          image: "{{ .Values.image.repository }}/web_gui:{{ .Values.image.release }}
           volumeMounts:
             - name: nginx-config
               mountPath: /etc/nginx/

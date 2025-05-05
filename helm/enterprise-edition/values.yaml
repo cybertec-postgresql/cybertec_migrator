@@ -1,7 +1,7 @@
 # Values file for the CYBERTEC-Migrator Helm-Chart
 
 image:
-  repository: containers.cybertec.at
+  repository: containers.cybertec.at/cybertec_migrator_enterprise
   pullPolicy: IfNotPresent
   release: "v3.19.0"
 
@@ -26,3 +26,6 @@ migrator:
     core_config: 
       size: 5Gi
       storageClass: standard
+
+postgres:
+  image: docker.io/postgres:13-alpine
