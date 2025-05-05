@@ -3,7 +3,7 @@
 services:
   # Single page application served via nginx web server
   web_gui:
-    image: docker.io/cybertecpostgresql/cybertec_migrator-${EDITION}-web_gui:${VERSION}
+    image: containers.cybertec.at/cybertec_migrator-${EDITION}/web_gui:${VERSION}
     depends_on:
       core:
         condition: service_started
@@ -19,7 +19,7 @@ services:
 
   # Migrator core exposed as REST service API
   core:
-    image: docker.io/cybertecpostgresql/cybertec_migrator-${EDITION}-core:${VERSION}
+    image: containers.cybertec.at/cybertec_migrator-${EDITION}/core:${VERSION}
     env_file: .env
     environment:
       # —— Internal database ——
@@ -37,7 +37,7 @@ services:
 
   # Internal Migrator database
   core_db:
-    image: docker.io/postgres:13-alpine
+    image: docker.io/postgres:17-alpine3.21
     environment:
       # —— Postgres settings ——
       - POSTGRES_PASSWORD=${CORE_DB_PASSWORD}
