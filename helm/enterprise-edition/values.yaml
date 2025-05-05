@@ -1,12 +1,12 @@
 # Values file for the CYBERTEC-Migrator Helm-Chart
 
 image:
-  repository: docker.io
+  repository: containers.cybertec.at
   pullPolicy: IfNotPresent
   release: "v3.19.0"
 
 imagePullSecrets:
-  - name: "docker.io"
+  - name: "containers.cybertec.at"
 
 migrator:
   ui:
