@@ -12,7 +12,7 @@ generate_self_signed_certificate() {
 
   local edition=$(print_env 'EDITION')
   local version=$(print_env 'VERSION')
-  local image="containers.cybertec.at/cybertec_migrator-${edition}/web_gui:${version}"
+  local image="containers.cybertec.at/cybertec_migrator_${edition}/web_gui:${version}"
 
   runtime_run ${image} "openssl genrsa -out /tmp/nginx.key 4096 && cat /tmp/nginx.key" \
     > ../volumes/web_gui/nginx/certs/nginx.key
