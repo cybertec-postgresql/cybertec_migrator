@@ -3,7 +3,7 @@
 image:
   repository: containers.cybertec.at/cybertec_migrator_enterprise
   pullPolicy: IfNotPresent
-  release: "v3.19.0"
+  release: "v3.20.3"
 
 imagePullSecrets:
   - name: "containers.cybertec.at"
