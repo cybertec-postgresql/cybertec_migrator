@@ -71,7 +71,7 @@ spec:
               subPath: oracle
 
         - name: web-gui
-          image: "{{ .Values.image.repository }}/web_gui:{{ .Values.image.release }}
+          image: "{{ .Values.image.repository }}/web_gui:{{ .Values.image.release }}"
           volumeMounts:
             - name: nginx-config
               mountPath: /etc/nginx/
