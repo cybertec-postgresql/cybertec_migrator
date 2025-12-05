@@ -1,4 +1,67 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Installation on CYBERTEC Migrator Documentation</title><link>https://cybertec-postgresql.github.io/cybertec_migrator/getting-started/installation/</link><description>Recent content in Installation on CYBERTEC Migrator Documentation</description><generator>Hugo</generator><language>en</language><lastBuildDate>Thu, 25 Jul 2024 15:28:36 +0200</lastBuildDate><atom:link href="https://cybertec-postgresql.github.io/cybertec_migrator/getting-started/installation/index.xml" rel="self" type="application/rss+xml"/><item><title>Online</title><link>https://cybertec-postgresql.github.io/cybertec_migrator/getting-started/installation/online/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://cybertec-postgresql.github.io/cybertec_migrator/getting-started/installation/online/</guid><description>The docker images are available on the Docker Hub container image registry.
-Please get in touch with us if your account has not been granted access to the respective images. Make sure you are logged in the Docker Hub registry with the correct user.
-cat ~/password.txt | docker login --username &amp;lt;username&amp;gt; --password-stdin Clone this git repository Change working directory to the previously cloned repository Run the installer Start the Migrator ➜ git clone https://github.</description></item><item><title>Offline</title><link>https://cybertec-postgresql.github.io/cybertec_migrator/getting-started/installation/offline/</link><pubDate>Thu, 25 Jul 2024 15:28:36 +0200</pubDate><guid>https://cybertec-postgresql.github.io/cybertec_migrator/getting-started/installation/offline/</guid><description>The offline installation package for the Trial Edition may be downloaded for free. For the Professional or Enterprise Edition, please get in touch with us to request access to our download server.
-Extract the provided archive file Change working directory to newly created directory Run the installer Start the Migrator ➜ tar xf cybertec_migrator-trial-v3.20.0.tar.gz ➜ cd cybertec_migrator ➜ ./migrator install [INFO] You are about to be asked to enter some information relevant to the installation.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Installation on CYBERTEC Migrator Documentation</title><link>https://cybertec-postgresql.github.io/cybertec_migrator/getting-started/installation/</link><description>Recent content in Installation on CYBERTEC Migrator Documentation</description><generator>Hugo</generator><language>en</language><lastBuildDate>Thu, 25 Jul 2024 15:28:36 +0200</lastBuildDate><atom:link href="https://cybertec-postgresql.github.io/cybertec_migrator/getting-started/installation/index.xml" rel="self" type="application/rss+xml"/><item><title>Online</title><link>https://cybertec-postgresql.github.io/cybertec_migrator/getting-started/installation/online/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://cybertec-postgresql.github.io/cybertec_migrator/getting-started/installation/online/</guid><description>&lt;p>The docker images are available on the &lt;a
+ class="gdoc-markdown__link"
+ href="https://hub.docker.com/"
+>Docker Hub&lt;/a> container image registry.&lt;/p>
+&lt;p>Please &lt;a
+ class="gdoc-markdown__link"
+ href="#contact"
+>get in touch with us&lt;/a> if your account has not been granted access to the respective images.
+Make sure you are logged in the Docker Hub registry with the correct user.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-sh" data-lang="sh">&lt;span class="line">&lt;span class="cl">cat ~/password.txt &lt;span class="p">|&lt;/span> docker login --username &amp;lt;username&amp;gt; --password-stdin
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol>
+&lt;li>Clone this git repository&lt;/li>
+&lt;li>Change working directory to the previously cloned repository&lt;/li>
+&lt;li>Run the installer&lt;/li>
+&lt;li>Start the Migrator&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-sh" data-lang="sh">&lt;span class="line">&lt;span class="cl">➜ git clone https://github.com/cybertec-postgresql/cybertec_migrator
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">➜ &lt;span class="nb">cd&lt;/span> cybertec_migrator
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">[&lt;/span>INFO&lt;span class="o">]&lt;/span> You are about to be asked to enter some information relevant to the installation.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">[&lt;/span>INFO&lt;span class="o">]&lt;/span> The allowed values are in normal brackets, the default value in square brackets.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Migrator Edition &lt;span class="o">(&lt;/span>trial, professional, enterprise&lt;span class="o">)&lt;/span> &lt;span class="o">[&lt;/span>trial&lt;span class="o">]&lt;/span>:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Container runtime &lt;span class="o">(&lt;/span>docker, podman&lt;span class="o">)&lt;/span> &lt;span class="o">[&lt;/span>docker&lt;span class="o">]&lt;/span>:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">[&lt;/span>INFO&lt;span class="o">]&lt;/span> Generating environment file
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">[&lt;/span>INFO&lt;span class="o">]&lt;/span> Pulling container images &lt;span class="k">for&lt;/span> trial:v3.20.0
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">[&lt;/span>INFO&lt;span class="o">]&lt;/span> Generating self-signed TLS/SSL certificate
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">[&lt;/span>OK&lt;span class="o">]&lt;/span> Install finished. To start the CYBERTEC Migrator, run ./migrator up
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">➜ ./migrator up
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Recreating cybertec_migrator_core_db_1 ... &lt;span class="k">done&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Recreating cybertec_migrator_core_1 ... &lt;span class="k">done&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Recreating cybertec_migrator_web_gui_1 ... &lt;span class="k">done&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">[&lt;/span>OK&lt;span class="o">]&lt;/span> Started on &lt;span class="s1">&amp;#39;https://localhost&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Offline</title><link>https://cybertec-postgresql.github.io/cybertec_migrator/getting-started/installation/offline/</link><pubDate>Thu, 25 Jul 2024 15:28:36 +0200</pubDate><guid>https://cybertec-postgresql.github.io/cybertec_migrator/getting-started/installation/offline/</guid><description>&lt;p>The offline installation package for the &lt;a
+ class="gdoc-markdown__link"
+ href="https://www.cybertec-postgresql.com/en/products/cybertec-migrator#form"
+>Trial Edition&lt;/a> may be downloaded for free.
+For the Professional or Enterprise Edition, please &lt;a
+ class="gdoc-markdown__link"
+ href="#contact"
+>get in touch with us&lt;/a> to request access to our download server.&lt;/p>
+&lt;ol>
+&lt;li>Extract the provided archive file&lt;/li>
+&lt;li>Change working directory to newly created directory&lt;/li>
+&lt;li>Run the installer&lt;/li>
+&lt;li>Start the Migrator&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-sh" data-lang="sh">&lt;span class="line">&lt;span class="cl">➜ tar xf cybertec_migrator-trial-v3.20.0.tar.gz
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">➜ &lt;span class="nb">cd&lt;/span> cybertec_migrator
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">➜ ./migrator install
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">[&lt;/span>INFO&lt;span class="o">]&lt;/span> You are about to be asked to enter some information relevant to the installation.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">[&lt;/span>INFO&lt;span class="o">]&lt;/span> The allowed values are in normal brackets, the default value in square brackets.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Migrator Edition &lt;span class="o">(&lt;/span>trial, professional, enterprise&lt;span class="o">)&lt;/span> &lt;span class="o">[&lt;/span>trial&lt;span class="o">]&lt;/span>:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Container runtime &lt;span class="o">(&lt;/span>docker, podman&lt;span class="o">)&lt;/span> &lt;span class="o">[&lt;/span>docker&lt;span class="o">]&lt;/span>:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">[&lt;/span>INFO&lt;span class="o">]&lt;/span> Generating environment file
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">[&lt;/span>INFO&lt;span class="o">]&lt;/span> Loading container images
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">[&lt;/span>INFO&lt;span class="o">]&lt;/span> Generating self-signed TLS/SSL certificate
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">[&lt;/span>OK&lt;span class="o">]&lt;/span> Install finished. To start the CYBERTEC Migrator, run ./migrator up
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">➜ ./migrator up
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Recreating cybertec_migrator_core_db_1 ... &lt;span class="k">done&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Recreating cybertec_migrator_core_1 ... &lt;span class="k">done&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Recreating cybertec_migrator_web_gui_1 ... &lt;span class="k">done&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">[&lt;/span>OK&lt;span class="o">]&lt;/span> Started on &lt;span class="s1">&amp;#39;https://localhost&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>
