@@ -37,7 +37,7 @@ services:
 
   # Internal Migrator database
   core_db:
-    image: docker.io/postgres:13-alpine
+    image: containers.cybertec.at/cybertec_migrator_${EDITION}/core_db:${VERSION}
     environment:
       # —— Postgres settings ——
       - POSTGRES_PASSWORD=${CORE_DB_PASSWORD}
