@@ -26,7 +26,7 @@ runtime_load() {
   # Podman prefixes images with localhost/
   # We have to re-tag the image to start with docker.io/
   image_reference="${image_reference#*localhost/}"
-  podman tag "localhost/${image_reference}" "docker.io/${image_reference}"
+  podman tag "localhost/${image_reference}" "containers.cybertec.at/${image_reference}"
   podman image rm "localhost/${image_reference}"
 }
 
