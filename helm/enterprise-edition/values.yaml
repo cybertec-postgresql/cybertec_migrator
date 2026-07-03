@@ -26,6 +26,3 @@ migrator:
     core_config: 
       size: 5Gi
       storageClass: standard
-
-postgres:
-  image: docker.io/postgres:13-alpine
