@@ -3,7 +3,7 @@
 image:
   repository: docker.io
   pullPolicy: IfNotPresent
-  release: "v3.20.4-rc.5"
+  release: "v3.20.3"
 
 imagePullSecrets:
   - name: "docker.io"
