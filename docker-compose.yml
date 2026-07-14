@@ -37,12 +37,12 @@ services:
 
   # Internal Migrator database
   core_db:
-    image: containers.cybertec.at/cybertec_migrator_${EDITION}/core_db:${VERSION}
+    image: postgres:18-alpine
     environment:
       # —— Postgres settings ——
       - POSTGRES_PASSWORD=${CORE_DB_PASSWORD}
     volumes:
-      - core_db-data:/var/lib/postgresql/data
+      - core_db-data:/var/lib/postgresql/18/docker
       - ./volumes/core_db/initdb.sh:/docker-entrypoint-initdb.d/init-user-db.sh:Z
     healthcheck:
       # Ensures that the database is ready *and* the password is in sync
