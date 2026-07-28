@@ -1,108 +1,106 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Oracle on CYBERTEC Migrator Documentation</title><link>https://cybertec-postgresql.github.io/cybertec_migrator/features/oracle/</link><description>Recent content in Oracle on CYBERTEC Migrator Documentation</description><generator>Hugo</generator><language>en</language><lastBuildDate>Fri, 26 Jul 2024 09:12:43 +0200</lastBuildDate><atom:link href="https://cybertec-postgresql.github.io/cybertec_migrator/features/oracle/index.xml" rel="self" type="application/rss+xml"/><item><title>Supported Features</title><link>https://cybertec-postgresql.github.io/cybertec_migrator/features/oracle/supported-features/</link><pubDate>Fri, 26 Jul 2024 09:12:43 +0200</pubDate><guid>https://cybertec-postgresql.github.io/cybertec_migrator/features/oracle/supported-features/</guid><description>&lt;div class="flex align-center gdoc-page__anchorwrap">
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Oracle on CYBERTEC Migrator Documentation</title><link>https://cybertec-postgresql.github.io/cybertec_migrator/features/oracle/</link><description>Recent content in Oracle on CYBERTEC Migrator Documentation</description><generator>Hugo</generator><language>en</language><lastBuildDate>Fri, 26 Jul 2024 09:12:43 +0200</lastBuildDate><atom:link href="https://cybertec-postgresql.github.io/cybertec_migrator/features/oracle/index.xml" rel="self" type="application/rss+xml"/><item><title>Supported Features</title><link>https://cybertec-postgresql.github.io/cybertec_migrator/features/oracle/supported-features/</link><pubDate>Fri, 26 Jul 2024 09:12:43 +0200</pubDate><guid>https://cybertec-postgresql.github.io/cybertec_migrator/features/oracle/supported-features/</guid><description>&lt;div class="flex align-center gdoc-page__anchorwrap"&gt;
  &lt;h2 id="database-object-types"
- >
+ &gt;
  Database Object Types
- &lt;/h2>
- &lt;a data-clipboard-text="https://cybertec-postgresql.github.io/cybertec_migrator/features/oracle/supported-features/#database-object-types" class="gdoc-page__anchor clip flex align-center" title="Anchor to: Database Object Types" aria-label="Anchor to: Database Object Types" href="#database-object-types">
- &lt;svg class="gdoc-icon gdoc_link">&lt;use xlink:href="#gdoc_link">&lt;/use>&lt;/svg>
- &lt;/a>
-&lt;/div>
-&lt;table>
- &lt;thead>
- &lt;tr>
- &lt;th>CREATE&lt;/th>
- &lt;th>&lt;/th>
- &lt;th>Comment&lt;/th>
- &lt;/tr>
- &lt;/thead>
- &lt;tbody>
- &lt;tr>
- &lt;td>DATABASE LINK&lt;/td>
- &lt;td>✅&lt;/td>
- &lt;td>visible, use PostgreSQL [Foreign Data Wrapper]&lt;/td>
- &lt;/tr>
- &lt;tr>
- &lt;td>DIRECTORY&lt;/td>
- &lt;td>❌&lt;/td>
- &lt;td>&lt;/td>
- &lt;/tr>
- &lt;tr>
- &lt;td>FUNCTION&lt;/td>
- &lt;td>✅&lt;/td>
- &lt;td>code needs to be translated manually&lt;/td>
- &lt;/tr>
- &lt;tr>
- &lt;td>INDEX&lt;/td>
- &lt;td>✅&lt;/td>
- &lt;td>&lt;/td>
- &lt;/tr>
- &lt;tr>
- &lt;td>MATERIALIZED VIEW&lt;/td>
- &lt;td>✅&lt;/td>
- &lt;td>&lt;/td>
- &lt;/tr>
- &lt;tr>
- &lt;td>PACKAGE&lt;/td>
- &lt;td>✅&lt;/td>
- &lt;td>package code visible, code needs to be translated manually&lt;/td>
- &lt;/tr>
- &lt;tr>
- &lt;td>PROCEDURE&lt;/td>
- &lt;td>✅&lt;/td>
- &lt;td>code needs to be translated manually&lt;/td>
- &lt;/tr>
- &lt;tr>
- &lt;td>SCHEMA&lt;/td>
- &lt;td>✅&lt;/td>
- &lt;td>&lt;/td>
- &lt;/tr>
- &lt;tr>
- &lt;td>SEQUENCE&lt;/td>
- &lt;td>✅&lt;/td>
- &lt;td>&lt;/td>
- &lt;/tr>
- &lt;tr>
- &lt;td>SYNONYMS&lt;/td>
- &lt;td>✅&lt;/td>
- &lt;td>visible, have to be migrated manually&lt;/td>
- &lt;/tr>
- &lt;tr>
- &lt;td>TABLE&lt;/td>
- &lt;td>✅&lt;/td>
- &lt;td>partitions (hash, list, range) supported&lt;/td>
- &lt;/tr>
- &lt;tr>
- &lt;td>TRIGGER&lt;/td>
- &lt;td>✅&lt;/td>
- &lt;td>&lt;/td>
- &lt;/tr>
- &lt;tr>
- &lt;td>TYPE&lt;/td>
- &lt;td>✅&lt;/td>
- &lt;td>&lt;/td>
- &lt;/tr>
- &lt;tr>
- &lt;td>USER&lt;/td>
- &lt;td>❌&lt;/td>
- &lt;td>&lt;/td>
- &lt;/tr>
- &lt;tr>
- &lt;td>VIEW&lt;/td>
- &lt;td>✅&lt;/td>
- &lt;td>&lt;/td>
- &lt;/tr>
- &lt;/tbody>
-&lt;/table>
-&lt;div class="flex align-center gdoc-page__anchorwrap">
+ &lt;/h2&gt;
+ &lt;a data-clipboard-text="https://cybertec-postgresql.github.io/cybertec_migrator/features/oracle/supported-features/#database-object-types" class="gdoc-page__anchor clip flex align-center" title="Anchor to: Database Object Types" aria-label="Anchor to: Database Object Types" href="#database-object-types"&gt;
+ &lt;svg class="gdoc-icon gdoc_link"&gt;&lt;use xlink:href="#gdoc_link"&gt;&lt;/use&gt;&lt;/svg&gt;
+ &lt;/a&gt;
+&lt;/div&gt;&lt;table&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th&gt;CREATE&lt;/th&gt;
+					&lt;th&gt;&lt;/th&gt;
+					&lt;th&gt;Comment&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td&gt;DATABASE LINK&lt;/td&gt;
+					&lt;td&gt;✅&lt;/td&gt;
+					&lt;td&gt;visible, use PostgreSQL [Foreign Data Wrapper]&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;DIRECTORY&lt;/td&gt;
+					&lt;td&gt;❌&lt;/td&gt;
+					&lt;td&gt;&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;FUNCTION&lt;/td&gt;
+					&lt;td&gt;✅&lt;/td&gt;
+					&lt;td&gt;code needs to be translated manually&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;INDEX&lt;/td&gt;
+					&lt;td&gt;✅&lt;/td&gt;
+					&lt;td&gt;&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;MATERIALIZED VIEW&lt;/td&gt;
+					&lt;td&gt;✅&lt;/td&gt;
+					&lt;td&gt;&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;PACKAGE&lt;/td&gt;
+					&lt;td&gt;✅&lt;/td&gt;
+					&lt;td&gt;package code visible, code needs to be translated manually&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;PROCEDURE&lt;/td&gt;
+					&lt;td&gt;✅&lt;/td&gt;
+					&lt;td&gt;code needs to be translated manually&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;SCHEMA&lt;/td&gt;
+					&lt;td&gt;✅&lt;/td&gt;
+					&lt;td&gt;&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;SEQUENCE&lt;/td&gt;
+					&lt;td&gt;✅&lt;/td&gt;
+					&lt;td&gt;&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;SYNONYMS&lt;/td&gt;
+					&lt;td&gt;✅&lt;/td&gt;
+					&lt;td&gt;visible, have to be migrated manually&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;TABLE&lt;/td&gt;
+					&lt;td&gt;✅&lt;/td&gt;
+					&lt;td&gt;partitions (hash, list, range) supported&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;TRIGGER&lt;/td&gt;
+					&lt;td&gt;✅&lt;/td&gt;
+					&lt;td&gt;&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;TYPE&lt;/td&gt;
+					&lt;td&gt;✅&lt;/td&gt;
+					&lt;td&gt;&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;USER&lt;/td&gt;
+					&lt;td&gt;❌&lt;/td&gt;
+					&lt;td&gt;&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;VIEW&lt;/td&gt;
+					&lt;td&gt;✅&lt;/td&gt;
+					&lt;td&gt;&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class="flex align-center gdoc-page__anchorwrap"&gt;
  &lt;h2 id="built-in-data-types"
- >
+ &gt;
  Built-In Data Types
- &lt;/h2>
- &lt;a data-clipboard-text="https://cybertec-postgresql.github.io/cybertec_migrator/features/oracle/supported-features/#built-in-data-types" class="gdoc-page__anchor clip flex align-center" title="Anchor to: Built-In Data Types" aria-label="Anchor to: Built-In Data Types" href="#built-in-data-types">
- &lt;svg class="gdoc-icon gdoc_link">&lt;use xlink:href="#gdoc_link">&lt;/use>&lt;/svg>
- &lt;/a>
-&lt;/div>
-&lt;p>Detailed information about Oracle built-in data types may be found in the &lt;a
+ &lt;/h2&gt;
+ &lt;a data-clipboard-text="https://cybertec-postgresql.github.io/cybertec_migrator/features/oracle/supported-features/#built-in-data-types" class="gdoc-page__anchor clip flex align-center" title="Anchor to: Built-In Data Types" aria-label="Anchor to: Built-In Data Types" href="#built-in-data-types"&gt;
+ &lt;svg class="gdoc-icon gdoc_link"&gt;&lt;use xlink:href="#gdoc_link"&gt;&lt;/use&gt;&lt;/svg&gt;
+ &lt;/a&gt;
+&lt;/div&gt;&lt;p&gt;Detailed information about Oracle built-in data types may be found in the &lt;a
  class="gdoc-markdown__link"
  href="https://docs.oracle.com/en/database/oracle/oracle-database/19/sqlrf/Data-Types.html#GUID-7B72E154-677A-4342-A1EA-C74C1EA928E6"
->Oracle SQL Language Reference&lt;/a>.&lt;/p></description></item></channel></rss>
+&gt;Oracle SQL Language Reference&lt;/a&gt;.&lt;/p&gt;</description></item></channel></rss>

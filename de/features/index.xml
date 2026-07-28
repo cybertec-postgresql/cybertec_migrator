@@ -1,60 +1,59 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Features on CYBERTEC Migrator Documentation</title><link>https://cybertec-postgresql.github.io/cybertec_migrator/de/features/</link><description>Recent content in Features on CYBERTEC Migrator Documentation</description><generator>Hugo</generator><language>de</language><lastBuildDate>Mon, 01 Jan 0001 00:00:00 +0000</lastBuildDate><atom:link href="https://cybertec-postgresql.github.io/cybertec_migrator/de/features/index.xml" rel="self" type="application/rss+xml"/><item><title>Code Transpilierung</title><link>https://cybertec-postgresql.github.io/cybertec_migrator/de/features/code-transpilation/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://cybertec-postgresql.github.io/cybertec_migrator/de/features/code-transpilation/</guid><description>&lt;p>Der CYBERTEC Migrator ist in der Lage, bestimmte PL/SQL-Konstrukte zu parsen, zu analysieren und automatisch nach PL/pgSQL zu transpilieren.
-Jedes unterstützte Konstrukt wird durch eine entsprechende Regel dargestellt.&lt;/p>
-&lt;p>Dieses Feature-Set wird ständig weiterentwickelt, wobei neue Regeln hinzugefügt werden, wo immer dies möglich ist.
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Features on CYBERTEC Migrator Documentation</title><link>https://cybertec-postgresql.github.io/cybertec_migrator/de/features/</link><description>Recent content in Features on CYBERTEC Migrator Documentation</description><generator>Hugo</generator><language>de</language><lastBuildDate>Mon, 01 Jan 0001 00:00:00 +0000</lastBuildDate><atom:link href="https://cybertec-postgresql.github.io/cybertec_migrator/de/features/index.xml" rel="self" type="application/rss+xml"/><item><title>Code Transpilierung</title><link>https://cybertec-postgresql.github.io/cybertec_migrator/de/features/code-transpilation/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://cybertec-postgresql.github.io/cybertec_migrator/de/features/code-transpilation/</guid><description>&lt;p&gt;Der CYBERTEC Migrator ist in der Lage, bestimmte PL/SQL-Konstrukte zu parsen, zu analysieren und automatisch nach PL/pgSQL zu transpilieren.
+Jedes unterstützte Konstrukt wird durch eine entsprechende Regel dargestellt.&lt;/p&gt;
+&lt;p&gt;Dieses Feature-Set wird ständig weiterentwickelt, wobei neue Regeln hinzugefügt werden, wo immer dies möglich ist.
 Wenn Sie einen Vorschlag für eine neue Regel haben, öffnen Sie bitte einen &lt;a
  class="gdoc-markdown__link"
  href="https://github.com/cybertec-postgresql/cybertec_migrator/issues/new?assignees=&amp;amp;labels=feature&amp;#43;request&amp;amp;template=feature_request.yml"
->feature request&lt;/a>.&lt;/p>
-&lt;div class="gdoc-toc gdoc-toc__level--1">
- &lt;nav id="TableOfContents">
- &lt;ul>
- &lt;li>&lt;a href="#cyar-0001-addparamlistparentheses">CYAR-0001: &lt;code>AddParamlistParentheses&lt;/code>&lt;/a>
- &lt;ul>
- &lt;li>&lt;a href="#beispiel">Beispiel&lt;/a>&lt;/li>
- &lt;/ul>
- &lt;/li>
- &lt;li>&lt;a href="#cyar-0002-replaceprologue">CYAR-0002: &lt;code>ReplacePrologue&lt;/code>&lt;/a>
- &lt;ul>
- &lt;li>&lt;a href="#beispiel-1">Beispiel&lt;/a>&lt;/li>
- &lt;/ul>
- &lt;/li>
- &lt;li>&lt;a href="#cyar-0003-replaceepilogue">CYAR-0003: &lt;code>ReplaceEpilogue&lt;/code>&lt;/a>
- &lt;ul>
- &lt;li>&lt;a href="#beispiel-2">Beispiel&lt;/a>&lt;/li>
- &lt;/ul>
- &lt;/li>
- &lt;li>&lt;a href="#cyar-0004-fixtrunc">CYAR-0004: &lt;code>FixTrunc&lt;/code>&lt;/a>&lt;/li>
- &lt;li>&lt;a href="#cyar-0005-replacesysdate">CYAR-0005: &lt;code>ReplaceSysdate&lt;/code>&lt;/a>
- &lt;ul>
- &lt;li>&lt;a href="#beispiel-3">Beispiel&lt;/a>&lt;/li>
- &lt;/ul>
- &lt;/li>
- &lt;li>&lt;a href="#cyar-0006-replacenvl">CYAR-0006: &lt;code>ReplaceNvl&lt;/code>&lt;/a>
- &lt;ul>
- &lt;li>&lt;a href="#beispiel-4">Beispiel&lt;/a>&lt;/li>
- &lt;/ul>
- &lt;/li>
- &lt;li>&lt;a href="#cyar-0007-removeeditionable">CYAR-0007: &lt;code>RemoveEditionable&lt;/code>&lt;/a>
- &lt;ul>
- &lt;li>&lt;a href="#beispiel-5">Beispiel&lt;/a>&lt;/li>
- &lt;/ul>
- &lt;/li>
- &lt;li>&lt;a href="#cyar-0008-replacenvl2">CYAR-0008: &lt;code>ReplaceNvl2&lt;/code>&lt;/a>
- &lt;ul>
- &lt;li>&lt;a href="#beispiel-6">Beispiel&lt;/a>&lt;/li>
- &lt;/ul>
- &lt;/li>
- &lt;/ul>
-&lt;/nav>
- &lt;hr />
- &lt;/div>
-&lt;div class="flex align-center gdoc-page__anchorwrap">
+&gt;feature request&lt;/a&gt;.&lt;/p&gt;
+&lt;div class="gdoc-toc gdoc-toc__level--1"&gt;
+ &lt;nav id="TableOfContents"&gt;
+ &lt;ul&gt;
+ &lt;li&gt;&lt;a href="#cyar-0001-addparamlistparentheses"&gt;CYAR-0001: &lt;code&gt;AddParamlistParentheses&lt;/code&gt;&lt;/a&gt;
+ &lt;ul&gt;
+ &lt;li&gt;&lt;a href="#beispiel"&gt;Beispiel&lt;/a&gt;&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;/li&gt;
+ &lt;li&gt;&lt;a href="#cyar-0002-replaceprologue"&gt;CYAR-0002: &lt;code&gt;ReplacePrologue&lt;/code&gt;&lt;/a&gt;
+ &lt;ul&gt;
+ &lt;li&gt;&lt;a href="#beispiel-1"&gt;Beispiel&lt;/a&gt;&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;/li&gt;
+ &lt;li&gt;&lt;a href="#cyar-0003-replaceepilogue"&gt;CYAR-0003: &lt;code&gt;ReplaceEpilogue&lt;/code&gt;&lt;/a&gt;
+ &lt;ul&gt;
+ &lt;li&gt;&lt;a href="#beispiel-2"&gt;Beispiel&lt;/a&gt;&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;/li&gt;
+ &lt;li&gt;&lt;a href="#cyar-0004-fixtrunc"&gt;CYAR-0004: &lt;code&gt;FixTrunc&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href="#cyar-0005-replacesysdate"&gt;CYAR-0005: &lt;code&gt;ReplaceSysdate&lt;/code&gt;&lt;/a&gt;
+ &lt;ul&gt;
+ &lt;li&gt;&lt;a href="#beispiel-3"&gt;Beispiel&lt;/a&gt;&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;/li&gt;
+ &lt;li&gt;&lt;a href="#cyar-0006-replacenvl"&gt;CYAR-0006: &lt;code&gt;ReplaceNvl&lt;/code&gt;&lt;/a&gt;
+ &lt;ul&gt;
+ &lt;li&gt;&lt;a href="#beispiel-4"&gt;Beispiel&lt;/a&gt;&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;/li&gt;
+ &lt;li&gt;&lt;a href="#cyar-0007-removeeditionable"&gt;CYAR-0007: &lt;code&gt;RemoveEditionable&lt;/code&gt;&lt;/a&gt;
+ &lt;ul&gt;
+ &lt;li&gt;&lt;a href="#beispiel-5"&gt;Beispiel&lt;/a&gt;&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;/li&gt;
+ &lt;li&gt;&lt;a href="#cyar-0008-replacenvl2"&gt;CYAR-0008: &lt;code&gt;ReplaceNvl2&lt;/code&gt;&lt;/a&gt;
+ &lt;ul&gt;
+ &lt;li&gt;&lt;a href="#beispiel-6"&gt;Beispiel&lt;/a&gt;&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;/li&gt;
+ &lt;/ul&gt;
+&lt;/nav&gt;
+ &lt;hr /&gt;
+ &lt;/div&gt;
+&lt;div class="flex align-center gdoc-page__anchorwrap"&gt;
  &lt;h2 id="cyar-0001-addparamlistparentheses"
- >
- CYAR-0001: &lt;code>AddParamlistParentheses&lt;/code>
- &lt;/h2>
- &lt;a data-clipboard-text="https://cybertec-postgresql.github.io/cybertec_migrator/de/features/code-transpilation/#cyar-0001-addparamlistparentheses" class="gdoc-page__anchor clip flex align-center" title="Link zu: CYAR-0001: AddParamlistParentheses" aria-label="Link zu: CYAR-0001: AddParamlistParentheses" href="#cyar-0001-addparamlistparentheses">
- &lt;svg class="gdoc-icon gdoc_link">&lt;use xlink:href="#gdoc_link">&lt;/use>&lt;/svg>
- &lt;/a>
-&lt;/div>
-&lt;p>In Oracle kann eine Prozedur ohne Parameter in ihrer Definition Klammern weglassen, während PostgreSQL sie immer benötigt.&lt;/p></description></item></channel></rss>
+ &gt;
+ CYAR-0001: &lt;code&gt;AddParamlistParentheses&lt;/code&gt;
+ &lt;/h2&gt;
+ &lt;a data-clipboard-text="https://cybertec-postgresql.github.io/cybertec_migrator/de/features/code-transpilation/#cyar-0001-addparamlistparentheses" class="gdoc-page__anchor clip flex align-center" title="Link zu: CYAR-0001: AddParamlistParentheses" aria-label="Link zu: CYAR-0001: AddParamlistParentheses" href="#cyar-0001-addparamlistparentheses"&gt;
+ &lt;svg class="gdoc-icon gdoc_link"&gt;&lt;use xlink:href="#gdoc_link"&gt;&lt;/use&gt;&lt;/svg&gt;
+ &lt;/a&gt;
+&lt;/div&gt;&lt;p&gt;In Oracle kann eine Prozedur ohne Parameter in ihrer Definition Klammern weglassen, während PostgreSQL sie immer benötigt.&lt;/p&gt;</description></item></channel></rss>
