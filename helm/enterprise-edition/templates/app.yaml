@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: core-db
-          image: {{ .Values.postgres.image }}
+          image: "{{ .Values.image.repository }}/core_db:{{ .Values.image.release }}"
           volumeMounts:
             - name: initdb
               mountPath: /docker-entrypoint-initdb.d
