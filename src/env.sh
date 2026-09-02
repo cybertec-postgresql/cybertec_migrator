@@ -50,7 +50,7 @@ generate_env_file() {
   if installed_from_archive; then
     version="$(cat "../${VERSION_FILE}")"
   else
-    version="$(git describe --tags --abbrev=0)"
+    version="$(git tag | grep -E '^v[0-9]+\.[0-9]+\.[0-9]+$' | sort -V | tail -n 1)"
   fi
 
   cat <<EOF > "${ENV_FILE}"
