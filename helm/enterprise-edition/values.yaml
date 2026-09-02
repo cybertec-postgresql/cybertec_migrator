@@ -3,7 +3,7 @@
 image:
   repository: containers.cybertec.at/cybertec_migrator_enterprise
   pullPolicy: IfNotPresent
-  release: "v3.20.3"
+  release: "v4.0.0"
 
 imagePullSecrets:
   - name: "containers.cybertec.at"
@@ -26,3 +26,6 @@ migrator:
     core_config: 
       size: 5Gi
       storageClass: standard
+
+postgres:
+  image: postgres:18-alpine

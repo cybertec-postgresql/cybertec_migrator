@@ -32,5 +32,5 @@ runtime_run() {
     mount="--volume ${mount}"
   fi
 
-  eval "docker run ${mount} ${image} bash -c \"${cmd}\""
+  eval "docker run --rm ${mount} ${image} bash -c \"${cmd}\""
 }

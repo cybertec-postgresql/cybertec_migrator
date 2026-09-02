@@ -39,5 +39,5 @@ runtime_run() {
     mount="--volume ${mount}"
   fi
 
-  eval "podman run ${mount} ${image} bash -c \"${cmd}\""
+  eval "podman run --rm ${mount} ${image} bash -c \"${cmd}\""
 }
