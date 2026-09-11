@@ -1,0 +1,18 @@
+name: gates
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+  security-events: write
+  issues: write
+  pull-requests: write
+
+jobs:
+  gates:
+    uses: cybertec-postgresql/security-workflows/.github/workflows/gates.yml@main
+    with:
+      private: true
