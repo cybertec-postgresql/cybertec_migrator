@@ -27,3 +27,30 @@ v3_20_0_add_arch_and_container_runtime() {
     set_env_file_variable "CONTAINER_RUNTIME" "docker"
   fi
 }
+
+v4_0_0_add_llm_settings() {
+  if ! env_file_exists; then
+    return
+  fi
+
+  if grep -q 'CORE_LLM_CONFIG' "${ENV_FILE}"; then
+    return
+  fi
+
+  cat >> "${ENV_FILE}" <<'EOF'
+
+# —— AI-Assistant (optional) ——
+# Mode 1 (recommended): copy ./llm.example.yaml to ./llm.yaml, then uncomment:
+# CORE_LLM_CONFIG=llm.yaml
+# Optional: override the model, API key and timeout of the file
+# CORE_LLM_MODEL=
+# CORE_LLM_API_KEY=
+# CORE_LLM_TIMEOUT_MS=300000
+# Mode 2: configure a single model without a file (CORE_LLM_BASE_URL and CORE_LLM_MODEL are required):
+# CORE_LLM_BASE_URL=https://llm.example.com/v1
+# CORE_LLM_MODEL=
+# CORE_LLM_API_KEY=
+# CORE_LLM_TIMEOUT_MS=300000
+EOF
+  info 'Added AI-Assistant settings to the environment file'
+}
