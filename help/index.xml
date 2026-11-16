@@ -8,6 +8,7 @@
  &lt;li&gt;&lt;a href="#how-do-i-install-an-existing-certificate"&gt;How do I install an existing certificate?&lt;/a&gt;&lt;/li&gt;
  &lt;li&gt;&lt;a href="#how-do-i-configure-http-basic-auth"&gt;How do I configure HTTP Basic Auth?&lt;/a&gt;&lt;/li&gt;
  &lt;li&gt;&lt;a href="#how-do-i-set-environment-variables"&gt;How do I set environment variables&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href="#how-are-the-stored-database-passwords-protected"&gt;How are the stored database passwords protected&lt;/a&gt;&lt;/li&gt;
  &lt;/ul&gt;
  &lt;/li&gt;
  &lt;li&gt;&lt;a href="#permissions"&gt;Permissions&lt;/a&gt;

@@ -11,12 +11,13 @@
     --ci-color-white: #ffffff;
 
     --custom-border-radius: 3px;
-    --custom-color-heading-color-alternative: var(--ci-color-tertiary);
+    /* AA-safe text blues: tertiary (#3880ad) fails normal-text AA on white. */
+    --custom-color-heading-color-alternative: #1a6dbf;
     --custom-color-heading-color: var(--ci-color-primary);
     --custom-footer-link-color: var(--ci-color-white);
     --custom-header-height: 80px;
     --custom-header-margin: 1rem;
-    --custom-link-color: var(--ci-color-tertiary);
+    --custom-link-color: #1a6dbf;
     --custom-paper-color: #ffffff;
 
     /* Taxonomy Design System - Using CI Colors */
@@ -52,8 +53,9 @@
     --body-background: var(--ci-lightest-of-blues);
     --body-font-color: var(--ci-color-text);
     --code-copy-success-color: var(--ci-color-success);
-    --custom-color-heading-color-alternative: var(--ci-color-tertiary);
+    --custom-color-heading-color-alternative: #1a6dbf;
     --custom-color-heading-color: var(--ci-color-primary);
+    --custom-link-color: #1a6dbf;
     --custom-paper-color: var(--ci-color-white);
     --footer-background: var(--ci-color-primary);
     --header-background: var(--ci-color-primary);
@@ -65,7 +67,7 @@
     --taxonomy-bg-card: var(--custom-paper-color);
     --taxonomy-text-primary: var(--body-font-color);
     --taxonomy-text-secondary: #283340;
-    --taxonomy-text-muted: #6c757d;
+    --taxonomy-text-muted: #5c6b7a;
     --taxonomy-text-light: var(--ci-color-white);
     --taxonomy-border-tag: rgba(78, 193, 236, 0.25);
     --taxonomy-border-category: rgba(0, 150, 136, 0.25);
@@ -84,8 +86,9 @@
         --body-background: var(--ci-lightest-of-blues);
         --body-font-color: var(--ci-color-text);
         --code-copy-success-color: var(--ci-color-success);
-        --custom-color-heading-color-alternative: var(--ci-color-tertiary);
+        --custom-color-heading-color-alternative: #1a6dbf;
         --custom-color-heading-color: var(--ci-color-primary);
+        --custom-link-color: #1a6dbf;
         --custom-paper-color: var(--ci-color-white);
         --footer-background: var(--ci-color-primary);
         --header-background: var(--ci-color-primary);
@@ -97,7 +100,7 @@
         --taxonomy-bg-card: var(--custom-paper-color);
         --taxonomy-text-primary: var(--body-font-color);
         --taxonomy-text-secondary: #283340;
-        --taxonomy-text-muted: #6c757d;
+        --taxonomy-text-muted: #5c6b7a;
         --taxonomy-text-light: var(--ci-color-white);
         --taxonomy-border-tag: rgba(78, 193, 236, 0.25);
         --taxonomy-border-category: rgba(0, 150, 136, 0.25);
@@ -118,6 +121,7 @@
     --body-background: #020617;
     --custom-color-heading-color-alternative: var(--ci-color-secondary);
     --custom-color-heading-color: var(--ci-color-white);
+    --custom-link-color: #7dd3fc;
     --custom-paper-color: #020617;
     --header-background: #020617;
 
@@ -157,6 +161,7 @@
         --body-background: #1e2022;
         --custom-color-heading-color-alternative: var(--ci-color-secondary);
         --custom-color-heading-color: var(--ci-color-white);
+        --custom-link-color: #7dd3fc;
         --custom-paper-color: #181a1b;
         --header-background: var(--ci-color-primary);
 
@@ -264,7 +269,8 @@ code {
     margin-right: 0.25rem;
 }
 
-/* Style the support button */
+/* Style the support button — navy on cyan for WCAG AA (≥4.5:1).
+   White-on-#4ec1ec is only ~2.07:1 and fails AA. */
 .gdoc-support__button {
     background-color: var(--ci-color-secondary);
     padding-left: 8px;
@@ -275,7 +281,7 @@ code {
     border-radius: var(--custom-border-radius);
 
     a {
-        color: var(--ci-color-white);
+        color: var(--ci-color-primary);
         text-transform: uppercase;
         font-weight: bold;
     }

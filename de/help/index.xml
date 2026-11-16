@@ -16,6 +16,7 @@
  &lt;li&gt;&lt;a href="#wie-verwende-ich-ein-existierendes-zertifikat"&gt;Wie verwende ich ein existierendes Zertifikat?&lt;/a&gt;&lt;/li&gt;
  &lt;li&gt;&lt;a href="#wie-konfiguriere-ich-http-basic-auth"&gt;Wie konfiguriere ich HTTP Basic Auth?&lt;/a&gt;&lt;/li&gt;
  &lt;li&gt;&lt;a href="#wie-setze-ich-umgebungsvariablen"&gt;Wie setze ich Umgebungsvariablen&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href="#wie-werden-die-gespeicherten-datenbank-passwörter-geschützt"&gt;Wie werden die gespeicherten Datenbank-Passwörter geschützt&lt;/a&gt;&lt;/li&gt;
  &lt;/ul&gt;
  &lt;/li&gt;
  &lt;li&gt;&lt;a href="#berechtigungen"&gt;Berechtigungen&lt;/a&gt;

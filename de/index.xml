@@ -142,6 +142,7 @@ Dies kann in der &lt;code&gt;.env&lt;/code&gt; Datei (generiert durch &lt;code&g
  &lt;li&gt;&lt;a href="#wie-verwende-ich-ein-existierendes-zertifikat"&gt;Wie verwende ich ein existierendes Zertifikat?&lt;/a&gt;&lt;/li&gt;
  &lt;li&gt;&lt;a href="#wie-konfiguriere-ich-http-basic-auth"&gt;Wie konfiguriere ich HTTP Basic Auth?&lt;/a&gt;&lt;/li&gt;
  &lt;li&gt;&lt;a href="#wie-setze-ich-umgebungsvariablen"&gt;Wie setze ich Umgebungsvariablen&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href="#wie-werden-die-gespeicherten-datenbank-passwörter-geschützt"&gt;Wie werden die gespeicherten Datenbank-Passwörter geschützt&lt;/a&gt;&lt;/li&gt;
  &lt;/ul&gt;
  &lt;/li&gt;
  &lt;li&gt;&lt;a href="#berechtigungen"&gt;Berechtigungen&lt;/a&gt;
@@ -340,4 +341,32 @@ Wenn Sie einen Vorschlag für eine neue Regel haben, öffnen Sie bitte einen &lt
  &lt;a data-clipboard-text="https://cybertec-postgresql.github.io/cybertec_migrator/de/features/code-transpilation/#cyar-0001-addparamlistparentheses" class="gdoc-page__anchor clip flex align-center" title="Link zu: CYAR-0001: AddParamlistParentheses" aria-label="Link zu: CYAR-0001: AddParamlistParentheses" href="#cyar-0001-addparamlistparentheses"&gt;
  &lt;svg class="gdoc-icon gdoc_link"&gt;&lt;use xlink:href="#gdoc_link"&gt;&lt;/use&gt;&lt;/svg&gt;
  &lt;/a&gt;
-&lt;/div&gt;&lt;p&gt;In Oracle kann eine Prozedur ohne Parameter in ihrer Definition Klammern weglassen, während PostgreSQL sie immer benötigt.&lt;/p&gt;</description></item></channel></rss>
+&lt;/div&gt;&lt;p&gt;In Oracle kann eine Prozedur ohne Parameter in ihrer Definition Klammern weglassen, während PostgreSQL sie immer benötigt.&lt;/p&gt;</description></item><item><title>KI-Assistent</title><link>https://cybertec-postgresql.github.io/cybertec_migrator/de/features/ai-assistant/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://cybertec-postgresql.github.io/cybertec_migrator/de/features/ai-assistant/</guid><description>&lt;p&gt;Der KI-Assistent (Enterprise Edition) unterstützt bei der Migration von prozeduralem Code.
+Im Code-Editor von Funktionen, Prozeduren, Triggern und Views&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Erklären&lt;/strong&gt; beschreibt, was der Code macht und welche Oracle-Besonderheiten in PostgreSQL zu beachten sind&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Übersetzen&lt;/strong&gt; schlägt eine PostgreSQL-Version des Codes vor, die mit &lt;strong&gt;Übernehmen&lt;/strong&gt; in den Editor übernommen werden kann&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Antworten eines Sprachmodells können falsch sein. Übersetzten Code vor der Migration immer prüfen und testen.&lt;/p&gt;
+&lt;div class="gdoc-toc gdoc-toc__level--2"&gt;
+ &lt;nav id="TableOfContents"&gt;
+ &lt;ul&gt;
+ &lt;li&gt;&lt;a href="#funktionsweise"&gt;Funktionsweise&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href="#konfiguration"&gt;Konfiguration&lt;/a&gt;
+ &lt;ul&gt;
+ &lt;li&gt;&lt;a href="#konfigurationsdatei"&gt;Konfigurationsdatei&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href="#konfigurationsdatei-angeben"&gt;Konfigurationsdatei angeben&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href="#umgebungsvariablen"&gt;Umgebungsvariablen&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href="#reasoning-modelle"&gt;Reasoning-Modelle&lt;/a&gt;&lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;/li&gt;
+ &lt;li&gt;&lt;a href="#fehlerbehebung"&gt;Fehlerbehebung&lt;/a&gt;&lt;/li&gt;
+ &lt;/ul&gt;
+&lt;/nav&gt;
+ &lt;hr /&gt;
+ &lt;/div&gt;
+&lt;p&gt;Der KI-Assistent erstellt außerdem &lt;strong&gt;Assessment-Insights&lt;/strong&gt;: Bei der Assessment-Tiefe &lt;em&gt;expert&lt;/em&gt; werden aus dem automatischen Assessment eine Management-Zusammenfassung, zentrale Risiken, eine Migrationsstrategie, schnelle Erfolge und offene Fragen abgeleitet (siehe &lt;a
+ class="gdoc-markdown__link"
+ href="https://cybertec-postgresql.github.io/cybertec_migrator/de/how-to/migration-assessment/"
+&gt;Migration Assessment&lt;/a&gt;).
+Für die Insights wird nur das aggregierte Assessment-Ergebnis (Score, Befunde, Namen betroffener Objekte) an das LLM gesendet, kein Quellcode.&lt;/p&gt;</description></item></channel></rss>

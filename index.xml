@@ -8,6 +8,7 @@
  &lt;li&gt;&lt;a href="#how-do-i-install-an-existing-certificate"&gt;How do I install an existing certificate?&lt;/a&gt;&lt;/li&gt;
  &lt;li&gt;&lt;a href="#how-do-i-configure-http-basic-auth"&gt;How do I configure HTTP Basic Auth?&lt;/a&gt;&lt;/li&gt;
  &lt;li&gt;&lt;a href="#how-do-i-set-environment-variables"&gt;How do I set environment variables&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;a href="#how-are-the-stored-database-passwords-protected"&gt;How are the stored database passwords protected&lt;/a&gt;&lt;/li&gt;
  &lt;/ul&gt;
  &lt;/li&gt;
  &lt;li&gt;&lt;a href="#permissions"&gt;Permissions&lt;/a&gt;
@@ -286,7 +287,13 @@ individual customer or entity, and the CYBERTEC PostgreSQL International GmbH, t
 MIGRATOR, the Software, which may include associated media, printed materials, and online or electronic documentation.
 This Agreement is a legally binding contract that includes terms that limit your legal rights and Licensors&amp;rsquo; liability
 to you, and shall govern all access to and use of this Software. You hereby agree, without limitation or alteration, to
-all the terms and conditions contained herein.&lt;/p&gt;</description></item><item><title>Code Transpilation</title><link>https://cybertec-postgresql.github.io/cybertec_migrator/features/code-transpilation/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://cybertec-postgresql.github.io/cybertec_migrator/features/code-transpilation/</guid><description>&lt;p&gt;The CYBERTEC Migrator is able to parse, analyze and transpile certain PL/SQL constructs to PL/pgSQL automatically.
+all the terms and conditions contained herein.&lt;/p&gt;</description></item><item><title>AI-Assistant</title><link>https://cybertec-postgresql.github.io/cybertec_migrator/features/ai-assistant/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://cybertec-postgresql.github.io/cybertec_migrator/features/ai-assistant/</guid><description>&lt;p&gt;The AI-Assistant (Enterprise Edition) helps with the migration of procedural code.
+In the code editor of functions, procedures, triggers and views&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Explain&lt;/strong&gt; describes what the code does and which Oracle specifics have to be considered in PostgreSQL&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Translate&lt;/strong&gt; proposes a PostgreSQL version of the code, which may be applied to the editor with &lt;strong&gt;Apply&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Answers of a large language model may be wrong. Always review and test translated code before migrating it.&lt;/p&gt;</description></item><item><title>Code Transpilation</title><link>https://cybertec-postgresql.github.io/cybertec_migrator/features/code-transpilation/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://cybertec-postgresql.github.io/cybertec_migrator/features/code-transpilation/</guid><description>&lt;p&gt;The CYBERTEC Migrator is able to parse, analyze and transpile certain PL/SQL constructs to PL/pgSQL automatically.
 Each supported construct is represented by a corresponding rule.&lt;/p&gt;
 &lt;p&gt;This feature-set is under ongoing development, adding new rules wherever possible.
 If you have a suggestion for a new rule, please open a &lt;a
