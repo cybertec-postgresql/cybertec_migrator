@@ -32,6 +32,7 @@ services:
         condition: service_healthy
     volumes:
       - ./volumes/core/config:/app/config:Z
+      - ./llm.yaml:/app/llm.yaml:Z
     networks:
       - common
 

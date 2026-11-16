@@ -17,6 +17,7 @@ env_barrier() {
   fi
 
   v3_20_0_add_arch_and_container_runtime
+  v4_0_0_add_llm_settings
 }
 
 print_env() {
@@ -59,6 +60,19 @@ EXTERNAL_HTTP_PORT=${HTTPS_PORT_DEFAULT}
 VERSION=${version}
 EDITION=trial
 CONTAINER_RUNTIME=docker
+
+# —— AI-Assistant (optional) ——
+# Mode 1 (recommended): copy ./llm.example.yaml to ./llm.yaml, then uncomment:
+# CORE_LLM_CONFIG=llm.yaml
+# Optional: override the model, API key and timeout of the file
+# CORE_LLM_MODEL=
+# CORE_LLM_API_KEY=
+# CORE_LLM_TIMEOUT_MS=300000
+# Mode 2: configure a single model without a file (CORE_LLM_BASE_URL and CORE_LLM_MODEL are required):
+# CORE_LLM_BASE_URL=https://llm.example.com/v1
+# CORE_LLM_MODEL=
+# CORE_LLM_API_KEY=
+# CORE_LLM_TIMEOUT_MS=300000
 
 # —— Internal ⚠ ——
 CORE_DB_PASSWORD="${password}"

@@ -1,0 +1,54 @@
+# Example configuration of the AI-Assistant ("Explain" and "Translate" in the code editors).
+#
+# Copy this file to ./llm.yaml, adjust the values, and enable it by uncommenting in .env:
+#
+#   CORE_LLM_CONFIG=llm.yaml
+#   CORE_LLM_API_KEY=<your api key>
+#
+# The Migrator talks to any OpenAI-compatible server (OpenAI, vLLM, Ollama, LiteLLM, llama.cpp, ...).
+# The core reads the file at startup and stops with a descriptive error if it is invalid.
+# See https://cybertec-postgresql.github.io/cybertec_migrator/features/ai-assistant/ for all options.
+
+# Optional: which provider and model to use (default: the first provider and its first model).
+# May be overridden with the CORE_LLM_PROVIDER and CORE_LLM_MODEL environment variables.
+default:
+  provider: h200
+  model: qwen3.8-27b
+
+# Optional: maximum time to wait for an answer in milliseconds (default: CORE_LLM_TIMEOUT_MS or 300000)
+timeoutMs: 300000
+
+providers:
+  h200:
+    # Base URL of the OpenAI-compatible API, the Migrator calls <baseUrl>/chat/completions
+    baseUrl: https://llm.example.com/v1
+    # ${NAME} is replaced by the environment variable NAME, so the secret does not have to be stored in this file.
+    # CORE_LLM_API_KEY overrides the API key of the selected provider.
+    apiKey: ${CORE_LLM_API_KEY}
+    # The only supported API: OpenAI chat completions
+    api: openai-completions
+    # Send the API key as "Authorization: Bearer <apiKey>" header
+    authHeader: true
+    models:
+      - id: qwen3.8-27b
+        name: Qwen3.8 27B (H200)
+        reasoning: true
+        input: [text, image]
+        contextWindow: 262144
+        maxTokens: 32768
+
+  ollama:
+    baseUrl: http://localhost:11434/v1
+    api: openai-completions
+    authHeader: false
+    # Optional: additional HTTP headers
+    headers:
+      X-Client: cybertec-migrator
+    models:
+      - id: qwen2.5-coder:32b
+        name: Qwen2.5 Coder 32B
+        # Optional: sampling temperature (default: 0.2)
+        temperature: 0.1
+        # Optional: vendor specific request parameters, merged into the request body
+        extraBody:
+          keep_alive: 30m

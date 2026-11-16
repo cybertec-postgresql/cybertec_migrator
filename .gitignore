@@ -1,4 +1,5 @@
 .env
+llm.yaml
 .meta-inf
 .edition
 .version
