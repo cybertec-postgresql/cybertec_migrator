@@ -6,6 +6,13 @@
 source ./runtime.sh
 
 command_up() {
+  # docker compose would auto-create a missing ./llm.yaml bind source as an empty directory,
+  # which would prevent the configuration file from being created later
+  if [ -d "../llm.yaml" ]; then
+    rmdir "../llm.yaml" 2> /dev/null || true
+  fi
+  [ -e "../llm.yaml" ] || touch "../llm.yaml"
+
   tls_barrier
   fix_encryption_key
 
